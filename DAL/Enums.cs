@@ -11,6 +11,6 @@ namespace IDAL
         enum WheightCategories { }
         enum Priorities { }
         enum DroneStatuses{}
-
+        
     }
 }
