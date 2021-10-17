@@ -4,7 +4,7 @@ namespace IDAL
 {
     namespace DO
     {
-        struct Customer
+        public struct Customer
         {
             public int Id { get; set; }
             public string Name { get; set; }
@@ -12,6 +12,14 @@ namespace IDAL
             public double Longitude { get; set; }
             public double Latitude { get; set; }
 
+            public Customer(int id, string name, string phone, double longitude, double latitude)
+            {
+                Id = id;
+                Name = name;
+                Phone = phone;
+                Longitude = longitude;
+                Latitude = latitude;
+            }
             public override string ToString()
             {
                 return $"Id: {Id}, Name: {Name}, Phone: {Phone}, Longitude: {Longitude}, Latitude: {Latitude}";
