@@ -21,20 +21,6 @@ namespace IDAL
             public DateTime PickedUp { get; set; }
             public DateTime Delivered { get; set; }
 
-            public Parcel(int id, int senderId, int targetId, WheightCategories wheight, Priorities priority, int droneId, DateTime requested, DateTime scheduled, DateTime pickedUp, DateTime delivered)
-            {
-                Id = id;
-                SenderId = senderId;
-                TargetId = targetId;
-                Wheight = wheight;
-                Priority = priority;
-                DroneId = droneId;
-                Requested = requested;
-                Scheduled = scheduled;
-                PickedUp = pickedUp;
-                Delivered = delivered;
-            }
-
             public override string ToString()
             {
                 return $"Id: {Id}, SenderId: {SenderId}, TargetId: {TargetId}, Wheight: {Wheight}, Priority: {Priority}, Requested: {Requested}, DroneId: {DroneId}, Scheduled: {Scheduled}, PickedUp: {PickedUp}, Delivered: {Delivered}";

@@ -16,15 +16,6 @@ namespace IDAL
             public double Lattitude { get; set; }
             public int ChargeSlots { get; set; }
 
-            public Station(int id, string name, double longitude, double lattitude, int chargeSlots)
-            {
-                Id = id;
-                Name = name;
-                Longitude = longitude;
-                Lattitude = lattitude;
-                ChargeSlots = chargeSlots;
-            }
-
             public override string ToString()
             {
                 return $"Id: {Id}, Name: {Name}, Longitude: {Longitude}, Lattitude: {Lattitude}, ChargeSlots: {ChargeSlots}";
