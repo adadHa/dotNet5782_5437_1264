@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DalObject
 {
-    public struct DataSource
+    struct DataSource
     {
         static internal IDAL.DO.Drone[] Drones;
         static internal IDAL.DO.Station[] Stations;
@@ -46,59 +46,89 @@ namespace DalObject
                     "0542444196", "0549035643", "0542463885" };
                 for (int i = 0; i < 10; i++)
                 {
-                    Customers[i] = new IDAL.DO.Customer(i, names[i], phoneNumbers[i], rand.NextDouble() * 360, rand.NextDouble() * 180);
+                    Customers[i] = new IDAL.DO.Customer{Id = rand.Next(10000000,99999999),
+                                                        Name = names[i], 
+                                                        Phone = phoneNumbers[i],
+                                                        Longitude = rand.NextDouble() * 360,
+                                                        Lattitude = rand.NextDouble() * 180)};
                     CustomersIndex++;
                 }
+
                 // generate general random values that will guide the initialization.
-                int shippedParcels = rand.Next(0, 5);
-                int watingParcels = 10 - shippedParcels;
+                int shippedParcels = rand.Next(0, 5);  // 0-5 shipped parcels
+                int watingParcels = 10 - shippedParcels; // 5-10 waiting parcels
 
                 // initialize shipped parcels
                 for (int i = 0; i < shippedParcels; i++)
                 {
                     IDAL.DO.WheightCategories wheight = (IDAL.DO.WheightCategories)rand.Next(0, 2);
                     IDAL.DO.Priorities priority = (IDAL.DO.Priorities)rand.Next(0, 2);
-                    int droneId = rand.Next(0, 9);
-                    DateTime defaultDate = DateTime.Now;
-                    Parcels[i] = new IDAL.DO.Parcel(i,
-                                                    rand.Next(0, 9),
-                                                    rand.Next(0, 9),
-                                                    wheight,
-                                                    priority,
-                                                    droneId,
-                                                    DateTime.Now
-                                                    );
+                    DateTime defaultDate = DateTime();
+                    Parcels[i] = new IDAL.DO.Parcel{Id = i,
+                                                    SenderId = rand.Next(0, 9),
+                                                    Target_Id = rand.Next(0, 9),
+                                                    Wheight =  wheight,
+                                                    Priority = priority,
+                                                    DroneId = i,
+                                                    Requested = DateTime.Now,
+                                                    Scheduled = defaultDate,
+                                                    PickedUp = defaultDate,
+                                                    Delivered = defaultDate
+                                                    };
+                    
                 }
                 //initialize waiting parcels
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < watingParcels; i++)
                 {
-                    IDAL.DO.WheightCategories wheight = (IDAL.DO.WheightCategories)rand.Next(0, 2);
-                    IDAL.DO.Priorities priority = (IDAL.DO.Priorities)rand.Next(0, 2);
-                    int droneId = rand.Next(0, 9);
-                    DateTime date = DateTime.Now;
-                    Parcels[i] = new IDAL.DO.Parcel(i,
-                                                    rand.Next(0, 9),
-                                                    rand.Next(0, 9),
-                                                    wheight,
-                                                    priority,
-                                                    droneId,
-                                                    date,
-                                                    0,
-                                                    0,
-                                                    0);
+                    wheight = (IDAL.DO.WheightCategories)rand.Next(0, 2);
+                    priority = (IDAL.DO.Priorities)rand.Next(0, 2);
+                    Parcels[i] = new IDAL.DO.Parcel{Id = shippedParcels + i,
+                                                    SenderId = rand.Next(0, 9),
+                                                    Target_Id = rand.Next(0, 9),
+                                                    Wheight =  wheight,
+                                                    Priority = priority,
+                                                    DroneId = 0,
+                                                    Requested = defaultDate,
+                                                    Scheduled = defaultDate,
+                                                    PickedUp = defaultDate,
+                                                    Delivered = defaultDate
+                                                    };
                 }
                 //initialize stations
                 for (int i = 0; i < 2; i++)
                 {
-                    Stations[i] = new IDAL.DO.Station(i, "station" + i.ToString(), rand.NextDouble() * 360, rand.NextDouble() * 180);
+                    Stations[i] = new IDAL.DO.Station{Id = i,
+                                                     Name = "station" + i.ToString(),
+                                                     Longitude = rand.NextDouble() * 360,
+                                                     Lattitude = rand.NextDouble() * 180)};
                 }
 
                 //initialize Drones
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < shippedParcels; i++)
                 {
-                    Drones[i] = new IDAL.DO.Drone();
-                    Drones[i].Id = i;
+                    IDAL.DO.Model models = [];
+                    IDAL.DO.WheightCategories maxWeight = (IDAL.DO.WheightCategories)rand.Next(0, 2);
+                    double battery = rand.NextDouble(); 
+                    Drones[i] = new IDAL.DO.Drone{  Id = i,
+                                                    Model = models[i],
+                                                    MaxWeight = maxWeight,
+                                                    Status = IDAL.DO.DroneStatuses.Shipping,
+                                                    Battery = battery
+                                                    };
                 }
+                for (int i = 0; i < watingParcels; i++)
+                {
+                    IDAL.DO.Model models = [];
+                    IDAL.DO.WheightCategories maxWeight = (IDAL.DO.WheightCategories)rand.Next(0, 2);
+                    IDAL.DO.DroneStatuses status = (IDAL.DO.DroneStatuses)rand.Next(0, 1); // "Available" or "Maintenance"
+                    double battery = rand.NextDouble(); 
+                    Drones[i] = new IDAL.DO.Drone{  Id = shippedParcels + i,
+                                                    Model = models[i],
+                                                    MaxWeight = maxWeight,
+                                                    Status = status,
+                                                    Battery = battery
+                                                    };
+                } 
             }
         }
     }
