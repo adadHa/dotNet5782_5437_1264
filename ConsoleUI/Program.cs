@@ -60,6 +60,7 @@ namespace ConsoleUI
                                     Console.Write("Enter latitude: ");
                                     double.TryParse(Console.ReadLine(), out latitude);
 
+                                    DalObject.DalObject.AddStation(id, name, num, longitude, latitude);
                                     break;
                                 }
 
@@ -94,9 +95,8 @@ namespace ConsoleUI
                                     Console.Write("Enter Name: ");
                                     string name = Console.ReadLine();
 
-                                    int phoneNumber;
-                                    Console.WriteLine("Enter Phone Number: ");
-                                    int.TryParse(Console.ReadLine(), out phoneNumber);
+                                    Console.Write("Enter Phone Number: ");
+                                    string phoneNumber = Console.ReadLine();
 
                                     double longitude;
                                     Console.Write("Enter longitude: ");
@@ -200,20 +200,44 @@ namespace ConsoleUI
                         switch (viewOption)
                         {
                             case View.ViewStation:
-                                // code block
-                                break;
+                                {
+                                    int stationIndex;
+                                    Console.WriteLine("Enter Station: ");
+                                    int.TryParse(Console.ReadLine(), out stationIndex);
+                                    DalObject.DalObject.ViewStation(stationIndex);
+                                    // code block
+                                    break;
+                                }
 
                             case View.ViewDrone:
-                                // code block
-                                break;
+                                {
+                                    int droneIndex;
+                                    Console.WriteLine("Enter Drone: ");
+                                    int.TryParse(Console.ReadLine(), out droneIndex);
+                                    DalObject.DalObject.ViewDrone(droneIndex);
+                                    // code block
+                                    break;
+                                }
 
                             case View.ViewCustomer:
-                                // code block
-                                break;
+                                {
+                                    int customerIndex;
+                                    Console.WriteLine("Enter Customer: ");
+                                    int.TryParse(Console.ReadLine(), out customerIndex);
+                                    DalObject.DalObject.ViewCustomer(customerIndex);
+                                    // code block
+                                    break;
+                                }
 
                             case View.ViewParcel:
-                                // code block
-                                break;
+                                {
+                                    int parcelIndex;
+                                    Console.WriteLine("Enter Parcel: ");
+                                    int.TryParse(Console.ReadLine(), out parcelIndex);
+                                    DalObject.DalObject.ParcelCustomer(parcelIndex);
+                                    // code block
+                                    break;
+                                }
 
                             default:
                                 // code block
