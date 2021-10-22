@@ -6,9 +6,9 @@ namespace ConsoleUI
     {
         enum GeneralOptions { Exit, Add, Update, View, ListView };
         enum Add { AddStation, AddDrone, AddCustomer, AddParcel };
-        enum Update { BindParcel, CollectParcelByDrone, SupplyParcelToCustomer, SendDroneToCharge, ReleaseDroneFromCharge };
+        enum Update { BindParcelTodrone, CollectParcelByDrone, SupplyParcelToCustomer, ChargeDrone, StopCharging };
         enum View { ViewStation, ViewDrone, ViewCustomer, ViewParcel };
-        enum ListView { ViewStationList, ViewDronesList, ViewCustomersList, ViewParcelsList, ViewUnbindParcel, ViewFreeChargeStations };
+        enum ListView { ViewStationsList, ViewDronesList, ViewCustomersList, ViewParcelsList, ViewUnbindParcels, ViewStationsWithFreeChargeSlots };
         static void Main(string[] args)
         {
             GeneralOptions option = 0;
@@ -111,9 +111,6 @@ namespace ConsoleUI
 
                             case Add.AddParcel:
                                 {
-                                    int id;
-                                    Console.WriteLine("Enter Id: ");
-                                    int.TryParse(Console.ReadLine(), out id);
                                     
                                     int customerSenderId;
                                     Console.WriteLine("Enter customer sender Id: ");
@@ -145,19 +142,19 @@ namespace ConsoleUI
                 case GeneralOptions.Update:
                     {
                         Update updateOption = 0;
-                        Console.WriteLine("Choose Option: /n" +
-                    "1 - BindParcel /n" +
-                    "2 - CollectParcelByDrone /n" +
-                    "3 - SupplyParcelToCustomer /n" +
-                    "4 - SendDroneToCharge /n" +
-                    "5 - ReleaseDroneFromCharge /n");
+                        Console.WriteLine("Choose option: /n" +
+                    "1 - Bind parcel to a drone /n" +
+                    "2 - Collect parcel by drone /n" +
+                    "3 - Supply parcel to customer /n" +
+                    "4 - Charge drone /n" +
+                    "5 - Stop drone's charging /n");
 
                         int.TryParse(Console.ReadLine(), out x);
                         updateOption = (Update)x;
 
                         switch (updateOption)
                         {
-                            case Update.BindParcel:
+                            case Update.BindParcelToDrone:
                                 // code block
                                 break;
 
@@ -169,11 +166,11 @@ namespace ConsoleUI
                                 // code block
                                 break;
 
-                            case Update.SendDroneToCharge:
+                            case Update.ChargeDrone:
                                 // code block
                                 break;
 
-                            case Update.ReleaseDroneFromCharge:
+                            case Update.StopCharging:
                                 // code block
                                 break;
 
@@ -202,40 +199,36 @@ namespace ConsoleUI
                             case View.ViewStation:
                                 {
                                     int stationIndex;
-                                    Console.WriteLine("Enter Station: ");
+                                    Console.WriteLine("Enter Station id: ");
                                     int.TryParse(Console.ReadLine(), out stationIndex);
-                                    DalObject.DalObject.ViewStation(stationIndex);
-                                    // code block
+                                    Console.WriteLine(DalObject.DalObject.ViewStation(stationIndex).ToString()));
                                     break;
                                 }
 
                             case View.ViewDrone:
                                 {
                                     int droneIndex;
-                                    Console.WriteLine("Enter Drone: ");
+                                    Console.WriteLine("Enter Drone id: ");
                                     int.TryParse(Console.ReadLine(), out droneIndex);
-                                    DalObject.DalObject.ViewDrone(droneIndex);
-                                    // code block
+                                    Console.WriteLine(DalObject.DalObject.ViewDrone(droneIndex));
                                     break;
                                 }
 
                             case View.ViewCustomer:
                                 {
                                     int customerIndex;
-                                    Console.WriteLine("Enter Customer: ");
+                                    Console.WriteLine("Enter Customer id: ");
                                     int.TryParse(Console.ReadLine(), out customerIndex);
-                                    DalObject.DalObject.ViewCustomer(customerIndex);
-                                    // code block
+                                    Console.WriteLine(DalObject.DalObject.ViewCustomer(customerIndex));
                                     break;
                                 }
 
                             case View.ViewParcel:
                                 {
                                     int parcelIndex;
-                                    Console.WriteLine("Enter Parcel: ");
+                                    Console.WriteLine("Enter Parcel id: ");
                                     int.TryParse(Console.ReadLine(), out parcelIndex);
-                                    DalObject.DalObject.ParcelCustomer(parcelIndex);
-                                    // code block
+                                    Console.WriteLine(DalObject.DalObject.ParcelCustomer(parcelIndex));
                                     break;
                                 }
 
@@ -249,21 +242,21 @@ namespace ConsoleUI
                 case GeneralOptions.ListView:
                     {
                         ListView listViewOption = 0;
-                        Console.WriteLine("Choose Option: /n" +
-                    "1 - ViewStationList /n" +
-                    "2 - ViewDronesList /n" +
-                    "3 - ViewCustomersList /n" +
-                    "4 - ViewParcelsList /n" +
-                    "5 - ViewUnbindParcel /n" +
-                    "6 - ViewFreeChargeStations /n");
+                        Console.WriteLine("Choose option: /n" +
+                    "1 - View stations list /n" +
+                    "2 - View drones list /n" +
+                    "3 - View costomers list /n" +
+                    "4 - View parcels list /n" +
+                    "5 - View unbind parcels /n" +
+                    "6 - View station with free charge slots /n");
 
                         int.TryParse(Console.ReadLine(), out x);
                         listViewOption = (ListView)x;
 
                         switch (listViewOption)
                         {
-                            case ListView.ViewStationList:
-                                // code block
+                            case ListView.ViewStationsList:
+                                
                                 break;
 
                             case ListView.ViewDronesList:
@@ -278,11 +271,11 @@ namespace ConsoleUI
                                 // code block
                                 break;
 
-                            case ListView.ViewUnbindParcel:
+                            case ListView.ViewUnbindParcels:
                                 // code block
                                 break;
 
-                            case ListView.ViewFreeChargeStations:
+                            case ListView.ViewStationsWithFreeChargeSlots:
                                 // code block
                                 break;
 

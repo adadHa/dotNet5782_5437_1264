@@ -116,7 +116,7 @@ namespace DalObject
                 }
 
                 //initialize Drones
-                for (int i = 0; i < shippedParcels; i++) // drone which send the "shipped parcels"
+                for (int i = 0; i < shippedParcels; i++) // drones which send the "shipped parcels"
                 {
                     IDAL.DO.WheightCategories maxWeight = (IDAL.DO.WheightCategories)rand.Next(0, 2);
                     double battery = rand.NextDouble();

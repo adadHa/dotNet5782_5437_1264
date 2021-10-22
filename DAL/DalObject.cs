@@ -59,11 +59,11 @@ namespace DalObject
             DataSource.Config.CustomersIndex++;
         }
 
-        public void AddParcel(int id, int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone)
+        public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone)
         {
             IDAL.DO.Parcel parcel = new IDAL.DO.Parcel
             {
-                Id = id,
+                Id = DataSource.ParcelsIndex,
                 SenderId = customerSenderId,
                 TargetId = customerReceiverId,
                 Wheight = (IDAL.DO.WheightCategories)Enum.Parse(typeof(IDAL.DO.WheightCategories), weight),
@@ -73,26 +73,91 @@ namespace DalObject
 
             DataSource.Parcels[DataSource.Config.ParcelsIndex] = parcel;
             DataSource.Config.ParcelsIndex++;
+
+            return DataSource.Config.ParcelsIndex;
         }
 
-        public void ViewStation(int stationIndex)
+        public void BindParcel(int parcelId, int droneId)
         {
-            Console.WriteLine(DataSource.Stations[DataSource.Config.StationsIndex].ToString());
+            DataSource.Drones[droneId].Status = shipping;
+            DataSource.Parcels[parcelId].DroneId = droneId;
+            DataSource.Parcels[parcelId].Scheduled = new DateTime();
         }
 
-        public void ViewDrone(int droneIndex)
+        public void CollectParcelByDrone()
         {
-            Console.WriteLine(DataSource.Drones[DataSource.Config.DronesIndex].ToString()); 
+
         }
 
-        public void ViewCustomer(int customerIndex)
+        public void SupplyParcelToCustomer()
         {
-            Console.WriteLine(DataSource.Customers[DataSource.Config.CustomersIndex].ToString());
+            
         }
 
-        public void ViewParcel(int parcelIndex)
+        public void ChargeDrone()
         {
-            Console.WriteLine(DataSource.Parcels[DataSource.Config.ParcelsIndex].ToString());
+            
+        }
+
+        public void StopCharging()
+        {
+            
+        }
+
+        public IDAL.DO.Station[] ViewStationsList()
+        {
+            IDAL.DO.Station[] resultList = new IDAL.DO.Station[DataSource.StationsIndex];
+            for(int i=0; i < StationsIndex); i++)
+            {
+                resultList[i] = new IDAL.DO.Station();
+                resultList[i] = DataSource.Stations[DataSource.Config.StationsIndex];
+            }
+            return resultList;
+        }
+
+        public IDAL.DO.Drone[] ViewDronesList()
+        {
+            
+        }
+
+        public IDAL.DO.Customer[] ViewCustomersList()
+        {
+            
+        }
+
+        public IDAL.DO.Parcel[] ViewParcelsList()
+        {
+            
+        }
+        
+        public IDAL.DO.Parcel[] ViewUnbindParcels()
+        {
+            
+        }
+
+        public IDAL.DO.Parcel[] ViewStationsWithFreeChargeSlots()
+        {
+            
+        }
+
+        public IDAL.DO.Station ViewStation(int index)
+        {
+            return DataSource.Stations[DataSource.Config.index];
+        }
+
+        public IDAL.DO.Drone ViewDrone(int index)
+        {
+            return DataSource.Drones[DataSource.Config.index]; 
+        }
+
+        public IDAL.DO.Customer ViewCustomer(int index)
+        {
+            return DataSource.Customers[DataSource.Config.index];
+        }
+
+        public IDAL.DO.parcel ViewParcel(int index)
+        {
+            return DataSource.Parcels[DataSource.Config.index];
         }
     }
 }
