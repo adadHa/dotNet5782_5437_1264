@@ -9,11 +9,47 @@ namespace DalObject
 {
     public class DalObject
     {
-        static DalObject()
+        public DalObject()
         {
             DataSource.Config.Initialize();
         }
 
+        private int CustomerIdToIndex(int id)
+        {
+            int index = 0;
+            for (int i = 0; i < DataSource.Config.CustomersIndex; i++)
+                if (DataSource.Customers[i].Id == id)
+                     index = i;
+            return index;
+        }
+
+        private int DroneIdToIndex(int id)
+        {
+            int index = 0;
+            for (int i = 0; i < DataSource.Config.DronesIndex; i++)
+                if (DataSource.Drones[i].Id == id)
+                    index = i;
+            return index;
+        }
+
+        private int ParcelIdToIndex(int id)
+        {
+            int index = 0;
+            for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
+                if (DataSource.Parcels[i].Id == id)
+                    index = i;
+            return index;
+        }
+
+        private int StationIdToIndex(int id)
+        {
+            int index = 0;
+            for (int i = 0; i < DataSource.Config.StationsIndex; i++)
+                if (DataSource.Stations[i].Id == id)
+                    index = i;
+            return index;
+        }
+        // This function add a station to the stations data base.
         public void AddStation(int id, string name, int num, double longitude, double latitude)
         {
             IDAL.DO.Station station = new IDAL.DO.Station
@@ -59,11 +95,11 @@ namespace DalObject
             DataSource.Config.CustomersIndex++;
         }
 
-        public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone)
+        public int AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone)
         {
             IDAL.DO.Parcel parcel = new IDAL.DO.Parcel
             {
-                Id = DataSource.ParcelsIndex,
+                Id = DataSource.Config.ParcelsIndex,
                 SenderId = customerSenderId,
                 TargetId = customerReceiverId,
                 Wheight = (IDAL.DO.WheightCategories)Enum.Parse(typeof(IDAL.DO.WheightCategories), weight),
@@ -79,19 +115,28 @@ namespace DalObject
 
         public void BindParcel(int parcelId, int droneId)
         {
-            DataSource.Drones[droneId].Status = shipping;
-            DataSource.Parcels[parcelId].DroneId = droneId;
-            DataSource.Parcels[parcelId].Scheduled = new DateTime();
+            int droneIndex = DroneIdToIndex(droneId);
+            int parcelIndex = ParcelIdToIndex(parcelId);
+
+            DataSource.Drones[droneIndex].Status = IDAL.DO.DroneStatuses.Shipping;
+            DataSource.Parcels[parcelIndex].DroneId = droneId;
+            DataSource.Parcels[parcelIndex].Scheduled = new DateTime();
         }
 
-        public void CollectParcelByDrone()
+        public void CollectParcelByDrone(int parcelId)
         {
-
+            int parcelIndex = ParcelIdToIndex(parcelId);
+            DataSource.Parcels[parcelIndex].PickedUp = DateTime.Now;
         }
 
-        public void SupplyParcelToCustomer()
+        public void SupplyParcelToCustomer(int parcelId)
         {
-            
+            int deliveredParcelIndex = ParcelIdToIndex(parcelId);
+            DataSource.Parcels[deliveredParcelIndex].Delivered = DateTime.Now;
+            int droneId = DroneIdToIndex(DataSource.Parcels[deliveredParcelIndex].DroneId);
+            int droneIndex = DroneIdToIndex(droneId);
+            DataSource.Drones[droneIndex].Status = IDAL.DO.DroneStatuses.Available;
+
         }
 
         public void ChargeDrone()
@@ -106,58 +151,64 @@ namespace DalObject
 
         public IDAL.DO.Station[] ViewStationsList()
         {
-            IDAL.DO.Station[] resultList = new IDAL.DO.Station[DataSource.StationsIndex];
-            for(int i=0; i < StationsIndex); i++)
+        
+            IDAL.DO.Station[] resultList = new IDAL.DO.Station[DataSource.Config.StationsIndex];
+            /*
+            for(int i=0; i < StationsIndex; i++)
             {
                 resultList[i] = new IDAL.DO.Station();
                 resultList[i] = DataSource.Stations[DataSource.Config.StationsIndex];
-            }
+            }*/
             return resultList;
         }
 
-        public IDAL.DO.Drone[] ViewDronesList()
-        {
+        //public IDAL.DO.Drone[] ViewDronesList()
+        //{
             
-        }
+        //}
 
-        public IDAL.DO.Customer[] ViewCustomersList()
-        {
+        //public IDAL.DO.Customer[] ViewCustomersList()
+        //{
             
-        }
+        //}
 
-        public IDAL.DO.Parcel[] ViewParcelsList()
-        {
+        //public IDAL.DO.Parcel[] ViewParcelsList()
+        //{
             
-        }
+        //}
         
-        public IDAL.DO.Parcel[] ViewUnbindParcels()
-        {
+        //public IDAL.DO.Parcel[] ViewUnbindParcels()
+        //{
             
-        }
+        //}
 
-        public IDAL.DO.Parcel[] ViewStationsWithFreeChargeSlots()
-        {
+        //public IDAL.DO.Parcel[] ViewStationsWithFreeChargeSlots()
+        //{
             
+        //}
+
+        public IDAL.DO.Station ViewStation(int id)
+        {
+            int index = StationIdToIndex(id);
+            return DataSource.Stations[index];
         }
 
-        public IDAL.DO.Station ViewStation(int index)
+        public IDAL.DO.Drone ViewDrone(int id)
         {
-            return DataSource.Stations[DataSource.Config.index];
+            int index = DroneIdToIndex(id);
+            return DataSource.Drones[index]; 
         }
 
-        public IDAL.DO.Drone ViewDrone(int index)
+        public IDAL.DO.Customer ViewCustomer(int id)
         {
-            return DataSource.Drones[DataSource.Config.index]; 
+            int index = CustomerIdToIndex(id);
+            return DataSource.Customers[index];
         }
 
-        public IDAL.DO.Customer ViewCustomer(int index)
+        public IDAL.DO.Parcel ViewParcel(int id)
         {
-            return DataSource.Customers[DataSource.Config.index];
-        }
-
-        public IDAL.DO.parcel ViewParcel(int index)
-        {
-            return DataSource.Parcels[DataSource.Config.index];
+            int index = ParcelIdToIndex(id);
+            return DataSource.Parcels[index];
         }
     }
 }
