@@ -19,7 +19,7 @@ namespace ConsoleUI
                 "1 - Add \n" +
                 "2 - Update \n" +
                 "3 - View \n" +
-                "4 - ListView \n" +
+                "4 - View lists \n" +
                 "0 - Exit");
                 int x = 0;
                 int.TryParse(Console.ReadLine(), out x);
@@ -31,7 +31,7 @@ namespace ConsoleUI
                     case GeneralOptions.Add:
                         {
                             Add addOption = 0;
-                            Console.WriteLine("Choose Option: \n" +
+                            Console.WriteLine("Choose add option: \n" +
                         "1 - Add station \n" +
                         "2 - Add drone \n" +
                         "3 - Add customer \n" +
