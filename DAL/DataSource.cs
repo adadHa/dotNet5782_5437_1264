@@ -52,7 +52,7 @@ namespace DalObject
                         Id = rand.Next(10000000, 99999999),
                         Name = names[i],
                         Phone = phoneNumbers[i],
-                        Longitude = rand.NextDouble() * 360,
+                        Longitude = rand.NextDouble() * 180,
                         Latitude = rand.NextDouble() * 180
                     };
                     CustomersIndex++;
@@ -110,7 +110,7 @@ namespace DalObject
                     {
                         Id = i,
                         Name = "station" + i.ToString(),
-                        Longitude = rand.NextDouble() * 360,
+                        Longitude = rand.NextDouble() * 180,
                         Latitude = rand.NextDouble() * 180
                     };
                 }
@@ -129,7 +129,7 @@ namespace DalObject
                         Battery = battery
                     };
                 }
-                for (int i = 0; i < watingParcels; i++) // the othre drones
+                for (int i = 0; i < watingParcels; i++) // the other drones
                 {
                     IDAL.DO.WheightCategories maxWeight = (IDAL.DO.WheightCategories)rand.Next(0, 2);
                     IDAL.DO.DroneStatuses status = (IDAL.DO.DroneStatuses)rand.Next(0, 1); // "Available" or "Maintenance"

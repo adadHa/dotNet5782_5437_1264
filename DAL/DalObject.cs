@@ -151,40 +151,56 @@ namespace DalObject
 
         public IDAL.DO.Station[] ViewStationsList()
         {
-        
             IDAL.DO.Station[] resultList = new IDAL.DO.Station[DataSource.Config.StationsIndex];
-            /*
-            for(int i=0; i < StationsIndex; i++)
+            for(int i=0; i < DataSource.Config.StationsIndex; i++)
             {
                 resultList[i] = new IDAL.DO.Station();
-                resultList[i] = DataSource.Stations[DataSource.Config.StationsIndex];
-            }*/
+                resultList[i] = DataSource.Stations[i];
+            }
             return resultList;
         }
 
-        //public IDAL.DO.Drone[] ViewDronesList()
-        //{
-            
-        //}
+        public IDAL.DO.Drone[] ViewDronesList()
+        {
+            IDAL.DO.Drone[] resultList = new IDAL.DO.Drone[DataSource.Config.DronesIndex];
+            for (int i = 0; i < DataSource.Config.StationsIndex; i++)
+            {
+                resultList[i] = new IDAL.DO.Drone();
+                resultList[i] = DataSource.Drones[i];
+            }
+            return resultList;
+        }
 
-        //public IDAL.DO.Customer[] ViewCustomersList()
-        //{
-            
-        //}
+        public IDAL.DO.Customer[] ViewCustomersList()
+        {
+            IDAL.DO.Customer[] resultList = new IDAL.DO.Customer[DataSource.Config.CustomersIndex];
+            for (int i = 0; i < DataSource.Config.CustomersIndex; i++)
+            {
+                resultList[i] = new IDAL.DO.Customer();
+                resultList[i] = DataSource.Customers[i];
+            }
+            return resultList;
+        }
 
-        //public IDAL.DO.Parcel[] ViewParcelsList()
-        //{
-            
-        //}
-        
+        public IDAL.DO.Parcel[] ViewParcelsList()
+        {
+            IDAL.DO.Parcel[] resultList = new IDAL.DO.Parcel[DataSource.Config.ParcelsIndex];
+            for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
+            {
+                resultList[i] = new IDAL.DO.Parcel();
+                resultList[i] = DataSource.Parcels[i];
+            }
+            return resultList;
+        }
+
         //public IDAL.DO.Parcel[] ViewUnbindParcels()
         //{
-            
+
         //}
 
         //public IDAL.DO.Parcel[] ViewStationsWithFreeChargeSlots()
         //{
-            
+
         //}
 
         public IDAL.DO.Station ViewStation(int id)
