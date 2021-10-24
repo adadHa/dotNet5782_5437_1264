@@ -77,7 +77,7 @@ namespace ConsoleUI
                                         Console.Write("Enter Model: ");
                                         string model = Console.ReadLine();
 
-                                        Console.Write("Enter Weight Catagory: ");
+                                        Console.Write("Enter Weight Category: ");
                                         string weight = Console.ReadLine();
 
                                         int batteryStatus;
@@ -111,19 +111,20 @@ namespace ConsoleUI
                                         Console.Write("Enter latitude: ");
                                         double.TryParse(Console.ReadLine(), out latitude);
 
+                                        dalObject.AddCustomer(id, name, phoneNumber, longitude, latitude);
                                         break;
                                     }
 
                                 case Add.AddParcel:
                                     {
 
-                                        int customerSenderId;
+                                        int senderId;
                                         Console.WriteLine("Enter customer sender Id: ");
-                                        int.TryParse(Console.ReadLine(), out customerSenderId);
+                                        int.TryParse(Console.ReadLine(), out senderId);
 
-                                        int customerReceiverId;
+                                        int receiverId;
                                         Console.WriteLine("Enter customer receiver Id: ");
-                                        int.TryParse(Console.ReadLine(), out customerReceiverId);
+                                        int.TryParse(Console.ReadLine(), out receiverId);
 
                                         Console.Write("Enter Weight Catagory: ");
                                         string weight = Console.ReadLine();
@@ -131,10 +132,11 @@ namespace ConsoleUI
                                         Console.Write("Enter Priority: ");
                                         string priority = Console.ReadLine();
 
-                                        int responsibleDrone;
+                                        int droneId;
                                         Console.WriteLine("Enter Id of responsible drone (0 if there is no one): ");
-                                        int.TryParse(Console.ReadLine(), out responsibleDrone);
+                                        int.TryParse(Console.ReadLine(), out droneId);
 
+                                        dalObject.AddParcel(senderId, receiverId, weight, priority, droneId);
                                         break;
                                     }
                                 default:
@@ -157,27 +159,47 @@ namespace ConsoleUI
                             int.TryParse(Console.ReadLine(), out x);
                             updateOption = (Update)x;
 
-                            switch (updateOption)
-                            {
+                        switch (updateOption)
+                        {
                                 case Update.BindParcelToDrone:
-                                    // code block
-                                    break;
+                                    {
+                                        int parcelId, droneId;
+                                        Console.WriteLine("Enter parcel id:");
+                                        int.TryParse(Console.ReadLine(), out parcelId);
+                                        Console.WriteLine("Enter drone id:");
+                                        int.TryParse(Console.ReadLine(), out droneId);
+                                        dalObject.BindParcel(parcelId, droneId);
+                                        break;
+                                    }
 
                                 case Update.CollectParcelByDrone:
-                                    // code block
-                                    break;
+                                    {
+                                        int parcelId;
+                                        Console.WriteLine("Enter parcel id:");
+                                        int.TryParse(Console.ReadLine(), out parcelId);
+                                        dalObject.CollectParcelByDrone(parcelId);
+                                        break;
+                                    }
 
                                 case Update.SupplyParcelToCustomer:
-                                    // code block
-                                    break;
+                                    {
+                                        int parcelId;
+                                        Console.WriteLine("Enter parcel id:");
+                                        int.TryParse(Console.ReadLine(), out parcelId);
+                                        dalObject.SupplyParcelToCustomer(parcelId);
+                                        break;
+                                    }
 
                                 case Update.ChargeDrone:
-                                    // code block
-                                    break;
+                                    {
+
+                                        break;
+                                    }
 
                                 case Update.StopCharging:
-                                    // code block
-                                    break;
+                                    {
+                                        break;
+                                    }
 
                                 default:
                                     // code block
