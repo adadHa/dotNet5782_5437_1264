@@ -179,7 +179,7 @@ namespace DalObject
         public IDAL.DO.Drone[] ViewDronesList()
         {
             IDAL.DO.Drone[] resultList = new IDAL.DO.Drone[DataSource.Config.DronesIndex];
-            for (int i = 0; i < DataSource.Config.DronesIndex; i++)
+            for (int i = 0; i < DataSource.Config.StationsIndex; i++)
             {
                 resultList[i] = new IDAL.DO.Drone();
                 resultList[i] = DataSource.Drones[i];
@@ -213,12 +213,18 @@ namespace DalObject
 
         public IDAL.DO.Parcel[] ViewUnbindParcels()
         {
+            // calculate the size of th result list
+            int size = 0;
+            for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
+                if(resultList[j].Scheduled != defaultDateTime):
+                    size++;
+            // create the result list
             int j = 0;
-            DateTime defaultDateTime = new DateTime();
-            IDAL.DO.Parcel[] resultList = new IDAL.DO.Parcel[DataSource.Config.ParcelsIndex];
+            defaultDateTime = new DateTime();
+            IDAL.DO.Parcel[] resultList = new IDAL.DO.Parcel[size];
             for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
             {
-                if(resultList[j].Scheduled != defaultDateTime)
+                if(DataSource.Parcels[i].Scheduled != defaultDateTime):
                 {
                     resultList[j] = new IDAL.DO.Parcel();
                     resultList[j] = DataSource.Parcels[i];
@@ -230,7 +236,25 @@ namespace DalObject
 
         public IDAL.DO.Parcel[] ViewStationsWithFreeChargeSlots()
         {
-            return null;
+            // calculate the size of the result list
+            int size = 0;
+            for (int i = 0; i < DataSource.Config.StationsIndex; i++)
+                if(resultList[j].Scheduled != defaultDateTime):
+                    size++;
+            // create the result list
+            int j = 0;
+            defaultDateTime = new DateTime();
+            IDAL.DO.Station[] resultList = new IDAL.DO.Station[size];
+            for (int i = 0; i < DataSource.Config.StationsIndex; i++)
+            {
+                if(DataSource.Stations[i].ChargeSlots > 0):
+                {
+                    resultList[j] = new IDAL.DO.Station();
+                    resultList[j] = DataSource.Stations[i];
+                    j++;
+                }
+            }
+            return resultList;
         }
 
         //This function returns the station with the required Id.

@@ -159,14 +159,13 @@ namespace ConsoleUI
                         "2 - Collect parcel by drone \n" +
                         "3 - Supply parcel to customer \n" +
                         "4 - Charge drone \n" +
-                        "5 - Stop drone's charging \n" +
-                        "0 - Exit");
+                        "5 - Stop drone's charging \n");
 
                             int.TryParse(Console.ReadLine(), out x);
                             updateOption = (Update)x;
 
-                            switch (updateOption)
-                            {
+                        switch (updateOption)
+                        {
                                 case Update.BindParcelToDrone:
                                     {
                                         int parcelId, droneId;
@@ -202,14 +201,14 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter drone id:");
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         Console.WriteLine("Choose one from the following stations:");
-
+                                        printList<IDAL.DO.Station>(dalObject.ViewStationsWithFreeChargeSlots());
                                         dalObject.ChargeDrone(droneId);
                                         break;
                                     }
 
                                 case Update.StopCharging:
                                     {
-
+                                        
                                         break;
                                     }
 
@@ -328,12 +327,12 @@ namespace ConsoleUI
 
                                 case ListView.ViewUnbindParcels:
                                     {
-                                        break;   
+                                        
                                     }
 
                                 case ListView.ViewStationsWithFreeChargeSlots:
                                     {
-                                        printList<IDAL.DO.Parcel>(dalObject.ViewStationsWithFreeChargeSlots());
+                                        printList<IDAL.DO.Station>(dalObject.ViewStationsWithFreeChargeSlots());
                                         break;
                                     }
 
