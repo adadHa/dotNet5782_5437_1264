@@ -12,6 +12,7 @@ namespace DalObject
         static internal IDAL.DO.Station[] Stations;
         static internal IDAL.DO.Customer[] Customers;
         static internal IDAL.DO.Parcel[] Parcels;
+        static internal IDAL.DO.DroneCharge[] DroneCharges;
         static Random rand = new Random();
         static DataSource()
         {
@@ -19,6 +20,7 @@ namespace DalObject
             Stations = new IDAL.DO.Station[5];
             Customers = new IDAL.DO.Customer[100];
             Parcels = new IDAL.DO.Parcel[1000];
+            DroneCharges = new IDAL.DO.DroneCharge[15];
         }
         internal class Config
         {
@@ -26,13 +28,14 @@ namespace DalObject
             static internal int StationsIndex;
             static internal int CustomersIndex;
             static internal int ParcelsIndex;
-
+            static internal int DroneChargeIndex;
             static Config()
             {
                 DronesIndex = 0;
                 StationsIndex = 0;
                 CustomersIndex = 0;
                 ParcelsIndex = 0;
+                DroneChargeIndex = 0;
             }
 
             //This function initailizes the data structures.

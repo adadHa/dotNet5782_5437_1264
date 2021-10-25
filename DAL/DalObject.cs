@@ -151,16 +151,29 @@ namespace DalObject
         }
 
         //This function charges a drone.
-        public void ChargeDrone(int droneId)
+        public void ChargeDrone(int droneId, int stationId)
         {
             int droneIndex = DroneIdToIndex(droneId);
             DataSource.Drones[droneIndex].Status = IDAL.DO.DroneStatuses.Maintenance;
+            IDAL.DO.DroneCharge droneCharge = new IDAL.DO.DroneCharge
+            {
+                DroneId = droneId,
+                StationId = stationId
+            };
+            DataSource.DroneCharges[DataSource.Config.DroneChargeIndex] = droneCharge;
+            DataSource.Config.DroneChargeIndex++;
         }
 
         //This function stops the charge of the drone.
-        public void StopCharging()
+        public void StopCharging(int droneId)
         {
-            
+            int droneChargeIndex = 0;
+            for (int i = 0; i < DataSource.Config.DroneChargeIndex; i++)
+            {
+                if (DataSource.DroneCharges[i].DroneId == droneId)
+                    droneChargeIndex = i;
+            }
+            DataSource.DroneCharges[droneChargeIndex] = new IDAL.DO.DroneCharge(); //remove the element from the array (we truely remove the element when we will use list)
         }
 
         //This function returns a copy of the stations list.
@@ -213,18 +226,19 @@ namespace DalObject
 
         public IDAL.DO.Parcel[] ViewUnbindParcels()
         {
+            DateTime defaultDateTime = new DateTime();
             // calculate the size of th result list
             int size = 0;
             for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
-                if(resultList[j].Scheduled != defaultDateTime):
+                if(DataSource.Parcels[i].Scheduled != defaultDateTime)
                     size++;
             // create the result list
             int j = 0;
-            defaultDateTime = new DateTime();
+            
             IDAL.DO.Parcel[] resultList = new IDAL.DO.Parcel[size];
             for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
             {
-                if(DataSource.Parcels[i].Scheduled != defaultDateTime):
+                if(DataSource.Parcels[i].Scheduled != defaultDateTime)
                 {
                     resultList[j] = new IDAL.DO.Parcel();
                     resultList[j] = DataSource.Parcels[i];
@@ -234,20 +248,19 @@ namespace DalObject
             return resultList;
         }
 
-        public IDAL.DO.Parcel[] ViewStationsWithFreeChargeSlots()
+        public IDAL.DO.Station[] ViewStationsWithFreeChargeSlots()
         {
-            // calculate the size of the result list
+            // calculate the size of th result list
             int size = 0;
             for (int i = 0; i < DataSource.Config.StationsIndex; i++)
-                if(resultList[j].Scheduled != defaultDateTime):
+                if (DataSource.Stations[i].ChargeSlots > 0)
                     size++;
             // create the result list
             int j = 0;
-            defaultDateTime = new DateTime();
             IDAL.DO.Station[] resultList = new IDAL.DO.Station[size];
             for (int i = 0; i < DataSource.Config.StationsIndex; i++)
             {
-                if(DataSource.Stations[i].ChargeSlots > 0):
+                if(DataSource.Stations[i].ChargeSlots > 0)
                 {
                     resultList[j] = new IDAL.DO.Station();
                     resultList[j] = DataSource.Stations[i];
@@ -285,9 +298,6 @@ namespace DalObject
             return DataSource.Parcels[index];
         }
 
-        public string Sexagesimal(double longitude, double latitude)
-        {
-            return 
-        }
+        
     }
 }

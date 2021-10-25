@@ -164,8 +164,8 @@ namespace ConsoleUI
                             int.TryParse(Console.ReadLine(), out x);
                             updateOption = (Update)x;
 
-                        switch (updateOption)
-                        {
+                            switch (updateOption)
+                            {
                                 case Update.BindParcelToDrone:
                                     {
                                         int parcelId, droneId;
@@ -197,18 +197,22 @@ namespace ConsoleUI
 
                                 case Update.ChargeDrone:
                                     {
-                                        int droneId;
+                                        int droneId, stationId;
                                         Console.WriteLine("Enter drone id:");
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         Console.WriteLine("Choose one from the following stations:");
                                         printList<IDAL.DO.Station>(dalObject.ViewStationsWithFreeChargeSlots());
-                                        dalObject.ChargeDrone(droneId);
+                                        int.TryParse(Console.ReadLine(), out stationId);
+                                        dalObject.ChargeDrone(droneId, stationId);
                                         break;
                                     }
 
                                 case Update.StopCharging:
                                     {
-                                        
+                                        int droneId;
+                                        Console.WriteLine("Enter drone id:");
+                                        int.TryParse(Console.ReadLine(), out droneId);
+                                        dalObject.StopCharging(droneId);
                                         break;
                                     }
 
@@ -327,7 +331,8 @@ namespace ConsoleUI
 
                                 case ListView.ViewUnbindParcels:
                                     {
-                                        
+                                        printList<IDAL.DO.Parcel>(dalObject.ViewUnbindParcels());
+                                        break;
                                     }
 
                                 case ListView.ViewStationsWithFreeChargeSlots:
@@ -380,6 +385,27 @@ namespace ConsoleUI
                 Console.WriteLine(item.ToString());
             }
         }
+
+        static private void printSexagesimal(double longitude, double latitude)
+        {
+            string result = "";
+            double integer = Math.Truncate(longitude);
+            double fractional = longitude - Math.Truncate(longitude);
+            string direction = "N";
+            result += $"{integer}^";
+            if (longitude < 0)
+            {
+                longitude = longitude * -1;
+                direction = "S";
+            }
+
+            integer = Math.Truncate(fractional / (1 / 60));
+            string part2 = $"{ integer }'";
+            string part3 = $"{ fractional / (1 / 60) - integer * (1 / 60) }\"";
+            result += part2;
+            result += part3;
+            result += direction;
+        }
     }
 }
-               
+
