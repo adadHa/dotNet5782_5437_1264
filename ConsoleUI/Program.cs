@@ -159,8 +159,8 @@ namespace ConsoleUI
                             int.TryParse(Console.ReadLine(), out x);
                             updateOption = (Update)x;
 
-                            switch (updateOption)
-                            {
+                        switch (updateOption)
+                        {
                                 case Update.BindParcelToDrone:
                                     {
                                         int parcelId, droneId;
@@ -192,12 +192,16 @@ namespace ConsoleUI
 
                                 case Update.ChargeDrone:
                                     {
-
+                                        int droneId;
+                                        Console.WriteLine("Enter drone id:");
+                                        int.TryParse(Console.ReadLine(), out droneId);
+                                        dalObject.ChargeDrone(droneId);
                                         break;
                                     }
 
                                 case Update.StopCharging:
                                     {
+                                        
                                         break;
                                     }
 
@@ -283,28 +287,20 @@ namespace ConsoleUI
                             switch (listViewOption)
                             {
                                 case ListView.ViewStationsList:
-                                    {
-                                        printList<IDAL.DO.Station>(dalObject.ViewStationsList());
-                                        break;
-                                    }
+                                    
+                                    break;
 
                                 case ListView.ViewDronesList:
-                                    {
-                                        printList<IDAL.DO.Drone>(dalObject.ViewDronesList());
-                                        break;
-                                    }
+                                    // code block
+                                    break;
 
                                 case ListView.ViewCustomersList:
-                                    {
-                                        printList<IDAL.DO.Customer>(dalObject.ViewCustomersList());
-                                        break;
-                                    }
+                                    // code block
+                                    break;
 
                                 case ListView.ViewParcelsList:
-                                    {
-                                        printList<IDAL.DO.Parcel>(dalObject.ViewParcelsList());
-                                        break;
-                                    }
+                                    // code block
+                                    break;
 
                                 case ListView.ViewUnbindParcels:
                                     // code block
@@ -331,14 +327,7 @@ namespace ConsoleUI
                 }
             } while (option != GeneralOptions.Exit);
 
-
-        }
-        static private void printList<T>(T[] list)
-        {
-            foreach (T item in list)
-            {
-                Console.WriteLine(item.ToString());
-            }
+            
         }
     }
 }
