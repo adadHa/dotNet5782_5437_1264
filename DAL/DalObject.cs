@@ -14,6 +14,7 @@ namespace DalObject
             DataSource.Config.Initialize();
         }
 
+        //This function gets an Id an returns the index in the array of customers.
         private int CustomerIdToIndex(int id)
         {
             int index = 0;
@@ -23,6 +24,7 @@ namespace DalObject
             return index;
         }
 
+        //This function gets an Id an returns the index in the array of drones.
         private int DroneIdToIndex(int id)
         {
             int index = 0;
@@ -32,6 +34,7 @@ namespace DalObject
             return index;
         }
 
+        //This function gets an Id an returns the index in the array of parcels.
         private int ParcelIdToIndex(int id)
         {
             int index = 0;
@@ -41,6 +44,7 @@ namespace DalObject
             return index;
         }
 
+        //This function gets an Id an returns the index in the array of stations.
         private int StationIdToIndex(int id)
         {
             int index = 0;
@@ -49,6 +53,7 @@ namespace DalObject
                     index = i;
             return index;
         }
+
         // This function add a station to the stations data base.
         public void AddStation(int id, string name, int num, double longitude, double latitude)
         {
@@ -65,6 +70,7 @@ namespace DalObject
             DataSource.Config.StationsIndex++;
         }
 
+        // This function add a drone to the drones data base.
         public void AddDrone(int id, string model, string weight, int batteryStatus, string droneStatus)
         {
             IDAL.DO.Drone drone = new IDAL.DO.Drone
@@ -80,6 +86,7 @@ namespace DalObject
             DataSource.Config.DronesIndex++;
         }
 
+        // This function add a customer to the customers data base.
         public void AddCustomer(int id, string name, string phoneNumber, double longitude, double latitude)
         {
             IDAL.DO.Customer customer = new IDAL.DO.Customer
@@ -95,6 +102,7 @@ namespace DalObject
             DataSource.Config.CustomersIndex++;
         }
 
+        // This function add a parcel to the parcels data base.
         public int AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone)
         {
             IDAL.DO.Parcel parcel = new IDAL.DO.Parcel
@@ -113,6 +121,7 @@ namespace DalObject
             return DataSource.Config.ParcelsIndex;
         }
 
+        //This function binds a parcel to a drone.
         public void BindParcel(int parcelId, int droneId)
         {
             int droneIndex = DroneIdToIndex(droneId);
@@ -123,12 +132,14 @@ namespace DalObject
             DataSource.Parcels[parcelIndex].Scheduled = new DateTime();
         }
 
+        //This function collects a parcel by a drone
         public void CollectParcelByDrone(int parcelId)
         {
             int parcelIndex = ParcelIdToIndex(parcelId);
             DataSource.Parcels[parcelIndex].PickedUp = DateTime.Now;
         }
 
+        //This funtion supplies a parcel to the customer.
         public void SupplyParcelToCustomer(int parcelId)
         {
             int deliveredParcelIndex = ParcelIdToIndex(parcelId);
@@ -139,16 +150,19 @@ namespace DalObject
 
         }
 
+        //This function charges a drone.
         public void ChargeDrone()
         {
             
         }
 
+        //This function stops the charge of the drone.
         public void StopCharging()
         {
             
         }
 
+        //This function returns a copy of the stations list.
         public IDAL.DO.Station[] ViewStationsList()
         {
             IDAL.DO.Station[] resultList = new IDAL.DO.Station[DataSource.Config.StationsIndex];
@@ -160,6 +174,7 @@ namespace DalObject
             return resultList;
         }
 
+        //This function returns a copy of the drones list.
         public IDAL.DO.Drone[] ViewDronesList()
         {
             IDAL.DO.Drone[] resultList = new IDAL.DO.Drone[DataSource.Config.DronesIndex];
@@ -171,6 +186,7 @@ namespace DalObject
             return resultList;
         }
 
+        //This function returns a copy of the customers list.
         public IDAL.DO.Customer[] ViewCustomersList()
         {
             IDAL.DO.Customer[] resultList = new IDAL.DO.Customer[DataSource.Config.CustomersIndex];
@@ -182,6 +198,7 @@ namespace DalObject
             return resultList;
         }
 
+        //This function returns a copy of the parcels list.
         public IDAL.DO.Parcel[] ViewParcelsList()
         {
             IDAL.DO.Parcel[] resultList = new IDAL.DO.Parcel[DataSource.Config.ParcelsIndex];
@@ -203,24 +220,28 @@ namespace DalObject
 
         //}
 
+        //This function returns the station with the required Id.
         public IDAL.DO.Station ViewStation(int id)
         {
             int index = StationIdToIndex(id);
             return DataSource.Stations[index];
         }
 
+        //This function returns the drone with the required Id.
         public IDAL.DO.Drone ViewDrone(int id)
         {
             int index = DroneIdToIndex(id);
             return DataSource.Drones[index]; 
         }
 
+        //This function returns the customer with the required Id.
         public IDAL.DO.Customer ViewCustomer(int id)
         {
             int index = CustomerIdToIndex(id);
             return DataSource.Customers[index];
         }
 
+        //This function returns the parcel with the required Id.
         public IDAL.DO.Parcel ViewParcel(int id)
         {
             int index = ParcelIdToIndex(id);
