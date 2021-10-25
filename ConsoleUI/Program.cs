@@ -328,12 +328,12 @@ namespace ConsoleUI
 
                                 case ListView.ViewUnbindParcels:
                                     {
-                                        
+                                        break;   
                                     }
 
                                 case ListView.ViewStationsWithFreeChargeSlots:
                                     {
-                                        printList<IDAL.DO.Station>(dalObject.ViewStationsWithFreeChargeSlots());
+                                        printList<IDAL.DO.Parcel>(dalObject.ViewStationsWithFreeChargeSlots());
                                         break;
                                     }
 

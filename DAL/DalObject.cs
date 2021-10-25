@@ -151,7 +151,7 @@ namespace DalObject
         }
 
         //This function charges a drone.
-        public void ChargeDrone(int droneId,)
+        public void ChargeDrone(int droneId)
         {
             int droneIndex = DroneIdToIndex(droneId);
             DataSource.Drones[droneIndex].Status = IDAL.DO.DroneStatuses.Maintenance;
@@ -214,11 +214,11 @@ namespace DalObject
         public IDAL.DO.Parcel[] ViewUnbindParcels()
         {
             int j = 0;
-            defaultDateTime = new DateTime();
+            DateTime defaultDateTime = new DateTime();
             IDAL.DO.Parcel[] resultList = new IDAL.DO.Parcel[DataSource.Config.ParcelsIndex];
             for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
             {
-                if(resultList[j].Scheduled != defaultDateTime):
+                if(resultList[j].Scheduled != defaultDateTime)
                 {
                     resultList[j] = new IDAL.DO.Parcel();
                     resultList[j] = DataSource.Parcels[i];
@@ -230,7 +230,7 @@ namespace DalObject
 
         public IDAL.DO.Parcel[] ViewStationsWithFreeChargeSlots()
         {
-
+            return null;
         }
 
         //This function returns the station with the required Id.
