@@ -151,9 +151,10 @@ namespace DalObject
         }
 
         //This function charges a drone.
-        public void ChargeDrone()
+        public void ChargeDrone(int droneId,)
         {
-            
+            int droneIndex = DroneIdToIndex(droneId);
+            DataSource.Drones[droneIndex].Status = IDAL.DO.DroneStatuses.Maintenance;
         }
 
         //This function stops the charge of the drone.
