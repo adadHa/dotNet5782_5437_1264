@@ -5,10 +5,10 @@ namespace ConsoleUI
     class Program
     {
         enum GeneralOptions { Exit, Add, Update, View, ListView };
-        enum Add { Exit, AddStation, AddDrone, AddCustomer, AddParcel };
-        enum Update { Exit, BindParcelToDrone, CollectParcelByDrone, SupplyParcelToCustomer, ChargeDrone, StopCharging };
-        enum View { Exit, ViewStation, ViewDrone, ViewCustomer, ViewParcel };
-        enum ListView { Exit, ViewStationsList, ViewDronesList, ViewCustomersList, ViewParcelsList, ViewUnbindParcels, ViewStationsWithFreeChargeSlots };
+        enum Add { AddStation, AddDrone, AddCustomer, AddParcel };
+        enum Update { BindParcelToDrone, CollectParcelByDrone, SupplyParcelToCustomer, ChargeDrone, StopCharging };
+        enum View { ViewStation, ViewDrone, ViewCustomer, ViewParcel };
+        enum ListView { ViewStationsList, ViewDronesList, ViewCustomersList, ViewParcelsList, ViewUnbindParcels, ViewStationsWithFreeChargeSlots };
         static void Main(string[] args)
         {
             DalObject.DalObject dalObject = new DalObject.DalObject();
@@ -35,8 +35,7 @@ namespace ConsoleUI
                         "1 - Add station \n" +
                         "2 - Add drone \n" +
                         "3 - Add customer \n" +
-                        "4 - Add parcel \n" +
-                        "0 - Exit");
+                        "4 - Add parcel \n");
 
                             int.TryParse(Console.ReadLine(), out x);
                             addOption = (Add)x;
@@ -140,10 +139,6 @@ namespace ConsoleUI
                                         dalObject.AddParcel(senderId, receiverId, weight, priority, droneId);
                                         break;
                                     }
-
-                                case Add.Exit:
-                                    break;
-
                                 default:
                                     // code block
                                     break;
@@ -159,14 +154,13 @@ namespace ConsoleUI
                         "2 - Collect parcel by drone \n" +
                         "3 - Supply parcel to customer \n" +
                         "4 - Charge drone \n" +
-                        "5 - Stop drone's charging \n" +
-                        "0 - Exit");
+                        "5 - Stop drone's charging \n");
 
                             int.TryParse(Console.ReadLine(), out x);
                             updateOption = (Update)x;
 
-                            switch (updateOption)
-                            {
+                        switch (updateOption)
+                        {
                                 case Update.BindParcelToDrone:
                                     {
                                         int parcelId, droneId;
@@ -202,19 +196,16 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter drone id:");
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         Console.WriteLine("Choose one from the following stations:");
-
+                                        printList<IDAL.DO.Station>(dalObject.ViewStationsWithFreeChargeSlots());
                                         dalObject.ChargeDrone(droneId);
                                         break;
                                     }
 
                                 case Update.StopCharging:
                                     {
-
+                                        
                                         break;
                                     }
-
-                                case Update.Exit:
-                                    break;
 
                                 default:
                                     // code block
@@ -231,8 +222,7 @@ namespace ConsoleUI
                         "1 - View station \n" +
                         "2 - View drone \n" +
                         "3 - View Ccustomer \n" +
-                        "4 - View parcel \n" +
-                        "0 - Exit");
+                        "4 - View parcel \n");
 
                             int.TryParse(Console.ReadLine(), out x);
                             viewOption = (View)x;
@@ -275,9 +265,6 @@ namespace ConsoleUI
                                         break;
                                     }
 
-                                case View.Exit:
-                                    break;
-
                                 default:
                                     // code block
                                     break;
@@ -294,8 +281,7 @@ namespace ConsoleUI
                         "3 - View costomers list \n" +
                         "4 - View parcels list \n" +
                         "5 - View unbind parcels \n" +
-                        "6 - View station with free charge slots \n" +
-                        "0 - Exit");
+                        "6 - View station with free charge slots \n");
 
                             int.TryParse(Console.ReadLine(), out x);
                             listViewOption = (ListView)x;
@@ -328,17 +314,14 @@ namespace ConsoleUI
 
                                 case ListView.ViewUnbindParcels:
                                     {
-                                        break;   
+                                        
                                     }
 
                                 case ListView.ViewStationsWithFreeChargeSlots:
                                     {
-                                        printList<IDAL.DO.Parcel>(dalObject.ViewStationsWithFreeChargeSlots());
+                                        printList<IDAL.DO.Station>(dalObject.ViewStationsWithFreeChargeSlots());
                                         break;
                                     }
-
-                                case ListView.Exit:
-                                    break;
 
                                 default:
                                     // code block
@@ -367,5 +350,4 @@ namespace ConsoleUI
             }
         }
     }
-}
                
