@@ -60,13 +60,12 @@ namespace DalObject
 
                 // generate general random values that will guide the initialization.
                 int shippedParcels = rand.Next(0, 5);  // 0-5 shipped parcels
-                int watingParcels = 10 - shippedParcels; // 5-10 waiting parcels
 
                 // initialize shipped parcels
                 for (int i = 0; i < shippedParcels; i++)
                 {
-                    IDAL.DO.WheightCategories wheight = (IDAL.DO.WheightCategories)rand.Next(0, 2);
-                    IDAL.DO.Priorities priority = (IDAL.DO.Priorities)rand.Next(0, 2);
+                    IDAL.DO.WheightCategories wheight = (IDAL.DO.WheightCategories)rand.Next(0, 3);
+                    IDAL.DO.Priorities priority = (IDAL.DO.Priorities)rand.Next(0, 3);
                     DateTime defaultDate = new DateTime();
                     Parcels[i] = new IDAL.DO.Parcel
                     {
@@ -81,13 +80,14 @@ namespace DalObject
                         PickedUp = defaultDate,
                         Delivered = defaultDate
                     };
+                    ParcelsIndex++;
 
                 }
                 //initialize waiting parcels
-                for (int i = 0; i < watingParcels; i++)
+                for (int i = shippedParcels; i < 10; i++)
                 {
-                    IDAL.DO.WheightCategories wheight = (IDAL.DO.WheightCategories)rand.Next(0, 2);
-                    IDAL.DO.Priorities priority = (IDAL.DO.Priorities)rand.Next(0, 2);
+                    IDAL.DO.WheightCategories wheight = (IDAL.DO.WheightCategories)rand.Next(0, 3);
+                    IDAL.DO.Priorities priority = (IDAL.DO.Priorities)rand.Next(0, 3);
                     DateTime defaultDate = new DateTime();
                     Parcels[i] = new IDAL.DO.Parcel
                     {
@@ -97,11 +97,12 @@ namespace DalObject
                         Wheight = wheight,
                         Priority = priority,
                         DroneId = 0,
-                        Requested = defaultDate,
+                        Requested = DateTime.Now,
                         Scheduled = defaultDate,
                         PickedUp = defaultDate,
                         Delivered = defaultDate
                     };
+                    ParcelsIndex++;
                 }
                 //initialize stations
                 for (int i = 0; i < 2; i++)
@@ -111,15 +112,17 @@ namespace DalObject
                         Id = i,
                         Name = "station" + i.ToString(),
                         Longitude = rand.NextDouble() * 180,
-                        Latitude = rand.NextDouble() * 180
+                        Latitude = rand.NextDouble() * 180,
+                        ChargeSlots = rand.Next(0,5)
                     };
+                    StationsIndex++;
                 }
 
                 //initialize Drones
                 for (int i = 0; i < shippedParcels; i++) // drones which send the "shipped parcels"
                 {
-                    IDAL.DO.WheightCategories maxWeight = (IDAL.DO.WheightCategories)rand.Next(0, 2);
-                    double battery = rand.NextDouble();
+                    IDAL.DO.WheightCategories maxWeight = (IDAL.DO.WheightCategories)rand.Next(0, 3);
+                    double battery = rand.NextDouble()*100;
                     Drones[i] = new IDAL.DO.Drone
                     {
                         Id = i,
@@ -128,12 +131,13 @@ namespace DalObject
                         Status = IDAL.DO.DroneStatuses.Shipping,
                         Battery = battery
                     };
+                    DronesIndex++;
                 }
-                for (int i = 0; i < watingParcels; i++) // the other drones
+                for (int i = 5 - shippedParcels; i > 0; i--) // the other drones which are'nt on shipping mode.
                 {
-                    IDAL.DO.WheightCategories maxWeight = (IDAL.DO.WheightCategories)rand.Next(0, 2);
-                    IDAL.DO.DroneStatuses status = (IDAL.DO.DroneStatuses)rand.Next(0, 1); // "Available" or "Maintenance"
-                    double battery = rand.NextDouble();
+                    IDAL.DO.WheightCategories maxWeight = (IDAL.DO.WheightCategories)rand.Next(0, 3);
+                    IDAL.DO.DroneStatuses status = (IDAL.DO.DroneStatuses)rand.Next(0, 2); // "Available" or "Maintenance"
+                    double battery = rand.NextDouble()*100;
                     Drones[i] = new IDAL.DO.Drone
                     {
                         Id = shippedParcels + i,
@@ -142,6 +146,7 @@ namespace DalObject
                         Status = status,
                         Battery = battery
                     };
+                    DronesIndex++;
                 }
             }
         }

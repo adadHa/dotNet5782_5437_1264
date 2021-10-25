@@ -178,7 +178,7 @@ namespace DalObject
         public IDAL.DO.Drone[] ViewDronesList()
         {
             IDAL.DO.Drone[] resultList = new IDAL.DO.Drone[DataSource.Config.DronesIndex];
-            for (int i = 0; i < DataSource.Config.StationsIndex; i++)
+            for (int i = 0; i < DataSource.Config.DronesIndex; i++)
             {
                 resultList[i] = new IDAL.DO.Drone();
                 resultList[i] = DataSource.Drones[i];
