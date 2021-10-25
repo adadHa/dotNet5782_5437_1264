@@ -129,7 +129,7 @@ namespace DalObject
 
             DataSource.Drones[droneIndex].Status = IDAL.DO.DroneStatuses.Shipping;
             DataSource.Parcels[parcelIndex].DroneId = droneId;
-            DataSource.Parcels[parcelIndex].Scheduled = new DateTime();
+            DataSource.Parcels[parcelIndex].Scheduled = DateTime.Now;
         }
 
         //This function collects a parcel by a drone
@@ -259,6 +259,11 @@ namespace DalObject
         {
             int index = ParcelIdToIndex(id);
             return DataSource.Parcels[index];
+        }
+
+        public string Sexagesimal(double longitude, double latitude)
+        {
+            return 
         }
     }
 }

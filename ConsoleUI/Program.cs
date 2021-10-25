@@ -4,7 +4,7 @@ namespace ConsoleUI
 {
     class Program
     {
-        enum GeneralOptions { Exit, Add, Update, View, ListView };
+        enum GeneralOptions { Exit, Add, Update, View, ListView, Sexagesimal };
         enum Add { Exit, AddStation, AddDrone, AddCustomer, AddParcel };
         enum Update { Exit, BindParcelToDrone, CollectParcelByDrone, SupplyParcelToCustomer, ChargeDrone, StopCharging };
         enum View { Exit, ViewStation, ViewDrone, ViewCustomer, ViewParcel };
@@ -348,8 +348,23 @@ namespace ConsoleUI
                         }
 
                     case GeneralOptions.Exit:
-                        Console.WriteLine("Close Program.");
-                        break;
+                        {
+                            Console.WriteLine("Close Program.");
+                            break;
+                        }
+
+                    case GeneralOptions.Sexagesimal:
+                        {
+                            double longitude;
+                            Console.Write("Enter longitude: ");
+                            double.TryParse(Console.ReadLine(), out longitude);
+
+                            double latitude;
+                            Console.Write("Enter latitude: ");
+                            double.TryParse(Console.ReadLine(), out latitude);
+
+                            break;
+                        }
 
                     default:
                         // code block
