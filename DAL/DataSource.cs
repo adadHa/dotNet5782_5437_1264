@@ -44,12 +44,14 @@ namespace DalObject
                 string[] phoneNumbers = { "05467651241", "0524931828", "0526067135",
                     "0527839442", "0524711136", "0588824245", "0586934625",
                     "0542444196", "0549035643", "0542463885" };
-
+                int[] ids = new int[10];
+                for (int i = 0; i < 10; i++)
+                    ids[i] = rand.Next(10000000, 99999999);
                 for (int i = 0; i < 10; i++)
                 {
                     Customers[i] = new IDAL.DO.Customer
                     {
-                        Id = rand.Next(10000000, 99999999),
+                        Id = ids[i],
                         Name = names[i],
                         Phone = phoneNumbers[i],
                         Longitude = rand.NextDouble() * 180,
@@ -70,8 +72,8 @@ namespace DalObject
                     Parcels[i] = new IDAL.DO.Parcel
                     {
                         Id = i,
-                        SenderId = rand.Next(0, 9),
-                        TargetId = rand.Next(0, 9),
+                        SenderId = Customers[rand.Next(0, 9)].id,
+                        TargetId = Customers[rand.Next(0, 9)].id,
                         Wheight = wheight,
                         Priority = priority,
                         DroneId = i,
@@ -92,8 +94,8 @@ namespace DalObject
                     Parcels[i] = new IDAL.DO.Parcel
                     {
                         Id = shippedParcels + i,
-                        SenderId = rand.Next(0, 9),
-                        TargetId = rand.Next(0, 9),
+                        SenderId = Customers[rand.Next(0, 9)].id,
+                        TargetId = Customers[rand.Next(0, 9)].id,
                         Wheight = wheight,
                         Priority = priority,
                         DroneId = 0,
