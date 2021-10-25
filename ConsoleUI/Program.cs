@@ -201,7 +201,9 @@ namespace ConsoleUI
                                         int droneId;
                                         Console.WriteLine("Enter drone id:");
                                         int.TryParse(Console.ReadLine(), out droneId);
-                                        //dalObject.ChargeDrone(droneId);
+                                        Console.WriteLine("Choose one from the following stations:");
+
+                                        dalObject.ChargeDrone(droneId);
                                         break;
                                     }
 
@@ -325,12 +327,15 @@ namespace ConsoleUI
                                     }
 
                                 case ListView.ViewUnbindParcels:
-                                    // code block
-                                    break;
+                                    {
+                                        
+                                    }
 
                                 case ListView.ViewStationsWithFreeChargeSlots:
-                                    // code block
-                                    break;
+                                    {
+                                        printList<IDAL.DO.Station>(dalObject.ViewStationsWithFreeChargeSlots());
+                                        break;
+                                    }
 
                                 case ListView.Exit:
                                     break;
