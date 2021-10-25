@@ -287,20 +287,28 @@ namespace ConsoleUI
                             switch (listViewOption)
                             {
                                 case ListView.ViewStationsList:
-                                    
-                                    break;
+                                    {
+                                        printList<IDAL.DO.Station>(dalObject.ViewStationsList());
+                                        break;
+                                    }
 
                                 case ListView.ViewDronesList:
-                                    // code block
-                                    break;
+                                    {
+                                        printList<IDAL.DO.Drone>(dalObject.ViewDronesList());
+                                        break;
+                                    }
 
                                 case ListView.ViewCustomersList:
-                                    // code block
-                                    break;
+                                    {
+                                        printList<IDAL.DO.Customer>(dalObject.ViewCustomersList());
+                                        break;
+                                    }
 
                                 case ListView.ViewParcelsList:
-                                    // code block
-                                    break;
+                                    {
+                                        printList<IDAL.DO.Parcel>(dalObject.ViewParcelsList());
+                                        break;
+                                    }
 
                                 case ListView.ViewUnbindParcels:
                                     // code block
@@ -327,7 +335,14 @@ namespace ConsoleUI
                 }
             } while (option != GeneralOptions.Exit);
 
-            
+
+        }
+        static private void printList<T>(T[] list)
+        {
+            foreach (T item in list)
+            {
+                Console.WriteLine(item.ToString());
+            }
         }
     }
-}
+               
