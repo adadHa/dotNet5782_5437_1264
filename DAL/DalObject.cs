@@ -210,15 +210,27 @@ namespace DalObject
             return resultList;
         }
 
-        //public IDAL.DO.Parcel[] ViewUnbindParcels()
-        //{
+        public IDAL.DO.Parcel[] ViewUnbindParcels()
+        {
+            int j = 0;
+            defaultDateTime = new DateTime();
+            IDAL.DO.Parcel[] resultList = new IDAL.DO.Parcel[DataSource.Config.ParcelsIndex];
+            for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
+            {
+                if(resultList[j].Scheduled != defaultDateTime):
+                {
+                    resultList[j] = new IDAL.DO.Parcel();
+                    resultList[j] = DataSource.Parcels[i];
+                    j++;
+                }
+            }
+            return resultList;
+        }
 
-        //}
+        public IDAL.DO.Parcel[] ViewStationsWithFreeChargeSlots()
+        {
 
-        //public IDAL.DO.Parcel[] ViewStationsWithFreeChargeSlots()
-        //{
-
-        //}
+        }
 
         //This function returns the station with the required Id.
         public IDAL.DO.Station ViewStation(int id)
