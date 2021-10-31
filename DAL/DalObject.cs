@@ -57,55 +57,46 @@ namespace DalObject
         // This function add a station to the stations data base.
         public void AddStation(int id, string name, int num, double longitude, double latitude)
         {
-            IDAL.DO.Station station = new IDAL.DO.Station
+            DataSource.Stations.Add(new IDAL.DO.Station()
             {
                 Id = id,
                 Name = name,
                 ChargeSlots = num,
                 Longitude = longitude,
                 Latitude = latitude
-            };
-
-            DataSource.Stations[DataSource.Config.StationsIndex] = station;
-            DataSource.Config.StationsIndex++;
+            });
         }
 
         // This function add a drone to the drones data base.
         public void AddDrone(int id, string model, string weight, int batteryStatus, string droneStatus)
         {
-            IDAL.DO.Drone drone = new IDAL.DO.Drone
+            DataSource.Drones.Add(new IDAL.DO.Drone()
             {
                 Id = id,
                 Model = model,
                 MaxWeight = (IDAL.DO.WheightCategories)Enum.Parse(typeof(IDAL.DO.WheightCategories), weight),
                 Battery = batteryStatus,
                 Status = (IDAL.DO.DroneStatuses)Enum.Parse(typeof(IDAL.DO.DroneStatuses), droneStatus)
-            };
-
-            DataSource.Drones[DataSource.Config.DronesIndex] = drone;
-            DataSource.Config.DronesIndex++;
+            });
         }
 
         // This function add a customer to the customers data base.
         public void AddCustomer(int id, string name, string phoneNumber, double longitude, double latitude)
         {
-            IDAL.DO.Customer customer = new IDAL.DO.Customer
+            DataSource.Customers.Add( new IDAL.DO.Customer()
             {
                 Id = id,
                 Name = name,
                 Phone = phoneNumber,
                 Longitude = longitude,
                 Latitude = latitude
-            };
-
-            DataSource.Customers[DataSource.Config.CustomersIndex] = customer;
-            DataSource.Config.CustomersIndex++;
+            });
         }
 
         // This function add a parcel to the parcels data base.
-        public int AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone)
+        public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone)
         {
-            IDAL.DO.Parcel parcel = new IDAL.DO.Parcel
+            DataSource.Parcels.Add( new IDAL.DO.Parcel()
             {
                 Id = DataSource.Config.ParcelsIndex,
                 SenderId = customerSenderId,
@@ -113,12 +104,7 @@ namespace DalObject
                 Wheight = (IDAL.DO.WheightCategories)Enum.Parse(typeof(IDAL.DO.WheightCategories), weight),
                 Priority = (IDAL.DO.Priorities)Enum.Parse(typeof(IDAL.DO.Priorities), priority),
                 DroneId = responsibleDrone
-            };
-
-            DataSource.Parcels[DataSource.Config.ParcelsIndex] = parcel;
-            DataSource.Config.ParcelsIndex++;
-
-            return DataSource.Config.ParcelsIndex;
+            });
         }
 
         //This function binds a parcel to a drone.
@@ -126,39 +112,50 @@ namespace DalObject
         {
             int droneIndex = DroneIdToIndex(droneId);
             int parcelIndex = ParcelIdToIndex(parcelId);
-
-            DataSource.Drones[droneIndex].Status = IDAL.DO.DroneStatuses.Shipping;
-            DataSource.Parcels[parcelIndex].DroneId = droneId;
-            DataSource.Parcels[parcelIndex].Scheduled = DateTime.Now;
+            
+            IDAL.Do.Drone d = DataSource.Drones[droneIndex];
+            IDAL.Do.Parcel p = DataSource.Parcels[parcelIndex];
+            d.Status = IDAL.DO.DroneStatuses.Shipping;
+            p.DroneId = droneId;
+            p.Scheduled = DateTime.Now;
+            DataSource.Drones[droneIndex] = d;
+            DataSource.Parcels[parcelIndex] = p;
         }
 
         //This function collects a parcel by a drone
         public void CollectParcelByDrone(int parcelId)
         {
             int parcelIndex = ParcelIdToIndex(parcelId);
-            DataSource.Parcels[parcelIndex].PickedUp = DateTime.Now;
+            IDAL.Do.Parcel p = DataSource.Parcels[parcelIndex];
+            p.PickedUp = DateTime.Now;
+            DataSource.Parcels[parcelIndex] = p;
         }
 
         //This funtion supplies a parcel to the customer.
         public void SupplyParcelToCustomer(int parcelId)
         {
             int deliveredParcelIndex = ParcelIdToIndex(parcelId);
-            DataSource.Parcels[deliveredParcelIndex].Delivered = DateTime.Now;
+            IDAL.Do.Parcel p = DataSource.Parcels[deliveredParcelIndex];
+            p.Delivered = DateTime.Now;
+            DataSource.Parcels[deliveredParcelIndex] = p;
             int droneId = DroneIdToIndex(DataSource.Parcels[deliveredParcelIndex].DroneId);
             int droneIndex = DroneIdToIndex(droneId);
-            DataSource.Drones[droneIndex].Status = IDAL.DO.DroneStatuses.Available;
-
+            IDAL.Do.Drone d = DataSource.Drones[droneIndex];
+            d.Status = IDAL.DO.DroneStatuses.Available;
+            DataSource.Drones[droneIndex] = d;
         }
 
         //This function charges a drone.
         public void ChargeDrone(int droneId)
         {
             int droneIndex = DroneIdToIndex(droneId);
-            DataSource.Drones[droneIndex].Status = IDAL.DO.DroneStatuses.Maintenance;
+            IDAL.Do.Drone d = DataSource.Drones[droneIndex];
+            d.Status = IDAL.DO.DroneStatuses.Maintenance;
+            DataSource.Drones[droneIndex] = d;
         }
 
         //This function stops the charge of the drone.
-        public void StopCharging()
+        public void StopCharging(int droneId, int chargingTime)
         {
             
         }

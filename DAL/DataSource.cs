@@ -15,24 +15,17 @@ namespace DalObject
         static Random rand = new Random();
         static DataSource()
         {
-            Drones = new IDAL.DO.Drone[10];
-            Stations = new IDAL.DO.Station[5];
-            Customers = new IDAL.DO.Customer[100];
-            Parcels = new IDAL.DO.Parcel[1000];
+            List<IDAL.DO.Drone> Drones = new List<IDAL.DO.Drone>();
+            List<IDAL.DO.Station> Stations = new List<IDAL.DO.Station>();
+            List<IDAL.DO.Customer> Customers = new List<IDAL.DO.Customer>();
+            List<IDAL.DO.Parcel> Parcels = new List<IDAL.DO.Parcel>();
         }
         internal class Config
         {
-            static internal int DronesIndex;
-            static internal int StationsIndex;
-            static internal int CustomersIndex;
-            static internal int ParcelsIndex;
 
             static Config()
             {
-                DronesIndex = 0;
-                StationsIndex = 0;
-                CustomersIndex = 0;
-                ParcelsIndex = 0;
+
             }
 
             //This function initailizes the data structures.
@@ -49,15 +42,13 @@ namespace DalObject
                     ids[i] = rand.Next(10000000, 99999999);
                 for (int i = 0; i < 10; i++)
                 {
-                    Customers[i] = new IDAL.DO.Customer
-                    {
+                    Customer.Add( new IDAL.DO.Customer(){
                         Id = ids[i],
                         Name = names[i],
                         Phone = phoneNumbers[i],
                         Longitude = rand.NextDouble() * 180,
                         Latitude = rand.NextDouble() * 180
-                    };
-                    CustomersIndex++;
+                    });
                 }
 
                 // generate general random values that will guide the initialization.
@@ -69,7 +60,7 @@ namespace DalObject
                     IDAL.DO.WheightCategories wheight = (IDAL.DO.WheightCategories)rand.Next(0, 3);
                     IDAL.DO.Priorities priority = (IDAL.DO.Priorities)rand.Next(0, 3);
                     DateTime defaultDate = new DateTime();
-                    Parcels[i] = new IDAL.DO.Parcel
+                    Parcels.Add(new IDAL.DO.Parcel()
                     {
                         Id = i,
                         SenderId = Customers[rand.Next(0, 9)].id,
@@ -81,9 +72,7 @@ namespace DalObject
                         Scheduled = defaultDate,
                         PickedUp = defaultDate,
                         Delivered = defaultDate
-                    };
-                    ParcelsIndex++;
-
+                    });
                 }
                 //initialize waiting parcels
                 for (int i = shippedParcels; i < 10; i++)
@@ -91,7 +80,7 @@ namespace DalObject
                     IDAL.DO.WheightCategories wheight = (IDAL.DO.WheightCategories)rand.Next(0, 3);
                     IDAL.DO.Priorities priority = (IDAL.DO.Priorities)rand.Next(0, 3);
                     DateTime defaultDate = new DateTime();
-                    Parcels[i] = new IDAL.DO.Parcel
+                    Parcels.Add(new IDAL.DO.Parcel()
                     {
                         Id = shippedParcels + i,
                         SenderId = Customers[rand.Next(0, 9)].id,
@@ -103,21 +92,19 @@ namespace DalObject
                         Scheduled = defaultDate,
                         PickedUp = defaultDate,
                         Delivered = defaultDate
-                    };
-                    ParcelsIndex++;
+                    });
                 }
                 //initialize stations
                 for (int i = 0; i < 2; i++)
                 {
-                    Stations[i] = new IDAL.DO.Station
+                    Stations.Add(new IDAL.DO.Station()
                     {
                         Id = i,
                         Name = "station" + i.ToString(),
                         Longitude = rand.NextDouble() * 180,
                         Latitude = rand.NextDouble() * 180,
                         ChargeSlots = rand.Next(0,5)
-                    };
-                    StationsIndex++;
+                    });
                 }
 
                 //initialize Drones
@@ -125,30 +112,28 @@ namespace DalObject
                 {
                     IDAL.DO.WheightCategories maxWeight = (IDAL.DO.WheightCategories)rand.Next(0, 3);
                     double battery = rand.NextDouble()*100;
-                    Drones[i] = new IDAL.DO.Drone
+                    Drones.Add(new IDAL.DO.Drone()
                     {
                         Id = i,
                         Model = "",
                         MaxWeight = maxWeight,
                         Status = IDAL.DO.DroneStatuses.Shipping,
                         Battery = battery
-                    };
-                    DronesIndex++;
+                    });
                 }
                 for (int i = 5 - shippedParcels; i > 0; i--) // the other drones which are'nt on shipping mode.
                 {
                     IDAL.DO.WheightCategories maxWeight = (IDAL.DO.WheightCategories)rand.Next(0, 3);
                     IDAL.DO.DroneStatuses status = (IDAL.DO.DroneStatuses)rand.Next(0, 2); // "Available" or "Maintenance"
                     double battery = rand.NextDouble()*100;
-                    Drones[i] = new IDAL.DO.Drone
+                    Drones.Add(new IDAL.DO.Drone()
                     {
                         Id = shippedParcels + i,
                         Model = "",
                         MaxWeight = maxWeight,
                         Status = status,
                         Battery = battery
-                    };
-                    DronesIndex++;
+                    });
                 }
             }
         }
