@@ -25,7 +25,11 @@ namespace DalObject
 
             static Config()
             {
-
+                static public int availableDrElectConsumption;
+                static public int lightDrElectConsumption;
+                static public int mediumDrElectConsumption;
+                static public int heavyDrElectConsumption;
+                public int chargingRate;
             }
 
             //This function initailizes the data structures.

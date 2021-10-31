@@ -155,7 +155,7 @@ namespace DalObject
         }
 
         //This function stops the charge of the drone.
-        public void StopCharging(int droneId, int chargingTime)
+        public void StopCharging(int droneId/*, int chargingTime*/)
         {
             
         }
@@ -164,66 +164,66 @@ namespace DalObject
         public IEnumerable<IDAL.DO.Station> ViewStationsList()
         {
             List<IDAL.DO.Station> resultList = new List<IDAL.DO.Station>();
-            for(int i=0; i < DataSource.Stations; i++)
+            foreach (IDAL.DO.Station station in DataSource.Stations)
             {
                 IDAL.DO.Station s = new IDAL.DO.Station();
-                s = DataSource.Stations[i];
+                s = station;
                 resultList.Add(s);
             }
             return resultList;
         }
 
         //This function returns a copy of the drones list.
-        public IDAL.DO.Drone[] ViewDronesList()
+        public IEnumerable<IDAL.DO.Drone> ViewDronesList()
         {
             List<IDAL.DO.Drone> resultList = new List<IDAL.DO.Drone>();
-            for (int i = 0; i < DataSource.Config.StationsIndex; i++)
+            foreach (IDAL.DO.Drone drone in DataSource.Drones)
             {
                 IDAL.DO.Drone d = new IDAL.DO.Drone();
-                d = DataSource.Drones[i];
+                d = drone;
                 resultList.Add(d);
             }
             return resultList;
         }
 
         //This function returns a copy of the customers list.
-        public IDAL.DO.Customer[] ViewCustomersList()
+        public IEnumerable<IDAL.DO.Customer> ViewCustomersList()
         {
             List<IDAL.DO.Customer> resultList = new List<IDAL.DO.Customer>();
-            for (int i = 0; i < DataSource.Config.CustomersIndex; i++)
+            foreach (IDAL.DO.Customer customer in DataSource.Customers)
             {
                 IDAL.DO.Customer c = new IDAL.DO.Customer();
-                c = DataSource.Customers[i];
+                c = customer;
                 resultList.Add(c);
             }
             return resultList;
         }
 
         //This function returns a copy of the parcels list.
-        public IDAL.DO.Parcel[] ViewParcelsList()
+        public IEnumerable<IDAL.DO.Parcel> ViewParcelsList()
         {
             List<IDAL.DO.Parcel> resultList = new List<IDAL.DO.Parcel>();
-            for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
+            foreach (IDAL.DO.Parcel parcel in DataSource.Parcels)
             {
                 IDAL.DO.Parcel p = new IDAL.DO.Parcel();
-                p = DataSource.Parcels[i];
+                p = parcel;
                 resultList.Add(p);
             }
             return resultList;
         }
 
-        public IDAL.DO.Parcel[] ViewUnbindParcels()
+        public IEnumerable<IDAL.DO.Parcel> ViewUnbindParcels()
         {
             // create the result list
             int j = 0;
             defaultDateTime = new DateTime();
             List<IDAL.DO.Parcel> resultList = new List<IDAL.DO.Parcel>();
-            for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
+            foreach (IDAL.DO.Parcel parcel in DataSource.Parcels)
             {
-                if(DataSource.Parcels[i].Scheduled != defaultDateTime):
+                if(parcel.Scheduled != defaultDateTime):
                 {
                     IDAL.DO.Parcel p = new IDAL.DO.Parcel();
-                    p = DataSource.Parcels[i];
+                    p = parcel;
                     resultList.Add(p);
                     j++;
                 }
@@ -231,18 +231,18 @@ namespace DalObject
             return resultList;
         }
 
-        public IDAL.DO.Parcel[] ViewStationsWithFreeChargeSlots()
+        public IEnumerable<IDAL.DO.Parcel> ViewStationsWithFreeChargeSlots()
         {
             // create the result list
             int j = 0;
             defaultDateTime = new DateTime();
             List<IDAL.DO.Station> resultList = new List<IDAL.DO.Station>();
-            for (int i = 0; i < DataSource.Config.StationsIndex; i++)
+            foreach (IDAL.DO.Station station in DataSource.Stations)
             {
                 if(DataSource.Stations[i].ChargeSlots > 0):
                 {
                     resultList[j] = new IDAL.DO.Station();
-                    resultList[j] = DataSource.Stations[i];
+                    resultList[j] = station;
                     j++;
                 }
             }
