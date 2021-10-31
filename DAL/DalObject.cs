@@ -161,13 +161,14 @@ namespace DalObject
         }
 
         //This function returns a copy of the stations list.
-        public IDAL.DO.Station[] ViewStationsList()
+        public IEnumerable<IDAL.DO.Station> ViewStationsList()
         {
-            IDAL.DO.Station[] resultList = new IDAL.DO.Station[DataSource.Config.StationsIndex];
-            for(int i=0; i < DataSource.Config.StationsIndex; i++)
+            List<IDAL.DO.Station> resultList = new List<IDAL.DO.Station>();
+            for(int i=0; i < DataSource.Stations; i++)
             {
-                resultList[i] = new IDAL.DO.Station();
-                resultList[i] = DataSource.Stations[i];
+                IDAL.DO.Station s = new IDAL.DO.Station();
+                s = DataSource.Stations[i];
+                resultList.Add(s);
             }
             return resultList;
         }
@@ -175,11 +176,12 @@ namespace DalObject
         //This function returns a copy of the drones list.
         public IDAL.DO.Drone[] ViewDronesList()
         {
-            IDAL.DO.Drone[] resultList = new IDAL.DO.Drone[DataSource.Config.DronesIndex];
+            List<IDAL.DO.Drone> resultList = new List<IDAL.DO.Drone>();
             for (int i = 0; i < DataSource.Config.StationsIndex; i++)
             {
-                resultList[i] = new IDAL.DO.Drone();
-                resultList[i] = DataSource.Drones[i];
+                IDAL.DO.Drone d = new IDAL.DO.Drone();
+                d = DataSource.Drones[i];
+                resultList.Add(d);
             }
             return resultList;
         }
@@ -187,11 +189,12 @@ namespace DalObject
         //This function returns a copy of the customers list.
         public IDAL.DO.Customer[] ViewCustomersList()
         {
-            IDAL.DO.Customer[] resultList = new IDAL.DO.Customer[DataSource.Config.CustomersIndex];
+            List<IDAL.DO.Customer> resultList = new List<IDAL.DO.Customer>();
             for (int i = 0; i < DataSource.Config.CustomersIndex; i++)
             {
-                resultList[i] = new IDAL.DO.Customer();
-                resultList[i] = DataSource.Customers[i];
+                IDAL.DO.Customer c = new IDAL.DO.Customer();
+                c = DataSource.Customers[i];
+                resultList.Add(c);
             }
             return resultList;
         }
@@ -199,32 +202,29 @@ namespace DalObject
         //This function returns a copy of the parcels list.
         public IDAL.DO.Parcel[] ViewParcelsList()
         {
-            IDAL.DO.Parcel[] resultList = new IDAL.DO.Parcel[DataSource.Config.ParcelsIndex];
+            List<IDAL.DO.Parcel> resultList = new List<IDAL.DO.Parcel>();
             for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
             {
-                resultList[i] = new IDAL.DO.Parcel();
-                resultList[i] = DataSource.Parcels[i];
+                IDAL.DO.Parcel p = new IDAL.DO.Parcel();
+                p = DataSource.Parcels[i];
+                resultList.Add(p);
             }
             return resultList;
         }
 
         public IDAL.DO.Parcel[] ViewUnbindParcels()
         {
-            // calculate the size of th result list
-            int size = 0;
-            for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
-                if(resultList[j].Scheduled != defaultDateTime):
-                    size++;
             // create the result list
             int j = 0;
             defaultDateTime = new DateTime();
-            IDAL.DO.Parcel[] resultList = new IDAL.DO.Parcel[size];
+            List<IDAL.DO.Parcel> resultList = new List<IDAL.DO.Parcel>();
             for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
             {
                 if(DataSource.Parcels[i].Scheduled != defaultDateTime):
                 {
-                    resultList[j] = new IDAL.DO.Parcel();
-                    resultList[j] = DataSource.Parcels[i];
+                    IDAL.DO.Parcel p = new IDAL.DO.Parcel();
+                    p = DataSource.Parcels[i];
+                    resultList.Add(p);
                     j++;
                 }
             }
@@ -233,15 +233,10 @@ namespace DalObject
 
         public IDAL.DO.Parcel[] ViewStationsWithFreeChargeSlots()
         {
-            // calculate the size of the result list
-            int size = 0;
-            for (int i = 0; i < DataSource.Config.StationsIndex; i++)
-                if(resultList[j].Scheduled != defaultDateTime):
-                    size++;
             // create the result list
             int j = 0;
             defaultDateTime = new DateTime();
-            IDAL.DO.Station[] resultList = new IDAL.DO.Station[size];
+            List<IDAL.DO.Station> resultList = new List<IDAL.DO.Station>();
             for (int i = 0; i < DataSource.Config.StationsIndex; i++)
             {
                 if(DataSource.Stations[i].ChargeSlots > 0):
