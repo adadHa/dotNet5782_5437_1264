@@ -75,8 +75,8 @@ namespace DalObject
                     Parcels[i] = new IDAL.DO.Parcel
                     {
                         Id = i,
-                        SenderId = Customers[rand.Next(0, 9)].id,
-                        TargetId = Customers[rand.Next(0, 9)].id,
+                        SenderId = Customers[rand.Next(0, 9)].Id,
+                        TargetId = Customers[rand.Next(0, 9)].Id,
                         Wheight = wheight,
                         Priority = priority,
                         DroneId = i,
@@ -97,8 +97,8 @@ namespace DalObject
                     Parcels[i] = new IDAL.DO.Parcel
                     {
                         Id = shippedParcels + i,
-                        SenderId = Customers[rand.Next(0, 9)].id,
-                        TargetId = Customers[rand.Next(0, 9)].id,
+                        SenderId = Customers[rand.Next(0, 9)].Id,
+                        TargetId = Customers[rand.Next(0, 9)].Id,
                         Wheight = wheight,
                         Priority = priority,
                         DroneId = 0,

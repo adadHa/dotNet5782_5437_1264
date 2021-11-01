@@ -162,6 +162,7 @@ namespace DalObject
             };
             DataSource.DroneCharges[DataSource.Config.DroneChargeIndex] = droneCharge;
             DataSource.Config.DroneChargeIndex++;
+            DataSource.Stations[stationId].ChargeSlots--;
         }
 
         //This function stops the charge of the drone.
@@ -174,6 +175,8 @@ namespace DalObject
                     droneChargeIndex = i;
             }
             DataSource.DroneCharges[droneChargeIndex] = new IDAL.DO.DroneCharge(); //remove the element from the array (we truely remove the element when we will use list)
+            int stationId = DataSource.DroneCharges[droneChargeIndex].StationId;
+            DataSource.Stations[stationId].ChargeSlots++;
         }
 
         //This function returns a copy of the stations list.
