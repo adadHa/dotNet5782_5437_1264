@@ -8,18 +8,11 @@ namespace DalObject
 {
     struct DataSource
     {
-        static internal List<IDAL.DO.Drone> Drones;
-        static internal List<IDAL.DO.Station> Stations;
-        static internal List<IDAL.DO.Customer> Customers;
-        static internal List<IDAL.DO.Parcel> Parcels;
+        static internal List<IDAL.DO.Drone> Drones = new List<IDAL.DO.Drone>();
+        static internal List<IDAL.DO.Station> Stations = new List<IDAL.DO.Station>();
+        static internal List<IDAL.DO.Customer> Customers = new List<IDAL.DO.Customer>();
+        static internal List<IDAL.DO.Parcel> Parcels = new List<IDAL.DO.Parcel>();
         static Random rand = new Random();
-        static DataSource()
-        {
-            List<IDAL.DO.Drone> Drones = new List<IDAL.DO.Drone>();
-            List<IDAL.DO.Station> Stations = new List<IDAL.DO.Station>();
-            List<IDAL.DO.Customer> Customers = new List<IDAL.DO.Customer>();
-            List<IDAL.DO.Parcel> Parcels = new List<IDAL.DO.Parcel>();
-        }
         internal class Config
         {
             public static int availableDrElectConsumption;
@@ -141,7 +134,7 @@ namespace DalObject
         }
     }
 }
-}
+
 
 
 

@@ -174,7 +174,6 @@ namespace DalObject
         public IEnumerable<IDAL.DO.Parcel> ViewUnbindParcels()
         {
             // create the result list
-            int j = 0;
             DateTime defaultDateTime = new DateTime();
             List<IDAL.DO.Parcel> resultList = new List<IDAL.DO.Parcel>();
             foreach (IDAL.DO.Parcel parcel in DataSource.Parcels)
@@ -184,7 +183,6 @@ namespace DalObject
                     IDAL.DO.Parcel p = new IDAL.DO.Parcel();
                     p = parcel;
                     resultList.Add(p);
-                    j++;
                 }
             }
             return resultList;
@@ -193,15 +191,14 @@ namespace DalObject
         public IEnumerable<IDAL.DO.Station> ViewStationsWithFreeChargeSlots()
         {
             // create the result list
-            int j = 0;
             List<IDAL.DO.Station> resultList = new List<IDAL.DO.Station>();
             foreach (IDAL.DO.Station station in DataSource.Stations)
             {
                 if(station.ChargeSlots > 0)
                 {
-                    resultList[j] = new IDAL.DO.Station();
-                    resultList[j] = station;
-                    j++;
+                    IDAL.DO.Station s = new IDAL.DO.Station();
+                    s = station;
+                    resultList.Add(s);
                 }
             }
             return resultList;

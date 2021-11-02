@@ -201,7 +201,8 @@ namespace ConsoleUI
                                         Console.WriteLine("Enter drone id:");
                                         int.TryParse(Console.ReadLine(), out droneId);
                                         Console.WriteLine("Choose one from the following stations:");
-                                        printList<IDAL.DO.Station>(dalObject.ViewStationsWithFreeChargeSlots());
+                                        printList<IDAL.DO.Station>(
+                                            (System.Collections.Generic.List<IDAL.DO.Station>)dalObject.ViewStationsWithFreeChargeSlots());
                                         dalObject.ChargeDrone(droneId);
                                         break;
                                     }
@@ -303,36 +304,43 @@ namespace ConsoleUI
                             {
                                 case ListView.ViewStationsList:
                                     {
-                                        printList<IDAL.DO.Station>(dalObject.ViewStationsList());
+                                        printList<IDAL.DO.Station>(
+                                            (System.Collections.Generic.List<IDAL.DO.Station>)dalObject.ViewStationsList());
                                         break;
                                     }
 
                                 case ListView.ViewDronesList:
                                     {
-                                        printList<IDAL.DO.Drone>(dalObject.ViewDronesList());
+                                        printList<IDAL.DO.Drone>(
+                                            (System.Collections.Generic.List<IDAL.DO.Drone>)dalObject.ViewDronesList());
                                         break;
                                     }
 
                                 case ListView.ViewCustomersList:
                                     {
-                                        printList<IDAL.DO.Customer>(dalObject.ViewCustomersList());
+                                        printList<IDAL.DO.Customer>(
+                                            (System.Collections.Generic.List<IDAL.DO.Customer>)dalObject.ViewCustomersList());
                                         break;
                                     }
 
                                 case ListView.ViewParcelsList:
                                     {
-                                        printList<IDAL.DO.Parcel>(dalObject.ViewParcelsList());
+                                        printList<IDAL.DO.Parcel>(
+                                            (System.Collections.Generic.List<IDAL.DO.Parcel>)dalObject.ViewParcelsList());
                                         break;
                                     }
 
                                 case ListView.ViewUnbindParcels:
                                     {
-                                        
+                                        printList<IDAL.DO.Parcel>(
+                                            (System.Collections.Generic.List<IDAL.DO.Parcel>)dalObject.ViewUnbindParcels());
+                                        break;
                                     }
 
                                 case ListView.ViewStationsWithFreeChargeSlots:
                                     {
-                                        printList<IDAL.DO.Station>(dalObject.ViewStationsWithFreeChargeSlots());
+                                        printList<IDAL.DO.Station>(
+                                            (System.Collections.Generic.List<IDAL.DO.Station>)dalObject.ViewStationsWithFreeChargeSlots());
                                         break;
                                     }
 
@@ -373,7 +381,7 @@ namespace ConsoleUI
 
 
         }
-        static private void printList<T>(T[] list)
+        static private void printList<T>(System.Collections.Generic.List<T> list)
         {
             foreach (T item in list)
             {
