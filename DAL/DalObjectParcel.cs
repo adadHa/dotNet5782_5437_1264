@@ -11,15 +11,25 @@ namespace DalObject
         // This function add a parcel to the parcels data base.
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone)
         {
-            DataSource.Parcels.Add(new IDAL.DO.Parcel()
+            try
             {
-                Id = DataSource.Parcels.Count,
-                SenderId = customerSenderId,
-                TargetId = customerReceiverId,
-                Wheight = (IDAL.DO.WheightCategories)Enum.Parse(typeof(IDAL.DO.WheightCategories), weight),
-                Priority = (IDAL.DO.Priorities)Enum.Parse(typeof(IDAL.DO.Priorities), priority),
-                DroneId = responsibleDrone
-            });
+                if (DataSource.Drones.FindIndex(x => x.Id == responsibleDrone) == -1)
+                    throw new IdIsNotExistException($"{responsibleDrone} is not Exist\n");
+
+                DataSource.Parcels.Add(new IDAL.DO.Parcel()
+                {
+                    Id = DataSource.Parcels.Count,
+                    SenderId = customerSenderId,
+                    TargetId = customerReceiverId,
+                    Wheight = (IDAL.DO.WheightCategories)Enum.Parse(typeof(IDAL.DO.WheightCategories), weight),
+                    Priority = (IDAL.DO.Priorities)Enum.Parse(typeof(IDAL.DO.Priorities), priority),
+                    DroneId = responsibleDrone
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         //This function binds a parcel to a drone.
