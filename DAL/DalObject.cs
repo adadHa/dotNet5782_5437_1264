@@ -11,47 +11,7 @@ namespace DalObject
     {
         public DalObject()
         {
-            DataSource.Config.Initialize();
-        }
-
-        //This function gets an Id an returns the index in the array of customers.
-        private int CustomerIdToIndex(int id)
-        {
-            int index = 0;
-            for (int i = 0; i < DataSource.Config.CustomersIndex; i++)
-                if (DataSource.Customers[i].Id == id)
-                     index = i;
-            return index;
-        }
-
-        //This function gets an Id an returns the index in the array of drones.
-        private int DroneIdToIndex(int id)
-        {
-            int index = 0;
-            for (int i = 0; i < DataSource.Config.DronesIndex; i++)
-                if (DataSource.Drones[i].Id == id)
-                    index = i;
-            return index;
-        }
-
-        //This function gets an Id an returns the index in the array of parcels.
-        private int ParcelIdToIndex(int id)
-        {
-            int index = 0;
-            for (int i = 0; i < DataSource.Config.ParcelsIndex; i++)
-                if (DataSource.Parcels[i].Id == id)
-                    index = i;
-            return index;
-        }
-
-        //This function gets an Id an returns the index in the array of stations.
-        private int StationIdToIndex(int id)
-        {
-            int index = 0;
-            for (int i = 0; i < DataSource.Config.StationsIndex; i++)
-                if (DataSource.Stations[i].Id == id)
-                    index = i;
-            return index;
+            DataSource.Initialize();
         }
 
         // This function add a station to the stations data base.
@@ -98,7 +58,7 @@ namespace DalObject
         {
             DataSource.Parcels.Add( new IDAL.DO.Parcel()
             {
-                Id = DataSource.Config.ParcelsIndex,
+                Id = DataSource.Parcels.Count,
                 SenderId = customerSenderId,
                 TargetId = customerReceiverId,
                 Wheight = (IDAL.DO.WheightCategories)Enum.Parse(typeof(IDAL.DO.WheightCategories), weight),
@@ -110,11 +70,10 @@ namespace DalObject
         //This function binds a parcel to a drone.
         public void BindParcel(int parcelId, int droneId)
         {
-            int droneIndex = DroneIdToIndex(droneId);
-            int parcelIndex = ParcelIdToIndex(parcelId);
-            
-            IDAL.Do.Drone d = DataSource.Drones[droneIndex];
-            IDAL.Do.Parcel p = DataSource.Parcels[parcelIndex];
+            int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
+            int parcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
+            IDAL.DO.Drone d = DataSource.Drones[droneIndex];
+            IDAL.DO.Parcel p = DataSource.Parcels[parcelIndex];
             d.Status = IDAL.DO.DroneStatuses.Shipping;
             p.DroneId = droneId;
             p.Scheduled = DateTime.Now;
@@ -125,8 +84,8 @@ namespace DalObject
         //This function collects a parcel by a drone
         public void CollectParcelByDrone(int parcelId)
         {
-            int parcelIndex = ParcelIdToIndex(parcelId);
-            IDAL.Do.Parcel p = DataSource.Parcels[parcelIndex];
+            int parcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
+            IDAL.DO.Parcel p = DataSource.Parcels[parcelIndex];
             p.PickedUp = DateTime.Now;
             DataSource.Parcels[parcelIndex] = p;
         }
@@ -134,13 +93,13 @@ namespace DalObject
         //This funtion supplies a parcel to the customer.
         public void SupplyParcelToCustomer(int parcelId)
         {
-            int deliveredParcelIndex = ParcelIdToIndex(parcelId);
-            IDAL.Do.Parcel p = DataSource.Parcels[deliveredParcelIndex];
+            int deliveredParcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId); ;
+            IDAL.DO.Parcel p = DataSource.Parcels[deliveredParcelIndex];
             p.Delivered = DateTime.Now;
             DataSource.Parcels[deliveredParcelIndex] = p;
-            int droneId = DroneIdToIndex(DataSource.Parcels[deliveredParcelIndex].DroneId);
-            int droneIndex = DroneIdToIndex(droneId);
-            IDAL.Do.Drone d = DataSource.Drones[droneIndex];
+            int droneId = DataSource.Parcels[deliveredParcelIndex].DroneId;
+            int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
+            IDAL.DO.Drone d = DataSource.Drones[droneIndex];
             d.Status = IDAL.DO.DroneStatuses.Available;
             DataSource.Drones[droneIndex] = d;
         }
@@ -148,8 +107,8 @@ namespace DalObject
         //This function charges a drone.
         public void ChargeDrone(int droneId)
         {
-            int droneIndex = DroneIdToIndex(droneId);
-            IDAL.Do.Drone d = DataSource.Drones[droneIndex];
+            int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
+            IDAL.DO.Drone d = DataSource.Drones[droneIndex];
             d.Status = IDAL.DO.DroneStatuses.Maintenance;
             DataSource.Drones[droneIndex] = d;
         }
@@ -216,11 +175,11 @@ namespace DalObject
         {
             // create the result list
             int j = 0;
-            defaultDateTime = new DateTime();
+            DateTime defaultDateTime = new DateTime();
             List<IDAL.DO.Parcel> resultList = new List<IDAL.DO.Parcel>();
             foreach (IDAL.DO.Parcel parcel in DataSource.Parcels)
             {
-                if(parcel.Scheduled != defaultDateTime):
+                if(parcel.Scheduled != defaultDateTime)
                 {
                     IDAL.DO.Parcel p = new IDAL.DO.Parcel();
                     p = parcel;
@@ -231,15 +190,14 @@ namespace DalObject
             return resultList;
         }
 
-        public IEnumerable<IDAL.DO.Parcel> ViewStationsWithFreeChargeSlots()
+        public IEnumerable<IDAL.DO.Station> ViewStationsWithFreeChargeSlots()
         {
             // create the result list
             int j = 0;
-            defaultDateTime = new DateTime();
             List<IDAL.DO.Station> resultList = new List<IDAL.DO.Station>();
             foreach (IDAL.DO.Station station in DataSource.Stations)
             {
-                if(DataSource.Stations[i].ChargeSlots > 0):
+                if(station.ChargeSlots > 0)
                 {
                     resultList[j] = new IDAL.DO.Station();
                     resultList[j] = station;
@@ -252,34 +210,31 @@ namespace DalObject
         //This function returns the station with the required Id.
         public IDAL.DO.Station ViewStation(int id)
         {
-            int index = StationIdToIndex(id);
+            int index = DataSource.Stations.FindIndex(x => x.Id == id);
             return DataSource.Stations[index];
         }
 
         //This function returns the drone with the required Id.
         public IDAL.DO.Drone ViewDrone(int id)
         {
-            int index = DroneIdToIndex(id);
+            int index = DataSource.Drones.FindIndex(x => x.Id == id);
             return DataSource.Drones[index]; 
         }
 
         //This function returns the customer with the required Id.
         public IDAL.DO.Customer ViewCustomer(int id)
         {
-            int index = CustomerIdToIndex(id);
+            int index = DataSource.Customers.FindIndex(x => x.Id == id);
             return DataSource.Customers[index];
         }
 
         //This function returns the parcel with the required Id.
         public IDAL.DO.Parcel ViewParcel(int id)
         {
-            int index = ParcelIdToIndex(id);
+            int index = DataSource.Parcels.FindIndex(x => x.Id == id);
             return DataSource.Parcels[index];
         }
 
-        public string Sexagesimal(double longitude, double latitude)
-        {
-            return 
-        }
+    
     }
 }
