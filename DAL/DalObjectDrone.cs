@@ -48,6 +48,17 @@ namespace DalObject
             }
             return resultList;
         }
+
+        public int[] ViewElectConsumptionData()
+        {
+            int[] arr = {DataSource.Config.availableDrElectConsumption,
+                         DataSource.Config.lightDrElectConsumption,
+                         DataSource.Config.mediumDrElectConsumption,
+                         DataSource.Config.heavyDrElectConsumption,
+                         DataSource.Config.chargingRate
+            };
+            return arr;
+        }
     }
 
 

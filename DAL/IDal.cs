@@ -28,8 +28,7 @@ namespace IDal
         public IDAL.DO.Drone ViewDrone(int id);
         public IDAL.DO.Customer ViewCustomer(int id);
         public IDAL.DO.Parcel ViewParcel(int id);
-
-
+        public int[] ViewElectConsumptionData();
 
 
 

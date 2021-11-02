@@ -19,7 +19,7 @@ namespace DalObject
             public static int lightDrElectConsumption;
             public static int mediumDrElectConsumption;
             public static int heavyDrElectConsumption;
-            public int chargingRate;
+            public static int chargingRate;
 
         }
 
