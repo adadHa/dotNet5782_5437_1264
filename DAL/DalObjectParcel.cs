@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DalObject
 {
-    public partial class DalObject
+    public partial class DalObject : IDal.IDal
     {
         // This function add a parcel to the parcels data base.
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone)

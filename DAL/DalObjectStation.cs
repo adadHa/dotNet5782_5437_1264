@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DalObject
 {
-    public partial class DalObject
+    public partial class DalObject : IDal.IDal
     {
         // This function add a station to the stations data base.
         public void AddStation(int id, string name, int num, double longitude, double latitude)

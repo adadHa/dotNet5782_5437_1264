@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DalObject
 {
-    public partial class DalObject
+    public partial class DalObject : IDal.IDal
     {
         // This function add a drone to the drones data base.
         public void AddDrone(int id, string model, string weight, int batteryStatus, string droneStatus)
@@ -51,7 +51,7 @@ namespace DalObject
 
         public int[] ViewElectConsumptionData()
         {
-            int[] arr = {DataSource.Config.availableDrElectConsumption,
+            double[] arr = {DataSource.Config.availableDrElectConsumption,
                          DataSource.Config.lightDrElectConsumption,
                          DataSource.Config.mediumDrElectConsumption,
                          DataSource.Config.heavyDrElectConsumption,

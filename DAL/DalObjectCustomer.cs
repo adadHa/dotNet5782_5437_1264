@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DalObject
 {
-    public partial class DalObject
+    public partial class DalObject : IDal.IDal
     {
         public DalObject()
         {
