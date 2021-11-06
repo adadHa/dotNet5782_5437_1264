@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 using DalObject;
-namespace IDal
+namespace IDAL
 {
     public interface IDal
     {
         public void AddStation(int id, string name, int num, double longitude, double latitude);
-        public void AddDrone(int id, string model, string weight, int batteryStatus, string droneStatus);
+        public void AddDrone(int id, string model, string weight, double batteryStatus, string droneStatus);
         public void AddCustomer(int id, string name, string phoneNumber, double longitude, double latitude);
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone);
         public void BindParcel(int parcelId, int droneId);

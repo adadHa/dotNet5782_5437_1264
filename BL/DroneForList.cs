@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    class DroneToList
+    class DroneForList
     {
         public int Id { get; set; }
         public string Model { get; set; }
@@ -14,6 +14,6 @@ namespace BL
         public double Battery { get; set; }
         public DroneStatuses Status { get; set; }
         public Location Location { get; set; }
-        public int NumberPacelDelivered { get; set; }
+        public int DeliveredParcelNumber { get; set; }
     }
 }

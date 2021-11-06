@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DalObject
 {
-    public partial class DalObject : IDal.IDal
+    public partial class DalObject : IDAL.IDal
     {
         // This function add a parcel to the parcels data base.
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone)
@@ -106,11 +106,6 @@ namespace DalObject
             return DataSource.Parcels[index];
         }
 
-        //This function returns the drone with the required Id.
-        public IDAL.DO.Drone ViewDrone(int id)
-        {
-            int index = DataSource.Drones.FindIndex(x => x.Id == id);
-            return DataSource.Drones[index];
-        }
+        
     }
 }
