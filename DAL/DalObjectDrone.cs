@@ -6,19 +6,31 @@ using System.Threading.Tasks;
 
 namespace DalObject
 {
-    public partial class DalObject
+    public partial class DalObject : IDAL.IDal
     {
         // This function add a drone to the drones data base.
-        public void AddDrone(int id, string model, string weight, int batteryStatus, string droneStatus)
+        public void AddDrone(int id, string model, string weight, double batteryStatus, string droneStatus)
         {
-            DataSource.Drones.Add(new IDAL.DO.Drone()
+            try
             {
-                Id = id,
-                Model = model,
-                MaxWeight = (IDAL.DO.WheightCategories)Enum.Parse(typeof(IDAL.DO.WheightCategories), weight),
-                Battery = batteryStatus,
-                Status = (IDAL.DO.DroneStatuses)Enum.Parse(typeof(IDAL.DO.DroneStatuses), droneStatus)
-            });
+                if (DataSource.Drones.FindIndex(x => x.Id == id) != -1)
+                {
+                    throw new IdIsAlreadyExistException($"Drone with the id {id} is alreay exists. try another id\n");
+                }
+                DataSource.Drones.Add(new IDAL.DO.Drone()
+                {
+                    Id = id,
+                    Model = model,
+                    MaxWeight = (IDAL.DO.WheightCategories)Enum.Parse(typeof(IDAL.DO.WheightCategories), weight),
+                    Battery = batteryStatus,
+                    Status = (IDAL.DO.DroneStatuses)Enum.Parse(typeof(IDAL.DO.DroneStatuses), droneStatus)
+                });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         //This function charges a drone.
@@ -36,6 +48,13 @@ namespace DalObject
 
         }
 
+        //This function returns the drone with the required Id.
+        public IDAL.DO.Drone ViewDrone(int id)
+        {
+            int index = DataSource.Drones.FindIndex(x => x.Id == id);
+            return DataSource.Drones[index];
+        }
+
         //This function returns a copy of the drones list.
         public IEnumerable<IDAL.DO.Drone> ViewDronesList()
         {
@@ -49,9 +68,9 @@ namespace DalObject
             return resultList;
         }
 
-        public int[] ViewElectConsumptionData()
+        public double[] ViewElectConsumptionData()
         {
-            int[] arr = {DataSource.Config.availableDrElectConsumption,
+            double[] arr = {DataSource.Config.availableDrElectConsumption,
                          DataSource.Config.lightDrElectConsumption,
                          DataSource.Config.mediumDrElectConsumption,
                          DataSource.Config.heavyDrElectConsumption,

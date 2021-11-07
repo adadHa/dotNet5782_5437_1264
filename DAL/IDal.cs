@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 using DalObject;
-namespace IDal
+namespace IDAL
 {
-    interface IDal
+    public interface IDal
     {
         public void AddStation(int id, string name, int num, double longitude, double latitude);
-        public void AddDrone(int id, string model, string weight, int batteryStatus, string droneStatus);
+        public void AddDrone(int id, string model, string weight, double batteryStatus, string droneStatus);
         public void AddCustomer(int id, string name, string phoneNumber, double longitude, double latitude);
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone);
         public void BindParcel(int parcelId, int droneId);
@@ -23,12 +23,12 @@ namespace IDal
         public IEnumerable<IDAL.DO.Customer> ViewCustomersList();
         public IEnumerable<IDAL.DO.Parcel> ViewParcelsList();
         public IEnumerable<IDAL.DO.Parcel> ViewUnbindParcels();
-        public IEnumerable<IDAL.DO.Parcel> ViewStationsWithFreeChargeSlots();
+        public IEnumerable<IDAL.DO.Station> ViewStationsWithFreeChargeSlots();
         public IDAL.DO.Station ViewStation(int id);
         public IDAL.DO.Drone ViewDrone(int id);
         public IDAL.DO.Customer ViewCustomer(int id);
         public IDAL.DO.Parcel ViewParcel(int id);
-        public int[] ViewElectConsumptionData();
+        public double[] ViewElectConsumptionData();
 
 
 
