@@ -2,7 +2,7 @@
 
 namespace ConsoleUI
 {
-    class Program
+    partial class Program
     {
         enum GeneralOptions { Exit, Add, Update, View, ListView, Sexagesimal };
         enum Add { Exit, AddStation, AddDrone, AddCustomer, AddParcel };

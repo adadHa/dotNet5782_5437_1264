@@ -4,13 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL
+namespace IBL
 {
-    class DeliveryInTransfer
+    namespace BO
     {
-        public int Id { get; set; }
-        public WheightCategories MaxWeight { get; set; }
-        public Priorities Priority { get; set; }
-        public double TransportDistance { get; set; }
+        class DeliveryInTransfer
+        {
+            public int Id { get; set; }
+            public WheightCategories MaxWeight { get; set; }
+            public Priorities Priority { get; set; }
+            public double TransportDistance { get; set; }
+            public override string ToString()
+            {
+                return $"Id: {Id}, Max Weight: {MaxWeight}, Priority: {Priority}, Transport Distance: {TransportDistance}";
+            }
+        } 
     }
 }

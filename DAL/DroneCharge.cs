@@ -15,7 +15,7 @@ namespace IDAL
 
             public override string ToString()
             {
-                return $"DroneId: {DroneId}, StationId: {StationId}";
+                return $"Drone Id: {DroneId}, Station Id: {StationId}";
             }
         }
     }

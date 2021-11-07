@@ -18,7 +18,7 @@ namespace IDAL
 
             public override string ToString()
             {
-                return $"Id: {Id}, Model: {Model}, MaxWeight: {MaxWeight}, Status: {Status}, Battery: {Battery}";
+                return $"Id: {Id}, Model: {Model}, Max Weight: {MaxWeight}, Status: {Status}, Battery: {Battery}";
             }
         }
     }

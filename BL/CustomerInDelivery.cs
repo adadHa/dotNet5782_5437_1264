@@ -4,11 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL
+namespace IBL
 {
-    class CustomerInDelivery
+    namespace BO
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        class CustomerInDelivery
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public override string ToString()
+            {
+                return $"Id: {Id}, Name: {Name}";
+            }
+        } 
     }
 }
