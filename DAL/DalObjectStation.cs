@@ -11,14 +11,26 @@ namespace DalObject
         // This function add a station to the stations data base.
         public void AddStation(int id, string name, int num, double longitude, double latitude)
         {
-            DataSource.Stations.Add(new IDAL.DO.Station()
+            try
             {
-                Id = id,
-                Name = name,
-                ChargeSlots = num,
-                Longitude = longitude,
-                Latitude = latitude
-            });
+                if (DataSource.Stations.FindIndex(x => x.Id == id) != -1)
+                {
+                    throw new IdIsAlreadyExistException(id, "Station");
+                }
+                DataSource.Stations.Add(new IDAL.DO.Station()
+                {
+                    Id = id,
+                    Name = name,
+                    ChargeSlots = num,
+                    Longitude = longitude,
+                    Latitude = latitude
+                });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         //This function returns a copy of the stations list.

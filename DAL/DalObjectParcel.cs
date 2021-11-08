@@ -13,8 +13,18 @@ namespace DalObject
         {
             try
             {
+                if (DataSource.Customers.FindIndex(x => x.Id == customerSenderId) == -1)
+                {
+                    throw new IdIsNotExistException(customerSenderId, "Sender");
+                }
+                if (DataSource.Customers.FindIndex(x => x.Id == customerReceiverId) == -1)
+                {
+                    throw new IdIsNotExistException(customerReceiverId, "Receiver");
+                }
                 if (DataSource.Drones.FindIndex(x => x.Id == responsibleDrone) == -1)
-                    throw new IdIsNotExistException($"{responsibleDrone} is not Exist\n");
+                {
+                    throw new IdIsNotExistException(responsibleDrone, "Responsible drone");
+                }
 
                 DataSource.Parcels.Add(new IDAL.DO.Parcel()
                 {
@@ -35,15 +45,31 @@ namespace DalObject
         //This function binds a parcel to a drone.
         public void BindParcel(int parcelId, int droneId)
         {
-            int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
-            int parcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
-            IDAL.DO.Drone d = DataSource.Drones[droneIndex];
-            IDAL.DO.Parcel p = DataSource.Parcels[parcelIndex];
-            d.Status = IDAL.DO.DroneStatuses.Shipping;
-            p.DroneId = droneId;
-            p.Scheduled = DateTime.Now;
-            DataSource.Drones[droneIndex] = d;
-            DataSource.Parcels[parcelIndex] = p;
+            try
+            {
+                if (DataSource.Drones.FindIndex(x => x.Id == droneId) != -1)
+                {
+                    throw new IdIsNotExistException(droneId, "Drone");
+                }
+                if (DataSource.Parcels.FindIndex(x => x.Id == parcelId) != -1)
+                {
+                    throw new IdIsNotExistException(parcelId, "Parcel");
+                }
+                int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
+                int parcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
+                IDAL.DO.Drone d = DataSource.Drones[droneIndex];
+                IDAL.DO.Parcel p = DataSource.Parcels[parcelIndex];
+                d.Status = IDAL.DO.DroneStatuses.Shipping;
+                p.DroneId = droneId;
+                p.Scheduled = DateTime.Now;
+                DataSource.Drones[droneIndex] = d;
+                DataSource.Parcels[parcelIndex] = p;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         //This function collects a parcel by a drone

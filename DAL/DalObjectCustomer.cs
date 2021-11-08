@@ -16,15 +16,26 @@ namespace DalObject
 
         // This function add a customer to the customers data base.
         public void AddCustomer(int id, string name, string phoneNumber, double longitude, double latitude)
-        {  
-            DataSource.Customers.Add( new IDAL.DO.Customer()
+        {
+            try
             {
-                Id = id,
-                Name = name,
-                Phone = phoneNumber, 
-                Longitude = longitude,
-                Latitude = latitude
-            });
+                if (DataSource.Customers.FindIndex(x => x.Id == id) != -1)
+                {
+                    throw new IdIsAlreadyExistException(id, $"Customer {name}");
+                }
+                DataSource.Customers.Add(new IDAL.DO.Customer()
+                {
+                    Id = id,
+                    Name = name,
+                    Phone = phoneNumber,
+                    Longitude = longitude,
+                    Latitude = latitude
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         //This function returns a copy of the customers list.

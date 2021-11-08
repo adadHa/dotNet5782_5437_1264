@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace DalObject
             {
                 if (DataSource.Drones.FindIndex(x => x.Id == id) != -1)
                 {
-                    throw new IdIsAlreadyExistException($"Drone with the id {id} is alreay exists. try another id\n");
+                    throw new IdIsAlreadyExistException(id, "Drone");
                 }
                 DataSource.Drones.Add(new IDAL.DO.Drone()
                 {
@@ -28,7 +29,6 @@ namespace DalObject
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -79,6 +79,6 @@ namespace DalObject
             return arr;
         }
     }
-
-
 }
+
+    

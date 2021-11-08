@@ -8,9 +8,10 @@ namespace ConsoleUI
 {
     partial class Program
     {
-        enum UpdateOptions { Exit, AddStation, AddDrone, AddCustomer, AddParcel };
-        static void Main(string[] args)
+        enum UpdateOptions { Exit, BindParcelToDrone, CollectParcelByDrone, SupplyParcelToCustomer, ChargeDrone, StopCharging };
+        static void UpdateMenu()
         {
+
             UpdateOptions updateOption = 0;
             Console.WriteLine("Choose option: \n" +
                             "1 - Bind parcel to a drone \n" +
@@ -84,3 +85,4 @@ namespace ConsoleUI
             }
         }
     }
+}
