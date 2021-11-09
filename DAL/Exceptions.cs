@@ -12,6 +12,7 @@ namespace DalObject
         {
             Id = id;
             Type = type;
+            Message = 
         }
 
         public IdIsNotExistException(string message) : base(message)

@@ -47,11 +47,11 @@ namespace DalObject
         {
             try
             {
-                if (DataSource.Drones.FindIndex(x => x.Id == droneId) != -1)
+                if (DataSource.Drones.FindIndex(x => x.Id == droneId) == -1)
                 {
                     throw new IdIsNotExistException(droneId, "Drone");
                 }
-                if (DataSource.Parcels.FindIndex(x => x.Id == parcelId) != -1)
+                if (DataSource.Parcels.FindIndex(x => x.Id == parcelId) == -1)
                 {
                     throw new IdIsNotExistException(parcelId, "Parcel");
                 }
@@ -67,7 +67,6 @@ namespace DalObject
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -84,15 +83,26 @@ namespace DalObject
         //This funtion supplies a parcel to the customer.
         public void SupplyParcelToCustomer(int parcelId)
         {
-            int deliveredParcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId); ;
-            IDAL.DO.Parcel p = DataSource.Parcels[deliveredParcelIndex];
-            p.Delivered = DateTime.Now;
-            DataSource.Parcels[deliveredParcelIndex] = p;
-            int droneId = DataSource.Parcels[deliveredParcelIndex].DroneId;
-            int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
-            IDAL.DO.Drone d = DataSource.Drones[droneIndex];
-            d.Status = IDAL.DO.DroneStatuses.Available;
-            DataSource.Drones[droneIndex] = d;
+            try
+            {
+                if (DataSource.Parcels.FindIndex(x => x.Id == parcelId) == -1)
+                {
+                    throw new IdIsNotExistException(parcelId, "Parcel");
+                }
+                int deliveredParcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId); ;
+                IDAL.DO.Parcel p = DataSource.Parcels[deliveredParcelIndex];
+                p.Delivered = DateTime.Now;
+                DataSource.Parcels[deliveredParcelIndex] = p;
+                int droneId = DataSource.Parcels[deliveredParcelIndex].DroneId;
+                int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
+                IDAL.DO.Drone d = DataSource.Drones[droneIndex];
+                d.Status = IDAL.DO.DroneStatuses.Available;
+                DataSource.Drones[droneIndex] = d;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         //This function returns a copy of the parcels list.
@@ -128,6 +138,10 @@ namespace DalObject
         //This function returns the parcel with the required Id.
         public IDAL.DO.Parcel ViewParcel(int id)
         {
+            if (DataSource.Parcels.FindIndex(x => x.Id == id) == -1)
+            {
+                throw new IdIsNotExistException(id, "Parcel");
+            }
             int index = DataSource.Parcels.FindIndex(x => x.Id == id);
             return DataSource.Parcels[index];
         }

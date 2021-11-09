@@ -36,10 +36,21 @@ namespace DalObject
         //This function charges a drone.
         public void ChargeDrone(int droneId)
         {
-            int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
-            IDAL.DO.Drone d = DataSource.Drones[droneIndex];
-            d.Status = IDAL.DO.DroneStatuses.Maintenance;
-            DataSource.Drones[droneIndex] = d;
+            try
+            {
+                int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
+                if (droneIndex == -1)
+                {
+                    throw new IdIsNotExistException(droneId, "Drone");
+                }
+                IDAL.DO.Drone d = DataSource.Drones[droneIndex];
+                d.Status = IDAL.DO.DroneStatuses.Maintenance;
+                DataSource.Drones[droneIndex] = d;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         //This function stops the charge of the drone.
@@ -51,8 +62,19 @@ namespace DalObject
         //This function returns the drone with the required Id.
         public IDAL.DO.Drone ViewDrone(int id)
         {
-            int index = DataSource.Drones.FindIndex(x => x.Id == id);
-            return DataSource.Drones[index];
+            try
+            {
+                int index = DataSource.Drones.FindIndex(x => x.Id == id);
+                if (index == -1)
+                {
+                    throw new IdIsNotExistException(id, "Drone");
+                }
+                return DataSource.Drones[index];
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         //This function returns a copy of the drones list.
