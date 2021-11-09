@@ -70,7 +70,15 @@ namespace DalObject
         //This function stops the charge of the drone.
         public void StopCharging(int droneId/*, int chargingTime*/)
         {
-
+            int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
+            if (droneIndex == -1)
+            {
+                throw new IdIsNotExistException(droneId, "Drone");
+            }
+            IDAL.DO.Drone d = DataSource.Drones[droneIndex];
+            d.Status = IDAL.DO.DroneStatuses.Available;
+            //d.Battery = ?\\
+            DataSource.Drones[droneIndex] = d;
         }
 
         //This function returns the drone with the required Id.

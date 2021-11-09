@@ -204,7 +204,7 @@ namespace ConsoleUI
                                         printList<IDAL.DO.Station>(
                                             (System.Collections.Generic.List<IDAL.DO.Station>)dalObject.ViewStationsWithFreeChargeSlots());
                                         int.TryParse(Console.ReadLine(), out stationId);
-                                        dalObject.ChargeDrone(droneId);
+                                        dalObject.ChargeDrone(droneId, stationId);
                                         break;
                                     }
 
