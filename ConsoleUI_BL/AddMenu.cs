@@ -47,7 +47,9 @@ namespace ConsoleUI
                         Console.Write("latitude: ");
                         double.TryParse(Console.ReadLine(), out latitude);
 
-                        blObject.AddStation(id,)
+                        BL.BL Location = new BL.BL Location { Longitude = longitude, Latitude = latitude };
+
+                        blObject.AddStation(id, name, num);
                         break;
                     }
 
@@ -56,9 +58,6 @@ namespace ConsoleUI
                         int id;
                         Console.WriteLine("Enter Id: ");
                         int.TryParse(Console.ReadLine(), out id);
-
-                        Console.Write("Enter Model: ");
-                        string model = Console.ReadLine();
 
                         Console.Write("Enter Weight Category: ");
                         string weight = Console.ReadLine();
@@ -70,7 +69,7 @@ namespace ConsoleUI
                         Console.Write("Enter Drone Status: ");
                         string droneStatus = Console.ReadLine();
 
-                        dalObject.AddDrone(id, model, weight, batteryStatus, droneStatus);
+                        blObject.AddDrone(id, weight, batteryStatus, droneStatus);
                         break;
                     }
 
@@ -86,15 +85,7 @@ namespace ConsoleUI
                         Console.Write("Enter Phone Number: ");
                         string phoneNumber = Console.ReadLine();
 
-                        double longitude;
-                        Console.Write("Enter longitude: ");
-                        double.TryParse(Console.ReadLine(), out longitude);
-
-                        double latitude;
-                        Console.Write("Enter latitude: ");
-                        double.TryParse(Console.ReadLine(), out latitude);
-
-                        dalObject.AddCustomer(id, name, phoneNumber, longitude, latitude);
+                        blObject.AddCustomer(id, name, phoneNumber);
                         break;
                     }
 
@@ -115,11 +106,7 @@ namespace ConsoleUI
                         Console.Write("Enter Priority: ");
                         string priority = Console.ReadLine();
 
-                        int droneId;
-                        Console.WriteLine("Enter Id of responsible drone (0 if there is no one): ");
-                        int.TryParse(Console.ReadLine(), out droneId);
-
-                        dalObject.AddParcel(senderId, receiverId, weight, priority, droneId);
+                        blObject.AddParcel(senderId, receiverId, weight, priority);
                         break;
                     }
 
