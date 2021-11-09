@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 namespace BL
 {
-    public partial class BL : IBL
+    public partial class BL : IBL.IBL
     {
         IDAL.IDal dalObject;
         private List<DroneForList> BLDrones = new List<DroneForList>();

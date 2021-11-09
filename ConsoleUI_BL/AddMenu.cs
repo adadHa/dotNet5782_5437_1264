@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace ConsoleUI
 {
     partial class Program
-    {        
+    {
         enum AddOptions { Exit, AddStation, AddDrone, AddCustomer, AddParcel };
-        static void AddMenu()
+        static void AddMenu(IBL.IBL blObject)
         {
             AddOptions addOption = 0;
             Console.WriteLine("Choose add option: \n" +
@@ -47,7 +47,7 @@ namespace ConsoleUI
                         Console.Write("latitude: ");
                         double.TryParse(Console.ReadLine(), out latitude);
 
-                        
+                        blObject.AddStation(id,)
                         break;
                     }
 
@@ -131,6 +131,6 @@ namespace ConsoleUI
                     break;
             }
         }
-    
+
     }
 }

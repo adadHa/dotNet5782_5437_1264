@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL : IBL
+    public partial class BL : IBL.IBL
     {
         public void AddCustomer(int id, string name, string phoneNumber)
         {

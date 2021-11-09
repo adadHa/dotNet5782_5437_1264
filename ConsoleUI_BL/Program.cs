@@ -4,9 +4,13 @@ namespace ConsoleUI_BL
 {
     class Program
     {
+        IBL.IBL blObject = new BL.BL();
         static void Main(string[] args)
         {
-            BL.IBL blObject = new BL.BL();
+            IBL.IBL blObject = new BL.BL();
+
+               
+
         }
     }
 }
