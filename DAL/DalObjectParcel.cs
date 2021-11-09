@@ -71,13 +71,24 @@ namespace DalObject
             }
         }
 
-        //This function collects a parcel by a drone
+        //This function collects a parcel by a drone (Its status was already changed to "shipping" on the bind function).
         public void CollectParcelByDrone(int parcelId)
         {
-            int parcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
-            IDAL.DO.Parcel p = DataSource.Parcels[parcelIndex];
-            p.PickedUp = DateTime.Now;
-            DataSource.Parcels[parcelIndex] = p;
+            try
+            {
+                if (DataSource.Parcels.FindIndex(x => x.Id == parcelId) == -1)
+                {
+                    throw new IdIsNotExistException(parcelId, "Parcel");
+                }
+                int parcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
+                IDAL.DO.Parcel p = DataSource.Parcels[parcelIndex];
+                p.PickedUp = DateTime.Now;
+                DataSource.Parcels[parcelIndex] = p;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         //This funtion supplies a parcel to the customer.

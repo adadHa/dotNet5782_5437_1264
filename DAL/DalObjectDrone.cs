@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -34,18 +35,31 @@ namespace DalObject
         }
 
         //This function charges a drone.
-        public void ChargeDrone(int droneId)
+        public void ChargeDrone(int droneId, int stationId)
         {
             try
             {
                 int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
+                int stationIndex = DataSource.Stations.FindIndex(x => x.Id == stationId);
                 if (droneIndex == -1)
                 {
                     throw new IdIsNotExistException(droneId, "Drone");
                 }
+                if (stationIndex == -1)
+                {
+                    throw new IdIsNotExistException(stationId, "Station");
+                }
+                if (DataSource.Stations[stationIndex].ChargeSlots == 0)
+                {
+                    throw new NoChargeSlotsException(stationId);
+                }
                 IDAL.DO.Drone d = DataSource.Drones[droneIndex];
                 d.Status = IDAL.DO.DroneStatuses.Maintenance;
                 DataSource.Drones[droneIndex] = d;
+                IDAL.DO.Station s = DataSource.Stations[stationIndex];
+                s.ChargeSlots -= 1;
+                DataSource.Stations[stationIndex] = s;
+                DataSource.DroneCharges.Add(new IDAL.DO.DroneCharge { DroneId = d.Id, StationId = s.Id });
             }
             catch (Exception)
             {
@@ -102,5 +116,3 @@ namespace DalObject
         }
     }
 }
-
-    
