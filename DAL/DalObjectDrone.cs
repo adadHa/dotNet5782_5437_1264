@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -34,25 +35,68 @@ namespace DalObject
         }
 
         //This function charges a drone.
-        public void ChargeDrone(int droneId)
+        public void ChargeDrone(int droneId, int stationId)
         {
-            int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
-            IDAL.DO.Drone d = DataSource.Drones[droneIndex];
-            d.Status = IDAL.DO.DroneStatuses.Maintenance;
-            DataSource.Drones[droneIndex] = d;
+            try
+            {
+                int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
+                int stationIndex = DataSource.Stations.FindIndex(x => x.Id == stationId);
+                if (droneIndex == -1)
+                {
+                    throw new IdIsNotExistException(droneId, "Drone");
+                }
+                if (stationIndex == -1)
+                {
+                    throw new IdIsNotExistException(stationId, "Station");
+                }
+                if (DataSource.Stations[stationIndex].ChargeSlots == 0)
+                {
+                    throw new NoChargeSlotsException(stationId);
+                }
+                IDAL.DO.Drone d = DataSource.Drones[droneIndex];
+                d.Status = IDAL.DO.DroneStatuses.Maintenance;
+                DataSource.Drones[droneIndex] = d;
+                IDAL.DO.Station s = DataSource.Stations[stationIndex];
+                s.ChargeSlots -= 1;
+                DataSource.Stations[stationIndex] = s;
+                DataSource.DroneCharges.Add(new IDAL.DO.DroneCharge { DroneId = d.Id, StationId = s.Id });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         //This function stops the charge of the drone.
         public void StopCharging(int droneId/*, int chargingTime*/)
         {
-
+            int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
+            if (droneIndex == -1)
+            {
+                throw new IdIsNotExistException(droneId, "Drone");
+            }
+            IDAL.DO.Drone d = DataSource.Drones[droneIndex];
+            d.Status = IDAL.DO.DroneStatuses.Available;
+            //d.Battery = ?\\
+            DataSource.Drones[droneIndex] = d;
         }
 
         //This function returns the drone with the required Id.
         public IDAL.DO.Drone ViewDrone(int id)
         {
-            int index = DataSource.Drones.FindIndex(x => x.Id == id);
-            return DataSource.Drones[index];
+            try
+            {
+                int index = DataSource.Drones.FindIndex(x => x.Id == id);
+                if (index == -1)
+                {
+                    throw new IdIsNotExistException(id, "Drone");
+                }
+                return DataSource.Drones[index];
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         //This function returns a copy of the drones list.
@@ -80,5 +124,3 @@ namespace DalObject
         }
     }
 }
-
-    

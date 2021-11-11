@@ -76,5 +76,38 @@ namespace DalObject
     }
 }
 
+[Serializable]
+internal class NoChargeSlotsException : Exception
+{
+    private int Id;
 
+    public NoChargeSlotsException()
+    {
+    }
+
+    public NoChargeSlotsException(int id)
+    {
+        this.Id = id;
+    }
+
+    public NoChargeSlotsException(string message) : base(message)
+    {
+    }
+
+    public NoChargeSlotsException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
+
+    protected NoChargeSlotsException(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
+    }
+
+    public override string ToString()
+    {
+        return $"Staion {Id} has no more charging slots\n";
+    }
+}
+
+
+    
 

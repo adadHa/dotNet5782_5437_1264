@@ -54,8 +54,19 @@ namespace DalObject
         //This function returns the customer with the required Id.
         public IDAL.DO.Customer ViewCustomer(int id)
         {
-            int index = DataSource.Customers.FindIndex(x => x.Id == id);
-            return DataSource.Customers[index];
+            try
+            {
+                int index = DataSource.Customers.FindIndex(x => x.Id == id);
+                if (index == -1)
+                {
+                    throw new IdIsNotExistException(id, $"Customer");
+                }
+                return DataSource.Customers[index];
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
