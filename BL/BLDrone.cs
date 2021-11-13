@@ -16,6 +16,7 @@ namespace BL
                 IDAL.DO.Station initialStation = dalObject.ViewStation(initialStationId);
                 if (initialStation.ChargeSlots == 0)
                 {
+                    throw new NoChargeSlotsException(initialStation);
                 }
             }
             catch (Exception)
@@ -25,13 +26,13 @@ namespace BL
 
             double batteryStatus = rand.NextDouble() * rand.Next(20, 41);
             dalObject.AddDrone(id, model, weight, batteryStatus, "Maintenance");
-            BLDrones.Add(new DroneForList
+            BLDrones.Add(new IBL.BO.DroneForList
             {
                 Id = id,
                 Model = model,
-                MaxWeight = (WheightCategories)Enum.Parse(typeof(WheightCategories), weight),
+                MaxWeight = (IBL.BO.WheightCategories)Enum.Parse(typeof(IBL.BO.WheightCategories), weight),
                 Battery = batteryStatus,
-                Status = (DroneStatuses)Enum.Parse(typeof(DroneStatuses), weight),
+                Status = (IBL.BO.DroneStatuses)Enum.Parse(typeof(IBL.BO.DroneStatuses), weight),
 
 
 
