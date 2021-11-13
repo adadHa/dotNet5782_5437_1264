@@ -1,16 +1,71 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ConsoleUI_BL
 {
     class Program
     {
-        IBL.IBL blObject = new BL.BL();
+        enum GeneralOptions { Exit, Add, Update, View, ListView };
         static void Main(string[] args)
         {
-            IBL.IBL blObject = new BL.BL();
+            GeneralOptions option = new GeneralOptions();
+            do
+            {
+                Console.WriteLine("Choose Option: \n" +
+                "1 - Add \n" +
+                "2 - Update \n" +
+                "3 - View \n" +
+                "4 - View lists \n" +
+                "0 - Exit");
 
-               
+                int x = 0;
+                int.TryParse(Console.ReadLine(), out x);
+                option = (GeneralOptions)x;
+
+                switch (option)
+                {
+                    case GeneralOptions.Add:
+                        {
+                            
+                            break;
+                        }
+
+                    case GeneralOptions.Update:
+                        {
+
+                            break;
+                        }
+
+                    case GeneralOptions.View:
+                        {
+
+                            break;
+                        }
+
+                    case GeneralOptions.ListView:
+                        {
+
+                            break;
+                        }
+
+                    case GeneralOptions.Exit:
+                        break;
+
+                    default:
+                        // code block
+                        break;
+                }
+            } while (option != GeneralOptions.Exit);
 
         }
+
+
+
+
     }
+
+
 }

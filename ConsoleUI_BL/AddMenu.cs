@@ -47,7 +47,7 @@ namespace ConsoleUI
                         Console.Write("latitude: ");
                         double.TryParse(Console.ReadLine(), out latitude);
 
-                        BL.BL Location = new BL.BL Location { Longitude = longitude, Latitude = latitude };
+                        IBL.BO.Location location = new IBL.BO.Location(){ Longitude = longitude, Latitude = latitude };
 
                         blObject.AddStation(id, name, num);
                         break;

@@ -32,7 +32,7 @@ namespace ConsoleUI
                             int stationIndex;
                             Console.WriteLine("Enter Station id: ");
                             int.TryParse(Console.ReadLine(), out stationIndex);
-                            Console.WriteLine(dalObject.ViewStation(stationIndex).ToString());
+                            Console.WriteLine(blObject.ViewStation(stationIndex).ToString());
                             break;
                         }
 

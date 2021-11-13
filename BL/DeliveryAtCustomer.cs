@@ -15,11 +15,10 @@ namespace IBL
             public WheightCategories Wheight { get; set; }
             public Priorities Priority { get; set; }
             public Statuses Status { get; set; }
-            public CustomerInDelivery Source { get; set; }
-            public CustomerInDelivery Destination { get; set; }
+            public CustomerInDelivery customerInDelivery { get; set; }
             public override string ToString()
             {
-                return $"Id: {Id}, Wheight: {Wheight}, Priority: {Priority}, status: {Status}, Source: {Source}, Destination: {Destination}";
+                return $"Id: {Id}, Wheight: {Wheight}, Priority: {Priority}, status: {Status}, customer in delivery: {customerInDelivery}";
             }
         } 
     }
