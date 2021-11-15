@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace ConsoleUI_BL
 {
-    class Program
+    partial class Program
     {
         enum GeneralOptions { Exit, Add, Update, View, ListView };
         static void Main(string[] args)
         {
             GeneralOptions option = new GeneralOptions();
+            IBL.IBL blObject = new BL.BL();
             do
             {
                 Console.WriteLine("Choose Option: \n" +
@@ -29,25 +30,25 @@ namespace ConsoleUI_BL
                 {
                     case GeneralOptions.Add:
                         {
-                            
+                            AddMenu(blObject);
                             break;
                         }
 
                     case GeneralOptions.Update:
                         {
-
+                            UpdateMenu(blObject);
                             break;
                         }
 
                     case GeneralOptions.View:
                         {
-
+                            ViewMenu(blObject);
                             break;
                         }
 
                     case GeneralOptions.ListView:
                         {
-
+                            ListViewMenu(blObject);
                             break;
                         }
 
@@ -61,11 +62,5 @@ namespace ConsoleUI_BL
             } while (option != GeneralOptions.Exit);
 
         }
-
-
-
-
     }
-
-
 }
