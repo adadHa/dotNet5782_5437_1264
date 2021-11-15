@@ -5,7 +5,7 @@ namespace BL
     public partial class BL : IBL.IBL
     {
         IDAL.IDal dalObject;
-        private List<DroneForList> BLDrones = new List<DroneForList>();
+        private List<IBL.BO.DroneForList> BLDrones = new List<IBL.BO.DroneForList>();
         public double availableDrElectConsumption;
         public double lightDrElectConsumption;
         public double mediumDrElectConsumption;
@@ -18,9 +18,16 @@ namespace BL
             IDAL.IDal dalObject = new DalObject.DalObject();
         }
 
-        public void AddStation(int id, string name, int freeChargingSlots, Location location)
+        public void AddStation(int id, string name, int freeChargingSlots, IBL.BO.Location location)
         {
-            dalObject.AddStation(id, name, freeChargingSlots, location.Longitude, location.Latitude);
+            try
+            {
+                dalObject.AddStation(id, name, freeChargingSlots, location.Longitude, location.Latitude);
+            }
+            catch (Exception)
+            {
+                throw;
+            }        
         }
 
         
