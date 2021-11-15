@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleUI
+namespace ConsoleUI_BL
 {
     partial class Program
     {
@@ -36,7 +36,7 @@ namespace ConsoleUI
                         Console.Write("Enter Name: ");
                         string name = Console.ReadLine();
 
-                        blObject.UpdateDrone(droneId, name);
+                        //blObject.UpdateDrone(droneId, name);
                         break;
                     }
 
@@ -49,7 +49,7 @@ namespace ConsoleUI
                         Console.Write("Enter name of station: ");
                         string name = Console.ReadLine();
 
-                        blObject.UpdateStation(id, name);
+                        //blObject.UpdateStation(id, name);
                         break;
                     }
 
@@ -65,7 +65,7 @@ namespace ConsoleUI
                         Console.Write("Enter Phone Number: ");
                         string phoneNumber = Console.ReadLine();
 
-                        blObject.UpdateCustomer(id, name, phoneNumber);
+                        //blObject.UpdateCustomer(id, name, phoneNumber);
                         break;
                     }
 
@@ -74,7 +74,7 @@ namespace ConsoleUI
                         int droneId, stationId;
                         Console.WriteLine("Enter drone id:");
                         int.TryParse(Console.ReadLine(), out droneId);
-                        
+
                         break;
                     }
 
@@ -83,7 +83,7 @@ namespace ConsoleUI
                         int droneId;
                         Console.WriteLine("Enter drone id:");
                         int.TryParse(Console.ReadLine(), out droneId);
-                        
+
                         break;
                     }
 
@@ -93,11 +93,11 @@ namespace ConsoleUI
                         Console.WriteLine("Enter parcel id:");
                         int.TryParse(Console.ReadLine(), out droneId);
 
-                        blObject.BindParcelToDrone(droneId);
+                        //blObject.BindParcelToDrone(droneId);
                         break;
                     }
 
-                
+
 
                 case UpdateOptions.CollectParcelByDrone:
                     {
@@ -105,7 +105,7 @@ namespace ConsoleUI
                         Console.WriteLine("Enter parcel id:");
                         int.TryParse(Console.ReadLine(), out droneId);
 
-                        blObject.CollectParcelByDrone(droneId);
+                        //blObject.CollectParcelByDrone(droneId);
                         break;
                     }
 
@@ -115,7 +115,7 @@ namespace ConsoleUI
                         Console.WriteLine("Enter parcel id:");
                         int.TryParse(Console.ReadLine(), out droneId);
 
-                        blObject.SupplyParcelToCustomer(droneId);
+                        //blObject.SupplyParcelToCustomer(droneId);
                         break;
                     }
 
@@ -128,3 +128,4 @@ namespace ConsoleUI
             }
         }
     }
+}

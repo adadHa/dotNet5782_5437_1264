@@ -47,9 +47,16 @@ namespace ConsoleUI_BL
                         Console.Write("latitude: ");
                         double.TryParse(Console.ReadLine(), out latitude);
 
-                        IBL.BO.Location location = new IBL.BO.Location(){ Longitude = longitude, Latitude = latitude };
+                        IBL.BO.Location location = new IBL.BO.Location() { Longitude = longitude, Latitude = latitude };
 
-                        blObject.AddStation(id, name, num);
+                        try
+                        {
+                            blObject.AddStation(id, name, num, location);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                        }
                         break;
                     }
 
@@ -69,7 +76,14 @@ namespace ConsoleUI_BL
                         Console.Write("Enter Drone Status: ");
                         string droneStatus = Console.ReadLine();
 
-                        blObject.AddDrone(id, weight, batteryStatus, droneStatus);
+                        try
+                        {
+                            //blObject.AddDrone(id, weight, batteryStatus, droneStatus);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                        }
                         break;
                     }
 
@@ -85,7 +99,15 @@ namespace ConsoleUI_BL
                         Console.Write("Enter Phone Number: ");
                         string phoneNumber = Console.ReadLine();
 
-                        blObject.AddCustomer(id, name, phoneNumber);
+                        try
+                        {
+                            blObject.AddCustomer(id, name, phoneNumber);
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                        }
                         break;
                     }
 
@@ -106,7 +128,14 @@ namespace ConsoleUI_BL
                         Console.Write("Enter Priority: ");
                         string priority = Console.ReadLine();
 
-                        blObject.AddParcel(senderId, receiverId, weight, priority);
+                        try
+                        {
+                            blObject.AddParcel(senderId, receiverId, weight, priority);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                        }
                         break;
                     }
 

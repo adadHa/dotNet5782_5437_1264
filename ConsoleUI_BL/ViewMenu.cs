@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleUI
+namespace ConsoleUI_BL
 {
     partial class Program
     {
@@ -32,7 +32,7 @@ namespace ConsoleUI
                             int stationIndex;
                             Console.WriteLine("Enter Station id: ");
                             int.TryParse(Console.ReadLine(), out stationIndex);
-                            Console.WriteLine(blObject.ViewStation(stationIndex).ToString());
+                            //Console.WriteLine(blObject.ViewStation(stationIndex).ToString());
                             break;
                         }
 
@@ -41,7 +41,7 @@ namespace ConsoleUI
                             int droneIndex;
                             Console.WriteLine("Enter Drone id: ");
                             int.TryParse(Console.ReadLine(), out droneIndex);
-                            Console.WriteLine(blObject.ViewDrone(droneIndex));
+                            //Console.WriteLine(blObject.ViewDrone(droneIndex));
                             break;
                         }
 
@@ -50,7 +50,7 @@ namespace ConsoleUI
                             int customerIndex;
                             Console.WriteLine("Enter Customer id: ");
                             int.TryParse(Console.ReadLine(), out customerIndex);
-                            Console.WriteLine(blObject.ViewCustomer(customerIndex));
+                            //Console.WriteLine(blObject.ViewCustomer(customerIndex));
                             break;
                         }
 
@@ -59,7 +59,7 @@ namespace ConsoleUI
                             int parcelIndex;
                             Console.WriteLine("Enter Parcel id: ");
                             int.TryParse(Console.ReadLine(), out parcelIndex);
-                            Console.WriteLine(blObject.ViewParcel(parcelIndex));
+                            //Console.WriteLine(blObject.ViewParcel(parcelIndex));
                             break;
                         }
 

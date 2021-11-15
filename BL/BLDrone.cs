@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IBL.BO;
 
 namespace BL
 {
@@ -10,33 +11,25 @@ namespace BL
     {
         public void AddDrone(int id, string model, string weight, int initialStationId)
         {
-            // to begin with, we check for the existance and availability of the initial station:
             try
             {
-                IDAL.DO.Station initialStation = dalObject.ViewStation(initialStationId);
-                if (initialStation.ChargeSlots == 0)
+                double batteryStatus = rand.NextDouble() * rand.Next(20, 41);
+                dalObject.AddDrone(id, model, weight, batteryStatus, "Maintenance");
+                BLDrones.Add(new IBL.BO.DroneForList
                 {
-                    throw new NoChargeSlotsException(initialStation);
-                }
+                    Id = id,
+                    Model = model,
+                    MaxWeight = (IBL.BO.WheightCategories)Enum.Parse(typeof(IBL.BO.WheightCategories), weight),
+                    Battery = batteryStatus,
+                    Status = (IBL.BO.DroneStatuses)Enum.Parse(typeof(IBL.BO.DroneStatuses), weight),
+
+                });
+                dalObject.ChargeDrone(id, initialStationId);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw ConvertIdalToBlException(e);
             }
-
-            double batteryStatus = rand.NextDouble() * rand.Next(20, 41);
-            dalObject.AddDrone(id, model, weight, batteryStatus, "Maintenance");
-            BLDrones.Add(new IBL.BO.DroneForList
-            {
-                Id = id,
-                Model = model,
-                MaxWeight = (IBL.BO.WheightCategories)Enum.Parse(typeof(IBL.BO.WheightCategories), weight),
-                Battery = batteryStatus,
-                Status = (IBL.BO.DroneStatuses)Enum.Parse(typeof(IBL.BO.DroneStatuses), weight),
-
-
-
-            });
         }
     }
 }

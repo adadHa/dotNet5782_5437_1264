@@ -2,37 +2,80 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace BL
+namespace IBL
 {
-    [Serializable]
-    internal class NoChargeSlotsException : Exception
+    namespace BO
     {
-        private Station InitialStation;
-
-        public NoChargeSlotsException()
+        [Serializable]
+        internal class NoChargeSlotsException : Exception
         {
+            private Station InitialStation;
+
+            public NoChargeSlotsException()
+            {
+            }
+
+            public NoChargeSlotsException(Station initialStation)
+            {
+                InitialStation = initialStation;
+            }
+
+            public NoChargeSlotsException(string message) : base(message)
+            {
+            }
+
+            public NoChargeSlotsException(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+            protected NoChargeSlotsException(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+
+            public override string ToString()
+            {
+                return $"{InitialStation.Name} has no more free charge slots!\n";
+            }
         }
 
-        public NoChargeSlotsException(Station initialStation)
+        [Serializable]
+        internal class IdIsNotExistException : Exception
         {
-            InitialStation = initialStation;
+            public IdIsNotExistException()
+            {
+            }
+
+            public IdIsNotExistException(string message) : base(message)
+            {
+            }
+
+            public IdIsNotExistException(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+            protected IdIsNotExistException(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
         }
 
-        public NoChargeSlotsException(string message) : base(message)
+        [Serializable]
+        internal class IdIsAlreadyExistException : Exception
         {
-        }
+            public IdIsAlreadyExistException()
+            {
+            }
 
-        public NoChargeSlotsException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+            public IdIsAlreadyExistException(string message) : base(message)
+            {
+            }
 
-        protected NoChargeSlotsException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+            public IdIsAlreadyExistException(string message, Exception innerException) : base(message, innerException)
+            {
+            }
 
-        public override string ToString()
-        {
-            return $"{InitialStation.Name} has no more free charge slots!\n";
+            protected IdIsAlreadyExistException(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
         }
     }
 }

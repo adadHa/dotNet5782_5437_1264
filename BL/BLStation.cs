@@ -4,7 +4,7 @@ namespace BL
 {
     public partial class BL : IBL.IBL
     {
-        IDAL.IDal dalObject;
+        private IDAL.IDal dalObject;
         private List<IBL.BO.DroneForList> BLDrones = new List<IBL.BO.DroneForList>();
         public double availableDrElectConsumption;
         public double lightDrElectConsumption;
@@ -15,7 +15,18 @@ namespace BL
 
         public BL()
         {
-            IDAL.IDal dalObject = new DalObject.DalObject();
+            dalObject = new DalObject.DalObject();
+        }
+
+        // this function returns an alternative BL exception to DAL exception
+        // if it's get a BL exception it just returns it. 
+        private Exception ConvertIdalToBlException(Exception e)
+        {
+            if (e is DalObject.IdIsAlreadyExistException)
+                return new IBL.BO.IdIsAlreadyExistException(e.ToString(), e);
+            else if (e is DalObject.IdIsNotExistException)
+                return new IBL.BO.IdIsNotExistException(e.ToString(), e);
+            else return e;
         }
 
         public void AddStation(int id, string name, int freeChargingSlots, IBL.BO.Location location)
@@ -24,9 +35,9 @@ namespace BL
             {
                 dalObject.AddStation(id, name, freeChargingSlots, location.Longitude, location.Latitude);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw ConvertIdalToBlException(e);
             }        
         }
 

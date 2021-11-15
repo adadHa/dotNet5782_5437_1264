@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleUI
+namespace ConsoleUI_BL
 {
     partial class Program
     {
@@ -29,43 +29,43 @@ namespace ConsoleUI
             {
                 case ListView.ViewStationsList:
                     {
-                        printList<IDAL.DO.Station>(
-                            (System.Collections.Generic.List<IDAL.DO.Station>)blObject.ViewStationsList());
+                        //printList<IDAL.DO.Station>(
+                        //    (System.Collections.Generic.List<IDAL.DO.Station>)blObject.ViewStationsList());
                         break;
                     }
 
                 case ListView.ViewDronesList:
                     {
-                        printList<IDAL.DO.Drone>(
-                            (System.Collections.Generic.List<IDAL.DO.Drone>)blObject.ViewDronesList());
+                        //printList<IDAL.DO.Drone>(
+                        //    (System.Collections.Generic.List<IDAL.DO.Drone>)blObject.ViewDronesList());
                         break;
                     }
 
                 case ListView.ViewCustomersList:
                     {
-                        printList<IDAL.DO.Customer>(
-                            (System.Collections.Generic.List<IDAL.DO.Customer>)blObject.ViewCustomersList());
+                        //printList<IDAL.DO.Customer>(
+                        //    (System.Collections.Generic.List<IDAL.DO.Customer>)blObject.ViewCustomersList());
                         break;
                     }
 
                 case ListView.ViewParcelsList:
                     {
-                        printList<IDAL.DO.Parcel>(
-                            (System.Collections.Generic.List<IDAL.DO.Parcel>)blObject.ViewParcelsList());
+                        //printList<IDAL.DO.Parcel>(
+                        //    (System.Collections.Generic.List<IDAL.DO.Parcel>)blObject.ViewParcelsList());
                         break;
                     }
 
                 case ListView.ViewUnbindParcels:
                     {
-                        printList<IDAL.DO.Parcel>(
-                            (System.Collections.Generic.List<IDAL.DO.Parcel>)blObject.ViewUnbindParcels());
+                        //printList<IDAL.DO.Parcel>(
+                        //    (System.Collections.Generic.List<IDAL.DO.Parcel>)blObject.ViewUnbindParcels());
                         break;
                     }
 
                 case ListView.ViewStationsWithFreeChargeSlots:
                     {
-                        printList<IDAL.DO.Station>(
-                            (System.Collections.Generic.List<IDAL.DO.Station>)blObject.ViewStationsWithFreeChargeSlots());
+                        //printList<IDAL.DO.Station>(
+                        //    (System.Collections.Generic.List<IDAL.DO.Station>)blObject.ViewStationsWithFreeChargeSlots());
                         break;
                     }
 

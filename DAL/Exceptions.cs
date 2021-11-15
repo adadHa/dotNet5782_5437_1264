@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace DalObject
 {
     [Serializable]
-    internal class IdIsNotExistException : Exception
+    public class IdIsNotExistException : Exception
     {
         private int Id { get; set; }
         private string Type { get; set; }
@@ -40,7 +40,7 @@ namespace DalObject
     }
 
     [Serializable]
-    internal class IdIsAlreadyExistException : Exception
+    public class IdIsAlreadyExistException : Exception
     {
         private int Id { get; set; }
         private string Type { get; set; }

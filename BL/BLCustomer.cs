@@ -10,7 +10,15 @@ namespace BL
     {
         public void AddCustomer(int id, string name, string phoneNumber)
         {
-            dalObject.AddCustomer(id, name, phoneNumber, 0, 0);
+            try
+            {
+                dalObject.AddCustomer(id, name, phoneNumber, 0, 0);
+
+            }
+            catch (Exception e)
+            {
+                throw ConvertIdalToBlException(e);
+            }
         }
     }
 }

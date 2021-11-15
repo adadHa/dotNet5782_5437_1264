@@ -10,7 +10,15 @@ namespace BL
     {
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority)
         {
-            dalObject.AddParcel(customerSenderId, customerReceiverId, weight, priority, 0);
+            try
+            {
+                dalObject.AddParcel(customerSenderId, customerReceiverId, weight, priority, 0);
+
+            }
+            catch (Exception e)
+            {
+                throw ConvertIdalToBlException(e);
+            }
         }
     }
 }
