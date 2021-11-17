@@ -35,10 +35,18 @@ namespace BL
             {
                 dalObject.AddStation(id, name, freeChargingSlots, location.Longitude, location.Latitude);
             }
-            catch (Exception e)
+            catch (DalObject.IdIsAlreadyExistException e)
             {
-                throw ConvertIdalToBlException(e);
-            }        
+                throw new IBL.BO.IdIsAlreadyExistException(e.ToString());
+            }
+            catch (DalObject.IdIsNotExistException e)
+            {
+                throw new IBL.BO.IdIsNotExistException(e.ToString());
+            }
+            catch (DalObject.NoChargeSlotsException e)
+            {
+                throw new IBL.BO.NoChargeSlotsException(e.ToString());
+            }
         }
 
         

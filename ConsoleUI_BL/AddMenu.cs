@@ -69,16 +69,16 @@ namespace ConsoleUI_BL
                         Console.Write("Enter Weight Category: ");
                         string weight = Console.ReadLine();
 
-                        int batteryStatus;
-                        Console.WriteLine("Enter Battery status: ");
-                        int.TryParse(Console.ReadLine(), out batteryStatus);
+                        Console.Write("Enter model: ");
+                        string model = Console.ReadLine();
 
-                        Console.Write("Enter Drone Status: ");
-                        string droneStatus = Console.ReadLine();
+                        int initialStationId;
+                        Console.WriteLine("Enter station id for intial charging: ");
+                        int.TryParse(Console.ReadLine(), out initialStationId);
 
                         try
                         {
-                            //blObject.AddDrone(id, weight, batteryStatus, droneStatus);
+                            blObject.AddDrone(id, model, weight, initialStationId);
                         }
                         catch (Exception e)
                         {

@@ -14,6 +14,7 @@ namespace BL
             try
             {
                 double batteryStatus = rand.NextDouble() * rand.Next(20, 41);
+                IDAL.DO.Station initialStation = dalObject.ViewStation(initialStationId);
                 dalObject.AddDrone(id, model, weight, batteryStatus, "Maintenance");
                 BLDrones.Add(new IBL.BO.DroneForList
                 {
@@ -22,6 +23,8 @@ namespace BL
                     MaxWeight = (IBL.BO.WheightCategories)Enum.Parse(typeof(IBL.BO.WheightCategories), weight),
                     Battery = batteryStatus,
                     Status = (IBL.BO.DroneStatuses)Enum.Parse(typeof(IBL.BO.DroneStatuses), weight),
+                    Location = new IBL.BO.Location() {Longitude = initialStation.Longitude, 
+                                                      Latitude = initialStation.Longitude}
 
                 });
                 dalObject.ChargeDrone(id, initialStationId);

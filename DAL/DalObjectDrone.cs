@@ -51,7 +51,7 @@ namespace DalObject
                 }
                 if (DataSource.Stations[stationIndex].ChargeSlots == 0)
                 {
-                    throw new NoChargeSlotsException(stationId);
+                    throw new NoChargeSlotsException(DataSource.Stations[stationIndex]);
                 }
                 IDAL.DO.Drone d = DataSource.Drones[droneIndex];
                 d.Status = IDAL.DO.DroneStatuses.Maintenance;

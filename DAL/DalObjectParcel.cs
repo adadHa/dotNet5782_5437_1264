@@ -21,11 +21,11 @@ namespace DalObject
                 {
                     throw new IdIsNotExistException(customerReceiverId, "Receiver");
                 }
-                if (DataSource.Drones.FindIndex(x => x.Id == responsibleDrone) == -1)
+                if (responsibleDrone != 0 && DataSource.Drones.FindIndex(x => x.Id == responsibleDrone) == -1)
                 {
                     throw new IdIsNotExistException(responsibleDrone, "Responsible drone");
                 }
-
+                DateTime d = new DateTime();
                 DataSource.Parcels.Add(new IDAL.DO.Parcel()
                 {
                     Id = DataSource.Parcels.Count,
@@ -33,7 +33,11 @@ namespace DalObject
                     TargetId = customerReceiverId,
                     Wheight = (IDAL.DO.WheightCategories)Enum.Parse(typeof(IDAL.DO.WheightCategories), weight),
                     Priority = (IDAL.DO.Priorities)Enum.Parse(typeof(IDAL.DO.Priorities), priority),
-                    DroneId = responsibleDrone
+                    DroneId = responsibleDrone,
+                    Requested = DateTime.Now,
+                    Scheduled = d,
+                    PickedUp = d,
+                    Delivered = d
                 });
             }
             catch (Exception)
@@ -157,6 +161,6 @@ namespace DalObject
             return DataSource.Parcels[index];
         }
 
-        
+
     }
 }

@@ -9,7 +9,6 @@ namespace IBL
         [Serializable]
         internal class NoChargeSlotsException : Exception
         {
-            private Station InitialStation;
 
             public NoChargeSlotsException()
             {
@@ -17,7 +16,6 @@ namespace IBL
 
             public NoChargeSlotsException(Station initialStation)
             {
-                InitialStation = initialStation;
             }
 
             public NoChargeSlotsException(string message) : base(message)
@@ -34,7 +32,7 @@ namespace IBL
 
             public override string ToString()
             {
-                return $"{InitialStation.Name} has no more free charge slots!\n";
+                return Message;
             }
         }
 
@@ -56,6 +54,10 @@ namespace IBL
             protected IdIsNotExistException(SerializationInfo info, StreamingContext context) : base(info, context)
             {
             }
+            public override string ToString()
+            {
+                return Message;
+            }
         }
 
         [Serializable]
@@ -75,6 +77,10 @@ namespace IBL
 
             protected IdIsAlreadyExistException(SerializationInfo info, StreamingContext context) : base(info, context)
             {
+            }
+            public override string ToString()
+            {
+                return Message;
             }
         }
     }

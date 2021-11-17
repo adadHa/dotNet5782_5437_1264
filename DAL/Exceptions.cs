@@ -28,14 +28,35 @@ namespace DalObject
 
         public override string ToString()
         {
-            if (Message != null)
-            {
-                return Message;
-            }
-            else
-            {
-                return $"{Type} with Id = {Id} is not exist. please try another id \n";
-            }
+            return $"{Type} with Id = {Id} is not exist. please try another id \n";
+        }
+    }
+
+    [Serializable]
+    public class NoChargeSlotsException : Exception
+    {
+        private IDAL.DO.Station InitialStation;
+        public NoChargeSlotsException()
+        {
+        }
+        public NoChargeSlotsException(IDAL.DO.Station initialStation)
+        {
+            InitialStation = initialStation;
+        }
+        public NoChargeSlotsException(string message) : base(message)
+        {
+        }
+
+        public NoChargeSlotsException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected NoChargeSlotsException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+        public override string ToString()
+        {
+            return $"{InitialStation.Name} has no more free charge slots!\n";
         }
     }
 
@@ -64,17 +85,11 @@ namespace DalObject
         }
 
         public override string ToString()
-        {   if (Message != null)
-            {
-                return Message;
-            }
-            else
-            {
-                return $"{Type} with Id = {Id} is already exist. please try another id \n";
-            }
+        {
+            return $"{Type} with Id = {Id} is already exist. please try another id \n";
         }
     }
 }
 
-    
+
 
