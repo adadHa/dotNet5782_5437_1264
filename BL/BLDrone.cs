@@ -9,6 +9,7 @@ namespace BL
 {
     public partial class BL : IBL.IBL
     {
+        //this function adds a drone to the database
         public void AddDrone(int id, string model, string weight, int initialStationId)
         {
             try
@@ -23,15 +24,33 @@ namespace BL
                     MaxWeight = (IBL.BO.WheightCategories)Enum.Parse(typeof(IBL.BO.WheightCategories), weight),
                     Battery = batteryStatus,
                     Status = (IBL.BO.DroneStatuses)Enum.Parse(typeof(IBL.BO.DroneStatuses), weight),
-                    Location = new IBL.BO.Location() {Longitude = initialStation.Longitude, 
-                                                      Latitude = initialStation.Longitude}
+                    Location = new IBL.BO.Location()
+                    {
+                        Longitude = initialStation.Longitude,
+                        Latitude = initialStation.Longitude
+                    }
 
                 });
                 dalObject.ChargeDrone(id, initialStationId);
             }
-            catch (Exception e)
+            catch (DalObject.IdIsAlreadyExistException e)
             {
-                throw ConvertIdalToBlException(e);
+                throw new IBL.BO.IdIsAlreadyExistException(e.ToString());
+            }
+            catch (DalObject.NoChargeSlotsException e)
+            {
+                throw new IBL.BO.NoChargeSlotsException(e.ToString());
+            }
+        }
+        public void UpdateDrone(int id, string newModel)
+        {
+            try
+            {
+                dalObject.UpdateDrone(id, newModel);
+            }
+            catch (DalObject.IdIsNotExistException e)
+            {
+                throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
         }
     }

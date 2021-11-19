@@ -18,6 +18,9 @@ namespace IDAL
         public void SupplyParcelToCustomer(int parcelId);
         public void ChargeDrone(int droneId, int stationId);
         public void StopCharging(int droneId/*, int chargingTime*/);
+        public void UpdateDrone(int droneId, string newModel);
+        public void UpdateStationName(int id, string newName);
+        public void UpdateStationChargeSlotsCap(int id, int newNum);
         public IEnumerable<IDAL.DO.Station> ViewStationsList();
         public IEnumerable<IDAL.DO.Drone> ViewDronesList();
         public IEnumerable<IDAL.DO.Customer> ViewCustomersList();

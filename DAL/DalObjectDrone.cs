@@ -98,6 +98,25 @@ namespace DalObject
                 throw;
             }
         }
+        // This function updates a drone with an new model.
+        public void UpdateDrone(int droneId, string newModel)
+        {
+            try
+            {
+                int index = DataSource.Drones.FindIndex(x => x.Id == droneId);
+                if (index == -1)
+                {
+                    throw new IdIsNotExistException(droneId, "Drone");
+                }
+                IDAL.DO.Drone d = DataSource.Drones[index];
+                d.Model = newModel;
+                DataSource.Drones[index] = d;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         //This function returns a copy of the drones list.
         public IEnumerable<IDAL.DO.Drone> ViewDronesList()

@@ -8,6 +8,7 @@ namespace BL
 {
     public partial class BL : IBL.IBL
     {
+        //this function adds a parcel to the database
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority)
         {
             try
@@ -15,9 +16,9 @@ namespace BL
                 dalObject.AddParcel(customerSenderId, customerReceiverId, weight, priority, 0);
 
             }
-            catch (Exception e)
+            catch (DalObject.IdIsAlreadyExistException e)
             {
-                throw ConvertIdalToBlException(e);
+                throw new IBL.BO.IdIsAlreadyExistException(e.ToString());
             }
         }
     }

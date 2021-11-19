@@ -18,17 +18,7 @@ namespace BL
             dalObject = new DalObject.DalObject();
         }
 
-        // this function returns an alternative BL exception to DAL exception
-        // if it's get a BL exception it just returns it. 
-        private Exception ConvertIdalToBlException(Exception e)
-        {
-            if (e is DalObject.IdIsAlreadyExistException)
-                return new IBL.BO.IdIsAlreadyExistException(e.ToString(), e);
-            else if (e is DalObject.IdIsNotExistException)
-                return new IBL.BO.IdIsNotExistException(e.ToString(), e);
-            else return e;
-        }
-
+        //this function adds a station to the database
         public void AddStation(int id, string name, int freeChargingSlots, IBL.BO.Location location)
         {
             try
@@ -39,21 +29,41 @@ namespace BL
             {
                 throw new IBL.BO.IdIsAlreadyExistException(e.ToString());
             }
-            catch (DalObject.IdIsNotExistException e)
-            {
-                throw new IBL.BO.IdIsNotExistException(e.ToString());
-            }
             catch (DalObject.NoChargeSlotsException e)
             {
                 throw new IBL.BO.NoChargeSlotsException(e.ToString());
             }
+
         }
 
-        
+        //This function updates a station with a new name and/or a new charging slots capacity.
+        public void UpdateStation(int id, string newName, int newNum)
+        {
+            try
+            {
+                if (newName != "") // check if there was an input for this value
+                {
+                    dalObject.UpdateStationName(id, newName);
+                }
+                if (newNum != -1) // check if there was an input for this value
+                {
+                    if (newNum >= 0) // it shoukd be a positive number
+                        dalObject.UpdateStationChargeSlotsCap(id, newNum);
+                    else
+                        throw new ArgumentOutOfRangeException("charging slots capacity");
+                }
+            }
+            catch (DalObject.IdIsNotExistException e)
+            {
+                throw new IBL.BO.IdIsNotExistException(e.ToString());
+            }
+        }
 
-        
 
-        
+
+
+
+
     }
 }
 /*public BL()

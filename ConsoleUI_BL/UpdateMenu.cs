@@ -33,23 +33,46 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Enter drone id:");
                         int.TryParse(Console.ReadLine(), out droneId);
 
-                        Console.Write("Enter Name: ");
-                        string name = Console.ReadLine();
+                        Console.Write("Enter new model: ");
+                        string model = Console.ReadLine();
 
-                        //blObject.UpdateDrone(droneId, name);
+                        try
+                        {
+                            blObject.UpdateDrone(droneId, model);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                        }
                         break;
                     }
 
                 case UpdateOptions.UpdateStation:
                     {
                         int id;
-                        Console.WriteLine("Enter drone id:");
+                        Console.WriteLine("Enter station id:");
                         int.TryParse(Console.ReadLine(), out id);
 
-                        Console.Write("Enter name of station: ");
-                        string name = Console.ReadLine();
+                        Console.WriteLine("Enter the values you want to update (if no, just press enter): ");
+                        Console.Write("A new name for the station - ");
+                        string newName = Console.ReadLine();
 
-                        //blObject.UpdateStation(id, name);
+                        int newNum; string input;
+                        Console.Write("A new chargeslots capcity - ");
+                        input = Console.ReadLine();
+                        if (input != "")
+                            int.TryParse(input, out newNum);
+                        else
+                            newNum = -1;
+
+                        try
+                        {
+                            blObject.UpdateStation(id, newName, newNum);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                        }
                         break;
                     }
 
