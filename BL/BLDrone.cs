@@ -9,6 +9,14 @@ namespace BL
 {
     public partial class BL : IBL.IBL
     {
+        public enum ElecConsumption // used in ChargeDrone function
+        {
+            availableDrElectConsumption,
+            lightDrElectConsumption,
+            mediumDrElectConsumption,
+            heavyDrElectConsumption,
+            chargingRate
+        }
         //this function adds a drone to the database
         public void AddDrone(int id, string model, string weight, int initialStationId)
         {
@@ -52,6 +60,45 @@ namespace BL
             {
                 throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
+        }
+        public void ChargeDrone(int id)
+        {
+            // First, we look for the closet station.
+            Drone drone = ViewDrone(id);
+            List<IDAL.DO.Station> stations = 
+                (List<IDAL.DO.Station>)dalObject.ViewStationsWithFreeChargeSlots(); // we choose from the available stations.
+            IDAL.DO.Station mostCloseStation = stations[0];
+            double mostCloseDistance = 0;
+            double distance = 0;
+            foreach (IDAL.DO.Station station in stations)
+            {
+                Location stationL = new Location { Latitude = station.Latitude, Longitude = station.Longitude };
+                distance = Distance(stationL, drone.Location);
+                if (mostCloseDistance > distance)
+                {
+                    mostCloseDistance = distance;
+                    mostCloseStation = station;
+                }
+            }
+
+            // now we check if the battery status of the drone allow it to get there.
+        
+        double consumptionRate = drone.Status == DroneStatuses.Available ?
+                                        dalObject.ViewElectConsumptionData()[0] :
+                                        dalObject.ViewElectConsumptionData()[drone.Model;
+        }
+        public Drone ViewDrone(int id)
+        {
+            return 0;
+        }
+
+        // This functions returns the distanse between two locations.
+        private double Distance(Location l1, Location l2)
+        {
+            // calculate the distance using Pythagoras 
+            double a = Math.Pow(l1.Latitude - l2.Latitude, 2); // a = (x1-x2)^2
+            double b = Math.Pow(l1.Longitude - l2.Longitude, 2);// b = (y1 - y2)^2
+            return Math.Sqrt(a + b); // dis = sqrt(a - b)
         }
     }
 }

@@ -47,7 +47,7 @@ namespace BL
                 }
                 if (newNum != -1) // check if there was an input for this value
                 {
-                    if (newNum >= 0) // it shoukd be a positive number
+                    if (newNum >= 0) // it should be a positive number
                         dalObject.UpdateStationChargeSlotsCap(id, newNum);
                     else
                         throw new ArgumentOutOfRangeException("charging slots capacity");

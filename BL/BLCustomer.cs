@@ -21,5 +21,23 @@ namespace BL
                 throw new IBL.BO.IdIsAlreadyExistException(e.ToString());
             }
         }
+        public void UpdateCustomer(int id, string newName, string newPhoneNumber)
+        {
+            try
+            {
+                if (newName != "") // check if there was an input for this value
+                {
+                    dalObject.UpdateCustomerName(id, newName);
+                }
+                if (newPhoneNumber != "") // check if there was an input for this value
+                {
+                    dalObject.UpdateCustomrePhoneNumber(id, newPhoneNumber);
+                }
+            }
+            catch (DalObject.IdIsNotExistException e)
+            {
+                throw new IBL.BO.IdIsNotExistException(e.ToString());
+            }
+        }
     }
 }

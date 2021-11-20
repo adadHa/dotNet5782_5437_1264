@@ -21,6 +21,8 @@ namespace IDAL
         public void UpdateDrone(int droneId, string newModel);
         public void UpdateStationName(int id, string newName);
         public void UpdateStationChargeSlotsCap(int id, int newNum);
+        public void UpdateCustomerName(int id, string newName);
+        public void UpdateCustomrePhoneNumber(int id, string newPhoneNumber);
         public IEnumerable<IDAL.DO.Station> ViewStationsList();
         public IEnumerable<IDAL.DO.Drone> ViewDronesList();
         public IEnumerable<IDAL.DO.Customer> ViewCustomersList();
