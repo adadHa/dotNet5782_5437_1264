@@ -35,6 +35,41 @@ namespace IBL
                 return Message;
             }
         }
+        [Serializable]
+        internal class NotEnoughBatteryException : Exception
+        {
+            private Drone Drone;
+            private Station Station;
+            public NotEnoughBatteryException()
+            {
+            }
+
+            public NotEnoughBatteryException(Drone drone, IDAL.DO.Station station)
+            {
+                Drone = drone;
+                Station = station;
+            }
+
+            public NotEnoughBatteryException(string message) : base(message)
+            {
+            }
+
+            public NotEnoughBatteryException(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+            protected NotEnoughBatteryException(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+
+            public override string ToString()
+            {
+                return $"Drone {Drone.Id} cannot be charged beacause it has only {Drone.Battery}% battery \n" +
+                    $"which is not enough to get to the closet station {Station.Name}";
+            }
+        }
+
+
 
         [Serializable]
         internal class IdIsNotExistException : Exception
@@ -85,3 +120,4 @@ namespace IBL
         }
     }
 }
+

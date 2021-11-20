@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using IBL.BO;
@@ -64,8 +65,8 @@ namespace BL
         public void ChargeDrone(int id)
         {
             // First, we look for the closet station.
-            Drone drone = ViewDrone(id);
-            List<IDAL.DO.Station> stations = 
+            DroneForList drone = BLDrones.Find(x => x.Id == id);
+            List<IDAL.DO.Station> stations =
                 (List<IDAL.DO.Station>)dalObject.ViewStationsWithFreeChargeSlots(); // we choose from the available stations.
             IDAL.DO.Station mostCloseStation = stations[0];
             double mostCloseDistance = 0;
@@ -82,14 +83,28 @@ namespace BL
             }
 
             // now we check if the battery status of the drone allow it to get there.
-        
-        double consumptionRate = drone.Status == DroneStatuses.Available ?
-                                        dalObject.ViewElectConsumptionData()[0] :
-                                        dalObject.ViewElectConsumptionData()[drone.Model;
+            double consumptionRate = drone.Status == DroneStatuses.Available ?
+                                            dalObject.ViewElectConsumptionData()[0] :
+                                            dalObject.ViewElectConsumptionData()[(int)drone.MaxWeight + 1]; // Light -- lightDrElectConsumption
+                                                                                                            // Medium -- mediumDrElectConsumption
+                                                                                                            // Heavy -- heavyDrElectConsumption
+            if(drone.Battery <= mostCloseDistance*consumptionRate)
+            {
+                throw new NotEnoughBatteryException(drone, mostCloseStation);
+            }
+
+            else
+            {
+                dalObject.ChargeDrone(id, mostCloseStation.Id, mostCloseDistance * consumptionRate);
+                BLDrones.FindIndex(x => x == drone);
+                drone.Location.Latitude = mostCloseStation.Latitude;
+                drone.Location.Longitude = mostCloseStation.Longitude;
+                BLDrones.FindIndex(x => x )
+            }
         }
         public Drone ViewDrone(int id)
         {
-            return 0;
+            return new Drone();
         }
 
         // This functions returns the distanse between two locations.
@@ -101,4 +116,4 @@ namespace BL
             return Math.Sqrt(a + b); // dis = sqrt(a - b)
         }
     }
-}
+

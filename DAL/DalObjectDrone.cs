@@ -35,7 +35,7 @@ namespace DalObject
         }
 
         //This function charges a drone.
-        public void ChargeDrone(int droneId, int stationId)
+        public void ChargeDrone(int droneId, int stationId, double batteryConsumption)
         {
             try
             {
@@ -55,6 +55,7 @@ namespace DalObject
                 }
                 IDAL.DO.Drone d = DataSource.Drones[droneIndex];
                 d.Status = IDAL.DO.DroneStatuses.Maintenance;
+                d.Battery -= batteryConsumption;
                 DataSource.Drones[droneIndex] = d;
                 IDAL.DO.Station s = DataSource.Stations[stationIndex];
                 s.ChargeSlots -= 1;

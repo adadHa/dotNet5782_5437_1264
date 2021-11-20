@@ -16,7 +16,7 @@ namespace IDAL
         public void BindParcel(int parcelId, int droneId);
         public void CollectParcelByDrone(int parcelId);
         public void SupplyParcelToCustomer(int parcelId);
-        public void ChargeDrone(int droneId, int stationId);
+        public void ChargeDrone(int droneId, int stationId, double batteryConsumprion);
         public void StopCharging(int droneId/*, int chargingTime*/);
         public void UpdateDrone(int droneId, string newModel);
         public void UpdateStationName(int id, string newName);
