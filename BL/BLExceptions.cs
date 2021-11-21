@@ -7,6 +7,38 @@ namespace IBL
     namespace BO
     {
         [Serializable]
+        internal class DroneCannotBeReleasedException : Exception
+        {
+            private DroneForList d;
+
+            public DroneCannotBeReleasedException()
+            {
+            }
+
+            public DroneCannotBeReleasedException(DroneForList d)
+            {
+                this.d = d;
+            }
+
+            public DroneCannotBeReleasedException(string message) : base(message)
+            {
+            }
+
+            public DroneCannotBeReleasedException(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+            protected DroneCannotBeReleasedException(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+
+            public override string ToString()
+            {
+                return $"Cannot release Drone {d.Id} from charging, probably beacause it is not being charging right now" +
+                    $"\n (dron status: {d.Status})";
+            }
+        }
+        [Serializable]
         internal class NoChargeSlotsException : Exception
         {
 

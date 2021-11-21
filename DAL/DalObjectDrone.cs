@@ -72,10 +72,14 @@ namespace DalObject
             {
                 throw new IdIsNotExistException(droneId, "Drone");
             }
-            IDAL.DO.Drone d = DataSource.Drones[droneIndex];
-            //d.Status = IDAL.DO.DroneStatuses.Available;
-            //d.Battery = ?\\
-            DataSource.Drones[droneIndex] = d;
+            int chargingIndex = DataSource.DroneCharges.FindIndex(x => x.DroneId == droneId);
+            IDAL.DO.DroneCharge charging = DataSource.DroneCharges[chargingIndex];
+            int stationIndex = DataSource.Stations.FindIndex(x => x.Id == charging.StationId);
+            IDAL.DO.Station s = DataSource.Stations[stationIndex];
+
+            s.ChargeSlots += 1;
+            DataSource.Stations[stationIndex] = s;
+            DataSource.DroneCharges.Remove(charging);
         }
 
         //This function returns the drone with the required Id.

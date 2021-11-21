@@ -127,7 +127,15 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Enter charging time:");
                         double.TryParse(Console.ReadLine(), out chargingTime);
 
-                        blObject.ReleaseDroneFromCharging(droneId, chargingTime);
+                        try
+                        {
+                            blObject.ReleaseDroneFromCharging(droneId, chargingTime);
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                        }
                         break;
                     }
 

@@ -32,7 +32,7 @@ namespace BL
                     Model = model,
                     MaxWeight = (IBL.BO.WheightCategories)Enum.Parse(typeof(IBL.BO.WheightCategories), weight),
                     Battery = batteryStatus,
-                    Status = (IBL.BO.DroneStatuses)Enum.Parse(typeof(IBL.BO.DroneStatuses), weight),
+                    Status = IBL.BO.DroneStatuses.Maintenance,
                     Location = new IBL.BO.Location()
                     {
                         Longitude = initialStation.Longitude,
@@ -101,6 +101,7 @@ namespace BL
 
                 else
                 {
+                    //finaly we change desired fields
                     dalObject.ChargeDrone(id, mostCloseStation.Id);
                     int droneIndex = BLDrones.FindIndex(x => x == drone);
                     drone.Location.Latitude = mostCloseStation.Latitude;
@@ -119,11 +120,21 @@ namespace BL
         {
             try
             {
-                dalObject.StopCharging(id);
+                DroneForList d = GetDrone(id);
+                if (d.Status != DroneStatuses.Maintenance)
+                {
+                    throw new DroneCannotBeReleasedException(d);
+                }
+                else
+                {
+                    dalObject.StopCharging(id);
+                    d.Status = DroneStatuses.Available;
+                    d.Battery = chargingTime * dalObject.ViewElectConsumptionData()[0];
+                    BLDrones[GetDroneIndex(id)] = d;
+                }
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -141,7 +152,7 @@ namespace BL
             return Math.Sqrt(a + b); // dis = sqrt(a - b)
         }
 
-        //This function return a DroneForList from the datasource (on BL) by an index.
+        //This function returns a DroneForList from the datasource (on BL) by an index.
         private DroneForList GetDrone(int id)
         {
             try
@@ -158,6 +169,26 @@ namespace BL
                 throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
         }
+
+        //This function returns an index to the desired drone id from the list on BL database
+        private int GetDroneIndex(int id)
+        {
+            try
+            {
+                int i = BLDrones.FindIndex(x => x.Id == id);
+                if (i == -1)
+                {
+                    throw new DalObject.IdIsNotExistException(id, "Drone"); // ??? should we throw Dal exception about bl's drone exception?
+                }
+                return i;
+            }
+            catch (DalObject.IdIsNotExistException e)
+            {
+                throw new IBL.BO.IdIsNotExistException(e.ToString());
+            }
+        }
     }
+
+    
 }
 

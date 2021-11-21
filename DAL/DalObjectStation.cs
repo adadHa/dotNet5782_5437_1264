@@ -90,6 +90,10 @@ namespace DalObject
         public IDAL.DO.Station ViewStation(int id)
         {
             int index = DataSource.Stations.FindIndex(x => x.Id == id);
+            if (index == -1)
+            {
+                throw new IdIsNotExistException(id, "Station");
+            }
             return DataSource.Stations[index];
         }
 
