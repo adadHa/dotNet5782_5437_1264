@@ -16,6 +16,7 @@ namespace IBL
         public void UpdateStation(int id, string newName, int newNum);
         public void UpdateCustomer(int id, string newName, string newPhoneNumber);
         public void ChargeDrone(int id);
+        public void ReleaseDroneFromCharging(int id, double chargingTime);
         public BO.Drone ViewDrone(int id);
     }
 }

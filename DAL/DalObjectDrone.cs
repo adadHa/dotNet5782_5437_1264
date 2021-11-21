@@ -11,7 +11,7 @@ namespace DalObject
     public partial class DalObject : IDAL.IDal
     {
         // This function add a drone to the drones data base.
-        public void AddDrone(int id, string model, string weight, double batteryStatus, string droneStatus)
+        public void AddDrone(int id, string model, string weight)
         {
             try
             {
@@ -24,8 +24,6 @@ namespace DalObject
                     Id = id,
                     Model = model,
                     MaxWeight = (IDAL.DO.WheightCategories)Enum.Parse(typeof(IDAL.DO.WheightCategories), weight),
-                    Battery = batteryStatus,
-                    Status = (IDAL.DO.DroneStatuses)Enum.Parse(typeof(IDAL.DO.DroneStatuses), droneStatus)
                 });
             }
             catch (Exception)
@@ -35,7 +33,7 @@ namespace DalObject
         }
 
         //This function charges a drone.
-        public void ChargeDrone(int droneId, int stationId, double batteryConsumption)
+        public void ChargeDrone(int droneId, int stationId)
         {
             try
             {
@@ -54,8 +52,6 @@ namespace DalObject
                     throw new NoChargeSlotsException(DataSource.Stations[stationIndex]);
                 }
                 IDAL.DO.Drone d = DataSource.Drones[droneIndex];
-                d.Status = IDAL.DO.DroneStatuses.Maintenance;
-                d.Battery -= batteryConsumption;
                 DataSource.Drones[droneIndex] = d;
                 IDAL.DO.Station s = DataSource.Stations[stationIndex];
                 s.ChargeSlots -= 1;
@@ -69,7 +65,7 @@ namespace DalObject
         }
 
         //This function stops the charge of the drone.
-        public void StopCharging(int droneId/*, int chargingTime*/)
+        public void StopCharging(int droneId)
         {
             int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
             if (droneIndex == -1)
@@ -77,7 +73,7 @@ namespace DalObject
                 throw new IdIsNotExistException(droneId, "Drone");
             }
             IDAL.DO.Drone d = DataSource.Drones[droneIndex];
-            d.Status = IDAL.DO.DroneStatuses.Available;
+            //d.Status = IDAL.DO.DroneStatuses.Available;
             //d.Battery = ?\\
             DataSource.Drones[droneIndex] = d;
         }

@@ -8,7 +8,7 @@ namespace ConsoleUI_BL
 {
     partial class Program
     {
-        enum UpdateOptions { Exit, UpdateDrone, UpdateStation, UpdateCustomer, ChargeDrone, ReleaseDroneFromCharge, BindParcelToDrone, CollectParcelByDrone, DeliverParcelByDrone };
+        enum UpdateOptions { Exit, UpdateDrone, UpdateStation, UpdateCustomer, ChargeDrone, ReleaseDroneFromCharging, BindParcelToDrone, CollectParcelByDrone, DeliverParcelByDrone };
         static void UpdateMenu(IBL.IBL blObject)
         {
             UpdateOptions updateOption = 0;
@@ -16,11 +16,11 @@ namespace ConsoleUI_BL
                             "1 - Update Drone \n" +
                             "2 - Update Station \n" +
                             "3 - Update Customer \n" +
-                            "3 - Send Drone To Charge \n" +
-                            "4 - Release Drone From Charge \n" +
-                            "5 - Bind Parcel To Drone \n" +
-                            "6 - Collect Parcel By Drone \n" +
-                            "7 - Deliver Parcel By Drone");
+                            "4 - Send Drone To Charge \n" +
+                            "5 - Release Drone From Charge \n" +
+                            "6 - Bind Parcel To Drone \n" +
+                            "7 - Collect Parcel By Drone \n" +
+                            "8 - Deliver Parcel By Drone");
             int x = 0;
             int.TryParse(Console.ReadLine(), out x);
             updateOption = (UpdateOptions)x;
@@ -79,7 +79,7 @@ namespace ConsoleUI_BL
                 case UpdateOptions.UpdateCustomer:
                     {
                         int id;
-                        Console.WriteLine("Enter drone id:");
+                        Console.WriteLine("Enter customer id:");
                         int.TryParse(Console.ReadLine(), out id);
 
                         Console.WriteLine("Enter the values you want to update (if no, just press enter): ");
@@ -117,12 +117,17 @@ namespace ConsoleUI_BL
                         break;
                     }
 
-                case UpdateOptions.ReleaseDroneFromCharge:
+                case UpdateOptions.ReleaseDroneFromCharging:
                     {
                         int droneId;
                         Console.WriteLine("Enter drone id:");
                         int.TryParse(Console.ReadLine(), out droneId);
 
+                        double chargingTime;
+                        Console.WriteLine("Enter charging time:");
+                        double.TryParse(Console.ReadLine(), out chargingTime);
+
+                        blObject.ReleaseDroneFromCharging(droneId, chargingTime);
                         break;
                     }
 

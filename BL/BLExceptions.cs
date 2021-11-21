@@ -38,13 +38,13 @@ namespace IBL
         [Serializable]
         internal class NotEnoughBatteryException : Exception
         {
-            private Drone Drone;
+            private DroneForList Drone;
             private Station Station;
             public NotEnoughBatteryException()
             {
             }
 
-            public NotEnoughBatteryException(Drone drone, IDAL.DO.Station station)
+            public NotEnoughBatteryException(DroneForList drone, IDAL.DO.Station station)
             {
                 Drone = drone;
                 Station = station;
@@ -74,8 +74,12 @@ namespace IBL
         [Serializable]
         internal class IdIsNotExistException : Exception
         {
-            public IdIsNotExistException()
+            private int Id { get; set; }
+            private string Type { get; set; }
+            public IdIsNotExistException(int id, string type)
             {
+                Id = id;
+                Type = type;
             }
 
             public IdIsNotExistException(string message) : base(message)
