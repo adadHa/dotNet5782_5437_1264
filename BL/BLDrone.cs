@@ -133,9 +133,9 @@ namespace BL
                     BLDrones[GetDroneIndex(id)] = d;
                 }
             }
-            catch (Exception)
+            catch (DalObject.IdIsNotExistException e)
             {
-                throw;
+                throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
         }
         public Drone ViewDrone(int id)
