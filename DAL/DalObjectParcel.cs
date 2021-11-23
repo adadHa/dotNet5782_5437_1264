@@ -150,8 +150,14 @@ namespace DalObject
             return resultList;
         }
 
+        //This function returns the string of the parcel with the required Id.
+        public string ViewParcel(int id)
+        {
+            return GetParcel(id).ToString();
+        }
+
         //This function returns the parcel with the required Id.
-        public IDAL.DO.Parcel ViewParcel(int id)
+        public IDAL.DO.Parcel GetParcel(int id)
         {
             if (DataSource.Parcels.FindIndex(x => x.Id == id) == -1)
             {
@@ -161,6 +167,11 @@ namespace DalObject
             return DataSource.Parcels[index];
         }
 
+        //This function returns a filtered copy of the Parcels list (according to a given predicate)
+        public IEnumerable<IDAL.DO.Parcel> GetParcels(Func<IDAL.DO.Parcel, bool> filter = null)
+        {
+            return DataSource.Parcels.Where(filter);
+        }
 
     }
 }

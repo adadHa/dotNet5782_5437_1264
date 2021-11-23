@@ -8,15 +8,15 @@ namespace IBL
 {
     namespace BO
     {
-        class BaseStationForList
+        class StationForList
         {
             public int Id { get; set; }
             public string Name { get; set; }
-            public int AvailableChargingStations { get; set; }
-            public int OccupiedChargingStations { get; set; }
+            public int AvailableChargingSlots { get; set; }
+            public int OccupiedChargingSlots { get; set; }
             public override string ToString()
             {
-                return $"Id: {Id}, Name: {Name}, Available Charging Stations: {AvailableChargingStations}, Occupied Charging Stations: {OccupiedChargingStations}";
+                return $"Id: {Id}, Name: {Name}, Available Charging Slots: {AvailableChargingSlots}, Occupied Charging Slots: {OccupiedChargingSlots}";
             }
         } 
     }

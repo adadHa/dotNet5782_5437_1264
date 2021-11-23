@@ -59,11 +59,13 @@ namespace BL
             }
         }
 
+        public IEnumerable<StationForList> GetStations(Func<StationForList, bool> filter = null)
+        {
+            foreach (IDAL.DO.Station station in dalObject.GetStations(filter))
+            {
 
-
-
-
-
+            }
+        }
     }
 }
 /*public BL()

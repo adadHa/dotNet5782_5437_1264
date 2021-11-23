@@ -29,10 +29,18 @@ namespace IDAL
         public IEnumerable<IDAL.DO.Parcel> ViewParcelsList();
         public IEnumerable<IDAL.DO.Parcel> ViewUnbindParcels();
         public IEnumerable<IDAL.DO.Station> ViewStationsWithFreeChargeSlots();
-        public IDAL.DO.Station ViewStation(int id);
-        public IDAL.DO.Drone ViewDrone(int id);
-        public IDAL.DO.Customer ViewCustomer(int id);
-        public IDAL.DO.Parcel ViewParcel(int id);
+        public string ViewStation(int id);
+        public string ViewDrone(int id);
+        public string ViewCustomer(int id);
+        public string ViewParcel(int id);
+        public IDAL.DO.Station GetStation(int id);
+        public IDAL.DO.Drone GetDrone(int id);
+        public IDAL.DO.Customer GetCustomer(int id);
+        public IDAL.DO.Parcel GetParcel(int id);
+        public IEnumerable<IDAL.DO.Station> GetStations(Func<IDAL.DO.Station, bool> filter = null);
+        public IEnumerable<IDAL.DO.Drone> GetDrones(Func<IDAL.DO.Drone, bool> filter = null);
+        public IEnumerable<IDAL.DO.Customer> GetCustomers(Func<IDAL.DO.Customer, bool> filter = null);
+        public IEnumerable<IDAL.DO.Parcel> GetParcels(Func<IDAL.DO.Parcel, bool> filter = null);
         public double[] ViewElectConsumptionData();
 
 

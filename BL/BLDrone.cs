@@ -24,7 +24,7 @@ namespace BL
             try
             {
                 double batteryStatus = rand.NextDouble() * rand.Next(20, 41);
-                IDAL.DO.Station initialStation = dalObject.ViewStation(initialStationId);
+                IDAL.DO.Station initialStation = dalObject.GetStation(initialStationId);
                 dalObject.AddDrone(id, model, weight);
                 BLDrones.Add(new IBL.BO.DroneForList
                 {
@@ -155,19 +155,7 @@ namespace BL
         //This function returns a DroneForList from the datasource (on BL) by an index.
         private DroneForList GetDrone(int id)
         {
-            try
-            {
-                DroneForList d = BLDrones.Find(x => x.Id == id);
-                if(d == null)
-                {
-                    throw new DalObject.IdIsNotExistException(id, "Drone"); // ??? should we throw Dal exception about bl's drone exception?
-                }
-                return d;
-            }
-            catch (DalObject.IdIsNotExistException e)
-            {
-                throw new IBL.BO.IdIsNotExistException(e.ToString());
-            }
+            return BLDrones[GetDroneIndex(id)];
         }
 
         //This function returns an index to the desired drone id from the list on BL database
@@ -187,8 +175,13 @@ namespace BL
                 throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
         }
+
+        public IEnumerable<DroneForList> GetDrones(Func<DroneForList, bool> filter = null)
+        {
+            return BLDrones.Where(filter);
+        }
     }
 
-    
+
 }
 

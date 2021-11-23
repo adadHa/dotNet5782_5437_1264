@@ -93,21 +93,24 @@ namespace DalObject
         }
 
         //This function returns the customer with the required Id.
-        public IDAL.DO.Customer ViewCustomer(int id)
+        public string ViewCustomer(int id)
         {
-            try
+            return ViewCustomer(id).ToString();
+        }
+        public IDAL.DO.Customer GetCustomer(int id)
+        {
+            int index = DataSource.Customers.FindIndex(x => x.Id == id);
+            if (index == -1)
             {
-                int index = DataSource.Customers.FindIndex(x => x.Id == id);
-                if (index == -1)
-                {
-                    throw new IdIsNotExistException(id, $"Customer");
-                }
-                return DataSource.Customers[index];
+                throw new IdIsNotExistException(id, $"Customer");
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return DataSource.Customers[index];
+        }
+
+        //This function returns a filtered copy of the Customers list (according to a given predicate)
+        public IEnumerable<IDAL.DO.Customer> GetCustomers(Func<IDAL.DO.Customer, bool> filter = null)
+        {
+            return DataSource.Customers.Where(filter);
         }
     }
 }

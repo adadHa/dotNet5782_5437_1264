@@ -18,5 +18,15 @@ namespace IBL
         public void ChargeDrone(int id);
         public void ReleaseDroneFromCharging(int id, double chargingTime);
         public BO.Drone ViewDrone(int id);
+        public string ViewStations();
+        public string ViewDrones(int id);
+        public string ViewCustomers(int id);
+        public string ViewParcels(int id);
+        public string ViewUnbinedParcels(int id);
+        public IEnumerable<BO.StationForList> GetStations(Func<BO.StationForList, bool> filter = null);
+        public IEnumerable<BO.DroneForList> GetDrones(Func<BO.DroneForList, bool> filter = null);
+        public IEnumerable<BO.CustomerForList> GetCustomers(Func<BO.CustomerForList, bool> filter = null);
+        public IEnumerable<BO.ParcelForList> GetParcels(Func<BO.ParcelForList, bool> filter = null);
+        public IEnumerable<BO.ParcelForList> GetUnbinedParcels(Func<BO.ParcelForList, bool> filter = null);
     }
 }

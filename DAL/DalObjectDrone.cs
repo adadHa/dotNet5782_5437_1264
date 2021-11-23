@@ -82,23 +82,6 @@ namespace DalObject
             DataSource.DroneCharges.Remove(charging);
         }
 
-        //This function returns the drone with the required Id.
-        public IDAL.DO.Drone ViewDrone(int id)
-        {
-            try
-            {
-                int index = DataSource.Drones.FindIndex(x => x.Id == id);
-                if (index == -1)
-                {
-                    throw new IdIsNotExistException(id, "Drone");
-                }
-                return DataSource.Drones[index];
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
         // This function updates a drone with an new model.
         public void UpdateDrone(int droneId, string newModel)
         {
@@ -119,6 +102,23 @@ namespace DalObject
             }
         }
 
+        //This function returns the string of the drone with the required Id.
+        public string ViewDrone(int id)
+        {
+            return GetDrone(id).ToString();
+        }
+
+        //This function returns the drone with the required Id.
+        public IDAL.DO.Drone GetDrone(int id)
+        {
+            int index = DataSource.Drones.FindIndex(x => x.Id == id);
+            if (index == -1)
+            {
+                throw new IdIsNotExistException(id, "Drone");
+            }
+            return DataSource.Drones[index];
+        }
+        
         //This function returns a copy of the drones list.
         public IEnumerable<IDAL.DO.Drone> ViewDronesList()
         {
@@ -130,6 +130,12 @@ namespace DalObject
                 resultList.Add(d);
             }
             return resultList;
+        }
+
+        //This function returns a filtered copy of the drones list (according to given predicate)
+        public IEnumerable<IDAL.DO.Drone> GetDrones(Func<IDAL.DO.Drone, bool> filter = null)
+        {
+            return DataSource.Drones.Where(filter); 
         }
 
         public double[] ViewElectConsumptionData()

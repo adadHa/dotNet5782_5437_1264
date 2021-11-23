@@ -86,8 +86,14 @@ namespace DalObject
             return resultList;
         }
 
+        //This function returns the string of the station with the required Id.
+        public string ViewStation(int id)
+        {
+            return GetStation(id).ToString();
+        }
+
         //This function returns the station with the required Id.
-        public IDAL.DO.Station ViewStation(int id)
+        public IDAL.DO.Station GetStation(int id)
         {
             int index = DataSource.Stations.FindIndex(x => x.Id == id);
             if (index == -1)
@@ -97,6 +103,11 @@ namespace DalObject
             return DataSource.Stations[index];
         }
 
+        //This function returns a filtered copy of the Stations list (according to a given predicate)
+        public IEnumerable<IDAL.DO.Station> GetStations(Func<IDAL.DO.Station, bool> filter = null)
+        {
+            return DataSource.Stations.Where(filter);
+        }
         public IEnumerable<IDAL.DO.Station> ViewStationsWithFreeChargeSlots()
         {
             // create the result list
