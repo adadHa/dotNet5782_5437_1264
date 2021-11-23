@@ -12,5 +12,7 @@ namespace IBL
         public void AddDrone(int id, string model, string weight, int initialStation);
         public void AddCustomer(int id, string name, string phoneNumber);
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority);
+        public BO.Station ViewStation(int id);
+
     }
 }

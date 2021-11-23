@@ -49,7 +49,29 @@ namespace BL
             }
         }
 
-        
+        public IBL.BO.Station ViewStation(int id)
+        {
+
+            try
+            {
+                IDAL.DO.Station station = dalObject.ViewStation(id);
+                IBL.BO.Station resultStation = new IBL.BO.Station
+                {
+                    Id = station.Id,
+                    Name = station.Name,
+                    Location = new IBL.BO.Location { Latitude = station.Latitude, Longitude = station.Longitude},
+                    ChargeSlots = station.ChargeSlots,
+                    ListOfDronesInCharge = 
+                    
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         
 

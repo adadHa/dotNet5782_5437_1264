@@ -36,7 +36,16 @@ namespace ConsoleUI_BL
                         Console.Write("Enter Name: ");
                         string name = Console.ReadLine();
 
-                        //blObject.UpdateDrone(droneId, name);
+                        try
+                        {
+                            blObject.UpdateDrone(droneId, name);
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }                       
                         break;
                     }
 
@@ -49,7 +58,16 @@ namespace ConsoleUI_BL
                         Console.Write("Enter name of station: ");
                         string name = Console.ReadLine();
 
-                        //blObject.UpdateStation(id, name);
+                        try
+                        {
+                            blObject.UpdateStation(id, name);
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }
                         break;
                     }
 
@@ -65,7 +83,16 @@ namespace ConsoleUI_BL
                         Console.Write("Enter Phone Number: ");
                         string phoneNumber = Console.ReadLine();
 
-                        //blObject.UpdateCustomer(id, name, phoneNumber);
+                        try
+                        {
+                            blObject.UpdateCustomer(id, name, phoneNumber);
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }
                         break;
                     }
 
@@ -75,6 +102,16 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Enter drone id:");
                         int.TryParse(Console.ReadLine(), out droneId);
 
+                        try
+                        {
+                            blObject.SendDroneToCharge(droneId, stationId);
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }
                         break;
                     }
 
@@ -84,6 +121,16 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Enter drone id:");
                         int.TryParse(Console.ReadLine(), out droneId);
 
+                        try
+                        {
+                            blObject.ReleaseDroneFromCharge(droneId);
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }
                         break;
                     }
 
@@ -93,7 +140,17 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Enter parcel id:");
                         int.TryParse(Console.ReadLine(), out droneId);
 
-                        //blObject.BindParcelToDrone(droneId);
+
+                        try
+                        {
+                            blObject.BindParcelToDrone(parcelId, droneId);
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }
                         break;
                     }
 
@@ -105,7 +162,16 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Enter parcel id:");
                         int.TryParse(Console.ReadLine(), out droneId);
 
-                        //blObject.CollectParcelByDrone(droneId);
+                        try
+                        {
+                            blObject.CollectParcelByDrone(droneId);
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }
                         break;
                     }
 
@@ -115,7 +181,16 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Enter parcel id:");
                         int.TryParse(Console.ReadLine(), out droneId);
 
-                        //blObject.SupplyParcelToCustomer(droneId);
+                        try
+                        {
+                            blObject.SupplyParcelToCustomer(droneId);
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }
                         break;
                     }
 
