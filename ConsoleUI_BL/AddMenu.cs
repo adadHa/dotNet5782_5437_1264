@@ -66,7 +66,11 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Enter Id: ");
                         int.TryParse(Console.ReadLine(), out id);
 
-                        Console.Write("Enter Weight Category: ");
+                        Console.WriteLine("Enter one of the following weight categories: ");
+                        foreach (IBL.BO.WheightCategories a in Enum.GetValues(typeof(IBL.BO.WheightCategories)))
+                        {
+                            Console.WriteLine(a.ToString());
+                        }
                         string weight = Console.ReadLine();
 
                         Console.Write("Enter model: ");
@@ -122,10 +126,18 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Enter customer receiver Id: ");
                         int.TryParse(Console.ReadLine(), out receiverId);
 
-                        Console.Write("Enter Weight Catagory: ");
+                        Console.WriteLine("Enter one of the following weight categories: ");
+                        foreach (IBL.BO.WheightCategories a in Enum.GetValues(typeof(IBL.BO.WheightCategories)))
+                        {
+                            Console.WriteLine(a.ToString());
+                        }
                         string weight = Console.ReadLine();
 
-                        Console.Write("Enter Priority: ");
+                        Console.Write("Enter one of the following priorities: ");
+                        foreach (IBL.BO.Priorities a in Enum.GetValues(typeof(IBL.BO.Priorities)))
+                        {
+                            Console.WriteLine(a.ToString());
+                        }
                         string priority = Console.ReadLine();
 
                         try

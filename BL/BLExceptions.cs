@@ -7,6 +7,38 @@ namespace IBL
     namespace BO
     {
         [Serializable]
+        internal class DroneCannotBeReleasedException : Exception
+        {
+            private DroneForList d;
+
+            public DroneCannotBeReleasedException()
+            {
+            }
+
+            public DroneCannotBeReleasedException(DroneForList d)
+            {
+                this.d = d;
+            }
+
+            public DroneCannotBeReleasedException(string message) : base(message)
+            {
+            }
+
+            public DroneCannotBeReleasedException(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+            protected DroneCannotBeReleasedException(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+
+            public override string ToString()
+            {
+                return $"Cannot release Drone {d.Id} from charging, probably beacause it is not being charging right now" +
+                    $"\n (dron status: {d.Status})";
+            }
+        }
+        [Serializable]
         internal class NoChargeSlotsException : Exception
         {
 
@@ -35,12 +67,51 @@ namespace IBL
                 return Message;
             }
         }
+        [Serializable]
+        internal class NotEnoughBatteryException : Exception
+        {
+            private DroneForList Drone;
+            private Station Station;
+            public NotEnoughBatteryException()
+            {
+            }
+
+            public NotEnoughBatteryException(DroneForList drone, IDAL.DO.Station station)
+            {
+                Drone = drone;
+                Station = station;
+            }
+
+            public NotEnoughBatteryException(string message) : base(message)
+            {
+            }
+
+            public NotEnoughBatteryException(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+            protected NotEnoughBatteryException(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+
+            public override string ToString()
+            {
+                return $"Drone {Drone.Id} cannot be charged beacause it has only {Drone.Battery}% battery \n" +
+                    $"which is not enough to get to the closet station {Station.Name}";
+            }
+        }
+
+
 
         [Serializable]
         internal class IdIsNotExistException : Exception
         {
-            public IdIsNotExistException()
+            private int Id { get; set; }
+            private string Type { get; set; }
+            public IdIsNotExistException(int id, string type)
             {
+                Id = id;
+                Type = type;
             }
 
             public IdIsNotExistException(string message) : base(message)
@@ -85,3 +156,4 @@ namespace IBL
         }
     }
 }
+

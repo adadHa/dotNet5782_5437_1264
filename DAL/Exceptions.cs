@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace DalObject
 {
+    
     [Serializable]
     public class IdIsNotExistException : Exception
     {

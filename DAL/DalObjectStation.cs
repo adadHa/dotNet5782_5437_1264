@@ -33,6 +33,46 @@ namespace DalObject
             }
         }
 
+        //This function updates a station with a new name.
+        public void UpdateStationName(int id, string newName)
+        {
+            try
+            {
+                int index = DataSource.Stations.FindIndex(x => x.Id == id);
+                if (DataSource.Stations.FindIndex(x => x.Id == id) == -1)
+                {
+                    throw new IdIsNotExistException(id, "Station");
+                }
+                IDAL.DO.Station s = DataSource.Stations[index];
+                s.Name = newName;
+                DataSource.Stations[index] = s;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //This function updates a station with a new charging slots capacity.
+        public void UpdateStationChargeSlotsCap(int id, int newNum)
+        {
+            try
+            {
+                int index = DataSource.Stations.FindIndex(x => x.Id == id);
+                if (DataSource.Stations.FindIndex(x => x.Id == id) == -1)
+                {
+                    throw new IdIsNotExistException(id, "Station");
+                }
+                IDAL.DO.Station s = DataSource.Stations[index];
+                s.ChargeSlots = newNum;
+                DataSource.Stations[index] = s;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         //This function returns a copy of the stations list.
         public IEnumerable<IDAL.DO.Station> ViewStationsList()
         {
@@ -50,6 +90,10 @@ namespace DalObject
         public IDAL.DO.Station ViewStation(int id)
         {
             int index = DataSource.Stations.FindIndex(x => x.Id == id);
+            if (index == -1)
+            {
+                throw new IdIsNotExistException(id, "Station");
+            }
             return DataSource.Stations[index];
         }
 

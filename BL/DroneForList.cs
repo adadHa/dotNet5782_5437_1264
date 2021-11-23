@@ -16,10 +16,10 @@ namespace IBL
             public double Battery { get; set; }
             public DroneStatuses Status { get; set; }
             public Location Location { get; set; }
-            public int NumberPacelDelivered { get; set; }
+            public int DeliveredParcelNumber { get; set; }
             public override string ToString()
             {
-                return $"Id: {Id}, Model: {Model}, Max Weight: {MaxWeight}, Battery: {Battery}, Status: {Status}, Location: {Location}, Number Pacel Delivered:{NumberPacelDelivered}";
+                return $"Id: {Id}, Model: {Model}, Max Weight: {MaxWeight}, Battery: {Battery}, Status: {Status}, Location: {Location}, Delivered Parcel Number:{DeliveredParcelNumber}";
             }
         } 
     }

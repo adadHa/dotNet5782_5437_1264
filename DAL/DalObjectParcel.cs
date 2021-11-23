@@ -63,7 +63,7 @@ namespace DalObject
                 int parcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
                 IDAL.DO.Drone d = DataSource.Drones[droneIndex];
                 IDAL.DO.Parcel p = DataSource.Parcels[parcelIndex];
-                d.Status = IDAL.DO.DroneStatuses.Shipping;
+                //d.Status = IDAL.DO.DroneStatuses.Shipping;
                 p.DroneId = droneId;
                 p.Scheduled = DateTime.Now;
                 DataSource.Drones[droneIndex] = d;
@@ -111,7 +111,7 @@ namespace DalObject
                 int droneId = DataSource.Parcels[deliveredParcelIndex].DroneId;
                 int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
                 IDAL.DO.Drone d = DataSource.Drones[droneIndex];
-                d.Status = IDAL.DO.DroneStatuses.Available;
+                //d.Status = IDAL.DO.DroneStatuses.Available;
                 DataSource.Drones[droneIndex] = d;
             }
             catch (Exception)

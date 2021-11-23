@@ -8,7 +8,7 @@ namespace ConsoleUI_BL
 {
     partial class Program
     {
-        enum UpdateOptions { Exit, UpdateDrone, UpdateStation, UpdateCustomer, SendDroneToCharge, ReleaseDroneFromCharge, BindParcelToDrone, CollectParcelByDrone, DeliverParcelByDrone };
+        enum UpdateOptions { Exit, UpdateDrone, UpdateStation, UpdateCustomer, ChargeDrone, ReleaseDroneFromCharging, BindParcelToDrone, CollectParcelByDrone, DeliverParcelByDrone };
         static void UpdateMenu(IBL.IBL blObject)
         {
             UpdateOptions updateOption = 0;
@@ -16,11 +16,11 @@ namespace ConsoleUI_BL
                             "1 - Update Drone \n" +
                             "2 - Update Station \n" +
                             "3 - Update Customer \n" +
-                            "3 - Send Drone To Charge \n" +
-                            "4 - Release Drone From Charge \n" +
-                            "5 - Bind Parcel To Drone \n" +
-                            "6 - Collect Parcel By Drone \n" +
-                            "7 - Deliver Parcel By Drone");
+                            "4 - Send Drone To Charge \n" +
+                            "5 - Release Drone From Charge \n" +
+                            "6 - Bind Parcel To Drone \n" +
+                            "7 - Collect Parcel By Drone \n" +
+                            "8 - Deliver Parcel By Drone");
             int x = 0;
             int.TryParse(Console.ReadLine(), out x);
             updateOption = (UpdateOptions)x;
@@ -33,40 +33,45 @@ namespace ConsoleUI_BL
                         Console.WriteLine("Enter drone id:");
                         int.TryParse(Console.ReadLine(), out droneId);
 
-                        Console.Write("Enter Name: ");
-                        string name = Console.ReadLine();
+                        Console.Write("Enter new model: ");
+                        string model = Console.ReadLine();
 
                         try
                         {
-                            blObject.UpdateDrone(droneId, name);
-
+                            blObject.UpdateDrone(droneId, model);
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.ToString());
-                            throw;
-                        }                       
+                        }
                         break;
                     }
 
                 case UpdateOptions.UpdateStation:
                     {
                         int id;
-                        Console.WriteLine("Enter drone id:");
+                        Console.WriteLine("Enter station id:");
                         int.TryParse(Console.ReadLine(), out id);
 
-                        Console.Write("Enter name of station: ");
-                        string name = Console.ReadLine();
+                        Console.WriteLine("Enter the values you want to update (if no, just press enter): ");
+                        Console.Write("A new name for the station - ");
+                        string newName = Console.ReadLine();
+
+                        int newNum; string input;
+                        Console.Write("A new chargeslots capcity - ");
+                        input = Console.ReadLine();
+                        if (input != "")
+                            int.TryParse(input, out newNum);
+                        else
+                            newNum = -1;
 
                         try
                         {
-                            blObject.UpdateStation(id, name);
-
+                            blObject.UpdateStation(id, newName, newNum);
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.ToString());
-                            throw;
                         }
                         break;
                     }
@@ -74,48 +79,28 @@ namespace ConsoleUI_BL
                 case UpdateOptions.UpdateCustomer:
                     {
                         int id;
-                        Console.WriteLine("Enter drone id:");
+                        Console.WriteLine("Enter customer id:");
                         int.TryParse(Console.ReadLine(), out id);
 
-                        Console.Write("Enter name of station: ");
-                        string name = Console.ReadLine();
+                        Console.WriteLine("Enter the values you want to update (if no, just press enter): ");
+                        Console.Write("Enter name of station - ");
+                        string newName = Console.ReadLine();
 
-                        Console.Write("Enter Phone Number: ");
-                        string phoneNumber = Console.ReadLine();
+                        Console.Write("Enter Phone Number - ");
+                        string newPhoneNumber = Console.ReadLine();
 
                         try
                         {
-                            blObject.UpdateCustomer(id, name, phoneNumber);
-
+                            blObject.UpdateCustomer(id, newName, newPhoneNumber);
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.ToString());
-                            throw;
                         }
                         break;
                     }
 
-                case UpdateOptions.SendDroneToCharge:
-                    {
-                        int droneId, stationId;
-                        Console.WriteLine("Enter drone id:");
-                        int.TryParse(Console.ReadLine(), out droneId);
-
-                        try
-                        {
-                            blObject.SendDroneToCharge(droneId, stationId);
-
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.ToString());
-                            throw;
-                        }
-                        break;
-                    }
-
-                case UpdateOptions.ReleaseDroneFromCharge:
+                case UpdateOptions.ChargeDrone:
                     {
                         int droneId;
                         Console.WriteLine("Enter drone id:");
@@ -123,13 +108,33 @@ namespace ConsoleUI_BL
 
                         try
                         {
-                            blObject.ReleaseDroneFromCharge(droneId);
+                            blObject.ChargeDrone(droneId);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                        }
+                        break;
+                    }
+
+                case UpdateOptions.ReleaseDroneFromCharging:
+                    {
+                        int droneId;
+                        Console.WriteLine("Enter drone id:");
+                        int.TryParse(Console.ReadLine(), out droneId);
+
+                        double chargingTime;
+                        Console.WriteLine("Enter charging time:");
+                        double.TryParse(Console.ReadLine(), out chargingTime);
+
+                        try
+                        {
+                            blObject.ReleaseDroneFromCharging(droneId, chargingTime);
 
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.ToString());
-                            throw;
                         }
                         break;
                     }

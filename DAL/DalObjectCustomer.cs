@@ -38,6 +38,47 @@ namespace DalObject
             }
         }
 
+        //This function updates a customer with a new name.
+        public void UpdateCustomerName(int id, string newName)
+        {
+            try
+            {
+                int index = DataSource.Customers.FindIndex(x => x.Id == id);
+                if (DataSource.Customers.FindIndex(x => x.Id == id) == -1)
+                {
+                    throw new IdIsNotExistException(id, "Station");
+                }
+                IDAL.DO.Customer c = DataSource.Customers[index];
+                c.Name = newName;
+                DataSource.Customers[index] = c;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //This function updates a customer with a new name.
+        public void UpdateCustomrePhoneNumber(int id, string newPhoneNumber)
+        {
+            try
+            {
+                int index = DataSource.Customers.FindIndex(x => x.Id == id);
+                if (DataSource.Customers.FindIndex(x => x.Id == id) == -1)
+                {
+                    throw new IdIsNotExistException(id, "Station");
+                }
+                IDAL.DO.Customer c = DataSource.Customers[index];
+                c.Phone = newPhoneNumber;
+                DataSource.Customers[index] = c;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
         //This function returns a copy of the customers list.
         public IEnumerable<IDAL.DO.Customer> ViewCustomersList()
         {

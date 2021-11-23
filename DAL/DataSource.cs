@@ -114,8 +114,6 @@ namespace DalObject
                     Id = i,
                     Model = "",
                     MaxWeight = maxWeight,
-                    Status = IDAL.DO.DroneStatuses.Shipping,
-                    Battery = battery
                 });
             }
             for (int i = 5 - shippedParcels; i > 0; i--) // the other drones which are'nt on shipping mode.
@@ -128,8 +126,6 @@ namespace DalObject
                     Id = shippedParcels + i,
                     Model = "",
                     MaxWeight = maxWeight,
-                    Status = status,
-                    Battery = battery
                 });
             }
         }
