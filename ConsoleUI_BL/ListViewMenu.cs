@@ -29,43 +29,97 @@ namespace ConsoleUI_BL
             {
                 case ListView.ViewStationsList:
                     {
-                        //printList<IDAL.DO.Station>(
-                        //    (System.Collections.Generic.List<IDAL.DO.Station>)blObject.ViewStationsList());
+                        try
+                        {
+                            printList<IDAL.DO.Station>(
+                               (System.Collections.Generic.List<IDAL.DO.Station>)blObject.ViewStationsList());
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }
                         break;
                     }
 
                 case ListView.ViewDronesList:
                     {
-                        //printList<IDAL.DO.Drone>(
-                        //    (System.Collections.Generic.List<IDAL.DO.Drone>)blObject.ViewDronesList());
+                        try
+                        {
+                            printList<IDAL.DO.Drone>(
+                                (System.Collections.Generic.List<IDAL.DO.Drone>)blObject.ViewDronesList());
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }
                         break;
                     }
 
                 case ListView.ViewCustomersList:
                     {
-                        //printList<IDAL.DO.Customer>(
-                        //    (System.Collections.Generic.List<IDAL.DO.Customer>)blObject.ViewCustomersList());
+                        try
+                        {
+                            printList<IDAL.DO.Customer>(
+                                (System.Collections.Generic.List<IDAL.DO.Customer>)blObject.ViewCustomersList());
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }
                         break;
                     }
 
                 case ListView.ViewParcelsList:
                     {
-                        //printList<IDAL.DO.Parcel>(
-                        //    (System.Collections.Generic.List<IDAL.DO.Parcel>)blObject.ViewParcelsList());
+                        try
+                        {
+                            printList<IDAL.DO.Parcel>(
+                                (System.Collections.Generic.List<IDAL.DO.Parcel>)blObject.ViewParcelsList());
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }
                         break;
                     }
 
                 case ListView.ViewUnbindParcels:
                     {
-                        //printList<IDAL.DO.Parcel>(
-                        //    (System.Collections.Generic.List<IDAL.DO.Parcel>)blObject.ViewUnbindParcels());
+                        try
+                        {
+                            printList<IDAL.DO.Parcel>(
+                                (System.Collections.Generic.List<IDAL.DO.Parcel>)blObject.ViewUnbindParcels());
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }
                         break;
                     }
 
                 case ListView.ViewStationsWithFreeChargeSlots:
                     {
-                        //printList<IDAL.DO.Station>(
-                        //    (System.Collections.Generic.List<IDAL.DO.Station>)blObject.ViewStationsWithFreeChargeSlots());
+                        try
+                        {
+                            printList<IDAL.DO.Station>(
+                                (System.Collections.Generic.List<IDAL.DO.Station>)blObject.ViewStationsWithFreeChargeSlots());
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            throw;
+                        }
                         break;
                     }
 

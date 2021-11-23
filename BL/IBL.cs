@@ -12,6 +12,8 @@ namespace IBL
         public void AddDrone(int id, string model, string weight, int initialStation);
         public void AddCustomer(int id, string name, string phoneNumber);
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority);
+        public BO.Station ViewStation(int id);
+
         public void UpdateDrone(int id, string newModel);
         public void UpdateStation(int id, string newName, int newNum);
         public void UpdateCustomer(int id, string newName, string newPhoneNumber);

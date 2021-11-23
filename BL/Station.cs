@@ -8,13 +8,13 @@ namespace IBL
 {
     namespace BO
     {
-        class BaseStation
+        public class Station
         {
             public int Id { get; set; }
             public string Name { get; set; }
             public Location Location { get; set; }
             public int ChargeSlots { get; set; }
-            public List<BaseStation> ListOfDronesInCharge { get; set; }
+            public List<DroneForList> ListOfDronesInCharge { get; set; }
             public override string ToString()
             {
                 return $"Id: {Id}, Name: {Name}, Location: {Location}, Charge Slots: {ChargeSlots}, List Of Drones In Charge: {ListOfDronesInCharge}";

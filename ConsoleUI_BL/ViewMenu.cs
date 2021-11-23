@@ -32,6 +32,17 @@ namespace ConsoleUI_BL
                             int stationIndex;
                             Console.WriteLine("Enter Station id: ");
                             int.TryParse(Console.ReadLine(), out stationIndex);
+
+                            try
+                            {
+                                blObject.ViewStation(stationIndex);
+
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.ToString());
+                                throw;
+                            }
                             //Console.WriteLine(blObject.ViewStation(stationIndex).ToString());
                             break;
                         }
@@ -41,6 +52,17 @@ namespace ConsoleUI_BL
                             int droneIndex;
                             Console.WriteLine("Enter Drone id: ");
                             int.TryParse(Console.ReadLine(), out droneIndex);
+
+                            try
+                            {
+                                blObject.ViewDrone(droneIndex);
+
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.ToString());
+                                throw;
+                            }
                             //Console.WriteLine(blObject.ViewDrone(droneIndex));
                             break;
                         }
@@ -50,6 +72,17 @@ namespace ConsoleUI_BL
                             int customerIndex;
                             Console.WriteLine("Enter Customer id: ");
                             int.TryParse(Console.ReadLine(), out customerIndex);
+
+                            try
+                            {
+                                blObject.ViewCustomer(customerIndex);
+
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.ToString());
+                                throw;
+                            }
                             //Console.WriteLine(blObject.ViewCustomer(customerIndex));
                             break;
                         }
@@ -59,6 +92,17 @@ namespace ConsoleUI_BL
                             int parcelIndex;
                             Console.WriteLine("Enter Parcel id: ");
                             int.TryParse(Console.ReadLine(), out parcelIndex);
+
+                            try
+                            {
+                                blObject.ViewParcel(parcelIndex);
+
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.ToString());
+                                throw;
+                            }
                             //Console.WriteLine(blObject.ViewParcel(parcelIndex));
                             break;
                         }
