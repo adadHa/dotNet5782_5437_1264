@@ -31,14 +31,11 @@ namespace ConsoleUI_BL
                     {
                         try
                         {
-                            printList<IDAL.DO.Station>(
-                               (System.Collections.Generic.List<IDAL.DO.Station>)blObject.ViewStationsList());
-
+                            //Console.WriteLine(blObject.ViewStationsList());
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.ToString());
-                            throw;
                         }
                         break;
                     }
@@ -47,14 +44,11 @@ namespace ConsoleUI_BL
                     {
                         try
                         {
-                            printList<IDAL.DO.Drone>(
-                                (System.Collections.Generic.List<IDAL.DO.Drone>)blObject.ViewDronesList());
-
+                            //Console.WriteLine(blObject.ViewDronesList());
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.ToString());
-                            throw;
                         }
                         break;
                     }
@@ -63,14 +57,11 @@ namespace ConsoleUI_BL
                     {
                         try
                         {
-                            printList<IDAL.DO.Customer>(
-                                (System.Collections.Generic.List<IDAL.DO.Customer>)blObject.ViewCustomersList());
-
+                            //Console.WriteLine(blObject.ViewCustomersList());
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.ToString());
-                            throw;
                         }
                         break;
                     }
@@ -79,14 +70,11 @@ namespace ConsoleUI_BL
                     {
                         try
                         {
-                            printList<IDAL.DO.Parcel>(
-                                (System.Collections.Generic.List<IDAL.DO.Parcel>)blObject.ViewParcelsList());
-
+                            //Console.WriteLine(blObject.ViewParcelsList());
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.ToString());
-                            throw;
                         }
                         break;
                     }
@@ -95,14 +83,11 @@ namespace ConsoleUI_BL
                     {
                         try
                         {
-                            printList<IDAL.DO.Parcel>(
-                                (System.Collections.Generic.List<IDAL.DO.Parcel>)blObject.ViewUnbindParcels());
-
+                            //Console.WriteLine(blObject.ViewUnbinedParcels());
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.ToString());
-                            throw;
                         }
                         break;
                     }
@@ -111,14 +96,11 @@ namespace ConsoleUI_BL
                     {
                         try
                         {
-                            printList<IDAL.DO.Station>(
-                                (System.Collections.Generic.List<IDAL.DO.Station>)blObject.ViewStationsWithFreeChargeSlots());
-
+                            //Console.WriteLine(blObject.ViewStationsWithFreeChargeSlots());
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.ToString());
-                            throw;
                         }
                         break;
                     }

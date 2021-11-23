@@ -35,13 +35,12 @@ namespace ConsoleUI_BL
 
                             try
                             {
-                                blObject.ViewStation(stationIndex);
+                                Console.WriteLine(blObject.ViewStation(stationIndex).ToString());
 
                             }
                             catch (Exception e)
                             {
                                 Console.WriteLine(e.ToString());
-                                throw;
                             }
                             //Console.WriteLine(blObject.ViewStation(stationIndex).ToString());
                             break;
@@ -55,13 +54,12 @@ namespace ConsoleUI_BL
 
                             try
                             {
-                                blObject.ViewDrone(droneIndex);
+                                //blObject.ViewDrone(droneIndex);
 
                             }
                             catch (Exception e)
                             {
                                 Console.WriteLine(e.ToString());
-                                throw;
                             }
                             //Console.WriteLine(blObject.ViewDrone(droneIndex));
                             break;
@@ -75,13 +73,12 @@ namespace ConsoleUI_BL
 
                             try
                             {
-                                blObject.ViewCustomer(customerIndex);
+                                //blObject.ViewCustomer(customerIndex);
 
                             }
                             catch (Exception e)
                             {
                                 Console.WriteLine(e.ToString());
-                                throw;
                             }
                             //Console.WriteLine(blObject.ViewCustomer(customerIndex));
                             break;
@@ -95,15 +92,13 @@ namespace ConsoleUI_BL
 
                             try
                             {
-                                blObject.ViewParcel(parcelIndex);
+                                //Console.WriteLine(blObject.ViewParcel(parcelIndex));
 
                             }
                             catch (Exception e)
                             {
                                 Console.WriteLine(e.ToString());
-                                throw;
                             }
-                            //Console.WriteLine(blObject.ViewParcel(parcelIndex));
                             break;
                         }
 

@@ -71,7 +71,7 @@ namespace IBL
         internal class NotEnoughBatteryException : Exception
         {
             private DroneForList Drone;
-            private Station Station;
+            private IDAL.DO.Station Station;
             public NotEnoughBatteryException()
             {
             }

@@ -148,13 +148,12 @@ namespace ConsoleUI_BL
 
                         try
                         {
-                            blObject.BindParcelToDrone(parcelId, droneId);
+                           // blObject.BindParcelToDrone(parcelId, droneId);
 
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.ToString());
-                            throw;
                         }
                         break;
                     }
@@ -169,13 +168,12 @@ namespace ConsoleUI_BL
 
                         try
                         {
-                            blObject.CollectParcelByDrone(droneId);
+                            //blObject.CollectParcelByDrone(droneId);
 
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.ToString());
-                            throw;
                         }
                         break;
                     }
@@ -188,13 +186,12 @@ namespace ConsoleUI_BL
 
                         try
                         {
-                            blObject.SupplyParcelToCustomer(droneId);
+                            //blObject.SupplyParcelToCustomer(droneId);
 
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.ToString());
-                            throw;
                         }
                         break;
                     }

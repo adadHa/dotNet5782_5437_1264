@@ -41,6 +41,7 @@ namespace IDAL
         public IEnumerable<IDAL.DO.Drone> GetDrones(Func<IDAL.DO.Drone, bool> filter = null);
         public IEnumerable<IDAL.DO.Customer> GetCustomers(Func<IDAL.DO.Customer, bool> filter = null);
         public IEnumerable<IDAL.DO.Parcel> GetParcels(Func<IDAL.DO.Parcel, bool> filter = null);
+        public IEnumerable<IDAL.DO.DroneCharge> GetDroneCharges(Func<IDAL.DO.DroneCharge, bool> filter = null);
         public double[] ViewElectConsumptionData();
 
 

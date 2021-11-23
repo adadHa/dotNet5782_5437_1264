@@ -138,10 +138,6 @@ namespace BL
                 throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
         }
-        public Drone ViewDrone(int id)
-        {
-            return new Drone();
-        }
 
         // This functions returns the distanse between two locations.
         private double Distance(Location l1, Location l2)
