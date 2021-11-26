@@ -20,7 +20,8 @@ namespace IBL
         public void ReleaseDroneFromCharging(int id, double chargingTime);
         public string ViewStation(int id);
 
-        private BO.DroneForList GetDrone(int id); /// WHATT
+        public BO.DroneForList GetDrone(int id); /// WHATT
+        public IEnumerable<BO.DroneForList> GetDrones(Func<BO.DroneForList, bool> filter = null);
 
 
         ///public BO.Drone ViewDrone(int id);

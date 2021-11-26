@@ -34,11 +34,19 @@ namespace BL
         private void InitializeDrones()
         {
             List<IDAL.DO.Drone> dalDrones = (List<IDAL.DO.Drone>)dalObject.GetDrones();
-            foreach (IDAL.DO.Drone drone in dalDrones)
+            foreach (IDAL.DO.Drone dalDrone in dalDrones)
             {
-                if (dalObject.GetParcels(x => x.Delivered == null && x.DroneId == drone.Id).Count() == 1)
+                DroneForList newDrone = new DroneForList { Id = dalDrone.Id,
+                    Model = dalDrone.Model,
+                    MaxWeight = (IBL.BO.WheightCategories)dalDrone.MaxWeight };
+                if (dalObject.GetParcels(x => x.Delivered == null && x.DroneId == dalDrone.Id).Count() == 1)
                 {
-                    drone.
+                    IDAL.DO.Parcel p = dalObject.GetParcels(x => x.Delivered == null && x.DroneId == dalDrone.Id).ToList()[0];
+                    newDrone.Status = DroneStatuses.Shipping;
+                    if (p.PickedUp == null)
+                    {
+
+                    }
                 }
             }
         }
@@ -182,7 +190,7 @@ namespace BL
         }
 
         //This function returns a DroneForList from the datasource (on BL) by an index.
-        private DroneForList GetDrone(int id)
+        public DroneForList GetDrone(int id)
         {
             return BLDrones[GetDroneIndex(id)];
         }
