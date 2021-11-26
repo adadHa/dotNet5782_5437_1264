@@ -25,7 +25,6 @@ namespace DalObject
                 {
                     throw new IdIsNotExistException(responsibleDrone, "Responsible drone");
                 }
-                DateTime d = new DateTime();
                 DataSource.Parcels.Add(new IDAL.DO.Parcel()
                 {
                     Id = DataSource.Parcels.Count,
@@ -35,9 +34,9 @@ namespace DalObject
                     Priority = (IDAL.DO.Priorities)Enum.Parse(typeof(IDAL.DO.Priorities), priority),
                     DroneId = responsibleDrone,
                     Requested = DateTime.Now,
-                    Scheduled = d,
-                    PickedUp = d,
-                    Delivered = d
+                    Scheduled = null,
+                    PickedUp = null,
+                    Delivered = null
                 });
             }
             catch (Exception)
@@ -136,11 +135,10 @@ namespace DalObject
         public IEnumerable<IDAL.DO.Parcel> ViewUnbindParcels()
         {
             // create the result list
-            DateTime defaultDateTime = new DateTime();
             List<IDAL.DO.Parcel> resultList = new List<IDAL.DO.Parcel>();
             foreach (IDAL.DO.Parcel parcel in DataSource.Parcels)
             {
-                if (parcel.Scheduled != defaultDateTime)
+                if (parcel.Scheduled != null)
                 {
                     IDAL.DO.Parcel p = new IDAL.DO.Parcel();
                     p = parcel;
@@ -170,7 +168,7 @@ namespace DalObject
         //This function returns a filtered copy of the Parcels list (according to a given predicate)
         public IEnumerable<IDAL.DO.Parcel> GetParcels(Func<IDAL.DO.Parcel, bool> filter = null)
         {
-            return DataSource.Parcels.Where(filter);
+            return DataSource.Parcels.Where(filter).ToList();
         }
 
     }

@@ -10,6 +10,39 @@ namespace BL
 {
     public partial class BL : IBL.IBL
     {
+        private IDAL.IDal dalObject;
+        private List<IBL.BO.DroneForList> BLDrones = new List<IBL.BO.DroneForList>();
+        public double availableDrElectConsumption;
+        public double lightDrElectConsumption;
+        public double mediumDrElectConsumption;
+        public double heavyDrElectConsumption;
+        public double chargingRate;
+        static Random rand = new Random();
+
+        public BL()
+        {
+            dalObject = new DalObject.DalObject();
+            double[] arr = dalObject.ViewElectConsumptionData();
+            availableDrElectConsumption = arr[0];
+            lightDrElectConsumption = arr[1];
+            mediumDrElectConsumption = arr[2];
+            heavyDrElectConsumption = arr[3];
+            chargingRate = arr[4];
+            InitializeDrones();
+        }
+
+        private void InitializeDrones()
+        {
+            List<IDAL.DO.Drone> dalDrones = (List<IDAL.DO.Drone>)dalObject.GetDrones();
+            foreach (IDAL.DO.Drone drone in dalDrones)
+            {
+                if (dalObject.GetParcels(x => x.Delivered == null && x.DroneId == drone.Id).Count() == 1)
+                {
+                    drone.
+                }
+            }
+        }
+
         public enum ElecConsumption // used in ChargeDrone function
         {
             availableDrElectConsumption,
@@ -174,7 +207,7 @@ namespace BL
 
         public IEnumerable<DroneForList> GetDrones(Func<DroneForList, bool> filter = null)
         {
-            return BLDrones.Where(filter);
+            return BLDrones.Where(filter).ToList();
         }
     }
 

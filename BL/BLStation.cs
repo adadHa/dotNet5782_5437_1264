@@ -4,20 +4,7 @@ namespace BL
 {
     public partial class BL : IBL.IBL
     {
-        private IDAL.IDal dalObject;
-        private List<IBL.BO.DroneForList> BLDrones = new List<IBL.BO.DroneForList>();
-        public double availableDrElectConsumption;
-        public double lightDrElectConsumption;
-        public double mediumDrElectConsumption;
-        public double heavyDrElectConsumption;
-        public double chargingRate;
-        static Random rand = new Random();
-
-        public BL()
-        {
-            dalObject = new DalObject.DalObject();
-        }
-
+        
         //this function adds a station to the database
         public void AddStation(int id, string name, int freeChargingSlots, IBL.BO.Location location)
         {
@@ -91,12 +78,7 @@ namespace BL
 /*public BL()
        {
            IDal.IDal dalObject = new DalObject.DalObject();
-           double[] arr = dalObject.ViewElectConsumptionData();
-           availableDrElectConsumption = arr[0];
-           lightDrElectConsumption = arr[1];
-           mediumDrElectConsumption = arr[2];
-           heavyDrElectConsumption = arr[3];
-           chargingRate = arr[4];
+           
 
            BLDrones = (List<Drone>)dalObject.ViewDronesList();
            List<StationForList> stations = (List<StationForList>)dalObject.ViewStationsList();

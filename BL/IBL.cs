@@ -19,6 +19,10 @@ namespace IBL
         public void ChargeDrone(int id);
         public void ReleaseDroneFromCharging(int id, double chargingTime);
         public string ViewStation(int id);
+
+        private BO.DroneForList GetDrone(int id); /// WHATT
+
+
         ///public BO.Drone ViewDrone(int id);
         //public string ViewStations();
         //public string ViewDrones(int id);

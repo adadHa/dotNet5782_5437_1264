@@ -56,7 +56,6 @@ namespace DalObject
             {
                 IDAL.DO.WheightCategories wheight = (IDAL.DO.WheightCategories)rand.Next(0, 3);
                 IDAL.DO.Priorities priority = (IDAL.DO.Priorities)rand.Next(0, 3);
-                DateTime defaultDate = new DateTime();
                 Parcels.Add(new IDAL.DO.Parcel()
                 {
                     Id = i,
@@ -66,9 +65,9 @@ namespace DalObject
                     Priority = priority,
                     DroneId = i,
                     Requested = DateTime.Now,
-                    Scheduled = defaultDate,
-                    PickedUp = defaultDate,
-                    Delivered = defaultDate
+                    Scheduled = null,
+                    PickedUp = null,
+                    Delivered = null
                 });
             }
             //initialize waiting parcels
@@ -76,7 +75,6 @@ namespace DalObject
             {
                 IDAL.DO.WheightCategories wheight = (IDAL.DO.WheightCategories)rand.Next(0, 3);
                 IDAL.DO.Priorities priority = (IDAL.DO.Priorities)rand.Next(0, 3);
-                DateTime defaultDate = new DateTime();
                 Parcels.Add(new IDAL.DO.Parcel()
                 {
                     Id = shippedParcels + i,
@@ -86,9 +84,9 @@ namespace DalObject
                     Priority = priority,
                     DroneId = 0,
                     Requested = DateTime.Now,
-                    Scheduled = defaultDate,
-                    PickedUp = defaultDate,
-                    Delivered = defaultDate
+                    Scheduled = null,
+                    PickedUp = null,
+                    Delivered = null
                 });
             }
             //initialize stations

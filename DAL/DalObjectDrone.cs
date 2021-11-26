@@ -135,7 +135,7 @@ namespace DalObject
         //This function returns a filtered copy of the drones list (according to given predicate)
         public IEnumerable<IDAL.DO.Drone> GetDrones(Func<IDAL.DO.Drone, bool> filter = null)
         {
-            return DataSource.Drones.Where(filter); 
+            return DataSource.Drones.Where(filter).ToList(); 
         }
 
         public double[] ViewElectConsumptionData()

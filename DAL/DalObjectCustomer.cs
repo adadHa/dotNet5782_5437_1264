@@ -110,7 +110,7 @@ namespace DalObject
         //This function returns a filtered copy of the Customers list (according to a given predicate)
         public IEnumerable<IDAL.DO.Customer> GetCustomers(Func<IDAL.DO.Customer, bool> filter = null)
         {
-            return DataSource.Customers.Where(filter);
+            return DataSource.Customers.Where(filter).ToList();
         }
     }
 }
