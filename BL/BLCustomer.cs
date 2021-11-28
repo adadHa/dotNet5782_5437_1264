@@ -39,5 +39,16 @@ namespace BL
                 throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
         }
+
+        public string ViewCustomer(int id)
+        {
+            return GetCustomer(id).ToString();
+        }
+
+        private IBL.BO.Customer GetCustomer(int id)
+        {
+
+        }
+
     }
 }

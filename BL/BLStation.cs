@@ -48,6 +48,10 @@ namespace BL
 
         public string ViewStation(int id)
         {
+            return GetStation(id).ToString();
+        }
+        private IBL.BO.Station GetStation(int id)
+        {
             try
             {
                 List<IDAL.DO.DroneCharge> l = (List<IDAL.DO.DroneCharge>)dalObject.GetDroneCharges(x => x.StationId == id);
@@ -66,13 +70,31 @@ namespace BL
                     ChargeSlots = station.ChargeSlots,
                     ListOfDronesInCharge = listOfDronesInCharge
                 };
-                return resultStation.ToString();
+                return resultStation;
             }
             catch (DalObject.IdIsNotExistException e)
             {
                 throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
         }
+
+        public string ViewStations()
+        {
+            return GetStations().ToString();
+        }
+
+        private IEnumerable<IBL.BO.StationForList> GetStations()
+        {
+            List<IDAL.DO.Station> dalStations = dalObject.GetStations().ToList();
+            List<IBL.BO.StationForList> resultList = new List<IBL.BO.StationForList>;
+            foreach (IDAL.DO.Station station in dalStations)
+            {
+                resultList.
+
+            }
+            
+        }
+
     }
 }
 /*public BL()
@@ -99,5 +121,4 @@ namespace BL
                    }
                }
            }
-         }
-          */
+         }          */

@@ -21,5 +21,17 @@ namespace BL
                 throw new IBL.BO.IdIsAlreadyExistException(e.ToString());
             }
         }
+
+        public string ViewParcel(int id)
+        {
+
+        }
+
+        private IBL.BO.Parcel GetParcel(int id)
+        {
+
+        }
+            
+
     }
 }

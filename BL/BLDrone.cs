@@ -45,7 +45,7 @@ namespace BL
                     newDrone.Status = DroneStatuses.Shipping;
                     if (p.PickedUp == null)
                     {
-
+                        
                     }
                 }
             }
@@ -189,8 +189,13 @@ namespace BL
             return Math.Sqrt(a + b); // dis = sqrt(a - b)
         }
 
+        public string ViewDrone(int id)
+        {
+            return GetDrone(id).ToString();
+        }
+
         //This function returns a DroneForList from the datasource (on BL) by an index.
-        public DroneForList GetDrone(int id)
+        private DroneForList GetDrone(int id)
         {
             return BLDrones[GetDroneIndex(id)];
         }

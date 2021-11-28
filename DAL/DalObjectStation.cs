@@ -106,7 +106,7 @@ namespace DalObject
         //This function returns a filtered copy of the Stations list (according to a given predicate)
         public IEnumerable<IDAL.DO.Station> GetStations(Func<IDAL.DO.Station, bool> filter = null)
         {
-            return DataSource.Stations.Where(filter);
+            return DataSource.Stations.Where(filter).ToList();
         }
 
         //This function returns a filtered copy of the Drone Charges list (according to a given predicate)
