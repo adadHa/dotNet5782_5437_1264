@@ -168,7 +168,11 @@ namespace DalObject
         //This function returns a filtered copy of the Parcels list (according to a given predicate)
         public IEnumerable<IDAL.DO.Parcel> GetParcels(Func<IDAL.DO.Parcel, bool> filter = null)
         {
-            return DataSource.Parcels.Where(filter).ToList();
+            if (filter == null)
+            {
+                return DataSource.Parcels;
+            }
+            return DataSource.Parcels.Where(filter);
         }
 
     }

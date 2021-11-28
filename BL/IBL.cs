@@ -33,11 +33,11 @@ namespace IBL
         //private IEnumerable<BO.ParcelForList> GetParcels();
 
 
-        public string ViewStations();
-        public string ViewDrones();
-        public string ViewCustomers();
-        public string ViewParcels();
-        public string ViewUnbinedParcels();
+        public string ViewStationsList();
+        public string ViewDronesList();
+        public string ViewCustomersList();
+        /*public string ViewParcelsList();
+        public string ViewUnbinedParcelsList();*/
 
     }
 }

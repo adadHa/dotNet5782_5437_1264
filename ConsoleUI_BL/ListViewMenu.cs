@@ -31,7 +31,7 @@ namespace ConsoleUI_BL
                     {
                         try
                         {
-                            //Console.WriteLine(blObject.ViewStationsList());
+                            Console.WriteLine(blObject.ViewStationsList());
                         }
                         catch (Exception e)
                         {
@@ -57,7 +57,7 @@ namespace ConsoleUI_BL
                     {
                         try
                         {
-                            //Console.WriteLine(blObject.ViewCustomersList());
+                            Console.WriteLine(blObject.ViewCustomersList());
                         }
                         catch (Exception e)
                         {

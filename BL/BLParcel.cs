@@ -11,6 +11,7 @@ namespace BL
         //this function adds a parcel to the database
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority)
         {
+
             try
             {
                 dalObject.AddParcel(customerSenderId, customerReceiverId, weight, priority, 0);
@@ -24,12 +25,12 @@ namespace BL
 
         public string ViewParcel(int id)
         {
-
+            return null;
         }
 
         private IBL.BO.Parcel GetParcel(int id)
         {
-
+            return null;
         }
             
 

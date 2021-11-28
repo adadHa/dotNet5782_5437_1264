@@ -88,7 +88,7 @@ namespace ConsoleUI
                                         Console.Write("Enter Drone Status: ");
                                         string droneStatus = Console.ReadLine();
 
-                                        dalObject.AddDrone(id, model, weight, batteryStatus, droneStatus);
+                                        //dalObject.AddDrone(id, model, weight, batteryStatus, droneStatus);
                                         break;
                                     }
 
