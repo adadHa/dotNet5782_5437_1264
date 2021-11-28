@@ -31,6 +31,7 @@ namespace BL
             InitializeDrones();
         }
 
+        //this functions initialize the drones
         private void InitializeDrones()
         {
             List<IDAL.DO.Drone> dalDrones = (List<IDAL.DO.Drone>)dalObject.GetDrones();
@@ -92,6 +93,7 @@ namespace BL
                 throw new IBL.BO.NoChargeSlotsException(e.ToString());
             }
         }
+        //this function updates the drone
         public void UpdateDrone(int id, string newModel)
         {
             try
@@ -103,6 +105,7 @@ namespace BL
                 throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
         }
+        //this fuction charge a drone who needs to be charged
         public void ChargeDrone(int id)
         {
             try
@@ -157,6 +160,7 @@ namespace BL
                 throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
         }
+        //this function release a drone from charge and updates his baterry status after the charge
         public void ReleaseDroneFromCharging(int id, double chargingTime)
         {
             try
@@ -189,6 +193,7 @@ namespace BL
             return Math.Sqrt(a + b); // dis = sqrt(a - b)
         }
 
+        //this function view the drones details
         public string ViewDrone(int id)
         {
             return GetDrone(id).ToString();

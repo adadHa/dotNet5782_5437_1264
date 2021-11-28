@@ -38,6 +38,5 @@ namespace IBL
         public string ViewCustomers();
         public string ViewParcels();
         public string ViewUnbinedParcels();
-
     }
 }
