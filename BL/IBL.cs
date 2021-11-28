@@ -36,8 +36,8 @@ namespace IBL
         public string ViewStationsList();
         public string ViewDronesList();
         public string ViewCustomersList();
-        /*public string ViewParcelsList();
-        public string ViewUnbinedParcelsList();*/
+        public string ViewParcelsList();
+        public string ViewUnbinedParcelsList();
 
     }
 }

@@ -8,7 +8,7 @@ namespace ConsoleUI_BL
 {
     partial class Program
     {
-        enum ListView { Exit, ViewStationsList, ViewDronesList, ViewCustomersList, ViewParcelsList, ViewUnbindParcels, ViewStationsWithFreeChargeSlots };
+        enum ListView { Exit, ViewStationsList, ViewDronesList, ViewCustomersList, ViewParcelsList, ViewUnbindParcelsList, ViewStationsWithFreeChargeSlots };
         static void ListViewMenu(IBL.IBL blObject)
         {
             ListView listViewOption = 0;
@@ -70,7 +70,7 @@ namespace ConsoleUI_BL
                     {
                         try
                         {
-                            //Console.WriteLine(blObject.ViewParcelsList());
+                            Console.WriteLine(blObject.ViewParcelsList());
                         }
                         catch (Exception e)
                         {
@@ -79,11 +79,11 @@ namespace ConsoleUI_BL
                         break;
                     }
 
-                case ListView.ViewUnbindParcels:
+                case ListView.ViewUnbindParcelsList:
                     {
                         try
                         {
-                            //Console.WriteLine(blObject.ViewUnbinedParcels());
+                            Console.WriteLine(blObject.ViewUnbinedParcelsList());
                         }
                         catch (Exception e)
                         {

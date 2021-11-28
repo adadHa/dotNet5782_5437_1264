@@ -21,7 +21,7 @@ namespace DalObject
                 {
                     throw new IdIsNotExistException(customerReceiverId, "Receiver");
                 }
-                if (responsibleDrone != 0 && DataSource.Drones.FindIndex(x => x.Id == responsibleDrone) == -1)
+                if (responsibleDrone != -1 && DataSource.Drones.FindIndex(x => x.Id == responsibleDrone) == -1)
                 {
                     throw new IdIsNotExistException(responsibleDrone, "Responsible drone");
                 }

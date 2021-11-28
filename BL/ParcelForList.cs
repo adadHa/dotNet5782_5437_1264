@@ -11,14 +11,14 @@ namespace IBL
         public class ParcelForList
         {
             public int Id { get; set; }
-            public string NameSender { get; set; }
-            public string NameReceiver { get; set; }
+            public string SenderName { get; set; }
+            public string ReceiverName { get; set; }
             public WheightCategories MaxWeight { get; set; }
             public Priorities Priority { get; set; }
-            public Statuses StatusPrcel { get; set; }
+            public Statuses ParcelStatus { get; set; }
             public override string ToString()
             {
-                return $"Id: {Id}, Name Sender: {NameSender}, Name Receiver: {NameReceiver}, Max Weight: {MaxWeight}, Priority: {Priority}, Status Prcel: {StatusPrcel}";
+                return $"Id: {Id}, Sender Name: {SenderName}, Receiver Name: {ReceiverName}, Max Weight: {MaxWeight}, Priority: {Priority}, Status Prcel: {ParcelStatus}";
             }
         } 
     }
