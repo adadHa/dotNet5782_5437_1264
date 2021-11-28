@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 namespace BL
 {
     public partial class BL : IBL.IBL
     {
-        
+
         //this function adds a station to the database
         public void AddStation(int id, string name, int freeChargingSlots, IBL.BO.Location location)
         {
+
             try
             {
                 dalObject.AddStation(id, name, freeChargingSlots, location.Longitude, location.Latitude);
@@ -81,19 +83,33 @@ namespace BL
         //this function view the station details
         public string ViewStations()
         {
-            return GetStations().ToString();
+            string result = "";
+            foreach (var item in GetStations())
+            {
+                result += item.ToString() + "\n";
+            }
+            return result;
         }
 
         private IEnumerable<IBL.BO.StationForList> GetStations()
         {
             List<IDAL.DO.Station> dalStations = dalObject.GetStations().ToList();
-            List<IBL.BO.StationForList> resultList = new List<IBL.BO.StationForList>;
+            List<IBL.BO.StationForList> resultList = new List<IBL.BO.StationForList>();
+            int availableChargingSlots = 0, occupiedChargingSlots = 0;
             foreach (IDAL.DO.Station station in dalStations)
             {
-                resultList.
+                occupiedChargingSlots = dalObject.GetDroneCharges(x => x.StationId == station.Id).Count();
+                availableChargingSlots = station.ChargeSlots - occupiedChargingSlots;
+                resultList.Add(new IBL.BO.StationForList
+                {
+                    Id = station.Id,
+                    Name = station.Name,
+                    AvailableChargingSlots = availableChargingSlots,
+                    OccupiedChargingSlots = occupiedChargingSlots
+                });
 
             }
-            
+            return resultList;
         }
 
     }

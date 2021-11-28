@@ -29,24 +29,30 @@ namespace BL
             heavyDrElectConsumption = arr[3];
             chargingRate = arr[4];
             InitializeDrones();
+
         }
 
         //this functions initialize the drones
         private void InitializeDrones()
         {
+
             List<IDAL.DO.Drone> dalDrones = (List<IDAL.DO.Drone>)dalObject.GetDrones();
             foreach (IDAL.DO.Drone dalDrone in dalDrones)
             {
-                DroneForList newDrone = new DroneForList { Id = dalDrone.Id,
+                DroneForList newDrone = new DroneForList
+                {
+                    Id = dalDrone.Id,
                     Model = dalDrone.Model,
-                    MaxWeight = (IBL.BO.WheightCategories)dalDrone.MaxWeight };
+                    MaxWeight = (IBL.BO.WheightCategories)dalDrone.MaxWeight
+                };
                 if (dalObject.GetParcels(x => x.Delivered == null && x.DroneId == dalDrone.Id).Count() == 1)
                 {
                     IDAL.DO.Parcel p = dalObject.GetParcels(x => x.Delivered == null && x.DroneId == dalDrone.Id).ToList()[0];
+
                     newDrone.Status = DroneStatuses.Shipping;
                     if (p.PickedUp == null)
                     {
-                        
+
                     }
                 }
             }
@@ -63,6 +69,7 @@ namespace BL
         //this function adds a drone to the database
         public void AddDrone(int id, string model, string weight, int initialStationId)
         {
+
             try
             {
                 double batteryStatus = rand.NextDouble() * rand.Next(20, 41);
@@ -96,6 +103,7 @@ namespace BL
         //this function updates the drone
         public void UpdateDrone(int id, string newModel)
         {
+
             try
             {
                 dalObject.UpdateDrone(id, newModel);
@@ -163,6 +171,7 @@ namespace BL
         //this function release a drone from charge and updates his baterry status after the charge
         public void ReleaseDroneFromCharging(int id, double chargingTime)
         {
+
             try
             {
                 DroneForList d = GetDrone(id);
@@ -221,6 +230,16 @@ namespace BL
             {
                 throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
+        }
+
+        public string ViewDronesList()
+        {
+            string result = "";
+            foreach (var item in GetDrones())
+            {
+                result += item.ToString() + "\n";
+            }
+            return result;
         }
 
         public IEnumerable<DroneForList> GetDrones(Func<DroneForList, bool> filter = null)

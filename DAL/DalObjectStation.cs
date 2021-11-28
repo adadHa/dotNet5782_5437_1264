@@ -106,13 +106,21 @@ namespace DalObject
         //This function returns a filtered copy of the Stations list (according to a given predicate)
         public IEnumerable<IDAL.DO.Station> GetStations(Func<IDAL.DO.Station, bool> filter = null)
         {
-            return DataSource.Stations.Where(filter).ToList();
+            if (filter == null)
+            {
+                return DataSource.Stations;
+            }
+            return DataSource.Stations.Where(filter);
         }
 
         //This function returns a filtered copy of the Drone Charges list (according to a given predicate)
         public IEnumerable<IDAL.DO.DroneCharge> GetDroneCharges(Func<IDAL.DO.DroneCharge, bool> filter = null)
         {
-            return DataSource.DroneCharges.Where(filter).ToList();
+            if (filter == null)
+            {
+                return DataSource.DroneCharges;
+            }
+            return DataSource.DroneCharges.Where(filter);
         }
 
         public IEnumerable<IDAL.DO.Station> ViewStationsWithFreeChargeSlots()
