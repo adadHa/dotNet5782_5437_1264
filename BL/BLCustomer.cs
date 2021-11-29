@@ -21,6 +21,7 @@ namespace BL
                 throw new IBL.BO.IdIsAlreadyExistException(e.ToString());
             }
         }
+        //this function updates the customer
         public void UpdateCustomer(int id, string newName, string newPhoneNumber)
         {
             try
@@ -39,12 +40,12 @@ namespace BL
                 throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
         }
-
+        //this function view the customer details
         public string ViewCustomer(int id)
         {
             return GetCustomer(id).ToString();
         }
-
+        //This function returns a CustomerForList from the datasource (on BL) by an index.
         private IBL.BO.Customer GetCustomer(int id)
         {
             return null;

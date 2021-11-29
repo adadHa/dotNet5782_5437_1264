@@ -22,11 +22,12 @@ namespace BL
                 throw new IBL.BO.IdIsAlreadyExistException(e.ToString());
             }
         }
-
+        //this function view the parcel details
         public string ViewParcel(int id)
         {
             return null;
         }
+        //This function returns a ParcelForList from the datasource (on BL) by an index.
 
         private IBL.BO.Parcel GetParcel(int id)
         {

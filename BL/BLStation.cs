@@ -47,11 +47,12 @@ namespace BL
                 throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
         }
-
+        //this function view the station details
         public string ViewStation(int id)
         {
             return GetStation(id).ToString();
         }
+        //This function returns a StationForList from the datasource (on BL) by an index.
         private IBL.BO.Station GetStation(int id)
         {
             try
@@ -79,8 +80,8 @@ namespace BL
                 throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
         }
-
-        public string ViewStationsList()
+        //this function view the station details
+        public string ViewStations()
         {
             string result = "";
             foreach (var item in GetStations())
