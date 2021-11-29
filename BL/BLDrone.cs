@@ -339,15 +339,31 @@ namespace BL
             else return false;
         }
 
-        //This function collects a parcel by its shipping drone;
+        //This function collects a parcel by its shipping drone
         public void CollectParcelByDrone(int id)
         {
-            DroneForList drone = BLDrones[GetBLDroneIndex(id)];
-            IDAL.DO.Parcel parcel = dalObject.GetParcels(p => p.DroneId == id).ToList()[0];
-            if (drone.Status != DroneStatuses.Shipping || parcel.PickedUp != null)
-                throw new DroneCannotCollectParcelException(drone, parcel);
-            dalObject.CollectParcelByDrone(parcel.Id);
+            try
+            {
+                DroneForList drone = BLDrones[GetBLDroneIndex(id)];
+                if (drone.Status != DroneStatuses.Shipping)
+                    throw new DroneCannotCollectParcelException(drone);
+                IDAL.DO.Parcel parcel = dalObject.GetParcels(p => p.DroneId == id).ToList()[0];
+                if(parcel.PickedUp != null)
+                    throw new DroneCannotCollectParcelException(drone, parcel);
+                IDAL.DO.Customer sender = dalObject.GetCustomer(parcel.SenderId);
+                dalObject.CollectParcelByDrone(id, parcel.Id);
 
+                // update battery and location
+                Location senderLocation = new Location { Latitude = sender.Latitude, Longitude = sender.Longitude };
+                double consumption = Distance(drone.Location, senderLocation) * getConsumptionRate(drone.MaxWeight);
+                drone.Battery -= consumption;
+                drone.Location = senderLocation;
+                BLDrones[GetBLDroneIndex(id)] = drone;
+            }
+            catch (DalObject.IdIsNotExistException e)
+            {
+                throw new IdIsNotExistException(e.ToString());
+            }
         }
 
 

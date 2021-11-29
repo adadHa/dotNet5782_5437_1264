@@ -75,7 +75,7 @@ namespace DalObject
         }
 
         //This function collects a parcel by a drone (Its status was already changed to "shipping" on the bind function).
-        public void CollectParcelByDrone(int parcelId)
+        public void CollectParcelByDrone(int droneId, int parcelId)
         {
             try
             {

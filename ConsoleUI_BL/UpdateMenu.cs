@@ -158,7 +158,7 @@ namespace ConsoleUI_BL
                 case UpdateOptions.CollectParcelByDrone:
                     {
                         int droneId;
-                        Console.WriteLine("Enter parcel id:");
+                        Console.WriteLine("Enter drone id:");
                         int.TryParse(Console.ReadLine(), out droneId);
 
                         try

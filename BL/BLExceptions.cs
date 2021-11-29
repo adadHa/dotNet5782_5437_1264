@@ -262,7 +262,7 @@ namespace IBL
         internal class DroneCannotCollectParcelException : Exception
         {
             private DroneForList drone;
-            private IDAL.DO.Parcel parcel;
+            private IDAL.DO.Parcel? parcel;
 
             public DroneCannotCollectParcelException()
             {
@@ -271,8 +271,7 @@ namespace IBL
             public DroneCannotCollectParcelException(string message) : base(message)
             {
             }
-
-            public DroneCannotCollectParcelException(DroneForList drone, IDAL.DO.Parcel parcel)
+            public DroneCannotCollectParcelException(DroneForList drone, IDAL.DO.Parcel? parcel = null)
             {
                 this.drone = drone;
                 this.parcel = parcel;
@@ -290,8 +289,8 @@ namespace IBL
             {
                 if (drone.Status != DroneStatuses.Shipping)
                     return $"Drone {drone.Id} is not shipping any parcel right now.";
-                else if (parcel.PickedUp != null)
-                    return $"Drone {drone.Id} already picked up its parcel";
+                else if (parcel != null && parcel.Value.PickedUp != null)
+                    return $"Parcel {parcel.Value.Id} was already picked up by drone {drone.Id}";
                 return null;
             }
         }
