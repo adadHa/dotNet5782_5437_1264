@@ -61,7 +61,7 @@ namespace BL
                 List<IBL.BO.DroneForList> listOfDronesInCharge = new List<IBL.BO.DroneForList>();
                 foreach (IDAL.DO.DroneCharge droneCharge in l)
                 {
-                    listOfDronesInCharge.Add(GetDrone(droneCharge.DroneId));
+                    listOfDronesInCharge.Add(BLDrones[GetBLDroneIndex(droneCharge.DroneId)]);
                 }
 
                 IDAL.DO.Station station = dalObject.GetStation(id);
