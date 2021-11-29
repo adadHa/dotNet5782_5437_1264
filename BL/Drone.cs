@@ -16,9 +16,10 @@ namespace IBL
             public DroneStatuses Status { get; set; }
             public double Battery { get; set; }
             public Location Location { get; set; }
+            public ParcelInTransfer TransferedParcel { get; set; }
             public override string ToString()
             {
-                return $"Id: {Id}, Model: {Model}, Max Weight: {MaxWeight}, Status: {Status}, Battery: {Battery}, Location:{Location}";
+                return $"Id: {Id}, Model: {Model}, Max Weight: {MaxWeight}, Status: {Status}, Battery: {Battery}, Location:{Location}, ParcelInTransfer{TransferedParcel.ToString()}";
             }
         } 
     }

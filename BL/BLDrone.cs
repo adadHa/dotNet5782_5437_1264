@@ -299,6 +299,41 @@ namespace BL
         {
             return GetDrone(id).ToString();
         }
+        private Drone GetDrone(int id)
+        {
+            try
+            {
+                ParcelInTransfer p = (ParcelInTransfer)dalObject.(x => x.DroneId == id);
+                ParcelInTransfer parcelInTransfer = new ParcelInTransfer();
+                foreach (ParcelInTransfer transferedParcel in p)
+                {
+                    parcelInTransfer.Add(GetDrone(transferedParcel));
+                }
+
+                IDAL.DO.Drone drone = dalObject.GetDrone(id);
+                IBL.BO.Drone resultDrone = new IBL.BO.Drone
+                {
+                    Id = drone.Id,
+                    Model = drone.Model,
+                    MaxWeight = drone.MaxWeight,
+                    Status = drone.Status,
+                    Battery = drone.Battery,
+                    Location = new IBL.BO.Location { Latitude = drone.Latitude, Longitude = drone.Longitude },
+                    parcelInTransfer = TransferedParcel
+                };
+                return resultDrone;
+            }
+            catch (DalObject.IdIsNotExistException e)
+            {
+                throw new IBL.BO.IdIsNotExistException(e.ToString());
+            }
+        }
+
+        //This function returns a DroneForList from the datasource (on BL) by an index.
+        private DroneForList GetBlDrone(int id)
+        {
+            return BLDrones[GetDroneIndex(id)];
+        }
 
         //This function returns an index to the desired drone id from the list on BL database
         private int GetBLDroneIndex(int id)
