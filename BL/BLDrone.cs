@@ -117,10 +117,10 @@ namespace BL
                     newDrone.Battery = rand.NextDouble() * 100;
                     if (newDrone.Battery < minimalBattery) newDrone.Battery = minimalBattery;
                 }
+                BLDrones.Add(newDrone);
+                int x = 1;
             }
         }
-
-
 
         //This function return the most close station's location to a given loaction
         private Location GetMostCloseStationLocation(Location location)
@@ -294,6 +294,33 @@ namespace BL
             return Math.Sqrt(a + b); // dis = sqrt(a - b)
         }
 
+        public void BindDrone(int id)
+        {
+            DroneForList drone = BLDrones[GetBLDroneIndex(id)];
+            List<IDAL.DO.Parcel> availableParcels = 
+                dalObject.GetParcels(p => IsAbleToDoDelivery(drone, p)).ToList(); // get only available parcels
+
+        }
+
+        //This function determine whether a drone is able to do a delivery <=>
+        // 1. its wheight capacity is large enough.
+        // 2. and is able to drive the path:
+        //   drone current location --> sender location --> target location --> most close station (to the target)
+        private bool IsAbleToDoDelivery(DroneForList drone, IDAL.DO.Parcel p)
+        {
+            if ((int)p.Wheight > (int)drone.MaxWeight) return false;
+            IDAL.DO.Customer sender = dalObject.GetCustomer(p.SenderId);
+            Location senderLoaction = new Location { Latitude = sender.Latitude, Longitude = sender.Longitude };
+            IDAL.DO.Customer target = dalObject.GetCustomer(p.TargetId);
+            Location targetLoaction = new Location { Latitude = target.Latitude, Longitude = target.Longitude };
+            double consumptionRate = getConsumptionRate(drone.MaxWeight);
+            
+            double desiredBattery = 
+           
+
+
+        }
+
         //this function view the drones details
         public string ViewDrone(int id)
         {
@@ -303,7 +330,7 @@ namespace BL
         {
             try
             {
-                ParcelInTransfer p = (ParcelInTransfer)dalObject.(x => x.DroneId == id);
+                /*ParcelInTransfer p = (ParcelInTransfer)dalObject.(x => x.DroneId == id);
                 ParcelInTransfer parcelInTransfer = new ParcelInTransfer();
                 foreach (ParcelInTransfer transferedParcel in p)
                 {
@@ -321,18 +348,13 @@ namespace BL
                     Location = new IBL.BO.Location { Latitude = drone.Latitude, Longitude = drone.Longitude },
                     parcelInTransfer = TransferedParcel
                 };
-                return resultDrone;
+                return resultDrone;*/
+                return null;
             }
             catch (DalObject.IdIsNotExistException e)
             {
                 throw new IBL.BO.IdIsNotExistException(e.ToString());
             }
-        }
-
-        //This function returns a DroneForList from the datasource (on BL) by an index.
-        private DroneForList GetBlDrone(int id)
-        {
-            return BLDrones[GetDroneIndex(id)];
         }
 
         //This function returns an index to the desired drone id from the list on BL database
@@ -365,6 +387,8 @@ namespace BL
 
         public IEnumerable<DroneForList> GetDrones(Func<DroneForList, bool> filter = null)
         {
+            if (filter == null)
+                return BLDrones;
             return BLDrones.Where(filter).ToList();
         }
     }

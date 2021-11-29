@@ -19,7 +19,7 @@ namespace IBL
             public int DeliveredParcelNumber { get; set; }
             public override string ToString()
             {
-                return $"Id: {Id}, Model: {Model}, Max Weight: {MaxWeight}, Battery: {Battery}, Status: {Status}, Location: {Location}, Delivered Parcel Number:{DeliveredParcelNumber}";
+                return $"Id: {Id}, Model: {Model}, Max Weight: {MaxWeight}, Battery: {Battery}%, Status: {Status}, Location: {Location}, Delivered Parcel Number:{DeliveredParcelNumber}";
             }
         } 
     }

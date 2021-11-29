@@ -81,10 +81,6 @@ namespace BL
             }
         }
         //this function view the station details
-        public string ViewStations()
-        {
-
-        }
         public string ViewStationsList()
         {
             string result = "";

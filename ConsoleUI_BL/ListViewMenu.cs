@@ -44,7 +44,7 @@ namespace ConsoleUI_BL
                     {
                         try
                         {
-                            //Console.WriteLine(blObject.ViewDronesList());
+                            Console.WriteLine(blObject.ViewDronesList());
                         }
                         catch (Exception e)
                         {
