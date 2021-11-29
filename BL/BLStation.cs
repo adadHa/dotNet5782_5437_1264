@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using IBL.BO;
 namespace BL
 {
     public partial class BL : IBL.IBL
     {
 
         //this function adds a station to the database
-        public void AddStation(int id, string name, int freeChargingSlots, IBL.BO.Location location)
+        public void AddStation(int id, string name, int freeChargingSlots, Location location)
         {
 
             try
@@ -16,13 +17,13 @@ namespace BL
             }
             catch (DalObject.IdIsAlreadyExistException e)
             {
-                throw new IBL.BO.IdIsAlreadyExistException(e.ToString());
+                throw new IdIsAlreadyExistException(e.ToString());
             }
             catch (DalObject.NoChargeSlotsException e)
             {
-                throw new IBL.BO.NoChargeSlotsException(e.ToString());
+                throw new NoChargeSlotsException(e.ToString());
             }
-
+           
         }
 
         //This function updates a station with a new name and/or a new charging slots capacity.
@@ -44,7 +45,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IBL.BO.IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e.ToString());
             }
         }
         //this function view the station details
@@ -53,23 +54,23 @@ namespace BL
             return GetStation(id).ToString();
         }
         //This function returns a StationForList from the datasource (on BL) by an index.
-        private IBL.BO.Station GetStation(int id)
+        private Station GetStation(int id)
         {
             try
             {
                 List<IDAL.DO.DroneCharge> l = (List<IDAL.DO.DroneCharge>)dalObject.GetDroneCharges(x => x.StationId == id);
-                List<IBL.BO.DroneForList> listOfDronesInCharge = new List<IBL.BO.DroneForList>();
+                List<DroneForList> listOfDronesInCharge = new List<DroneForList>();
                 foreach (IDAL.DO.DroneCharge droneCharge in l)
                 {
                     listOfDronesInCharge.Add(BLDrones[GetBLDroneIndex(droneCharge.DroneId)]);
                 }
 
                 IDAL.DO.Station station = dalObject.GetStation(id);
-                IBL.BO.Station resultStation = new IBL.BO.Station
+                Station resultStation = new Station
                 {
                     Id = station.Id,
                     Name = station.Name,
-                    Location = new IBL.BO.Location { Latitude = station.Latitude, Longitude = station.Longitude },
+                    Location = new Location { Latitude = station.Latitude, Longitude = station.Longitude },
                     ChargeSlots = station.ChargeSlots,
                     ListOfDronesInCharge = listOfDronesInCharge
                 };
@@ -77,7 +78,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IBL.BO.IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e.ToString());
             }
         }
         //this function view the station details
@@ -91,25 +92,47 @@ namespace BL
             return result;
         }
 
-        private IEnumerable<IBL.BO.StationForList> GetStations()
+        private IEnumerable<StationForList> GetStations()
         {
             List<IDAL.DO.Station> dalStations = dalObject.GetStations().ToList();
-            List<IBL.BO.StationForList> resultList = new List<IBL.BO.StationForList>();
+            List<StationForList> resultList = new List<StationForList>();
             int availableChargingSlots = 0, occupiedChargingSlots = 0;
             foreach (IDAL.DO.Station station in dalStations)
             {
                 occupiedChargingSlots = dalObject.GetDroneCharges(x => x.StationId == station.Id).Count();
                 availableChargingSlots = station.ChargeSlots - occupiedChargingSlots;
-                resultList.Add(new IBL.BO.StationForList
+                resultList.Add(new StationForList
                 {
                     Id = station.Id,
                     Name = station.Name,
                     AvailableChargingSlots = availableChargingSlots,
                     OccupiedChargingSlots = occupiedChargingSlots
                 });
-
             }
             return resultList;
+        }
+
+        //This function return the most close station's location to a given loaction
+        //check on a filtered stations list if a filter was provided
+        private Location GetMostCloseStationLocation(Location location, Func<IDAL.DO.Station, bool> filter = null)
+        {
+            List<IDAL.DO.Station> stations =
+                    dalObject.GetStations(filter).ToList(); // we choose from the available stations.
+            if (stations.Count() == 0) return null;
+            IDAL.DO.Station mostCloseStation = stations[0];
+            double mostCloseDistance = 0;
+            double distance = 0;
+            foreach (IDAL.DO.Station station in stations)
+            {
+                Location stationL = new Location { Latitude = station.Latitude, Longitude = station.Longitude };
+                distance = Distance(stationL, location);
+                if (mostCloseDistance > distance)
+                {
+                    mostCloseDistance = distance;
+                    mostCloseStation = station;
+                }
+            }
+            return new Location { Latitude = mostCloseStation.Latitude, Longitude = mostCloseStation.Longitude };
         }
 
     }

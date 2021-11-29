@@ -10,7 +10,6 @@ namespace IBL
         internal class DroneCannotBeReleasedException : Exception
         {
             private DroneForList d;
-
             public DroneCannotBeReleasedException()
             {
             }
@@ -152,6 +151,148 @@ namespace IBL
             public override string ToString()
             {
                 return Message;
+            }
+        }
+
+        [Serializable]
+        internal class DroneCannotBeChargedException : Exception
+        {
+            private DroneForList drone;
+
+            public DroneCannotBeChargedException()
+            {
+            }
+
+            public DroneCannotBeChargedException(DroneForList drone)
+            {
+                this.drone = drone;
+            }
+
+            public DroneCannotBeChargedException(string message) : base(message)
+            {
+            }
+
+            public DroneCannotBeChargedException(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+            protected DroneCannotBeChargedException(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+
+            public override string ToString()
+            {
+                if (drone.Status == DroneStatuses.Maintenance)
+                {
+                    return $"Drone {drone.Id} is already charging";
+                }
+                else //drone.Status = DroneStatuses.Shipping
+                    return $"Drone {drone.Id} cannot charge beacause it is shipping now a parcel";
+
+            }
+        }
+        [Serializable]
+        internal class NoParcelsToBindException : Exception
+        {
+            private DroneForList drone;
+
+            public NoParcelsToBindException()
+            {
+            }
+
+            public NoParcelsToBindException(DroneForList drone)
+            {
+                this.drone = drone;
+            }
+
+            public NoParcelsToBindException(string message) : base(message)
+            {
+            }
+
+            public NoParcelsToBindException(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+            protected NoParcelsToBindException(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+
+            public override string ToString()
+            {
+                return $"Drone {drone.Id} couldn't be linked to any parcel. " +
+                    $"\n It may be bacause all parcels are already linked to other drones";
+            }
+        }
+        [Serializable]
+        internal class DroneIsAlreadyBindException : Exception
+        {
+            private DroneForList drone;
+
+            public DroneIsAlreadyBindException()
+            {
+            }
+
+            public DroneIsAlreadyBindException(DroneForList drone)
+            {
+                this.drone = drone;
+            }
+
+            public DroneIsAlreadyBindException(string message) : base(message)
+            {
+            }
+
+            public DroneIsAlreadyBindException(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+            protected DroneIsAlreadyBindException(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+
+            public override string ToString()
+            {
+                if (drone.Status == DroneStatuses.Shipping)
+                    return $"Drone {drone.Id} is already linked to another parcel.";
+                else
+                    return $"Drone {drone.Id} is on maintenance and cannot be linked.";
+            }
+        }
+
+        [Serializable]
+        internal class DroneCannotCollectParcelException : Exception
+        {
+            private DroneForList drone;
+            private IDAL.DO.Parcel parcel;
+
+            public DroneCannotCollectParcelException()
+            {
+            }
+
+            public DroneCannotCollectParcelException(string message) : base(message)
+            {
+            }
+
+            public DroneCannotCollectParcelException(DroneForList drone, IDAL.DO.Parcel parcel)
+            {
+                this.drone = drone;
+                this.parcel = parcel;
+            }
+
+            public DroneCannotCollectParcelException(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+            protected DroneCannotCollectParcelException(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+
+            public override string ToString()
+            {
+                if (drone.Status != DroneStatuses.Shipping)
+                    return $"Drone {drone.Id} is not shipping any parcel right now.";
+                else if (parcel.PickedUp != null)
+                    return $"Drone {drone.Id} already picked up its parcel";
+                return null;
             }
         }
     }

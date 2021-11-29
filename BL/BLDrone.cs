@@ -118,30 +118,10 @@ namespace BL
                     if (newDrone.Battery < minimalBattery) newDrone.Battery = minimalBattery;
                 }
                 BLDrones.Add(newDrone);
-                int x = 1;
             }
         }
 
-        //This function return the most close station's location to a given loaction
-        private Location GetMostCloseStationLocation(Location location)
-        {
-            List<IDAL.DO.Station> stations =
-                    (List<IDAL.DO.Station>)dalObject.ViewStationsWithFreeChargeSlots(); // we choose from the available stations.
-            IDAL.DO.Station mostCloseStation = stations[0];
-            double mostCloseDistance = 0;
-            double distance = 0;
-            foreach (IDAL.DO.Station station in stations)
-            {
-                Location stationL = new Location { Latitude = station.Latitude, Longitude = station.Longitude };
-                distance = Distance(stationL, location);
-                if (mostCloseDistance > distance)
-                {
-                    mostCloseDistance = distance;
-                    mostCloseStation = station;
-                }
-            }
-            return new Location { Latitude = mostCloseStation.Latitude, Longitude = mostCloseStation.Longitude };
-        }
+
 
         //this function adds a drone to the database
         public void AddDrone(int id, string model, string weight, int initialStationId)
@@ -170,11 +150,11 @@ namespace BL
             }
             catch (DalObject.IdIsAlreadyExistException e)
             {
-                throw new IBL.BO.IdIsAlreadyExistException(e.ToString());
+                throw new IdIsAlreadyExistException(e.ToString());
             }
             catch (DalObject.NoChargeSlotsException e)
             {
-                throw new IBL.BO.NoChargeSlotsException(e.ToString());
+                throw new NoChargeSlotsException(e.ToString());
             }
         }
         //this function updates the drone
@@ -187,7 +167,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IBL.BO.IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e.ToString());
             }
         }
         //this fuction charge a drone who needs to be charged
@@ -198,11 +178,11 @@ namespace BL
                 // First, we look for the closet station.
                 DroneForList drone = BLDrones[GetBLDroneIndex(id)];
                 if (drone == null)
-                {
                     throw new DalObject.IdIsNotExistException(id, "Drone");
-                }
+                if (drone.Status != DroneStatuses.Available)
+                    throw new DroneCannotBeChargedException(drone);
                 List<IDAL.DO.Station> stations =
-                    (List<IDAL.DO.Station>)dalObject.ViewStationsWithFreeChargeSlots(); // we choose from the available stations.
+                    dalObject.GetStations(x => x.ChargeSlots > 0).ToList(); // we choose from the available stations.
                 IDAL.DO.Station mostCloseStation = stations[0];
                 double mostCloseDistance = 0;
                 double distance = 0;
@@ -237,9 +217,13 @@ namespace BL
                     BLDrones[droneIndex] = drone;
                 }
             }
+            catch (DalObject.NoChargeSlotsException e)
+            {
+                throw new NoChargeSlotsException(e.ToString());
+            }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IBL.BO.IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e.ToString());
             }
         }
 
@@ -263,7 +247,6 @@ namespace BL
         //this function release a drone from charge and updates his baterry status after the charge
         public void ReleaseDroneFromCharging(int id, double chargingTime)
         {
-
             try
             {
                 DroneForList d = BLDrones[GetBLDroneIndex(id)];
@@ -281,7 +264,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IBL.BO.IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e.ToString());
             }
         }
 
@@ -296,10 +279,29 @@ namespace BL
 
         public void BindDrone(int id)
         {
-            DroneForList drone = BLDrones[GetBLDroneIndex(id)];
-            List<IDAL.DO.Parcel> availableParcels = 
-                dalObject.GetParcels(p => IsAbleToDoDelivery(drone, p)).ToList(); // get only available parcels
-
+            try
+            {
+                DroneForList drone = BLDrones[GetBLDroneIndex(id)];
+                if (drone.Status != DroneStatuses.Available)
+                    throw new DroneIsAlreadyBindException(drone);
+                List<IDAL.DO.Parcel> availableParcels =
+                    dalObject.GetParcels(p => IsAbleToDoDelivery(drone, p)).ToList(); // get only available parcels
+                if (availableParcels.Count() == 0)
+                    throw new NoParcelsToBindException(drone);
+                IDAL.DO.Parcel bestParcelToBind = availableParcels[0];
+                foreach (IDAL.DO.Parcel parcel in availableParcels)
+                {
+                    if (IsMoreGoodToBind(drone, parcel, bestParcelToBind))
+                    {
+                        bestParcelToBind = parcel;
+                    }
+                }
+                dalObject.BindParcel(bestParcelToBind.Id, id);
+            }
+            catch (DalObject.IdIsNotExistException e)
+            {
+                throw new IdIsNotExistException(e.ToString());
+            }
         }
 
         //This function determine whether a drone is able to do a delivery <=>
@@ -314,12 +316,40 @@ namespace BL
             IDAL.DO.Customer target = dalObject.GetCustomer(p.TargetId);
             Location targetLoaction = new Location { Latitude = target.Latitude, Longitude = target.Longitude };
             double consumptionRate = getConsumptionRate(drone.MaxWeight);
-            
-            double desiredBattery = 
-           
+            double totalDistance = Distance(drone.Location, senderLoaction) + Distance(senderLoaction, targetLoaction)
+                                    + Distance(targetLoaction, GetMostCloseStationLocation(targetLoaction));
+            double desiredBattery = totalDistance * consumptionRate;
+            if (drone.Battery >= desiredBattery)
+                return true;
+            else return false;
+        }
 
+        //This function determine who, of two customers, has a more suitable parcel to bind to the drone.
+        // the function returns true if the parcel of customer1 is more suitable.
+        private bool IsMoreGoodToBind(DroneForList drone, IDAL.DO.Parcel parcel1, IDAL.DO.Parcel parcel2)
+        {
+            IDAL.DO.Customer p1Sender = dalObject.GetCustomer(parcel1.SenderId);
+            Location p1SenderLocation = new Location { Latitude = p1Sender.Latitude, Longitude = p1Sender.Longitude };
+            IDAL.DO.Customer p2Sender = dalObject.GetCustomer(parcel2.SenderId);
+            Location p2SenderLocation = new Location { Latitude = p2Sender.Latitude, Longitude = p2Sender.Longitude };
+            if (parcel1.Priority > parcel2.Priority)
+                return true;
+            else if (Distance(drone.Location, p1SenderLocation) < Distance(drone.Location, p2SenderLocation))
+                return true;
+            else return false;
+        }
+
+        //This function collects a parcel by its shipping drone;
+        public void CollectParcelByDrone(int id)
+        {
+            DroneForList drone = BLDrones[GetBLDroneIndex(id)];
+            IDAL.DO.Parcel parcel = dalObject.GetParcels(p => p.DroneId == id).ToList()[0];
+            if (drone.Status != DroneStatuses.Shipping || parcel.PickedUp != null)
+                throw new DroneCannotCollectParcelException(drone, parcel);
+            dalObject.CollectParcelByDrone(parcel.Id);
 
         }
+
 
         //this function view the drones details
         public string ViewDrone(int id)
@@ -353,7 +383,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IBL.BO.IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e.ToString());
             }
         }
 
@@ -371,7 +401,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IBL.BO.IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e.ToString());
             }
         }
 
@@ -393,6 +423,6 @@ namespace BL
         }
     }
 
-
+    
 }
 
