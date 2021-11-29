@@ -203,8 +203,10 @@ namespace BL
             return GetDrone(id).ToString();
         }
 
+        
+
         //This function returns a DroneForList from the datasource (on BL) by an index.
-        private DroneForList GetDrone(int id)
+        private DroneForList GetBLDrone(int id)
         {
             return BLDrones[GetDroneIndex(id)];
         }
