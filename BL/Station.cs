@@ -13,11 +13,23 @@ namespace IBL
             public int Id { get; set; }
             public string Name { get; set; }
             public Location Location { get; set; }
-            public int ChargeSlots { get; set; }
+            public int FreeChargeSlots { get; set; }
             public List<DroneInCharge> ListOfDronesInCharge { get; set; }
             public override string ToString()
             {
-                return $"Id: {Id}, Name: {Name}, Location: {Location}, Charge Slots: {ChargeSlots}, List Of Drones In Charge: {ListOfDronesInCharge.ToString()}";
+                string listOfDronesInCharge = "";
+                foreach (DroneInCharge drone in ListOfDronesInCharge)
+                {
+                    listOfDronesInCharge += "\n    " + drone.ToString();
+                }
+
+                if (listOfDronesInCharge == "") listOfDronesInCharge = "all charging slots are free";
+
+                return $"Id: {Id}\n" +
+                    $"Name: {Name}\n" +
+                    $"Location: {Location}\n" +
+                    $"Charge Slots: {FreeChargeSlots}\n" +
+                    $"List Of Drones In Charge: {listOfDronesInCharge}";
             }
         } 
     }

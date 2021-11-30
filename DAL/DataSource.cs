@@ -84,7 +84,7 @@ namespace DalObject
                     TargetId = Customers[rand.Next(0, 9)].Id,
                     Wheight = wheight,
                     Priority = priority,
-                    DroneId = 0,
+                    DroneId = -1,
                     Created = DateTime.Now,
                     Scheduled = null,
                     PickedUp = null,
@@ -100,7 +100,7 @@ namespace DalObject
                     Name = "station" + i.ToString(),
                     Longitude = rand.NextDouble() * 180,
                     Latitude = rand.NextDouble() * 180,
-                    ChargeSlots = rand.Next(0, 5)
+                    FreeChargeSlots = rand.Next(0, 5)
                 });
             }
 

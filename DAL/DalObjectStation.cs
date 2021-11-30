@@ -21,7 +21,7 @@ namespace DalObject
                 {
                     Id = id,
                     Name = name,
-                    ChargeSlots = num,
+                    FreeChargeSlots = num,
                     Longitude = longitude,
                     Latitude = latitude
                 });
@@ -64,7 +64,7 @@ namespace DalObject
                     throw new IdIsNotExistException(id, "Station");
                 }
                 IDAL.DO.Station s = DataSource.Stations[index];
-                s.ChargeSlots = newNum;
+                s.FreeChargeSlots = newNum;
                 DataSource.Stations[index] = s;
             }
             catch (Exception)
@@ -129,7 +129,7 @@ namespace DalObject
             List<IDAL.DO.Station> resultList = new List<IDAL.DO.Station>();
             foreach (IDAL.DO.Station station in DataSource.Stations)
             {
-                if (station.ChargeSlots > 0)
+                if (station.FreeChargeSlots > 0)
                 {
                     IDAL.DO.Station s = new IDAL.DO.Station();
                     s = station;

@@ -47,14 +47,14 @@ namespace DalObject
                 {
                     throw new IdIsNotExistException(stationId, "Station");
                 }
-                if (DataSource.Stations[stationIndex].ChargeSlots == 0)
+                if (DataSource.Stations[stationIndex].FreeChargeSlots == 0)
                 {
                     throw new NoChargeSlotsException(DataSource.Stations[stationIndex]);
                 }
                 IDAL.DO.Drone d = DataSource.Drones[droneIndex];
                 DataSource.Drones[droneIndex] = d;
                 IDAL.DO.Station s = DataSource.Stations[stationIndex];
-                s.ChargeSlots -= 1;
+                s.FreeChargeSlots -= 1;
                 DataSource.Stations[stationIndex] = s;
                 DataSource.DroneCharges.Add(new IDAL.DO.DroneCharge { DroneId = d.Id, StationId = s.Id });
             }
@@ -77,7 +77,7 @@ namespace DalObject
             int stationIndex = DataSource.Stations.FindIndex(x => x.Id == charging.StationId);
             IDAL.DO.Station s = DataSource.Stations[stationIndex];
 
-            s.ChargeSlots += 1;
+            s.FreeChargeSlots += 1;
             DataSource.Stations[stationIndex] = s;
             DataSource.DroneCharges.Remove(charging);
         }

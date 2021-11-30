@@ -182,7 +182,7 @@ namespace BL
                 if (drone.Status != DroneStatuses.Available)
                     throw new DroneCannotBeChargedException(drone);
                 List<IDAL.DO.Station> stations =
-                    dalObject.GetStations(x => x.ChargeSlots > 0).ToList(); // we choose from the available stations.
+                    dalObject.GetStations(x => x.FreeChargeSlots > 0).ToList(); // we choose from the available stations.
                 IDAL.DO.Station mostCloseStation = stations[0];
                 double mostCloseDistance = 0;
                 double distance = 0;

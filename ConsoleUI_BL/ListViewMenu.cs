@@ -96,7 +96,7 @@ namespace ConsoleUI_BL
                     {
                         try
                         {
-                            //Console.WriteLine(blObject.ViewStationsWithFreeChargeSlots());
+                            Console.WriteLine(blObject.ViewStationsWithFreeChargeSlots());
                         }
                         catch (Exception e)
                         {

@@ -40,6 +40,7 @@ namespace IBL
         public string ViewCustomersList();
         public string ViewParcelsList();
         public string ViewUnbinedParcelsList();
+        public string ViewStationsWithFreeChargeSlots();
 
     }
 }

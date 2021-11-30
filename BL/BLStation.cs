@@ -58,7 +58,7 @@ namespace BL
         {
             try
             {
-                List<IDAL.DO.DroneCharge> l = (List<IDAL.DO.DroneCharge>)dalObject.GetDroneCharges(x => x.StationId == id);
+                List<IDAL.DO.DroneCharge> l = dalObject.GetDroneCharges(x => x.StationId == id).ToList();
                 List<DroneInCharge> listOfDronesInCharge = new List<DroneInCharge>();
                 foreach (IDAL.DO.DroneCharge droneCharge in l)
                 {
@@ -76,7 +76,7 @@ namespace BL
                     Id = station.Id,
                     Name = station.Name,
                     Location = new Location { Latitude = station.Latitude, Longitude = station.Longitude },
-                    ChargeSlots = station.ChargeSlots,
+                    FreeChargeSlots = station.FreeChargeSlots,
                     ListOfDronesInCharge = listOfDronesInCharge
                 };
                 return resultStation;
@@ -96,21 +96,28 @@ namespace BL
             }
             return result;
         }
-
-        private IEnumerable<StationForList> GetStations()
+        public string ViewStationsWithFreeChargeSlots()
         {
-            List<IDAL.DO.Station> dalStations = dalObject.GetStations().ToList();
+            string result = "";
+            foreach (var item in GetStations(x => x.FreeChargeSlots > 0))
+            {
+                result += item.ToString() + "\n";
+            }
+            return result;
+        }
+        private IEnumerable<StationForList> GetStations(Func<IDAL.DO.Station, bool> filter = null)
+        {
+            List<IDAL.DO.Station> dalStations = dalObject.GetStations(filter).ToList();
             List<StationForList> resultList = new List<StationForList>();
-            int availableChargingSlots = 0, occupiedChargingSlots = 0;
+            int occupiedChargingSlots = 0;
             foreach (IDAL.DO.Station station in dalStations)
             {
                 occupiedChargingSlots = dalObject.GetDroneCharges(x => x.StationId == station.Id).Count();
-                availableChargingSlots = station.ChargeSlots - occupiedChargingSlots;
                 resultList.Add(new StationForList
                 {
                     Id = station.Id,
                     Name = station.Name,
-                    AvailableChargingSlots = availableChargingSlots,
+                    AvailableChargingSlots = station.FreeChargeSlots,
                     OccupiedChargingSlots = occupiedChargingSlots
                 });
             }
