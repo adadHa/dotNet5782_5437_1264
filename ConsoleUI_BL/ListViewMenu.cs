@@ -15,7 +15,7 @@ namespace ConsoleUI_BL
             Console.WriteLine("Choose option: \n" +
         "1 - View stations list \n" +
         "2 - View drones list \n" +
-        "3 - View costomers list \n" +
+        "3 - View customers list \n" +
         "4 - View parcels list \n" +
         "5 - View unbind parcels \n" +
         "6 - View station with free charge slots \n" +

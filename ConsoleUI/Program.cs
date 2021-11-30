@@ -182,7 +182,7 @@ namespace ConsoleUI
                                         int parcelId;
                                         Console.WriteLine("Enter parcel id:");
                                         int.TryParse(Console.ReadLine(), out parcelId);
-                                        dalObject.CollectParcelByDrone(parcelId);
+                                        //dalObject.CollectParcelByDrone(parcelId);
                                         break;
                                     }
 

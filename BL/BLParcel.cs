@@ -25,13 +25,46 @@ namespace BL
         //this function view the parcel details
         public string ViewParcel(int id)
         {
-            return null;
+            return GetParcel(id).ToString();
         }
-        //This function returns a ParcelForList from the datasource (on BL) by an index.
 
+        //This function returns a ParcelForList from the datasource (on BL) by an index.
         private IBL.BO.Parcel GetParcel(int id)
         {
-            return null;
+            try
+            {
+                IDAL.DO.Parcel dalParcel = dalObject.GetParcel(id);
+                IBL.BO.DroneInParcel drone = null;
+                if (dalParcel.DroneId != -1)
+                {
+                    IBL.BO.DroneForList blDrone = BLDrones[GetBLDroneIndex(dalParcel.DroneId)];
+                    drone = new IBL.BO.DroneInParcel
+                    {
+                        Id = blDrone.Id,
+                        BatteryStatus = blDrone.Battery,
+                        CurrentLocation = blDrone.Location
+                    };
+                }
+                
+                IBL.BO.Parcel parcel = new IBL.BO.Parcel
+                {
+                    Id = dalParcel.Id,
+                    Target = new IBL.BO.CustomerInDelivery { Id = dalParcel.TargetId, Name = dalObject.GetCustomer(dalParcel.TargetId).Name },
+                    Sender = new IBL.BO.CustomerInDelivery { Id = dalParcel.SenderId, Name = dalObject.GetCustomer(dalParcel.SenderId).Name },
+                    Wheight = (IBL.BO.WheightCategories)dalParcel.Wheight,
+                    Priority = (IBL.BO.Priorities)dalParcel.Priority,
+                    Drone = drone,
+                    Created = dalParcel.Created,
+                    Scheduled = dalParcel.Scheduled,
+                    PickedUp = dalParcel.PickedUp,
+                    Delivered = dalParcel.Delivered
+                };
+                return parcel;
+            }
+            catch (DalObject.IdIsNotExistException e)
+            {
+                throw new IBL.BO.IdIsNotExistException(e);
+            }
         }
 
         public string ViewParcelsList()

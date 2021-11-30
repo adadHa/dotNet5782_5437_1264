@@ -17,7 +17,7 @@ namespace ConsoleUI_BL
                 Console.WriteLine("Choose option: \n" +
             "1 - View station \n" +
             "2 - View drone \n" +
-            "3 - View Ccustomer \n" +
+            "3 - View customer \n" +
             "4 - View parcel \n" +
             "0 - Exit");
 
@@ -42,7 +42,7 @@ namespace ConsoleUI_BL
                             {
                                 Console.WriteLine(e.ToString());
                             }
-                            //Console.WriteLine(blObject.ViewStation(stationIndex).ToString());
+                            Console.WriteLine(blObject.ViewStation(stationIndex).ToString());
                             break;
                         }
 
@@ -71,14 +71,12 @@ namespace ConsoleUI_BL
 
                             try
                             {
-                                //blObject.ViewCustomer(customerIndex);
-
+                                Console.WriteLine(blObject.ViewCustomer(customerIndex));
                             }
                             catch (Exception e)
                             {
                                 Console.WriteLine(e.ToString());
                             }
-                            //Console.WriteLine(blObject.ViewCustomer(customerIndex));
                             break;
                         }
 
@@ -90,7 +88,7 @@ namespace ConsoleUI_BL
 
                             try
                             {
-                                //Console.WriteLine(blObject.ViewParcel(parcelIndex));
+                                Console.WriteLine(blObject.ViewParcel(parcelIndex));
 
                             }
                             catch (Exception e)

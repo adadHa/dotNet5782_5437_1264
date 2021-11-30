@@ -14,11 +14,26 @@ namespace IBL
             public string Name { get; set; }
             public string Phone { get; set; }
             public Location Location { get; set; }
-            public List<ParcelInTransfer> DeliveryListFromCustomer { get; set; }
-            public List<ParcelInTransfer> DeliveryListToCustomer { get; set; }
+            public List<ParcelInCustomer> ParcelsFromCustomer { get; set; }
+            public List<ParcelInCustomer> ParcelsToCustomer { get; set; }
             public override string ToString()
             {
-                return $"Id: {Id}, Name: {Name}, Phone: {Phone}, Location: {Location}, Delivery List From Customer: {DeliveryListFromCustomer}, Delivery List To Customer:{DeliveryListToCustomer}";
+                string parcelsFromCustomer = "";
+                string parcelsToCustomer = "";
+                foreach (ParcelInCustomer parcel in ParcelsFromCustomer)
+                {
+                    parcelsFromCustomer += "\n    " + parcel.ToString();
+                }
+                foreach (ParcelInCustomer parcel in ParcelsToCustomer)
+                {
+                    parcelsToCustomer += "\n    " + parcel.ToString();
+                }
+                return $"Id: {Id}\n" +
+                    $"Name: {Name}\n" +
+                    $"Phone: {Phone}\n" +
+                    $"Location: {Location}\n" +
+                    $"Delivery List From Customer: {parcelsFromCustomer}\n" +
+                    $"Delivery List To Customer:{parcelsToCustomer}";
             }
         }
     }

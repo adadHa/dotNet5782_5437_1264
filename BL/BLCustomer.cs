@@ -45,10 +45,69 @@ namespace BL
         {
             return GetCustomer(id).ToString();
         }
+
         //This function returns a CustomerForList from the datasource (on BL) by an index.
         private IBL.BO.Customer GetCustomer(int id)
         {
-            return null;
+            try
+            {
+                IDAL.DO.Customer dalCustomer = dalObject.GetCustomer(id);
+                //build the parcelsFromCustomer list
+                List<IBL.BO.ParcelInCustomer> parcelsFromCustomer = new List<IBL.BO.ParcelInCustomer>();
+                List<IDAL.DO.Parcel> dalParcelsFromCustomer = dalObject.GetParcels(x => x.SenderId == id).ToList();
+                IBL.BO.Statuses parcelStatus = new IBL.BO.Statuses();
+                foreach (IDAL.DO.Parcel parcel in dalParcelsFromCustomer)
+                {
+
+                    if (parcel.Delivered != null) parcelStatus = IBL.BO.Statuses.Delivered;
+                    else if (parcel.PickedUp != null) parcelStatus = IBL.BO.Statuses.PickedUp;
+                    else if (parcel.Scheduled != null) parcelStatus = IBL.BO.Statuses.Scheduled;
+                    else if (parcel.Created != null) parcelStatus = IBL.BO.Statuses.Created;
+                    parcelsFromCustomer.Add(new IBL.BO.ParcelInCustomer
+                    {
+                        Id = parcel.Id,
+                        Priority = (IBL.BO.Priorities)parcel.Priority,
+                        Wheight = (IBL.BO.WheightCategories)parcel.Wheight,
+                        ParcelStatus = parcelStatus,
+                        TheOtherSide = new IBL.BO.CustomerInDelivery { Id = parcel.TargetId, Name = dalObject.GetCustomer(parcel.TargetId).Name}
+                    });
+                }
+
+                //build the parcelsListToCustomer list
+                List<IBL.BO.ParcelInCustomer> parcelsToCustomer = new List<IBL.BO.ParcelInCustomer>();
+                List<IDAL.DO.Parcel> dalParcelsToCustomer = dalObject.GetParcels(x => x.TargetId == id).ToList();
+                foreach (IDAL.DO.Parcel parcel in dalParcelsToCustomer)
+                {
+                    if (parcel.Delivered != null) parcelStatus = IBL.BO.Statuses.Delivered;
+                    else if (parcel.PickedUp != null) parcelStatus = IBL.BO.Statuses.PickedUp;
+                    else if (parcel.Scheduled != null) parcelStatus = IBL.BO.Statuses.Scheduled;
+                    else if (parcel.Created != null) parcelStatus = IBL.BO.Statuses.Created;
+                    parcelsToCustomer.Add(new IBL.BO.ParcelInCustomer
+                    {
+                        Id = parcel.Id,
+                        Priority = (IBL.BO.Priorities)parcel.Priority,
+                        Wheight = (IBL.BO.WheightCategories)parcel.Wheight,
+                        ParcelStatus = parcelStatus,
+                        TheOtherSide = new IBL.BO.CustomerInDelivery { Id = parcel.SenderId, Name = dalObject.GetCustomer(parcel.SenderId).Name }
+                    });
+                }
+                //finally, build the customer
+                IBL.BO.Customer customer = new IBL.BO.Customer
+                {
+                    Id = dalCustomer.Id,
+                    Name = dalCustomer.Name,
+                    Phone = dalCustomer.Phone,
+                    Location = new IBL.BO.Location { Latitude = dalCustomer.Latitude, Longitude = dalCustomer.Longitude },
+                    ParcelsFromCustomer = parcelsFromCustomer,
+                    ParcelsToCustomer = parcelsToCustomer
+                };
+                return customer;
+            }
+            catch (DalObject.IdIsNotExistException e)
+            {
+                throw new IBL.BO.IdIsNotExistException(e);
+            }
+
         }
 
         public string ViewCustomersList()
