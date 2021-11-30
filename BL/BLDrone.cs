@@ -348,7 +348,7 @@ namespace BL
                 if (drone.Status != DroneStatuses.Shipping)
                     throw new DroneCannotCollectParcelException(drone);
                 IDAL.DO.Parcel parcel = dalObject.GetParcels(p => p.DroneId == id).ToList()[0];
-                if(parcel.PickedUp != null)
+                if (parcel.PickedUp != null)
                     throw new DroneCannotCollectParcelException(drone, parcel);
                 IDAL.DO.Customer sender = dalObject.GetCustomer(parcel.SenderId);
                 dalObject.CollectParcelByDrone(id, parcel.Id);
@@ -378,7 +378,7 @@ namespace BL
                 if (parcel.Delivered != null)
                     throw new DroneCannotSupplyParcelException(drone, parcel);
                 // update the parcel on data layer:
-                dalObject.SupplyParcelToCustomer(parcel.Id); 
+                dalObject.SupplyParcelToCustomer(parcel.Id);
                 // update the drone on BL layer:
                 drone.Status = DroneStatuses.Available;
                 IDAL.DO.Customer target = dalObject.GetCustomer(parcel.TargetId);
@@ -410,10 +410,13 @@ namespace BL
                 if (drone.Status == DroneStatuses.Shipping)
                 {
                     IDAL.DO.Parcel p = dalObject.GetParcels(x => x.DroneId == id).ToList()[0];
-                    transferedParcel.Priority = (Priorities)p.Priority;
                     transferedParcel.Id = p.Id;
+                    transferedParcel.Wheight = (WheightCategories)p.Wheight;
+                    transferedParcel.Priority = (Priorities)p.Priority;
                     transferedParcel.Sender = new CustomerInDelivery { Id = p.SenderId, Name = dalObject.GetCustomer(p.SenderId).Name };
                     transferedParcel.Receiver = new CustomerInDelivery { Id = p.TargetId, Name = dalObject.GetCustomer(p.TargetId).Name };
+                    transferedParcel.PickUpLocation = new Location { Latitude = dalObject.GetCustomer(p.SenderId).Latitude, Longitude = dalObject.GetCustomer(p.SenderId).Longitude };
+                    transferedParcel.TargetLocation = new Location { Latitude = dalObject.GetCustomer(p.TargetId).Latitude, Longitude = dalObject.GetCustomer(p.TargetId).Longitude };
                 }
 
                 Drone resultDrone = new Drone
@@ -470,6 +473,6 @@ namespace BL
         }
     }
 
-    
+
 }
 
