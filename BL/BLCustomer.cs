@@ -37,7 +37,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IBL.BO.IdIsNotExistException(e.ToString());
+                throw new IBL.BO.IdIsNotExistException(e);
             }
         }
         //this function view the customer details

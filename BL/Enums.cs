@@ -10,7 +10,7 @@ namespace IBL
     {
         public enum WheightCategories { Light, Medium, Heavy }
         public enum Priorities { Regular, Fast, Emergency }
-        public enum Statuses { Created, Ascribed, Collected, Provided }
+        public enum Statuses { Created, Scheduled, PickedUp, Delivered }
         public enum DroneStatuses { Available, Maintenance, Shipping } 
     }
 }

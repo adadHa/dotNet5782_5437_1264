@@ -13,7 +13,6 @@ namespace IDAL
             public int Id { get; set; }
             public string Model { get; set; }
             public WheightCategories MaxWeight { get; set; }
-
             public override string ToString()
             {
                 return $"Id: {Id}, Model: {Model}, Max Weight: {MaxWeight}";
@@ -21,4 +20,3 @@ namespace IDAL
         }
     }
 }
-

@@ -7,8 +7,8 @@ namespace DalObject
     [Serializable]
     public class IdIsNotExistException : Exception
     {
-        private int Id { get; set; }
-        private string Type { get; set; }
+        public int Id { get; set; }
+        public string Type { get; set; }
         public IdIsNotExistException(int id, string type)
         {
             Id = id;

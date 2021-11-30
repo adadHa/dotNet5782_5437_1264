@@ -21,7 +21,7 @@ namespace IBL
         public void ReleaseDroneFromCharging(int id, double chargingTime);
         public void BindDrone(int id);
         public void CollectParcelByDrone(int id);
-
+        public void SupplyParcel(int id);
 
         public string ViewStation(int id);
         public string ViewDrone(int id);

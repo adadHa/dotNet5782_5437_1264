@@ -19,7 +19,13 @@ namespace IBL
             public ParcelInTransfer TransferedParcel { get; set; }
             public override string ToString()
             {
-                return $"Id: {Id}, Model: {Model}, Max Weight: {MaxWeight}, Status: {Status}, Battery: {Battery}%, Location:{Location}, ParcelInTransfer{TransferedParcel.ToString()}";
+                return $"Id: {Id}\n" +
+                    $"Model: {Model}\n" +
+                    $"Max Weight: {MaxWeight}\n" +
+                    $"Status: {Status}\n" +
+                    $"Battery: {Battery}%\n" +
+                    $"Location:{Location}\n" +
+                    $"Parcel In Transfer: {TransferedParcel.ToString()}";
             }
         } 
     }

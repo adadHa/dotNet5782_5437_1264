@@ -35,7 +35,7 @@ namespace ConsoleUI_BL
 
                             try
                             {
-                                Console.WriteLine(blObject.ViewStation(stationIndex).ToString());
+                                Console.WriteLine(blObject.ViewStation(stationIndex));
 
                             }
                             catch (Exception e)
@@ -54,14 +54,12 @@ namespace ConsoleUI_BL
 
                             try
                             {
-                                //blObject.ViewDrone(droneIndex);
-
+                                Console.WriteLine(blObject.ViewDrone(droneIndex));
                             }
                             catch (Exception e)
                             {
                                 Console.WriteLine(e.ToString());
                             }
-                            //Console.WriteLine(blObject.ViewDrone(droneIndex));
                             break;
                         }
 

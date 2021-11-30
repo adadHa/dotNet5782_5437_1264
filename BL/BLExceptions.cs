@@ -112,7 +112,11 @@ namespace IBL
                 Id = id;
                 Type = type;
             }
-
+            public IdIsNotExistException(DalObject.IdIsNotExistException e)
+            {
+                Id = e.Id;
+                Type = e.Type;
+            }
             public IdIsNotExistException(string message) : base(message)
             {
             }
@@ -126,7 +130,7 @@ namespace IBL
             }
             public override string ToString()
             {
-                return Message;
+                return $"{Type} with Id = {Id} is not exist. please try another id \n";
             }
         }
 
@@ -291,6 +295,43 @@ namespace IBL
                     return $"Drone {drone.Id} is not shipping any parcel right now.";
                 else if (parcel != null && parcel.Value.PickedUp != null)
                     return $"Parcel {parcel.Value.Id} was already picked up by drone {drone.Id}";
+                return null;
+            }
+        }
+        [Serializable]
+        internal class DroneCannotSupplyParcelException : Exception
+        {
+            private DroneForList drone;
+            private IDAL.DO.Parcel? parcel;
+
+            public DroneCannotSupplyParcelException()
+            {
+            }
+
+            public DroneCannotSupplyParcelException(string message) : base(message)
+            {
+            }
+
+            public DroneCannotSupplyParcelException(DroneForList drone, IDAL.DO.Parcel? parcel = null)
+            {
+                this.drone = drone;
+                this.parcel = parcel;
+            }
+
+            public DroneCannotSupplyParcelException(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+            protected DroneCannotSupplyParcelException(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+
+            public override string ToString()
+            {
+                if (drone.Status != DroneStatuses.Shipping)
+                    return $"Drone {drone.Id} is not shipping any parcel right now.";
+                else if (parcel != null && parcel.Value.Delivered != null)
+                    return $"Parcel {parcel.Value.Id} was already delivered by drone {drone.Id}";
                 return null;
             }
         }

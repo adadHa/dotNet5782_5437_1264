@@ -10,14 +10,20 @@ namespace IBL
     {
         public class ParcelInTransfer
         {
-            public int Id { get; set; }
-            public Priorities Priority { get; set; }
-            public CustomerInDelivery Sender { get; set; }
-            public CustomerInDelivery Receiver { get; set; }
+            public int? Id { get; set; }
+            public Priorities? Priority { get; set; }
+            public CustomerInDelivery? Sender { get; set; }
+            public CustomerInDelivery? Receiver { get; set; }
             public override string ToString()
             {
-                return $"Id: {Id}, Priority: {Priority}, Sender: {Sender}, Receiver: {Receiver}";
+                if (Id != null)
+                    return $"Id: {Id}\n" +
+                        $"                    Priority: {Priority}\n" +
+                        $"                    Sender: {Sender.ToString()}\n" +
+                        $"                    Receiver: {Receiver.ToString()}";
+                else
+                    return $"No transfered parcel";
             }
-        } 
+        }
     }
 }

@@ -16,14 +16,14 @@ namespace IDAL
             public WheightCategories Wheight { get; set; }
             public Priorities Priority { get; set; }
             public int DroneId { get; set; }
-            public DateTime? Requested { get; set; }
+            public DateTime? Created { get; set; }
             public DateTime? Scheduled { get; set; }
             public DateTime? PickedUp { get; set; }
             public DateTime? Delivered { get; set; }
 
             public override string ToString()
             {
-                return $"Id: {Id}, Sender Id: {SenderId}, Target Id: {TargetId}, Wheight: {Wheight}, Priority: {Priority}, Requested: {Requested}, DroneId: {DroneId}, Scheduled: {Scheduled}, Picked Up: {PickedUp}, Delivered: {Delivered}";
+                return $"Id: {Id}, Sender Id: {SenderId}, Target Id: {TargetId}, Wheight: {Wheight}, Priority: {Priority}, Created: {Created}, DroneId: {DroneId}, Scheduled: {Scheduled}, Picked Up: {PickedUp}, Delivered: {Delivered}";
             }
         }
     }

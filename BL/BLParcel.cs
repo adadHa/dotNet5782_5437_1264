@@ -62,10 +62,10 @@ namespace BL
 
             foreach (IDAL.DO.Parcel parcel in dalParcels)
             {
-                if (parcel.Delivered != null) s = IBL.BO.Statuses.Provided;
-                else if(parcel.PickedUp != null) s = IBL.BO.Statuses.Ascribed;
-                else if(parcel.Requested != null) s = IBL.BO.Statuses.Collected;
-                else if(parcel.Scheduled != null) s = IBL.BO.Statuses.Created;
+                if (parcel.Delivered != null) s = IBL.BO.Statuses.Delivered;
+                else if(parcel.PickedUp != null) s = IBL.BO.Statuses.PickedUp;
+                else if(parcel.Scheduled != null) s = IBL.BO.Statuses.Scheduled;
+                else if(parcel.Created != null) s = IBL.BO.Statuses.Created;
                 resultList.Add(new IBL.BO.ParcelForList
                 {
                     Id = parcel.Id,

@@ -73,7 +73,7 @@ namespace BL
                         if (newDrone.Battery < minimalBattery) newDrone.Battery = minimalBattery;
                     }
 
-                    else if (p.Delivered == null) // parcel was piced up buy not deliverd
+                    else if (p.Delivered == null) // parcel was picked up but not deliverd
                     {
                         newDrone.Location = senderLocation;
                         //calculate the battery
@@ -167,7 +167,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e);
             }
         }
         //this fuction charge a drone who needs to be charged
@@ -223,7 +223,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e);
             }
         }
 
@@ -264,7 +264,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e);
             }
         }
 
@@ -300,7 +300,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e);
             }
         }
 
@@ -362,7 +362,35 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e);
+            }
+        }
+
+        // This function ,akes a drone supply its parcel to its target customer.
+        public void SupplyParcel(int id)
+        {
+            try
+            {
+                DroneForList drone = BLDrones[GetBLDroneIndex(id)];
+                if (drone.Status != DroneStatuses.Shipping)
+                    throw new DroneCannotSupplyParcelException(drone);
+                IDAL.DO.Parcel parcel = dalObject.GetParcels(p => p.DroneId == id).ToList()[0];
+                if (parcel.Delivered != null)
+                    throw new DroneCannotSupplyParcelException(drone, parcel);
+                // update the parcel on data layer:
+                dalObject.SupplyParcelToCustomer(parcel.Id); 
+                // update the drone on BL layer:
+                drone.Status = DroneStatuses.Available;
+                IDAL.DO.Customer target = dalObject.GetCustomer(parcel.TargetId);
+                Location targetLoaction = new Location { Latitude = target.Latitude, Longitude = target.Longitude };
+                double consumption = Distance(drone.Location, targetLoaction) * getConsumptionRate(drone.MaxWeight);
+                drone.Battery -= consumption;
+                drone.Location = targetLoaction;
+                BLDrones[GetBLDroneIndex(id)] = drone;
+            }
+            catch (DalObject.IdIsNotExistException e)
+            {
+                throw new IdIsNotExistException(e);
             }
         }
 
@@ -376,30 +404,33 @@ namespace BL
         {
             try
             {
-                /*ParcelInTransfer p = (ParcelInTransfer)dalObject.(x => x.DroneId == id);
-                ParcelInTransfer parcelInTransfer = new ParcelInTransfer();
-                foreach (ParcelInTransfer transferedParcel in p)
+                if (BLDrones.FindIndex(x => x.Id == id) == -1) throw new IdIsNotExistException(id, "Drone");
+                DroneForList drone = BLDrones[GetBLDroneIndex(id)];
+                ParcelInTransfer transferedParcel = new ParcelInTransfer();
+                if (drone.Status == DroneStatuses.Shipping)
                 {
-                    parcelInTransfer.Add(GetDrone(transferedParcel));
+                    IDAL.DO.Parcel p = dalObject.GetParcels(x => x.DroneId == id).ToList()[0];
+                    transferedParcel.Priority = (Priorities)p.Priority;
+                    transferedParcel.Id = p.Id;
+                    transferedParcel.Sender = new CustomerInDelivery { Id = p.SenderId, Name = dalObject.GetCustomer(p.SenderId).Name };
+                    transferedParcel.Receiver = new CustomerInDelivery { Id = p.TargetId, Name = dalObject.GetCustomer(p.TargetId).Name };
                 }
 
-                IDAL.DO.Drone drone = dalObject.GetDrone(id);
-                IBL.BO.Drone resultDrone = new IBL.BO.Drone
+                Drone resultDrone = new Drone
                 {
                     Id = drone.Id,
                     Model = drone.Model,
                     MaxWeight = drone.MaxWeight,
                     Status = drone.Status,
                     Battery = drone.Battery,
-                    Location = new IBL.BO.Location { Latitude = drone.Latitude, Longitude = drone.Longitude },
-                    parcelInTransfer = TransferedParcel
+                    Location = drone.Location,
+                    TransferedParcel = transferedParcel
                 };
-                return resultDrone;*/
-                return null;
+                return resultDrone;
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e);
             }
         }
 
@@ -417,7 +448,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e);
             }
         }
 

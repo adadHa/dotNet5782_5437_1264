@@ -23,7 +23,7 @@ namespace BL
             {
                 throw new NoChargeSlotsException(e.ToString());
             }
-           
+
         }
 
         //This function updates a station with a new name and/or a new charging slots capacity.
@@ -45,7 +45,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e);
             }
         }
         //this function view the station details
@@ -59,10 +59,15 @@ namespace BL
             try
             {
                 List<IDAL.DO.DroneCharge> l = (List<IDAL.DO.DroneCharge>)dalObject.GetDroneCharges(x => x.StationId == id);
-                List<DroneForList> listOfDronesInCharge = new List<DroneForList>();
+                List<DroneInCharge> listOfDronesInCharge = new List<DroneInCharge>();
                 foreach (IDAL.DO.DroneCharge droneCharge in l)
                 {
-                    listOfDronesInCharge.Add(BLDrones[GetBLDroneIndex(droneCharge.DroneId)]);
+                    DroneForList BLDrone = BLDrones[GetBLDroneIndex(droneCharge.DroneId)];
+                    listOfDronesInCharge.Add(new DroneInCharge
+                    {
+                        DroneId = BLDrone.Id,
+                        BatteryStatus = BLDrone.Battery
+                    });
                 }
 
                 IDAL.DO.Station station = dalObject.GetStation(id);
@@ -78,7 +83,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IdIsNotExistException(e.ToString());
+                throw new IdIsNotExistException(e);
             }
         }
         //this function view the station details

@@ -16,13 +16,13 @@ namespace IBL
             public WheightCategories Wheight { get; set; }
             public Priorities Priority { get; set; }
             public int DroneId { get; set; }
-            public DateTime Requested { get; set; }
+            public DateTime Created { get; set; }
             public DateTime Scheduled { get; set; }
             public DateTime PickedUp { get; set; }
             public DateTime Delivered { get; set; }
             public override string ToString()
             {
-                return $"Id: {Id}, SenderId: {SenderId}, TargetId: {TargetId}, Wheight: {Wheight}, Priority: {Priority}, Requested: {Requested}, DroneId: {DroneId}, Requested:{Requested}, Scheduled: {Scheduled}, Picked Up: {PickedUp}, Delivered: {Delivered}";
+                return $"Id: {Id}, SenderId: {SenderId}, TargetId: {TargetId}, Wheight: {Wheight}, Priority: {Priority}, DroneId: {DroneId}, Created:{Created}, Scheduled: {Scheduled}, Picked Up: {PickedUp}, Delivered: {Delivered}";
             }
         } 
     }

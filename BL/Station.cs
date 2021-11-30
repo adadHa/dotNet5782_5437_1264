@@ -14,10 +14,10 @@ namespace IBL
             public string Name { get; set; }
             public Location Location { get; set; }
             public int ChargeSlots { get; set; }
-            public List<DroneForList> ListOfDronesInCharge { get; set; }
+            public List<DroneInCharge> ListOfDronesInCharge { get; set; }
             public override string ToString()
             {
-                return $"Id: {Id}, Name: {Name}, Location: {Location}, Charge Slots: {ChargeSlots}, List Of Drones In Charge: {ListOfDronesInCharge}";
+                return $"Id: {Id}, Name: {Name}, Location: {Location}, Charge Slots: {ChargeSlots}, List Of Drones In Charge: {ListOfDronesInCharge.ToString()}";
             }
         } 
     }

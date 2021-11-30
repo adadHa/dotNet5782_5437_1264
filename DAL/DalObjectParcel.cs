@@ -33,7 +33,7 @@ namespace DalObject
                     Wheight = (IDAL.DO.WheightCategories)Enum.Parse(typeof(IDAL.DO.WheightCategories), weight),
                     Priority = (IDAL.DO.Priorities)Enum.Parse(typeof(IDAL.DO.Priorities), priority),
                     DroneId = responsibleDrone,
-                    Requested = DateTime.Now,
+                    Created = DateTime.Now,
                     Scheduled = null,
                     PickedUp = null,
                     Delivered = null
@@ -107,11 +107,6 @@ namespace DalObject
                 IDAL.DO.Parcel p = DataSource.Parcels[deliveredParcelIndex];
                 p.Delivered = DateTime.Now;
                 DataSource.Parcels[deliveredParcelIndex] = p;
-                int droneId = DataSource.Parcels[deliveredParcelIndex].DroneId;
-                int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
-                IDAL.DO.Drone d = DataSource.Drones[droneIndex];
-                //d.Status = IDAL.DO.DroneStatuses.Available;
-                DataSource.Drones[droneIndex] = d;
             }
             catch (Exception)
             {

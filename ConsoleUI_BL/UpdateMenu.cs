@@ -8,7 +8,7 @@ namespace ConsoleUI_BL
 {
     partial class Program
     {
-        enum UpdateOptions { Exit, UpdateDrone, UpdateStation, UpdateCustomer, ChargeDrone, ReleaseDroneFromCharging, BindDrone, CollectParcelByDrone, DeliverParcelByDrone };
+        enum UpdateOptions { Exit, UpdateDrone, UpdateStation, UpdateCustomer, ChargeDrone, ReleaseDroneFromCharging, BindDrone, CollectParcelByDrone, SupplyParcel };
         static void UpdateMenu(IBL.IBL blObject)
         {
             UpdateOptions updateOption = 0;
@@ -173,15 +173,15 @@ namespace ConsoleUI_BL
                         break;
                     }
 
-                case UpdateOptions.DeliverParcelByDrone:
+                case UpdateOptions.SupplyParcel:
                     {
                         int droneId;
-                        Console.WriteLine("Enter parcel id:");
+                        Console.WriteLine("Enter drone id:");
                         int.TryParse(Console.ReadLine(), out droneId);
 
                         try
                         {
-                            //blObject.SupplyParcelToCustomer(droneId);
+                            blObject.SupplyParcel(droneId);
 
                         }
                         catch (Exception e)
