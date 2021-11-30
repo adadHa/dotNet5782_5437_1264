@@ -87,7 +87,7 @@ namespace BL
             return result;
         }
 
-        private IEnumerable<IBL.BO.ParcelForList> GetParcels(Func<IDAL.DO.Parcel, bool> filter = null)
+        public IEnumerable<IBL.BO.ParcelForList> GetParcels(Func<IDAL.DO.Parcel, bool> filter = null)
         {
             List<IDAL.DO.Parcel> dalParcels = dalObject.GetParcels(filter).ToList();
             List<IBL.BO.ParcelForList> resultList = new List<IBL.BO.ParcelForList>();

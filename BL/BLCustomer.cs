@@ -120,7 +120,7 @@ namespace BL
             return result;
         }
 
-        private IEnumerable<IBL.BO.CustomerForList> GetCustomers()
+        public IEnumerable<IBL.BO.CustomerForList> GetCustomers(Func<IDAL.DO.Customer, bool> filter = null)
         {
             List<IDAL.DO.Customer> dalCustomers = dalObject.GetCustomers().ToList();
             List<IBL.BO.CustomerForList> resultList = new List<IBL.BO.CustomerForList>();

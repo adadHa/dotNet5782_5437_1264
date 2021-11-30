@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using IBL.BO;
 namespace IBL
 {
     public interface IBL
@@ -29,10 +29,10 @@ namespace IBL
         public string ViewParcel(int id);
 
 
-        //private IEnumerable<BO.StationForList> GetStations();
-        //private IEnumerable<BO.DroneForList> GetDrones();
-        //private IEnumerable<BO.CustomerForList> GetCustomers();
-        //private IEnumerable<BO.ParcelForList> GetParcels();
+        public IEnumerable<StationForList> GetStations(Func<IDAL.DO.Station, bool> filter = null);
+        public IEnumerable<DroneForList> GetDrones(Func<DroneForList, bool> filter = null);
+        public IEnumerable<CustomerForList> GetCustomers(Func<IDAL.DO.Customer, bool> filter = null);
+        public IEnumerable<ParcelForList> GetParcels(Func<IDAL.DO.Parcel, bool> filter = null);
 
 
         public string ViewStationsList();

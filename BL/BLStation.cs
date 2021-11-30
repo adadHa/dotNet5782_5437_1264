@@ -105,7 +105,7 @@ namespace BL
             }
             return result;
         }
-        private IEnumerable<StationForList> GetStations(Func<IDAL.DO.Station, bool> filter = null)
+        public IEnumerable<StationForList> GetStations(Func<IDAL.DO.Station, bool> filter = null)
         {
             List<IDAL.DO.Station> dalStations = dalObject.GetStations(filter).ToList();
             List<StationForList> resultList = new List<StationForList>();
