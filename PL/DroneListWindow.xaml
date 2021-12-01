@@ -20,9 +20,10 @@
                 <ColumnDefinition Width="200*"/>
                 <ColumnDefinition Width="200*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox Text="AAAAA" Name ="StatusSelector"  Grid.Column="1" Width="120" SelectionChanged="StatusSelector_SelectionChanged" Grid.ColumnSpan="2" Margin="40,0,40,0" >
+            <ComboBox Text="Status" Name ="StatusSelector"  Grid.Column="1" Width="120" SelectionChanged="StatusSelector_SelectionChanged" Grid.ColumnSpan="2" Margin="40,0,40,0" IsEditable="True" PreviewMouseDoubleClick="StatusSelector_PreviewMouseDoubleClick" >
 
             </ComboBox>
+            <ComboBox x:Name="WeightSelector" Grid.Column="3" Margin="40,0,40,0"  Width="120" SelectionChanged="WeightSelector_SelectionChanged" IsEditable="True" Text="Weight" PreviewMouseDoubleClick="WeightSelector_PreviewMouseDoubleClick"/>
         </Grid>
         <ListView x:Name="DronesListView" Grid.Row="1">
             <ListView.View>
