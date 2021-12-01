@@ -469,6 +469,7 @@ namespace BL
         {
             if (filter == null)
                 return BLDrones;
+            List<DroneForList> a = BLDrones.Where(filter).ToList();
             return BLDrones.Where(filter).ToList();
         }
     }

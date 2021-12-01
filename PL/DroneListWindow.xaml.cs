@@ -39,20 +39,34 @@ namespace PL
         {
             DroneStatuses statusFilter = (DroneStatuses)StatusSelector.SelectedItem;
             DronesListView.ItemsSource = BLObject.GetDrones(x => x.Status == statusFilter);
+            DronesListView.Items.Refresh();
         }
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             WheightCategories weightFilter = (WheightCategories)WeightSelector.SelectedItem;
             DronesListView.ItemsSource = BLObject.GetDrones(x => x.MaxWeight == weightFilter);
+            DronesListView.Items.Refresh();
         }
         private void StatusSelector_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DronesListView.ItemsSource = BLObject.GetDrones();
+            DronesListView.Items.Refresh();
         }
         private void WeightSelector_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DronesListView.ItemsSource = BLObject.GetDrones();
+            DronesListView.Items.Refresh();
         }
 
+        private void AddDroneButton_Click(object sender, RoutedEventArgs e)
+        {
+            new DroneWindow(BLObject).Show();
+        }
+
+        private void DronesListView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            DronesListView.ItemsSource = BLObject.GetDrones();
+            DronesListView.Items.Refresh();
+        }
     }
 }

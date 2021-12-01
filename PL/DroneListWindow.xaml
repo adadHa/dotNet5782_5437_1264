@@ -24,6 +24,7 @@
 
             </ComboBox>
             <ComboBox x:Name="WeightSelector" Grid.Column="3" Margin="40,0,40,0"  Width="120" SelectionChanged="WeightSelector_SelectionChanged" IsEditable="True" Text="Weight" PreviewMouseDoubleClick="WeightSelector_PreviewMouseDoubleClick"/>
+            <Button x:Name="AddDroneButton" Content="Add drone" HorizontalAlignment="Left" Margin="60,0,0,0" VerticalAlignment="Center" Click="AddDroneButton_Click"/>
         </Grid>
         <ListView x:Name="DronesListView" Grid.Row="1">
             <ListView.View>

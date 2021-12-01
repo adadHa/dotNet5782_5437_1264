@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="DroneWindow" Height="450" Width="800">
     <Grid>
-        
+        <TextBox x:Name="TextBoxInsertId" HorizontalAlignment="Left" Margin="372,100,0,0" Text="Insert id:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxInsertId_TextChanged" GotFocus="TextBoxInsertId_GotFocus"/>
+        <TextBox x:Name="TextBoxInsertModel" HorizontalAlignment="Left" Margin="372,133,0,0" Text="Insert model:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxInsertModel_TextChanged" GotFocus="TextBoxInsertModel_GotFocus"/>
+        <TextBox x:Name="TextBoxInsertInitialStationId" HorizontalAlignment="Left" Margin="372,0,0,0" Text="Insert initial station id:" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" TextChanged="TextBoxInsertInitialStationId_TextChanged" GotFocus="TextBoxInsertInitialStationId_GotFocus"/>
+        <ComboBox x:Name="ComboBoxInsertWeight" HorizontalAlignment="Left" Margin="372,165,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" Text="Insert weight cateory" SelectionChanged="ComboBoxInsertWeight_SelectionChanged"/>
+        <Button x:Name="ButtonAddDrone" Content="Add Drone" HorizontalAlignment="Left" Margin="372,59,0,0" VerticalAlignment="Top" Click="ButtonAddDrone_Click"/>
     </Grid>
 </Window>
