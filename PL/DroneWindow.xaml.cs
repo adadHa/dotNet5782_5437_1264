@@ -35,13 +35,9 @@ namespace PL
 
         private void TextBoxInsertId_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(!int.TryParse(TextBoxInsertId.Text, out Id))
+            if (!int.TryParse(TextBoxInsertId.Text, out Id) || Id < 0)
             {
-                CustomizeError(TextBoxInsertId);
-            }
-            else
-            {
-                CustomizeRight(TextBoxInsertId);
+                MessageBox.Show("Id should be an integer grater than 0!");
             }
         }
 
@@ -54,14 +50,9 @@ namespace PL
         {
             if (!int.TryParse(TextBoxInsertInitialStationId.Text, out InitialStation))
             {
-                //color error
-            }
-            else
-            {
-                //color right
+                MessageBox.Show("Initial id should be an integer grater than 0!");
             }
         }
-
         private void ComboBoxInsertWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Weight = (string)ComboBoxInsertWeight.SelectedItem;
@@ -95,6 +86,11 @@ namespace PL
         private void TextBoxInsertInitialStationId_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBoxInsertInitialStationId.Text = "";
+        }
+
+        private void CloseDroneWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

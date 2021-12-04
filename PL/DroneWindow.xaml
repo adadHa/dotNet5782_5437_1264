@@ -5,12 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneWindow" Height="450" Width="800">
-    <Grid>
-        <TextBox x:Name="TextBoxInsertId" HorizontalAlignment="Left" Margin="372,100,0,0" Text="Insert id:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxInsertId_TextChanged" GotFocus="TextBoxInsertId_GotFocus"/>
-        <TextBox x:Name="TextBoxInsertModel" HorizontalAlignment="Left" Margin="372,133,0,0" Text="Insert model:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxInsertModel_TextChanged" GotFocus="TextBoxInsertModel_GotFocus"/>
-        <TextBox x:Name="TextBoxInsertInitialStationId" HorizontalAlignment="Left" Margin="372,0,0,0" Text="Insert initial station id:" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" TextChanged="TextBoxInsertInitialStationId_TextChanged" GotFocus="TextBoxInsertInitialStationId_GotFocus"/>
-        <ComboBox x:Name="ComboBoxInsertWeight" HorizontalAlignment="Left" Margin="372,165,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" Text="Insert weight cateory" SelectionChanged="ComboBoxInsertWeight_SelectionChanged"/>
-        <Button x:Name="ButtonAddDrone" Content="Add Drone" HorizontalAlignment="Left" Margin="372,59,0,0" VerticalAlignment="Top" Click="ButtonAddDrone_Click"/>
+        Title="DroneWindow" Height="450" Width="450
+        ">
+
+    <Grid Name="InputValues" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
+VerticalAlignment="Stretch" Width="auto">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="ButtonAddDrone" Content="Add Drone" HorizontalAlignment="Left" Grid.Column="0" VerticalAlignment="Top" Click="ButtonAddDrone_Click"/>
+                <Button x:Name="CloseDroneWindow" HorizontalAlignment="Right" Click="CloseDroneWindow_Click" 
+                  BorderThickness="0,0,0,0" Grid.Column="1">
+                    <VisualBrush Stretch="Fill" 
+                Visual="{StaticResource CloseIcon}" />
+                </Button>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Insert id:" Grid.Column="0" HorizontalAlignment="Center"></TextBlock>
+                <TextBox x:Name="TextBoxInsertId" HorizontalAlignment="Left" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="auto" TextChanged="TextBoxInsertId_TextChanged" GotFocus="TextBoxInsertId_GotFocus" Grid.Row="1"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Insert model:" Grid.Column="0" HorizontalAlignment="Center"></TextBlock>
+                <TextBox x:Name="TextBoxInsertModel" HorizontalAlignment="Left" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxInsertModel_TextChanged" GotFocus="TextBoxInsertModel_GotFocus" Grid.Row="2"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Insert initial station's id:" Grid.Column="0" HorizontalAlignment="Center"></TextBlock>
+                <TextBox x:Name="TextBoxInsertInitialStationId" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Width="120" TextChanged="TextBoxInsertInitialStationId_TextChanged" GotFocus="TextBoxInsertInitialStationId_GotFocus" Grid.Row="3"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <ComboBox x:Name="ComboBoxInsertWeight" HorizontalAlignment="Left" VerticalAlignment="Top" IsEditable="True" SelectionChanged="ComboBoxInsertWeight_SelectionChanged" Grid.Row="3" Grid.Column="0" Margin="0,87,0,0" Grid.RowSpan="2" Width="120"/>
+            </Grid>
+        </StackPanel>
+
+
+
+
+
     </Grid>
 </Window>
