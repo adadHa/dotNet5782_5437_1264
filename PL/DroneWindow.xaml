@@ -5,13 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneWindow" Height="450" Width="450
-        ">
+        Title="DroneWindow" Height="250" Width="300">
 
     <Grid Name="InputValues" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
 VerticalAlignment="Stretch" Width="auto">
-        <StackPanel>
-            <Grid>
+        <StackPanel Background="#F7F6F2">
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Add Drone" Foreground="{StaticResource myFavoriteColor}"  FontSize="25" ></TextBlock>
+            </Grid>
+            <Grid Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -23,36 +30,37 @@ VerticalAlignment="Stretch" Width="auto">
                 Visual="{StaticResource CloseIcon}" />
                 </Button>
             </Grid>
-            <Grid>
+            <Grid Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Insert id:" Grid.Column="0" HorizontalAlignment="Center"></TextBlock>
-                <TextBox x:Name="TextBoxInsertId" HorizontalAlignment="Left" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="auto" TextChanged="TextBoxInsertId_TextChanged" GotFocus="TextBoxInsertId_GotFocus" Grid.Row="1"/>
+                <TextBlock Text="Insert id:" Foreground="#9D9D9D" Grid.Column="0" HorizontalAlignment="Center"></TextBlock>
+                <TextBox x:Name="TextBoxInsertId" HorizontalAlignment="Center" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" TextChanged="TextBoxInsertId_TextChanged" GotFocus="TextBoxInsertId_GotFocus" Grid.Row="1"/>
             </Grid>
-            <Grid>
+            <Grid Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Insert model:" Grid.Column="0" HorizontalAlignment="Center"></TextBlock>
-                <TextBox x:Name="TextBoxInsertModel" HorizontalAlignment="Left" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxInsertModel_TextChanged" GotFocus="TextBoxInsertModel_GotFocus" Grid.Row="2"/>
+                <TextBlock Text="Insert model:" Foreground="#9D9D9D" Grid.Column="0" HorizontalAlignment="Center"></TextBlock>
+                <TextBox x:Name="TextBoxInsertModel" HorizontalAlignment="Center" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBoxInsertModel_TextChanged" GotFocus="TextBoxInsertModel_GotFocus" Grid.Row="2"/>
             </Grid>
-            <Grid>
+            <Grid Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Insert initial station's id:" Grid.Column="0" HorizontalAlignment="Center"></TextBlock>
-                <TextBox x:Name="TextBoxInsertInitialStationId" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Width="120" TextChanged="TextBoxInsertInitialStationId_TextChanged" GotFocus="TextBoxInsertInitialStationId_GotFocus" Grid.Row="3"/>
+                <TextBlock Text="Insert initial station's id:" Grid.Column="0" HorizontalAlignment="Right"></TextBlock>
+                <TextBox x:Name="TextBoxInsertInitialStationId" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Width="120" TextChanged="TextBoxInsertInitialStationId_TextChanged" GotFocus="TextBoxInsertInitialStationId_GotFocus" Grid.Row="3"/>
             </Grid>
-            <Grid>
+            <Grid Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <ComboBox x:Name="ComboBoxInsertWeight" HorizontalAlignment="Left" VerticalAlignment="Top" IsEditable="True" SelectionChanged="ComboBoxInsertWeight_SelectionChanged" Grid.Row="3" Grid.Column="0" Margin="0,87,0,0" Grid.RowSpan="2" Width="120"/>
+                <TextBlock Text="Choose weight category:" Grid.Column="0" HorizontalAlignment="Right"></TextBlock>
+                <ComboBox x:Name="ComboBoxInsertWeight" HorizontalAlignment="Center" IsEditable="True" SelectionChanged="ComboBoxInsertWeight_SelectionChanged" Grid.Row="3" Grid.Column="1" Width="120"/>
             </Grid>
         </StackPanel>
 
