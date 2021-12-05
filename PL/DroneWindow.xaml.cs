@@ -20,17 +20,28 @@ namespace PL
     public partial class DroneWindow : Window
     {
         private IBL.IBL BLObject { get; set; }
+        public Drone Drone { get; }
+
         //for adding a drone:
         private int Id;
         private string Model;
         private string Weight;
         private int InitialStation;
 
+        //constructor for add drone mode
         public DroneWindow(IBL.IBL blObject)
         {
             InitializeComponent();
             BLObject = blObject;
             ComboBoxInsertWeight.ItemsSource = Enum.GetNames(typeof(WheightCategories));
+
+            //make the add drone window visible
+            AddDroneWindow.Visibility = Visibility.Hidden;
+        }
+
+        public DroneWindow(IBL.IBL blObject, Drone drone) : this(blObject)
+        {
+            Drone = drone;
         }
 
         private void TextBoxInsertId_TextChanged(object sender, TextChangedEventArgs e)
@@ -91,6 +102,16 @@ namespace PL
         private void CloseDroneWindow_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void ButtonAddDrone_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ButtonAddDrone.Background = FindResource("AddButtonMouseOver") as Brush;
+        }
+
+        private void ButtonAddDrone_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ButtonAddDrone.Background = FindResource("AddButton") as Brush;
         }
     }
 }

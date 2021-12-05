@@ -68,5 +68,11 @@ namespace PL
             DronesListView.ItemsSource = BLObject.GetDrones();
             DronesListView.Items.Refresh();
         }
+
+        private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Drone drone = ((ListViewItem)sender).Content as Drone;
+            new DroneWindow(BLObject, drone).Show();
+        }
     }
 }
