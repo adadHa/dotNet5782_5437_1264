@@ -81,7 +81,7 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.6*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -89,15 +89,37 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"  Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" >
+                <Button Name="CloseOptionsDroneWindowButton"  Content="Close"  HorizontalAlignment="right" VerticalAlignment="Bottom" Click="CloseOptionsDroneWindowButton_Click" />
             </StackPanel>
-            
-            <TextBlock Name="Title" Grid.Row="1" Grid.RowSpan="2" Text="  Drone " FontSize="46" Grid.Column="0"/>
-            <TextBlock Name="IdValueTextBlock" Grid.Row="1" Grid.RowSpan="2" FontSize="46" Grid.Column="3" />
-            <TextBlock Name="ModelValueTextBlock" Grid.Row="3" Text="Model: " FontSize="16" Grid.Column="0"  />
-            <TextBlock Name="LocationValueTextBlock" Grid.Row="4" Text="Location: "  FontSize="16" Grid.Column="0"/>
-            <TextBlock Name="WeightCategoryValueTextBlock" Grid.Row="5" Text="Weight Category: " FontSize="16" Grid.Column="0" />
-            <TextBlock Name="StatusCategoryValueTextBlock" Grid.Row="6" Text="Status: " FontSize="16" Grid.Column="0"/>
-            
+
+            <TextBlock Name="TitleTextBox" Grid.Row="1" Text="  Drone " FontSize="46" Grid.Column="0" />
+            <TextBlock Name="IdAndParcelIdTextBlock" Grid.Row="1" Text="With parcel" FontSize="16" Grid.Column="0" VerticalAlignment="Bottom" Margin="50,0,0,16"/>
+            <Grid Grid.Row="2" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Name="ModelValueTextBlok" Grid.Row="2" Text="Model : " FontSize="14" Grid.Column="0"   />
+                <TextBox Name="ModelValueTextBox" Grid.Row="2" FontSize="14" Grid.Column="1" KeyDown="ModelValueTextBox_KeyDown"/>
+            </Grid>
+
+            <TextBlock Name="LocationValueTextBlock" Grid.Row="3" Text="Location: "  FontSize="14" Grid.Column="0" TextInput="LocationValueTextBlock_TextInput"/>
+            <TextBlock Name="WeightCategoryValueTextBlock" Grid.Row="4" Text="Weight Category: " FontSize="16" Grid.Column="0" />
+            <TextBlock Name="StatusValueTextBlock" Grid.Row="5" Text="Status: " FontSize="14" Grid.Column="0"/>
+            <TextBlock Name="BatteryValueTextBlock" Grid.Row="6" Text="Battery: " FontSize="14" Grid.Column="0"/>
+            <StackPanel Name="OptionsStackPanel" Orientation="Vertical" Width="80" Height="180" Background="{StaticResource Blue3}" Margin="18,48,35,40" Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" >
+                <Button x:Name="ChargeDroneButton" Content="Charge Drone" Click="ChargeDroneButton_Click"/>
+                <Button x:Name="ReleaseDroneButton" Content="Stop charging" Click="ReleaseDroneButton_Click" />
+                <Button x:Name="SendDroneButton" Content="Send" Click="SendDroneButton_Click" />
+                <Button x:Name="PickUpDroneButton" Content="Pick up parcel" Click="PickUpDroneButton_Click" />
+                <Button x:Name="SupplyParcelDroneButton" Content="Supply parcel" Click="SupplyParcelDroneButton_Click" />
+                
+                
+            </StackPanel>
+
+
+
+
         </Grid>
     </Grid>
 </Window>

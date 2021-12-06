@@ -46,12 +46,12 @@ namespace PL
             OptionsDroneWindow.Visibility = Visibility.Visible;
             AddDroneWindow.Visibility = Visibility.Collapsed;
             Drone = drone;
-            //IdValueTextBlock.Text = (string)int.Parse(drone.Id);
-            ModelValueTextBlock.Text = "Model: " + drone.Model;
+            TitleTextBox.Text = $"Drone {drone.Id}";
+            IdAndParcelIdTextBlock.Text = $"With parcel {drone.DeliveredParcelNumber}";
             LocationValueTextBlock.Text = "Location: " + drone.Location.ToString();
             WeightCategoryValueTextBlock.Text = "Weight: " + Enum.GetName(drone.MaxWeight);
-            StatusCategoryValueTextBlock.Text = "Status: " + Enum.GetName(drone.Status);
-            int x = 2;
+            StatusValueTextBlock.Text = "Status: " + Enum.GetName(drone.Status);
+            BatteryValueTextBlock.Text = $"Battery: {Math.Round(drone.Battery, 2)}";
         }
 
         private void TextBoxInsertId_TextChanged(object sender, TextChangedEventArgs e)
@@ -122,6 +122,92 @@ namespace PL
         private void ButtonAddDrone_MouseLeave(object sender, MouseEventArgs e)
         {
             ButtonAddDrone.Background = FindResource("AddButton") as Brush;
+        }
+
+        private void LocationValueTextBlock_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            int a = 0;
+        }
+
+        private void ModelValueTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                BLObject.UpdateDrone(Drone.Id, ModelValueTextBox.Text);
+            }
+
+        }
+
+        private void CloseOptionsDroneWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void ChargeDroneButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BLObject.ChargeDrone(Drone.Id);
+                MessageBox.Show($"Drone {Drone.Id} has sarted charging. \n " +
+                    $"Its battery now is {Drone.Battery}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void ReleaseDroneButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //BLObject.ReleaseDroneFromCharging(Drone.Id,);
+                MessageBox.Show($"Drone {Drone.Id} has stopped charging. \n " +
+                    $"Its battery now is {Drone.Battery}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void SendDroneButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BLObject.BindDrone(Drone.Id);
+                MessageBox.Show($"Drone {Drone.Id} was sent succefully to deliver parcel {Drone.DeliveredParcelNumber}!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void PickUpDroneButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BLObject.CollectParcelByDrone(Drone.Id);
+                MessageBox.Show($"Drone {Drone.Id} was picks up parcel {Drone.DeliveredParcelNumber}!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void SupplyParcelDroneButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BLObject.SupplyParcel(Drone.Id);
+                MessageBox.Show($"Drone {Drone.Id} supply parcel {Drone.DeliveredParcelNumber}!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

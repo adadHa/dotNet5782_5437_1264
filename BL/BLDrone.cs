@@ -48,7 +48,7 @@ namespace BL
                 if (dalObject.GetParcels(x => x.Delivered == null && x.DroneId == dalDrone.Id).Count() == 1)
                 {
                     IDAL.DO.Parcel p = dalObject.GetParcels(x => x.Delivered == null && x.DroneId == dalDrone.Id).ToList()[0];
-
+                    newDrone.DeliveredParcelNumber = p.Id;
                     newDrone.Status = DroneStatuses.Shipping;
 
                     Location senderLocation = new Location
@@ -138,6 +138,7 @@ namespace BL
                     Model = model,
                     MaxWeight = (IBL.BO.WheightCategories)Enum.Parse(typeof(IBL.BO.WheightCategories), weight),
                     Battery = batteryStatus,
+                    DeliveredParcelNumber = -1,
                     Status = IBL.BO.DroneStatuses.Maintenance,
                     Location = new IBL.BO.Location()
                     {
