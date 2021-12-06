@@ -46,6 +46,11 @@ namespace PL
             OptionsDroneWindow.Visibility = Visibility.Visible;
             AddDroneWindow.Visibility = Visibility.Collapsed;
             Drone = drone;
+            //IdValueTextBlock.Text = (string)int.Parse(drone.Id);
+            ModelValueTextBlock.Text = Drone.Model;
+            LocationValueTextBlock.Text = drone.Location.ToString();
+            StatusCategoryValueTextBlock.Text = Enum.GetName(drone.Status);
+
         }
 
         private void TextBoxInsertId_TextChanged(object sender, TextChangedEventArgs e)
