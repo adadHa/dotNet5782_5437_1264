@@ -28,7 +28,7 @@ namespace PL
         private string Weight;
         private int InitialStation;
 
-        //constructor for add drone mode
+        //constructor of add drone mode
         public DroneWindow(IBL.IBL blObject)
         {
             InitializeComponent();
@@ -36,11 +36,15 @@ namespace PL
             ComboBoxInsertWeight.ItemsSource = Enum.GetNames(typeof(WheightCategories));
 
             //make the add drone window visible
-            AddDroneWindow.Visibility = Visibility.Hidden;
+            AddDroneWindow.Visibility = Visibility.Visible;
+            OptionsDroneWindow.Visibility = Visibility.Collapsed;
         }
 
+        // constructor of view drone/options mode
         public DroneWindow(IBL.IBL blObject, Drone drone) : this(blObject)
         {
+            OptionsDroneWindow.Visibility = Visibility.Visible;
+            AddDroneWindow.Visibility = Visibility.Collapsed;
             Drone = drone;
         }
 

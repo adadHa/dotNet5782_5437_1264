@@ -80,16 +80,27 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="0.6*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" >
-                
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"  Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" >
             </StackPanel>
+            
+            <TextBlock Name="Title" Grid.Row="1" Grid.RowSpan="2" Text="  Drone " FontSize="46" Grid.Column="0" Grid.ColumnSpan="3"/>
+            <TextBlock Name="IdValueTextBlock" Grid.Row="1" Grid.RowSpan="2" FontSize="46" Grid.Column="3"/>
+            <TextBlock Name="ModelValueTextBlock" Grid.Row="3" Text="Model: " FontSize="16" Grid.Column="1" />
+            <TextBlock Name="InitialStationIdValueTextBlock" Grid.Row="4" Text="Initial StationId: "  FontSize="16" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <TextBlock Name="WeightCategoryValueTextBlock" Grid.Row="5" Text="Weight Category: " FontSize="16" Grid.Column="1" Grid.ColumnSpan="2"/>
+            
         </Grid>
     </Grid>
 </Window>
