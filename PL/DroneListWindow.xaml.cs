@@ -71,7 +71,7 @@ namespace PL
 
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Drone drone = ((ListViewItem)sender).Content as Drone;
+            DroneForList drone = (DroneForList)((ListView)sender).SelectedItem;
             new DroneWindow(BLObject, drone).Show();
         }
     }

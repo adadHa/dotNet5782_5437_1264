@@ -20,7 +20,7 @@ namespace PL
     public partial class DroneWindow : Window
     {
         private IBL.IBL BLObject { get; set; }
-        public Drone Drone { get; }
+        public DroneForList Drone { get; }
 
         //for adding a drone:
         private int Id;
@@ -41,16 +41,17 @@ namespace PL
         }
 
         // constructor of view drone/options mode
-        public DroneWindow(IBL.IBL blObject, Drone drone) : this(blObject)
+        public DroneWindow(IBL.IBL blObject, DroneForList drone) : this(blObject)
         {
             OptionsDroneWindow.Visibility = Visibility.Visible;
             AddDroneWindow.Visibility = Visibility.Collapsed;
             Drone = drone;
             //IdValueTextBlock.Text = (string)int.Parse(drone.Id);
-            ModelValueTextBlock.Text = Drone.Model;
-            LocationValueTextBlock.Text = drone.Location.ToString();
-            StatusCategoryValueTextBlock.Text = Enum.GetName(drone.Status);
-
+            ModelValueTextBlock.Text = "Model: " + drone.Model;
+            LocationValueTextBlock.Text = "Location: " + drone.Location.ToString();
+            WeightCategoryValueTextBlock.Text = "Weight: " + Enum.GetName(drone.MaxWeight);
+            StatusCategoryValueTextBlock.Text = "Status: " + Enum.GetName(drone.Status);
+            int x = 2;
         }
 
         private void TextBoxInsertId_TextChanged(object sender, TextChangedEventArgs e)

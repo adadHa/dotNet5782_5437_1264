@@ -14,7 +14,7 @@ namespace IBL
             public double Latitude { get; set; }
             public override string ToString()
             {
-                return $"Longitude: {Longitude}, Latitude: {Latitude}";
+                return $"({Math.Round(Longitude,2)},{Math.Round(Latitude,2)})";
             }
         } 
     }

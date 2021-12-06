@@ -76,11 +76,7 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
         <Grid Name="OptionsDroneWindow" HorizontalAlignment="Stretch" Height="340" Width="400" Grid.Row="1"
         VerticalAlignment="Stretch" Visibility="Visible">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -95,12 +91,12 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"  Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" >
             </StackPanel>
             
-            <TextBlock Name="Title" Grid.Row="1" Grid.RowSpan="2" Text="  Drone " FontSize="46" Grid.Column="0" Grid.ColumnSpan="3"/>
-            <TextBlock Name="IdValueTextBlock" Grid.Row="1" Grid.RowSpan="2" FontSize="46" Grid.Column="3"/>
-            <TextBlock Name="ModelValueTextBlock" Grid.Row="3" Text="Model: " FontSize="16" Grid.Column="1" />
-            <TextBlock Name="LocationValueTextBlock" Grid.Row="4" Text="Location: "  FontSize="16" Grid.Column="1" Grid.ColumnSpan="2"/>
-            <TextBlock Name="WeightCategoryValueTextBlock" Grid.Row="5" Text="Weight Category: " FontSize="16" Grid.Column="1" Grid.ColumnSpan="2"/>
-            <TextBlock Name="StatusCategoryValueTextBlock" Grid.Row="6" Text="Status: " FontSize="16" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <TextBlock Name="Title" Grid.Row="1" Grid.RowSpan="2" Text="  Drone " FontSize="46" Grid.Column="0"/>
+            <TextBlock Name="IdValueTextBlock" Grid.Row="1" Grid.RowSpan="2" FontSize="46" Grid.Column="3" />
+            <TextBlock Name="ModelValueTextBlock" Grid.Row="3" Text="Model: " FontSize="16" Grid.Column="0"  />
+            <TextBlock Name="LocationValueTextBlock" Grid.Row="4" Text="Location: "  FontSize="16" Grid.Column="0"/>
+            <TextBlock Name="WeightCategoryValueTextBlock" Grid.Row="5" Text="Weight Category: " FontSize="16" Grid.Column="0" />
+            <TextBlock Name="StatusCategoryValueTextBlock" Grid.Row="6" Text="Status: " FontSize="16" Grid.Column="0"/>
             
         </Grid>
     </Grid>
