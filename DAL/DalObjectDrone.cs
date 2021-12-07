@@ -52,7 +52,6 @@ namespace DalObject
                     throw new NoChargeSlotsException(DataSource.Stations[stationIndex]);
                 }
                 IDAL.DO.Drone d = DataSource.Drones[droneIndex];
-                DataSource.Drones[droneIndex] = d;
                 IDAL.DO.Station s = DataSource.Stations[stationIndex];
                 s.FreeChargeSlots -= 1;
                 DataSource.Stations[stationIndex] = s;

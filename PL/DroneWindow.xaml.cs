@@ -45,6 +45,7 @@ namespace PL
         {
             OptionsDroneWindow.Visibility = Visibility.Visible;
             AddDroneWindow.Visibility = Visibility.Collapsed;
+            TimeInput.Visibility = Visibility.Collapsed;
             Drone = drone;
             TitleTextBox.Text = $"Drone {drone.Id}";
             if (drone.DeliveredParcelNumber != -1)
@@ -56,6 +57,7 @@ namespace PL
             WeightCategoryValueTextBlock.Text = "Weight: " + Enum.GetName(drone.MaxWeight);
             StatusValueTextBlock.Text = "Status: " + Enum.GetName(drone.Status);
             BatteryValueTextBlock.Text = $"Battery: {Math.Round(drone.Battery, 2)}";
+
         }
 
         private void TextBoxInsertId_TextChanged(object sender, TextChangedEventArgs e)
@@ -171,17 +173,8 @@ namespace PL
         }
         private void ReleaseDroneButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                //BLObject.ReleaseDroneFromCharging(Drone.Id,);
-                Drone = BLObject.GetDrones(x => x.Id == Drone.Id).ToList()[0];
-                MessageBox.Show($"Drone {Drone.Id} has stopped charging. \n " +
-                    $"Its battery now is {Drone.Battery}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            TimeInput.Visibility = Visibility.Visible;
+            TimeInput.Focus();
         }
 
         private void PickUpDroneButton_Click(object sender, RoutedEventArgs e)
@@ -209,6 +202,32 @@ namespace PL
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                double time = 0;
+                if (double.TryParse(TimeInputTextBox.Text, out time))
+                {
+                    try
+                    {
+                        BLObject.ReleaseDroneFromCharging(Drone.Id, time);
+                        TimeInput.Visibility = Visibility.Collapsed;
+                        MessageBox.Show($"Drone {Drone.Id} has stopped charging. \n " +
+                        $"Its battery now is {Drone.Battery}");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+                else
+                {
+                    TimeInputTextBox.Background = Brushes.Red;
+                }
             }
         }
     }

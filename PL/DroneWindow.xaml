@@ -107,14 +107,17 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
             <TextBlock Name="WeightCategoryValueTextBlock" Grid.Row="4" Text="Weight Category: " FontSize="16" Grid.Column="0" />
             <TextBlock Name="StatusValueTextBlock" Grid.Row="5" Text="Status: " FontSize="14" Grid.Column="0"/>
             <TextBlock Name="BatteryValueTextBlock" Grid.Row="6" Text="Battery: " FontSize="14" Grid.Column="0"/>
-            <StackPanel Name="OptionsStackPanel" Orientation="Vertical" Width="80" Height="180" Background="{StaticResource Blue3}" Margin="18,48,35,40" Grid.Row="1" Grid.Column="1" Grid.RowSpan="5"  >
+            <StackPanel Name="OptionsStackPanel" Orientation="Vertical" Height="180" Background="{StaticResource Blue3}" Margin="212,39,22,5" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2"  >
                 <Button x:Name="ChargeDroneButton" Content="Charge Drone" Click="ChargeDroneButton_Click"/>
                 <Button x:Name="ReleaseDroneButton" Content="Stop charging" Click="ReleaseDroneButton_Click" />
                 <Button x:Name="LinkDroneButton" Content="Link to parcel" Click="LinkDroneButton_Click" />
                 <Button x:Name="PickUpDroneButton" Content="Pick up parcel" Click="PickUpDroneButton_Click" />
                 <Button x:Name="SupplyParcelDroneButton" Content="Supply parcel" Click="SupplyParcelDroneButton_Click" />
             </StackPanel>
-
         </Grid>
+        <StackPanel Name="TimeInput" Width="200" Height="50" Visibility="Visible" Background="White" Margin="116,145,84,145">
+            <TextBlock  Text="Insert charging time:"/>
+            <TextBox Name="TimeInputTextBox" Width="100" Margin="0,5,0,0" KeyDown="TextBox_KeyDown"/>
+        </StackPanel>
     </Grid>
 </Window>
