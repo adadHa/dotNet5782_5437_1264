@@ -86,6 +86,7 @@ namespace BL
                 else
                 {
                     newDrone.Status = (DroneStatuses)rand.Next(0, 2); // rand between Available and Maintenance
+                    newDrone.DeliveredParcelNumber = -1;
                 }
 
                 if (newDrone.Status == DroneStatuses.Maintenance)
@@ -164,6 +165,7 @@ namespace BL
 
             try
             {
+                BLDrones[GetBLDroneIndex(id)].Model = newModel;
                 dalObject.UpdateDrone(id, newModel);
             }
             catch (DalObject.IdIsNotExistException e)
@@ -297,6 +299,8 @@ namespace BL
                         bestParcelToBind = parcel;
                     }
                 }
+                BLDrones[GetBLDroneIndex(id)].Status = DroneStatuses.Shipping;
+                BLDrones[GetBLDroneIndex(id)].DeliveredParcelNumber = bestParcelToBind.Id;
                 dalObject.BindParcel(bestParcelToBind.Id, id);
             }
             catch (DalObject.IdIsNotExistException e)
@@ -335,7 +339,8 @@ namespace BL
             Location p2SenderLocation = new Location { Latitude = p2Sender.Latitude, Longitude = p2Sender.Longitude };
             if (parcel1.Priority > parcel2.Priority)
                 return true;
-            else if (Distance(drone.Location, p1SenderLocation) < Distance(drone.Location, p2SenderLocation))
+            else if (parcel1.Priority == parcel2.Priority &&
+                Distance(drone.Location, p1SenderLocation) < Distance(drone.Location, p2SenderLocation))
                 return true;
             else return false;
         }

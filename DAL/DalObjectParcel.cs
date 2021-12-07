@@ -62,7 +62,6 @@ namespace DalObject
                 int parcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
                 IDAL.DO.Drone d = DataSource.Drones[droneIndex];
                 IDAL.DO.Parcel p = DataSource.Parcels[parcelIndex];
-                //d.Status = IDAL.DO.DroneStatuses.Shipping;
                 p.DroneId = droneId;
                 p.Scheduled = DateTime.Now;
                 DataSource.Drones[droneIndex] = d;

@@ -20,7 +20,7 @@ namespace PL
     public partial class DroneWindow : Window
     {
         private IBL.IBL BLObject { get; set; }
-        public DroneForList Drone { get; }
+        public DroneForList Drone { get; set; }
 
         //for adding a drone:
         private int Id;
@@ -47,7 +47,11 @@ namespace PL
             AddDroneWindow.Visibility = Visibility.Collapsed;
             Drone = drone;
             TitleTextBox.Text = $"Drone {drone.Id}";
-            IdAndParcelIdTextBlock.Text = $"With parcel {drone.DeliveredParcelNumber}";
+            if (drone.DeliveredParcelNumber != -1)
+                IdAndParcelIdTextBlock.Text = $"With parcel {drone.DeliveredParcelNumber}";
+            else
+                IdAndParcelIdTextBlock.Text = $"";
+            ModelValueTextBox.Text = $"{drone.Model}";
             LocationValueTextBlock.Text = "Location: " + drone.Location.ToString();
             WeightCategoryValueTextBlock.Text = "Weight: " + Enum.GetName(drone.MaxWeight);
             StatusValueTextBlock.Text = "Status: " + Enum.GetName(drone.Status);
@@ -124,14 +128,9 @@ namespace PL
             ButtonAddDrone.Background = FindResource("AddButton") as Brush;
         }
 
-        private void LocationValueTextBlock_TextInput(object sender, TextCompositionEventArgs e)
-        {
-            int a = 0;
-        }
-
         private void ModelValueTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 BLObject.UpdateDrone(Drone.Id, ModelValueTextBox.Text);
             }
@@ -148,6 +147,7 @@ namespace PL
             try
             {
                 BLObject.ChargeDrone(Drone.Id);
+                Drone = BLObject.GetDrones(x => x.Id == Drone.Id).ToList()[0];
                 MessageBox.Show($"Drone {Drone.Id} has sarted charging. \n " +
                     $"Its battery now is {Drone.Battery}");
             }
@@ -156,27 +156,27 @@ namespace PL
                 MessageBox.Show(ex.ToString());
             }
         }
-
-        private void ReleaseDroneButton_Click(object sender, RoutedEventArgs e)
+        private void LinkDroneButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //BLObject.ReleaseDroneFromCharging(Drone.Id,);
-                MessageBox.Show($"Drone {Drone.Id} has stopped charging. \n " +
-                    $"Its battery now is {Drone.Battery}");
+                BLObject.BindDrone(Drone.Id);
+                Drone = BLObject.GetDrones(x => x.Id == Drone.Id).ToList()[0];
+                MessageBox.Show($"Drone {Drone.Id} was sent succefully to deliver parcel {Drone.DeliveredParcelNumber}!");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
-
-        private void SendDroneButton_Click(object sender, RoutedEventArgs e)
+        private void ReleaseDroneButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                BLObject.BindDrone(Drone.Id);
-                MessageBox.Show($"Drone {Drone.Id} was sent succefully to deliver parcel {Drone.DeliveredParcelNumber}!");
+                //BLObject.ReleaseDroneFromCharging(Drone.Id,);
+                Drone = BLObject.GetDrones(x => x.Id == Drone.Id).ToList()[0];
+                MessageBox.Show($"Drone {Drone.Id} has stopped charging. \n " +
+                    $"Its battery now is {Drone.Battery}");
             }
             catch (Exception ex)
             {
@@ -189,7 +189,8 @@ namespace PL
             try
             {
                 BLObject.CollectParcelByDrone(Drone.Id);
-                MessageBox.Show($"Drone {Drone.Id} was picks up parcel {Drone.DeliveredParcelNumber}!");
+                Drone = BLObject.GetDrones(x => x.Id == Drone.Id).ToList()[0];
+                MessageBox.Show($"Drone {Drone.Id} picks up parcel {Drone.DeliveredParcelNumber}!");
             }
             catch (Exception ex)
             {
@@ -202,6 +203,7 @@ namespace PL
             try
             {
                 BLObject.SupplyParcel(Drone.Id);
+                Drone = BLObject.GetDrones(x => x.Id == Drone.Id).ToList()[0];
                 MessageBox.Show($"Drone {Drone.Id} supply parcel {Drone.DeliveredParcelNumber}!");
             }
             catch (Exception ex)
