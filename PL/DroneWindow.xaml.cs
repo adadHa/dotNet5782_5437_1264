@@ -212,16 +212,24 @@ namespace PL
                 double time = 0;
                 if (double.TryParse(TimeInputTextBox.Text, out time))
                 {
-                    try
+
+                    if (time < 0)
                     {
-                        BLObject.ReleaseDroneFromCharging(Drone.Id, time);
-                        TimeInput.Visibility = Visibility.Collapsed;
-                        MessageBox.Show($"Drone {Drone.Id} has stopped charging. \n " +
-                        $"Its battery now is {Drone.Battery}");
+                        MessageBox.Show("Time should be positive!");
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show(ex.ToString());
+                        try
+                        {
+                            BLObject.ReleaseDroneFromCharging(Drone.Id, time);
+                            MessageBox.Show($"Drone {Drone.Id} has stopped charging. \n " +
+                            $"Its battery now is {Drone.Battery}");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                        }
+                        TimeInput.Visibility = Visibility.Collapsed;
                     }
                 }
                 else

@@ -116,7 +116,7 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
             </StackPanel>
         </Grid>
         <StackPanel Name="TimeInput" Width="200" Height="50" Visibility="Visible" Background="White" Margin="116,145,84,145">
-            <TextBlock  Text="Insert charging time:"/>
+            <TextBlock  Text="Insert charging time (in hours):"/>
             <TextBox Name="TimeInputTextBox" Width="100" Margin="0,5,0,0" KeyDown="TextBox_KeyDown"/>
         </StackPanel>
     </Grid>

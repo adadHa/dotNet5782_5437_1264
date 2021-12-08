@@ -16,11 +16,12 @@ namespace DalObject
         static Random rand = new Random();
         internal class Config
         {
-            public static double availableDrElectConsumption = 0.1;
-            public static double lightDrElectConsumption = 0.3;
-            public static double mediumDrElectConsumption = 0.5;
-            public static double heavyDrElectConsumption = 0.8;
-            public static double chargingRate = 1.5;
+            //per hour
+            public static double availableDrElectConsumption = 10;
+            public static double lightDrElectConsumption = 15;
+            public static double mediumDrElectConsumption = 20;
+            public static double heavyDrElectConsumption = 25;
+            public static double chargingRate = 20;
 
         }
 

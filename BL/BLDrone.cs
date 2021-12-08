@@ -266,7 +266,7 @@ namespace BL
                 {
                     dalObject.StopCharging(id);
                     d.Status = DroneStatuses.Available;
-                    d.Battery = chargingTime * dalObject.ViewElectConsumptionData()[0];
+                    d.Battery += chargingTime * dalObject.ViewElectConsumptionData()[0];
                     BLDrones[GetBLDroneIndex(id)] = d;
                 }
             }
