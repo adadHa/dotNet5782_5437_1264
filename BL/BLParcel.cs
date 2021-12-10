@@ -29,7 +29,7 @@ namespace BL
         }
 
         //This function returns a ParcelForList from the datasource (on BL) by an index.
-        private IBL.BO.Parcel GetParcel(int id)
+        public IBL.BO.Parcel GetParcel(int id)
         {
             try
             {

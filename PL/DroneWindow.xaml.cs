@@ -46,6 +46,29 @@ namespace PL
             OptionsDroneWindow.Visibility = Visibility.Visible;
             AddDroneWindow.Visibility = Visibility.Collapsed;
             TimeInput.Visibility = Visibility.Collapsed;
+            ChargeDroneButton.Visibility = Visibility.Collapsed;
+            ReleaseDroneButton.Visibility = Visibility.Collapsed;
+            LinkDroneButton.Visibility = Visibility.Collapsed;
+            PickUpDroneButton.Visibility = Visibility.Collapsed;
+            SupplyParcelDroneButton.Visibility = Visibility.Collapsed;
+            //show only desired buttons
+            if (drone.Status == DroneStatuses.Available)
+            {
+                ChargeDroneButton.Visibility = Visibility.Visible;
+                LinkDroneButton.Visibility = Visibility.Visible;
+            }
+            else if(drone.Status == DroneStatuses.Maintenance)
+            {
+                ReleaseDroneButton.Visibility = Visibility.Visible;
+            }
+            else if (drone.Status == DroneStatuses.Shipping && blObject.GetParcel(drone.DeliveredParcelNumber).PickedUp == null)
+            {
+                PickUpDroneButton.Visibility = Visibility.Visible;
+            }
+            else if (drone.Status == DroneStatuses.Shipping && blObject.GetParcel(drone.DeliveredParcelNumber).PickedUp != null)
+            {
+                SupplyParcelDroneButton.Visibility = Visibility.Visible;
+            }
             Drone = drone;
             TitleTextBox.Text = $"Drone {drone.Id}";
             if (drone.DeliveredParcelNumber != -1)
@@ -228,6 +251,19 @@ namespace PL
                 {
                     TimeInputTextBox.Background = Brushes.Red;
                 }
+            }
+        }
+
+        private void TimeInputTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            double time;
+            if (!double.TryParse(TimeInputTextBox.Text, out time))
+            {
+                TimeInputTextBox.Background = Brushes.Red;
+            }
+            else
+            {
+                TimeInputTextBox.Background = Brushes.White;
             }
         }
     }

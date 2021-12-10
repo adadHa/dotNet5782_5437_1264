@@ -20,6 +20,7 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        DronesListPage droneListPage { get; set; }
         private IBL.IBL BLObject { get; set; }
         public MainWindow()
         {
@@ -30,8 +31,8 @@ namespace PL
 
         private void ShowDronesButton_Click(object sender, RoutedEventArgs e)
         {
-            new DroneListWindow(BLObject).Show();
-
+            droneListPage = new DronesListPage(BLObject);
+            CurrentPage.Content = droneListPage;
         }
     }
 }
