@@ -9,7 +9,7 @@ namespace ConsoleUI_BL
     partial class Program
     {
         enum ListView { Exit, ViewStationsList, ViewDronesList, ViewCustomersList, ViewParcelsList, ViewUnbindParcelsList, ViewStationsWithFreeChargeSlots };
-        static void ListViewMenu(IBL.IBL blObject)
+        static void ListViewMenu(BlApi.IBL blObject)
         {
             ListView listViewOption = 0;
             Console.WriteLine("Choose option: \n" +

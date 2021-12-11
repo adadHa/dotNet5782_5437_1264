@@ -9,7 +9,7 @@ namespace ConsoleUI_BL
     partial class Program
     {
         enum AddOptions { Exit, AddStation, AddDrone, AddCustomer, AddParcel };
-        static void AddMenu(IBL.IBL blObject)
+        static void AddMenu(BlApi.IBL blObject)
         {
             AddOptions addOption = 0;
             Console.WriteLine("Choose add option: \n" +
@@ -47,7 +47,7 @@ namespace ConsoleUI_BL
                         Console.Write("latitude: ");
                         double.TryParse(Console.ReadLine(), out latitude);
 
-                        IBL.BO.Location location = new IBL.BO.Location() { Longitude = longitude, Latitude = latitude };
+                        BO.Location location = new BO.Location() { Longitude = longitude, Latitude = latitude };
 
                         try
                         {
@@ -67,7 +67,7 @@ namespace ConsoleUI_BL
                         int.TryParse(Console.ReadLine(), out id);
 
                         Console.WriteLine("Enter one of the following weight categories: ");
-                        foreach (IBL.BO.WheightCategories a in Enum.GetValues(typeof(IBL.BO.WheightCategories)))
+                        foreach (BO.WheightCategories a in Enum.GetValues(typeof(BO.WheightCategories)))
                         {
                             Console.WriteLine(a.ToString());
                         }
@@ -127,14 +127,14 @@ namespace ConsoleUI_BL
                         int.TryParse(Console.ReadLine(), out receiverId);
 
                         Console.WriteLine("Enter one of the following weight categories: ");
-                        foreach (IBL.BO.WheightCategories a in Enum.GetValues(typeof(IBL.BO.WheightCategories)))
+                        foreach (BO.WheightCategories a in Enum.GetValues(typeof(BO.WheightCategories)))
                         {
                             Console.WriteLine(a.ToString());
                         }
                         string weight = Console.ReadLine();
 
                         Console.Write("Enter one of the following priorities: ");
-                        foreach (IBL.BO.Priorities a in Enum.GetValues(typeof(IBL.BO.Priorities)))
+                        foreach (BO.Priorities a in Enum.GetValues(typeof(BO.Priorities)))
                         {
                             Console.WriteLine(a.ToString());
                         }

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using IBL.BO;
+using BO;
 
 namespace PL
 {
@@ -21,14 +21,14 @@ namespace PL
     /// </summary>
     public partial class DronesListPage : Page
     {
-        private IBL.IBL BLObject { get; set; }
+        private BlApi.IBL BLObject { get; set; }
 
         public DronesListPage()
         {
             InitializeComponent();
         }
 
-        public DronesListPage(IBL.IBL blObject)
+        public DronesListPage(BlApi.IBL blObject)
         {
             InitializeComponent();
             BLObject = blObject;

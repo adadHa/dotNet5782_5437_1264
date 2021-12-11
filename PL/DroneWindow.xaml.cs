@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using IBL.BO;
+using BO;
 namespace PL
 {
     /// <summary>
@@ -19,7 +19,7 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        private IBL.IBL BLObject { get; set; }
+        private BlApi.IBL BLObject { get; set; }
         public DroneForList Drone { get; set; }
 
         //for adding a drone:
@@ -29,7 +29,7 @@ namespace PL
         private int InitialStation;
 
         //constructor of add drone mode
-        public DroneWindow(IBL.IBL blObject)
+        public DroneWindow(BlApi.IBL blObject)
         {
             InitializeComponent();
             BLObject = blObject;
@@ -41,7 +41,7 @@ namespace PL
         }
 
         // constructor of view drone/options mode
-        public DroneWindow(IBL.IBL blObject, DroneForList drone) : this(blObject)
+        public DroneWindow(BlApi.IBL blObject, DroneForList drone) : this(blObject)
         {
             OptionsDroneWindow.Visibility = Visibility.Visible;
             AddDroneWindow.Visibility = Visibility.Collapsed;
@@ -102,7 +102,7 @@ namespace PL
 
         private void TextBoxInsertInitialStationId_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if ((int.TryParse(TextBoxInsertInitialStationId.Text, out Id) && Id > 0) || TextBoxInsertInitialStationId.Text == "")
+            if ((int.TryParse(TextBoxInsertInitialStationId.Text, out Id) && Id >= 0) || TextBoxInsertInitialStationId.Text == "")
             {
                 TextBoxInsertInitialStationId.Background = Brushes.White;
             }
@@ -120,11 +120,11 @@ namespace PL
         {
             if (!int.TryParse(TextBoxInsertId.Text, out Id) || Id < 0)
             {
-                MessageBox.Show("Id should be an integer grater than 0!");
+                MessageBox.Show("Id should be an integer grater or equal to than 0!");
             }
-            else if (!int.TryParse(TextBoxInsertInitialStationId.Text, out InitialStation))
+            else if (!int.TryParse(TextBoxInsertInitialStationId.Text, out InitialStation) || Id < 0)
             {
-                MessageBox.Show("Initial id should be an integer grater than 0!");
+                MessageBox.Show("Initial id should be an integer grater or equal to 0!");
             }
             else
             {
@@ -276,7 +276,7 @@ namespace PL
         private void TimeInputTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             double time;
-            if ((double.TryParse(TimeInputTextBox.Text, out time) && time > 0) || TimeInputTextBox.Text == "")
+            if ((double.TryParse(TimeInputTextBox.Text, out time) && time >= 0) || TimeInputTextBox.Text == "")
             {
                 TimeInputTextBox.Background = Brushes.White;
             }
