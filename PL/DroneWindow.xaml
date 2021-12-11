@@ -15,7 +15,7 @@
     </Window.Resources>
     <Grid>
         <Grid Name="AddDroneWindow" HorizontalAlignment="Stretch" Height="340" Width="400" Grid.Row="0"
-VerticalAlignment="Stretch" Visibility="Collapsed">
+VerticalAlignment="Stretch" Visibility="Visible">
             <StackPanel Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
                 <Grid Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
@@ -74,7 +74,7 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
         </Grid>
 
         <Grid Name="OptionsDroneWindow" HorizontalAlignment="Stretch" Height="340" Width="400" Grid.Row="1"
-        VerticalAlignment="Stretch" Visibility="Visible">
+        VerticalAlignment="Stretch" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>

@@ -34,5 +34,10 @@ namespace PL
             droneListPage = new DronesListPage(BLObject);
             CurrentPage.Content = droneListPage;
         }
+
+        private void CloseOptionsDroneWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

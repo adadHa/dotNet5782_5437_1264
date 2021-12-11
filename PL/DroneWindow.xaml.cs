@@ -85,9 +85,13 @@ namespace PL
 
         private void TextBoxInsertId_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!int.TryParse(TextBoxInsertId.Text, out Id) || Id < 0)
+            if ((int.TryParse(TextBoxInsertId.Text, out Id) && Id > 0) || TextBoxInsertId.Text == "")
             {
-                MessageBox.Show("Id should be an integer grater than 0!");
+                TextBoxInsertId.Background = Brushes.White;
+            }
+            else
+            {
+                TextBoxInsertId.Background = Brushes.Red;
             }
         }
 
@@ -98,9 +102,13 @@ namespace PL
 
         private void TextBoxInsertInitialStationId_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!int.TryParse(TextBoxInsertInitialStationId.Text, out InitialStation))
+            if ((int.TryParse(TextBoxInsertInitialStationId.Text, out Id) && Id > 0) || TextBoxInsertInitialStationId.Text == "")
             {
-                MessageBox.Show("Initial id should be an integer grater than 0!");
+                TextBoxInsertInitialStationId.Background = Brushes.White;
+            }
+            else
+            {
+                TextBoxInsertInitialStationId.Background = Brushes.Red;
             }
         }
         private void ComboBoxInsertWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -110,15 +118,26 @@ namespace PL
 
         private void ButtonAddDrone_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (!int.TryParse(TextBoxInsertId.Text, out Id) || Id < 0)
             {
-                BLObject.AddDrone(Id, Model, Weight, InitialStation);
-                MessageBox.Show($"Drone {Id} was added succefully!");
-                Close();
+                MessageBox.Show("Id should be an integer grater than 0!");
             }
-            catch (Exception ex)
+            else if (!int.TryParse(TextBoxInsertInitialStationId.Text, out InitialStation))
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Initial id should be an integer grater than 0!");
+            }
+            else
+            {
+                try
+                {
+                    BLObject.AddDrone(Id, Model, Weight, InitialStation);
+                    MessageBox.Show($"Drone {Id} was added succefully!");
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                } 
             }
 
         }
@@ -249,7 +268,7 @@ namespace PL
                 }
                 else
                 {
-                    TimeInputTextBox.Background = Brushes.Red;
+                    MessageBox.Show("Charging time should be positive!");
                 }
             }
         }
@@ -257,13 +276,13 @@ namespace PL
         private void TimeInputTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             double time;
-            if (!double.TryParse(TimeInputTextBox.Text, out time))
+            if ((double.TryParse(TimeInputTextBox.Text, out time) && time > 0) || TimeInputTextBox.Text == "")
             {
-                TimeInputTextBox.Background = Brushes.Red;
+                TimeInputTextBox.Background = Brushes.White;
             }
             else
             {
-                TimeInputTextBox.Background = Brushes.White;
+                TimeInputTextBox.Background = Brushes.Red;
             }
         }
     }
