@@ -43,6 +43,7 @@ namespace PL
         // constructor of view drone/options mode
         public DroneWindow(BlApi.IBL blObject, DroneForList drone) : this(blObject)
         {
+            Drone = drone;
             OptionsDroneWindow.DataContext = Drone;
             OptionsDroneWindow.Visibility = Visibility.Visible;
             AddDroneWindow.Visibility = Visibility.Collapsed;
@@ -70,7 +71,6 @@ namespace PL
             {
                 SupplyParcelDroneButton.Visibility = Visibility.Visible;
             }
-            Drone = drone;
             TitleTextBox.Text = $"Drone {drone.Id}";
             if (drone.DeliveredParcelNumber != -1)
                 IdAndParcelIdTextBlock.Text = $"With parcel {drone.DeliveredParcelNumber}";
