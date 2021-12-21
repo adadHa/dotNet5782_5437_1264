@@ -4,33 +4,13 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using IBL.BO;
+using BO;
 
 namespace BL
 {
-    public partial class BL : IBL.IBL
+    internal partial class BL : BlApi.IBL
     {
-        private IDAL.IDal dalObject;
-        private List<IBL.BO.DroneForList> BLDrones = new List<IBL.BO.DroneForList>();
-        public double availableDrElectConsumption;
-        public double lightDrElectConsumption;
-        public double mediumDrElectConsumption;
-        public double heavyDrElectConsumption;
-        public double chargingRate;
-        static Random rand = new Random();
-
-        public BL()
-        {
-            dalObject = new DalObject.DalObject();
-            double[] arr = dalObject.ViewElectConsumptionData();
-            availableDrElectConsumption = arr[0];
-            lightDrElectConsumption = arr[1];
-            mediumDrElectConsumption = arr[2];
-            heavyDrElectConsumption = arr[3];
-            chargingRate = arr[4];
-            InitializeDrones();
-
-        }
+        
 
         //this functions initialize the drones
         private void InitializeDrones()
@@ -43,7 +23,7 @@ namespace BL
                 {
                     Id = dalDrone.Id,
                     Model = dalDrone.Model,
-                    MaxWeight = (IBL.BO.WheightCategories)dalDrone.MaxWeight
+                    MaxWeight = (BO.WheightCategories)dalDrone.MaxWeight
                 };
                 if (dalObject.GetParcels(x => x.Delivered == null && x.DroneId == dalDrone.Id).Count() == 1)
                 {
@@ -138,15 +118,15 @@ namespace BL
                 double batteryStatus = rand.NextDouble() * rand.Next(20, 41);
                 IDAL.DO.Station initialStation = dalObject.GetStation(initialStationId);
                 dalObject.AddDrone(id, model, weight);
-                BLDrones.Add(new IBL.BO.DroneForList
+                BLDrones.Add(new BO.DroneForList
                 {
                     Id = id,
                     Model = model,
-                    MaxWeight = (IBL.BO.WheightCategories)Enum.Parse(typeof(IBL.BO.WheightCategories), weight),
+                    MaxWeight = (BO.WheightCategories)Enum.Parse(typeof(BO.WheightCategories), weight),
                     Battery = batteryStatus,
                     DeliveredParcelNumber = -1,
-                    Status = IBL.BO.DroneStatuses.Maintenance,
-                    Location = new IBL.BO.Location()
+                    Status = BO.DroneStatuses.Maintenance,
+                    Location = new BO.Location()
                     {
                         Longitude = initialStation.Longitude,
                         Latitude = initialStation.Longitude

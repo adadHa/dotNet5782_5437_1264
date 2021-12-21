@@ -4,18 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL
+namespace BO
 {
-    namespace BO
+    public class DroneInCharge
     {
-        public class DroneInCharge
+        public int DroneId { get; set; }
+        public double BatteryStatus { get; set; }
+        public override string ToString()
         {
-            public int DroneId { get; set; }
-            public double BatteryStatus { get; set; }
-            public override string ToString()
-            {
-                return $"Drone Id: {DroneId}, Battery Status: {BatteryStatus}";
-            }
-        } 
-    }
+            return $"Drone Id: {DroneId}, Battery Status: {BatteryStatus}";
+        }
+    } 
 }

@@ -9,7 +9,7 @@ namespace ConsoleUI_BL
     partial class Program
     {
         enum UpdateOptions { Exit, UpdateDrone, UpdateStation, UpdateCustomer, ChargeDrone, ReleaseDroneFromCharging, BindDrone, CollectParcelByDrone, SupplyParcel };
-        static void UpdateMenu(IBL.IBL blObject)
+        static void UpdateMenu(BlApi.IBL blObject)
         {
             UpdateOptions updateOption = 0;
             Console.WriteLine("Choose option: \n" +

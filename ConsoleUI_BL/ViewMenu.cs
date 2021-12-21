@@ -9,7 +9,7 @@ namespace ConsoleUI_BL
     partial class Program
     {
         enum ViewOptions { Exit, ViewStation, ViewDrone, ViewCustomer, ViewParcel };
-        static void ViewMenu(IBL.IBL blObject)
+        static void ViewMenu(BlApi.IBL blObject)
         {
             {
 

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using IBL.BO;
+using BO;
 namespace BL
 {
-    public partial class BL : IBL.IBL
+    internal partial class BL : BlApi.IBL
     {
 
         //this function adds a station to the database

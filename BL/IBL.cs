@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IBL.BO;
-namespace IBL
+using BO;
+namespace BlApi
 {
     public interface IBL
     {
@@ -28,6 +28,7 @@ namespace IBL
         public string ViewCustomer(int id);
         public string ViewParcel(int id);
 
+        public Parcel GetParcel(int id);
 
         public IEnumerable<StationForList> GetStations(Func<IDAL.DO.Station, bool> filter = null);
         public IEnumerable<DroneForList> GetDrones(Func<DroneForList, bool> filter = null);

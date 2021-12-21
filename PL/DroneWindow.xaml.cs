@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using IBL.BO;
+using BO;
 namespace PL
 {
     /// <summary>
@@ -19,7 +19,7 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        private IBL.IBL BLObject { get; set; }
+        private BlApi.IBL BLObject { get; set; }
         public DroneForList Drone { get; set; }
 
         //for adding a drone:
@@ -29,7 +29,7 @@ namespace PL
         private int InitialStation;
 
         //constructor of add drone mode
-        public DroneWindow(IBL.IBL blObject)
+        public DroneWindow(BlApi.IBL blObject)
         {
             InitializeComponent();
             BLObject = blObject;
@@ -41,11 +41,34 @@ namespace PL
         }
 
         // constructor of view drone/options mode
-        public DroneWindow(IBL.IBL blObject, DroneForList drone) : this(blObject)
+        public DroneWindow(BlApi.IBL blObject, DroneForList drone) : this(blObject)
         {
             OptionsDroneWindow.Visibility = Visibility.Visible;
             AddDroneWindow.Visibility = Visibility.Collapsed;
             TimeInput.Visibility = Visibility.Collapsed;
+            ChargeDroneButton.Visibility = Visibility.Collapsed;
+            ReleaseDroneButton.Visibility = Visibility.Collapsed;
+            LinkDroneButton.Visibility = Visibility.Collapsed;
+            PickUpDroneButton.Visibility = Visibility.Collapsed;
+            SupplyParcelDroneButton.Visibility = Visibility.Collapsed;
+            //show only desired buttons
+            if (drone.Status == DroneStatuses.Available)
+            {
+                ChargeDroneButton.Visibility = Visibility.Visible;
+                LinkDroneButton.Visibility = Visibility.Visible;
+            }
+            else if(drone.Status == DroneStatuses.Maintenance)
+            {
+                ReleaseDroneButton.Visibility = Visibility.Visible;
+            }
+            else if (drone.Status == DroneStatuses.Shipping && blObject.GetParcel(drone.DeliveredParcelNumber).PickedUp == null)
+            {
+                PickUpDroneButton.Visibility = Visibility.Visible;
+            }
+            else if (drone.Status == DroneStatuses.Shipping && blObject.GetParcel(drone.DeliveredParcelNumber).PickedUp != null)
+            {
+                SupplyParcelDroneButton.Visibility = Visibility.Visible;
+            }
             Drone = drone;
             TitleTextBox.Text = $"Drone {drone.Id}";
             if (drone.DeliveredParcelNumber != -1)
@@ -62,9 +85,13 @@ namespace PL
 
         private void TextBoxInsertId_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!int.TryParse(TextBoxInsertId.Text, out Id) || Id < 0)
+            if ((int.TryParse(TextBoxInsertId.Text, out Id) && Id > 0) || TextBoxInsertId.Text == "")
             {
-                MessageBox.Show("Id should be an integer grater than 0!");
+                TextBoxInsertId.Background = Brushes.White;
+            }
+            else
+            {
+                TextBoxInsertId.Background = Brushes.Red;
             }
         }
 
@@ -75,9 +102,13 @@ namespace PL
 
         private void TextBoxInsertInitialStationId_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!int.TryParse(TextBoxInsertInitialStationId.Text, out InitialStation))
+            if ((int.TryParse(TextBoxInsertInitialStationId.Text, out Id) && Id >= 0) || TextBoxInsertInitialStationId.Text == "")
             {
-                MessageBox.Show("Initial id should be an integer grater than 0!");
+                TextBoxInsertInitialStationId.Background = Brushes.White;
+            }
+            else
+            {
+                TextBoxInsertInitialStationId.Background = Brushes.Red;
             }
         }
         private void ComboBoxInsertWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -87,15 +118,26 @@ namespace PL
 
         private void ButtonAddDrone_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (!int.TryParse(TextBoxInsertId.Text, out Id) || Id < 0)
             {
-                BLObject.AddDrone(Id, Model, Weight, InitialStation);
-                MessageBox.Show($"Drone {Id} was added succefully!");
-                Close();
+                MessageBox.Show("Id should be an integer grater or equal to than 0!");
             }
-            catch (Exception ex)
+            else if (!int.TryParse(TextBoxInsertInitialStationId.Text, out InitialStation) || Id < 0)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Initial id should be an integer grater or equal to 0!");
+            }
+            else
+            {
+                try
+                {
+                    BLObject.AddDrone(Id, Model, Weight, InitialStation);
+                    MessageBox.Show($"Drone {Id} was added succefully!");
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                } 
             }
 
         }
@@ -234,8 +276,21 @@ namespace PL
                 }
                 else
                 {
-                    TimeInputTextBox.Background = Brushes.Red;
+                    MessageBox.Show("Charging time should be positive!");
                 }
+            }
+        }
+
+        private void TimeInputTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            double time;
+            if ((double.TryParse(TimeInputTextBox.Text, out time) && time >= 0) || TimeInputTextBox.Text == "")
+            {
+                TimeInputTextBox.Background = Brushes.White;
+            }
+            else
+            {
+                TimeInputTextBox.Background = Brushes.Red;
             }
         }
     }

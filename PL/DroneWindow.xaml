@@ -15,7 +15,7 @@
     </Window.Resources>
     <Grid>
         <Grid Name="AddDroneWindow" HorizontalAlignment="Stretch" Height="340" Width="400" Grid.Row="0"
-VerticalAlignment="Stretch" Visibility="Collapsed">
+VerticalAlignment="Stretch" Visibility="Visible">
             <StackPanel Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
                 <Grid Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
@@ -74,7 +74,7 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
         </Grid>
 
         <Grid Name="OptionsDroneWindow" HorizontalAlignment="Stretch" Height="340" Width="400" Grid.Row="1"
-        VerticalAlignment="Stretch" Visibility="Visible">
+        VerticalAlignment="Stretch" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
@@ -107,7 +107,7 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
             <TextBlock Name="WeightCategoryValueTextBlock" Grid.Row="4" Text="Weight Category: " FontSize="16" Grid.Column="0" />
             <TextBlock Name="StatusValueTextBlock" Grid.Row="5" Text="Status: " FontSize="14" Grid.Column="0"/>
             <TextBlock Name="BatteryValueTextBlock" Grid.Row="6" Text="Battery: " FontSize="14" Grid.Column="0"/>
-            <StackPanel Name="OptionsStackPanel" Orientation="Vertical" Height="180" Background="{StaticResource Blue3}" Margin="212,39,22,5" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2"  >
+            <StackPanel Name="OptionsStackPanel" Orientation="Vertical" Height="180" Background="{StaticResource Blue3}" Margin="213,39,21,5" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2"  >
                 <Button x:Name="ChargeDroneButton" Content="Charge Drone" Click="ChargeDroneButton_Click"/>
                 <Button x:Name="ReleaseDroneButton" Content="Stop charging" Click="ReleaseDroneButton_Click" />
                 <Button x:Name="LinkDroneButton" Content="Link to parcel" Click="LinkDroneButton_Click" />
@@ -115,9 +115,9 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
                 <Button x:Name="SupplyParcelDroneButton" Content="Supply parcel" Click="SupplyParcelDroneButton_Click" />
             </StackPanel>
         </Grid>
-        <StackPanel Name="TimeInput" Width="200" Height="50" Visibility="Visible" Background="White" Margin="116,145,84,145">
-            <TextBlock  Text="Insert charging time (in hours):"/>
-            <TextBox Name="TimeInputTextBox" Width="100" Margin="0,5,0,0" KeyDown="TextBox_KeyDown"/>
+        <StackPanel Name="TimeInput" Width="200" Height="70" Visibility="Collapsed" Background="White" Margin="116,145,84,145">
+            <TextBlock  Text="Insert charging time:"/>
+            <TextBox Name="TimeInputTextBox" Margin="0,5,0,0" KeyDown="TextBox_KeyDown" TextChanged="TimeInputTextBox_TextChanged"/>
         </StackPanel>
     </Grid>
 </Window>

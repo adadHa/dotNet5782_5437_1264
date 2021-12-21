@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL : IBL.IBL
+    internal partial class BL : BlApi.IBL
     {
         //this function adds a parcel to the database
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority)
@@ -19,7 +19,7 @@ namespace BL
             }
             catch (DalObject.IdIsAlreadyExistException e)
             {
-                throw new IBL.BO.IdIsAlreadyExistException(e.ToString());
+                throw new BO.IdIsAlreadyExistException(e.ToString());
             }
         }
         //this function view the parcel details
@@ -29,16 +29,16 @@ namespace BL
         }
 
         //This function returns a ParcelForList from the datasource (on BL) by an index.
-        private IBL.BO.Parcel GetParcel(int id)
+        public BO.Parcel GetParcel(int id)
         {
             try
             {
                 IDAL.DO.Parcel dalParcel = dalObject.GetParcel(id);
-                IBL.BO.DroneInParcel drone = null;
+                BO.DroneInParcel drone = null;
                 if (dalParcel.DroneId != -1)
                 {
-                    IBL.BO.DroneForList blDrone = BLDrones[GetBLDroneIndex(dalParcel.DroneId)];
-                    drone = new IBL.BO.DroneInParcel
+                    BO.DroneForList blDrone = BLDrones[GetBLDroneIndex(dalParcel.DroneId)];
+                    drone = new BO.DroneInParcel
                     {
                         Id = blDrone.Id,
                         BatteryStatus = blDrone.Battery,
@@ -46,13 +46,13 @@ namespace BL
                     };
                 }
                 
-                IBL.BO.Parcel parcel = new IBL.BO.Parcel
+                BO.Parcel parcel = new BO.Parcel
                 {
                     Id = dalParcel.Id,
-                    Target = new IBL.BO.CustomerInDelivery { Id = dalParcel.TargetId, Name = dalObject.GetCustomer(dalParcel.TargetId).Name },
-                    Sender = new IBL.BO.CustomerInDelivery { Id = dalParcel.SenderId, Name = dalObject.GetCustomer(dalParcel.SenderId).Name },
-                    Wheight = (IBL.BO.WheightCategories)dalParcel.Wheight,
-                    Priority = (IBL.BO.Priorities)dalParcel.Priority,
+                    Target = new BO.CustomerInDelivery { Id = dalParcel.TargetId, Name = dalObject.GetCustomer(dalParcel.TargetId).Name },
+                    Sender = new BO.CustomerInDelivery { Id = dalParcel.SenderId, Name = dalObject.GetCustomer(dalParcel.SenderId).Name },
+                    Wheight = (BO.WheightCategories)dalParcel.Wheight,
+                    Priority = (BO.Priorities)dalParcel.Priority,
                     Drone = drone,
                     Created = dalParcel.Created,
                     Scheduled = dalParcel.Scheduled,
@@ -63,7 +63,7 @@ namespace BL
             }
             catch (DalObject.IdIsNotExistException e)
             {
-                throw new IBL.BO.IdIsNotExistException(e);
+                throw new BO.IdIsNotExistException(e);
             }
         }
 
@@ -87,25 +87,25 @@ namespace BL
             return result;
         }
 
-        public IEnumerable<IBL.BO.ParcelForList> GetParcels(Func<IDAL.DO.Parcel, bool> filter = null)
+        public IEnumerable<BO.ParcelForList> GetParcels(Func<IDAL.DO.Parcel, bool> filter = null)
         {
             List<IDAL.DO.Parcel> dalParcels = dalObject.GetParcels(filter).ToList();
-            List<IBL.BO.ParcelForList> resultList = new List<IBL.BO.ParcelForList>();
-            IBL.BO.Statuses s = new IBL.BO.Statuses();
+            List<BO.ParcelForList> resultList = new List<BO.ParcelForList>();
+            BO.Statuses s = new BO.Statuses();
 
             foreach (IDAL.DO.Parcel parcel in dalParcels)
             {
-                if (parcel.Delivered != null) s = IBL.BO.Statuses.Delivered;
-                else if(parcel.PickedUp != null) s = IBL.BO.Statuses.PickedUp;
-                else if(parcel.Scheduled != null) s = IBL.BO.Statuses.Scheduled;
-                else if(parcel.Created != null) s = IBL.BO.Statuses.Created;
-                resultList.Add(new IBL.BO.ParcelForList
+                if (parcel.Delivered != null) s = BO.Statuses.Delivered;
+                else if(parcel.PickedUp != null) s = BO.Statuses.PickedUp;
+                else if(parcel.Scheduled != null) s = BO.Statuses.Scheduled;
+                else if(parcel.Created != null) s = BO.Statuses.Created;
+                resultList.Add(new BO.ParcelForList
                 {
                     Id = parcel.Id,
                     SenderName = dalObject.GetCustomer(parcel.SenderId).Name,
                     ReceiverName = dalObject.GetCustomer(parcel.TargetId).Name,
-                    MaxWeight = (IBL.BO.WheightCategories)parcel.Wheight,
-                    Priority = (IBL.BO.Priorities)parcel.Priority,
+                    MaxWeight = (BO.WheightCategories)parcel.Wheight,
+                    Priority = (BO.Priorities)parcel.Priority,
                     ParcelStatus =  s
                 });
             }

@@ -1,11 +1,13 @@
-﻿<Window x:Class="PL.DroneListWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
-        mc:Ignorable="d"
-        Title="DroneListWindow" Height="450" Width="800">
+﻿<Page x:Class="PL.DronesListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PL"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DronesListPage">
+
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
@@ -26,7 +28,7 @@
             <ComboBox x:Name="WeightSelector" Grid.Column="3" Margin="40,0,40,0"  Width="120" SelectionChanged="WeightSelector_SelectionChanged" IsEditable="True" Text="Weight" PreviewMouseDoubleClick="WeightSelector_PreviewMouseDoubleClick"/>
             <Button x:Name="AddDroneButton" Content="Add drone" HorizontalAlignment="Left" Margin="60,0,0,0" VerticalAlignment="Center" Click="AddDroneButton_Click"/>
         </Grid>
-        <ListView x:Name="DronesListView" Grid.Row="1" MouseDoubleClick="DronesListView_MouseDoubleClick">
+        <ListView x:Name="DronesListView" Grid.Row="1" MouseDoubleClick="DronesListView_MouseDoubleClick" SelectionMode="Extended">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -35,4 +37,4 @@
         </ListView>
 
     </Grid>
-</Window>
+</Page>
