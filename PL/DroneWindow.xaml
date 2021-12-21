@@ -86,7 +86,9 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
 
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"  Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" >
-                <Button Name="CloseOptionsDroneWindowButton"  Content="Close"  HorizontalAlignment="right" VerticalAlignment="Bottom" Click="CloseOptionsDroneWindowButton_Click" />
+                <Button Name="CloseOptionsDroneWindowButton"  Template="{StaticResource ButtonTemplate}"  HorizontalAlignment="right" VerticalAlignment="Bottom" Click="CloseOptionsDroneWindowButton_Click" Width="20" Height="20" Margin="0,5,5,0">
+
+                </Button>
             </StackPanel>
 
             <TextBlock Name="TitleTextBox" Grid.Row="1" Text="  Drone " FontSize="46" Grid.Column="0" />
@@ -131,8 +133,6 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
             <TextBlock  Text="Insert charging time:"/>
             <TextBox Name="TimeInputTextBox" Margin="0,5,0,0" KeyDown="TextBox_KeyDown" TextChanged="TimeInputTextBox_TextChanged"/>
         </StackPanel>
-        <Button Template="{StaticResource EllipseButton}">
-            
-        </Button>
+
     </Grid>
 </Window>
