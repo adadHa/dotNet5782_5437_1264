@@ -43,6 +43,7 @@ namespace PL
         // constructor of view drone/options mode
         public DroneWindow(BlApi.IBL blObject, DroneForList drone) : this(blObject)
         {
+            OptionsDroneWindow.DataContext = Drone;
             OptionsDroneWindow.Visibility = Visibility.Visible;
             AddDroneWindow.Visibility = Visibility.Collapsed;
             TimeInput.Visibility = Visibility.Collapsed;
