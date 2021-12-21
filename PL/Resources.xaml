@@ -16,4 +16,22 @@
     <!--#region Texts-->
     <TextBox x:Key="InputValue" FontSize="16" Foreground="{StaticResource TextColor}">
     </TextBox>
+
+    <!--#region Templates-->
+    <ControlTemplate x:Key="EllipseButton">
+        <Grid>
+            <Ellipse Fill="Gray"/>
+            <ContentPresenter     
+                            Content="Submit"     
+                            VerticalAlignment="Center"    
+                            HorizontalAlignment="Center"/>
+
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Fill" TargetName="backgroundElement" Value="AliceBlue"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
 </ResourceDictionary>

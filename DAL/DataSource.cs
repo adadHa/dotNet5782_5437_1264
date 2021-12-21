@@ -17,10 +17,10 @@ namespace DalObject
         internal class Config
         {
             //per hour
-            public static double availableDrElectConsumption = 10;
-            public static double lightDrElectConsumption = 15;
-            public static double mediumDrElectConsumption = 20;
-            public static double heavyDrElectConsumption = 25;
+            public static double availableDrElectConsumption = 0.10;
+            public static double lightDrElectConsumption = 0.15;
+            public static double mediumDrElectConsumption = 0.20;
+            public static double heavyDrElectConsumption = 0.25;
             public static double chargingRate = 20;
 
         }

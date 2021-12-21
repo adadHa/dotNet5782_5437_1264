@@ -76,11 +76,6 @@ namespace PL
                 IdAndParcelIdTextBlock.Text = $"With parcel {drone.DeliveredParcelNumber}";
             else
                 IdAndParcelIdTextBlock.Text = $"";
-            ModelValueTextBox.Text = $"{drone.Model}";
-            LocationValueTextBlock.Text = "Location: " + drone.Location.ToString();
-            WeightCategoryValueTextBlock.Text = "Weight: " + Enum.GetName(drone.MaxWeight);
-            StatusValueTextBlock.Text = "Status: " + Enum.GetName(drone.Status);
-            BatteryValueTextBlock.Text = $"Battery: {Math.Round(drone.Battery, 2)}";
 
         }
 

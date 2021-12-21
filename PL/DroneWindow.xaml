@@ -94,7 +94,7 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
             <Grid Grid.RowSpan="5" Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="0" Width="250" HorizontalAlignment="left">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -103,18 +103,23 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBox Name="ModelValueTextBlok" Grid.Row="0" Text="Model : " FontSize="14" Grid.Column="0"   />
-                <TextBox Name="ModelValueTextBox" Text="{Binding Path=Model}" Grid.Row="0" FontSize="14" Grid.Column="1" KeyDown="ModelValueTextBox_KeyDown"/>
+                <TextBlock Name="ModelValueTextBlock" Grid.Row="0" Text="Model  " FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"   />
+                <TextBox Name="ModelValueTextBox" Text="{Binding Path=Model}" Grid.Row="0" FontSize="14" KeyDown="ModelValueTextBox_KeyDown" BorderThickness="0,0,0,1" Grid.ColumnSpan="2" Margin="83,0,59,22"/>
 
-                <TextBlock Name="LocationValueTextBlock" Grid.Row="1" Text="Location: "  FontSize="14" Grid.Column="0"/>
-                <TextBlock Name="LocationValueTextBox" Text="{Binding Path=Location}" Grid.Row="1" FontSize="14" Grid.Column="1" KeyDown="ModelValueTextBox_KeyDown"/>
+                <TextBlock Name="LocationValueTextBlock" Grid.Row="1" Text="Location"  FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,0,5,0"/>
+                <TextBlock Text="{Binding Path=Location}" Grid.Row="1" FontSize="14" Grid.Column="1" KeyDown="ModelValueTextBox_KeyDown"/>
 
-                <TextBlock Name="WeightCategoryValueTextBlock" Grid.Row="2" Text="Weight: " FontSize="14" Grid.Column="0" />
-                <TextBlock Name="StatusValueTextBlock" Grid.Row="3" Text="Status: " FontSize="14" Grid.Column="0"/>
-                <TextBlock Name="BatteryValueTextBlock" Grid.Row="4" Text="Battery: " FontSize="14" Grid.Column="0"/>
+                <TextBlock Name="WeightCategoryValueTextBlock" Grid.Row="2" Text="Weight" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,0,5,0" />
+                <TextBlock Grid.Row="2" Text="{Binding Path=MaxWeight}" FontSize="14" Grid.Column="1" />
+
+                <TextBlock Name="StatusValueTextBlock" Grid.Row="3" Text="Status " FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+                <TextBlock Grid.Row="3" Text="{Binding Path=Status}" FontSize="14" Grid.Column="1"/>
+
+                <TextBlock Name="BatteryValueTextBlock" Grid.Row="4" Text="Battery " FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+                <TextBlock Grid.Row="4" Text="{Binding Path=Battery}" FontSize="14" Grid.Column="1"/>
             </Grid>
 
-            <StackPanel Name="OptionsStackPanel" Orientation="Vertical" Height="180" Background="{StaticResource Blue3}" Margin="213,39,21,5" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2"  >
+            <StackPanel Name="OptionsStackPanel" Orientation="Vertical" Height="180" Background="{StaticResource Blue3}" Margin="224,47,10,85" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2"  >
                 <Button x:Name="ChargeDroneButton" Content="Charge Drone" Click="ChargeDroneButton_Click"/>
                 <Button x:Name="ReleaseDroneButton" Content="Stop charging" Click="ReleaseDroneButton_Click" />
                 <Button x:Name="LinkDroneButton" Content="Link to parcel" Click="LinkDroneButton_Click" />
@@ -126,5 +131,8 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
             <TextBlock  Text="Insert charging time:"/>
             <TextBox Name="TimeInputTextBox" Margin="0,5,0,0" KeyDown="TextBox_KeyDown" TextChanged="TimeInputTextBox_TextChanged"/>
         </StackPanel>
+        <Button Template="{StaticResource EllipseButton}">
+            
+        </Button>
     </Grid>
 </Window>

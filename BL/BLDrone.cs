@@ -103,6 +103,7 @@ namespace BL
                     newDrone.Battery = rand.NextDouble() * 100;
                     if (newDrone.Battery < minimalBattery) newDrone.Battery = minimalBattery;
                 }
+                newDrone.Battery = Math.Round(newDrone.Battery, 1);
                 BLDrones.Add(newDrone);
             }
         }
@@ -115,7 +116,7 @@ namespace BL
 
             try
             {
-                double batteryStatus = rand.NextDouble() * rand.Next(20, 41);
+                double batteryStatus = Math.Round(rand.NextDouble() * rand.Next(20, 41),1);
                 IDAL.DO.Station initialStation = dalObject.GetStation(initialStationId);
                 dalObject.AddDrone(id, model, weight);
                 BLDrones.Add(new BO.DroneForList
@@ -200,7 +201,7 @@ namespace BL
                     int droneIndex = BLDrones.FindIndex(x => x == drone);
                     drone.Location.Latitude = mostCloseStation.Latitude;
                     drone.Location.Longitude = mostCloseStation.Longitude;
-                    drone.Battery -= mostCloseDistance * consumptionRate;
+                    drone.Battery -= Math.Round(mostCloseDistance * consumptionRate,1);
                     drone.Status = DroneStatuses.Maintenance;
                     BLDrones[droneIndex] = drone;
                 }
