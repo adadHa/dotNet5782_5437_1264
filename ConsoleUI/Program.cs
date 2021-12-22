@@ -11,7 +11,7 @@ namespace ConsoleUI
         enum ListView { Exit, ViewStationsList, ViewDronesList, ViewCustomersList, ViewParcelsList, ViewUnbindParcels, ViewStationsWithFreeChargeSlots };
         static void Main(string[] args)
         {
-            DalObject.DalObject dalObject = new DalObject.DalObject();
+            DalApi.DalObject dalObject = new DalApi.DalObject();
             GeneralOptions option = 0;
             do
             {

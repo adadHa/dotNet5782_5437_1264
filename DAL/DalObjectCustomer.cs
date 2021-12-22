@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace DalObject
+namespace DalApi
 {
     public partial class DalObject : IDAL.IDal
     {

@@ -17,7 +17,7 @@ namespace BL
                 dalObject.AddParcel(customerSenderId, customerReceiverId, weight, priority, -1);
 
             }
-            catch (DalObject.IdIsAlreadyExistException e)
+            catch (DalApi.IdIsAlreadyExistException e)
             {
                 throw new BO.IdIsAlreadyExistException(e.ToString());
             }
@@ -61,7 +61,7 @@ namespace BL
                 };
                 return parcel;
             }
-            catch (DalObject.IdIsNotExistException e)
+            catch (DalApi.IdIsNotExistException e)
             {
                 throw new BO.IdIsNotExistException(e);
             }

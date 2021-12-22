@@ -110,7 +110,7 @@ namespace BO
             Id = id;
             Type = type;
         }
-        public IdIsNotExistException(DalObject.IdIsNotExistException e)
+        public IdIsNotExistException(DalApi.IdIsNotExistException e)
         {
             Id = e.Id;
             Type = e.Type;

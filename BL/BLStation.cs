@@ -15,11 +15,11 @@ namespace BL
             {
                 dalObject.AddStation(id, name, freeChargingSlots, location.Longitude, location.Latitude);
             }
-            catch (DalObject.IdIsAlreadyExistException e)
+            catch (DalApi.IdIsAlreadyExistException e)
             {
                 throw new IdIsAlreadyExistException(e.ToString());
             }
-            catch (DalObject.NoChargeSlotsException e)
+            catch (DalApi.NoChargeSlotsException e)
             {
                 throw new NoChargeSlotsException(e.ToString());
             }
@@ -43,7 +43,7 @@ namespace BL
                         throw new ArgumentOutOfRangeException("charging slots capacity");
                 }
             }
-            catch (DalObject.IdIsNotExistException e)
+            catch (DalApi.IdIsNotExistException e)
             {
                 throw new IdIsNotExistException(e);
             }
@@ -81,7 +81,7 @@ namespace BL
                 };
                 return resultStation;
             }
-            catch (DalObject.IdIsNotExistException e)
+            catch (DalApi.IdIsNotExistException e)
             {
                 throw new IdIsNotExistException(e);
             }

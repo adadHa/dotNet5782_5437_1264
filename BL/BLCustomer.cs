@@ -16,7 +16,7 @@ namespace BL
                 dalObject.AddCustomer(id, name, phoneNumber, 0, 0);
 
             }
-            catch (DalObject.IdIsAlreadyExistException e)
+            catch (DalApi.IdIsAlreadyExistException e)
             {
                 throw new BO.IdIsAlreadyExistException(e.ToString());
             }
@@ -35,7 +35,7 @@ namespace BL
                     dalObject.UpdateCustomrePhoneNumber(id, newPhoneNumber);
                 }
             }
-            catch (DalObject.IdIsNotExistException e)
+            catch (DalApi.IdIsNotExistException e)
             {
                 throw new BO.IdIsNotExistException(e);
             }
@@ -103,7 +103,7 @@ namespace BL
                 };
                 return customer;
             }
-            catch (DalObject.IdIsNotExistException e)
+            catch (DalApi.IdIsNotExistException e)
             {
                 throw new BO.IdIsNotExistException(e);
             }

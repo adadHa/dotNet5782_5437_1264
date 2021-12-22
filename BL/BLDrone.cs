@@ -136,11 +136,11 @@ namespace BL
                 });
                 dalObject.ChargeDrone(id, initialStationId);
             }
-            catch (DalObject.IdIsAlreadyExistException e)
+            catch (DalApi.IdIsAlreadyExistException e)
             {
                 throw new IdIsAlreadyExistException(e.ToString());
             }
-            catch (DalObject.NoChargeSlotsException e)
+            catch (DalApi.NoChargeSlotsException e)
             {
                 throw new NoChargeSlotsException(e.ToString());
             }
@@ -154,7 +154,7 @@ namespace BL
                 BLDrones[GetBLDroneIndex(id)].Model = newModel;
                 dalObject.UpdateDrone(id, newModel);
             }
-            catch (DalObject.IdIsNotExistException e)
+            catch (DalApi.IdIsNotExistException e)
             {
                 throw new IdIsNotExistException(e);
             }
@@ -167,7 +167,7 @@ namespace BL
                 // First, we look for the closet station.
                 DroneForList drone = BLDrones[GetBLDroneIndex(id)];
                 if (drone == null)
-                    throw new DalObject.IdIsNotExistException(id, "Drone");
+                    throw new DalApi.IdIsNotExistException(id, "Drone");
                 if (drone.Status != DroneStatuses.Available)
                     throw new DroneCannotBeChargedException(drone);
                 List<IDAL.DO.Station> stations =
@@ -206,11 +206,11 @@ namespace BL
                     BLDrones[droneIndex] = drone;
                 }
             }
-            catch (DalObject.NoChargeSlotsException e)
+            catch (DalApi.NoChargeSlotsException e)
             {
                 throw new NoChargeSlotsException(e.ToString());
             }
-            catch (DalObject.IdIsNotExistException e)
+            catch (DalApi.IdIsNotExistException e)
             {
                 throw new IdIsNotExistException(e);
             }
@@ -251,7 +251,7 @@ namespace BL
                     BLDrones[GetBLDroneIndex(id)] = d;
                 }
             }
-            catch (DalObject.IdIsNotExistException e)
+            catch (DalApi.IdIsNotExistException e)
             {
                 throw new IdIsNotExistException(e);
             }
@@ -289,7 +289,7 @@ namespace BL
                 BLDrones[GetBLDroneIndex(id)].DeliveredParcelNumber = bestParcelToBind.Id;
                 dalObject.BindParcel(bestParcelToBind.Id, id);
             }
-            catch (DalObject.IdIsNotExistException e)
+            catch (DalApi.IdIsNotExistException e)
             {
                 throw new IdIsNotExistException(e);
             }
@@ -352,7 +352,7 @@ namespace BL
                 drone.Location = senderLocation;
                 BLDrones[GetBLDroneIndex(id)] = drone;
             }
-            catch (DalObject.IdIsNotExistException e)
+            catch (DalApi.IdIsNotExistException e)
             {
                 throw new IdIsNotExistException(e);
             }
@@ -380,7 +380,7 @@ namespace BL
                 drone.Location = targetLoaction;
                 BLDrones[GetBLDroneIndex(id)] = drone;
             }
-            catch (DalObject.IdIsNotExistException e)
+            catch (DalApi.IdIsNotExistException e)
             {
                 throw new IdIsNotExistException(e);
             }
@@ -423,7 +423,7 @@ namespace BL
                 };
                 return resultDrone;
             }
-            catch (DalObject.IdIsNotExistException e)
+            catch (DalApi.IdIsNotExistException e)
             {
                 throw new IdIsNotExistException(e);
             }
@@ -437,11 +437,11 @@ namespace BL
                 int i = BLDrones.FindIndex(x => x.Id == id);
                 if (i == -1)
                 {
-                    throw new DalObject.IdIsNotExistException(id, "Drone"); // ??? should we throw Dal exception about bl's drone exception?
+                    throw new DalApi.IdIsNotExistException(id, "Drone"); // ??? should we throw Dal exception about bl's drone exception?
                 }
                 return i;
             }
-            catch (DalObject.IdIsNotExistException e)
+            catch (DalApi.IdIsNotExistException e)
             {
                 throw new IdIsNotExistException(e);
             }
