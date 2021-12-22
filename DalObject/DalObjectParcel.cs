@@ -1,0 +1,175 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DalApi;
+
+namespace Dal
+{
+    public partial class DalObject : DalApi.IDal
+    {
+        // This function add a parcel to the parcels data base.
+        public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone)
+        {
+            try
+            {
+                if (DataSource.Customers.FindIndex(x => x.Id == customerSenderId) == -1)
+                {
+                    throw new IdIsNotExistException(customerSenderId, "Sender");
+                }
+                if (DataSource.Customers.FindIndex(x => x.Id == customerReceiverId) == -1)
+                {
+                    throw new IdIsNotExistException(customerReceiverId, "Receiver");
+                }
+                if (responsibleDrone != -1 && DataSource.Drones.FindIndex(x => x.Id == responsibleDrone) == -1)
+                {
+                    throw new IdIsNotExistException(responsibleDrone, "Responsible drone");
+                }
+                DataSource.Parcels.Add(new 
+                    .Parcel()
+                {
+                    Id = DataSource.Parcels.Count,
+                    SenderId = customerSenderId,
+                    TargetId = customerReceiverId,
+                    Wheight = (DO.WheightCategories)Enum.Parse(typeof(DO.WheightCategories), weight),
+                    Priority = (DO.Priorities)Enum.Parse(typeof(DO.Priorities), priority),
+                    DroneId = responsibleDrone,
+                    Created = DateTime.Now,
+                    Scheduled = null,
+                    PickedUp = null,
+                    Delivered = null
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //This function binds a parcel to a drone.
+        public void BindParcel(int parcelId, int droneId)
+        {
+            try
+            {
+                if (DataSource.Drones.FindIndex(x => x.Id == droneId) == -1)
+                {
+                    throw new IdIsNotExistException(droneId, "Drone");
+                }
+                if (DataSource.Parcels.FindIndex(x => x.Id == parcelId) == -1)
+                {
+                    throw new IdIsNotExistException(parcelId, "Parcel");
+                }
+                int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
+                int parcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
+                DO.Drone d = DataSource.Drones[droneIndex];
+                DO.Parcel p = DataSource.Parcels[parcelIndex];
+                p.DroneId = droneId;
+                p.Scheduled = DateTime.Now;
+                DataSource.Drones[droneIndex] = d;
+                DataSource.Parcels[parcelIndex] = p;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //This function collects a parcel by a drone (Its status was already changed to "shipping" on the bind function).
+        public void CollectParcelByDrone(int droneId, int parcelId)
+        {
+            try
+            {
+                if (DataSource.Parcels.FindIndex(x => x.Id == parcelId) == -1)
+                {
+                    throw new IdIsNotExistException(parcelId, "Parcel");
+                }
+                int parcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId);
+                DO.Parcel p = DataSource.Parcels[parcelIndex];
+                p.PickedUp = DateTime.Now;
+                DataSource.Parcels[parcelIndex] = p;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //This funtion supplies a parcel to the customer.
+        public void SupplyParcelToCustomer(int parcelId)
+        {
+            try
+            {
+                if (DataSource.Parcels.FindIndex(x => x.Id == parcelId) == -1)
+                {
+                    throw new IdIsNotExistException(parcelId, "Parcel");
+                }
+                int deliveredParcelIndex = DataSource.Parcels.FindIndex(x => x.Id == parcelId); ;
+                DO.Parcel p = DataSource.Parcels[deliveredParcelIndex];
+                p.Delivered = DateTime.Now;
+                DataSource.Parcels[deliveredParcelIndex] = p;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //This function returns a copy of the parcels list.
+        public IEnumerable<DO.Parcel> ViewParcelsList()
+        {
+            List<DO.Parcel> resultList = new List<DO.Parcel>();
+            foreach (DO.Parcel parcel in DataSource.Parcels)
+            {
+                DO.Parcel p = new DO.Parcel();
+                p = parcel;
+                resultList.Add(p);
+            }
+            return resultList;
+        }
+
+        public IEnumerable<DO.Parcel> ViewUnbindParcels()
+        {
+            // create the result list
+            List<DO.Parcel> resultList = new List<DO.Parcel>();
+            foreach (DO.Parcel parcel in DataSource.Parcels)
+            {
+                if (parcel.Scheduled != null)
+                {
+                    DO.Parcel p = new DO.Parcel();
+                    p = parcel;
+                    resultList.Add(p);
+                }
+            }
+            return resultList;
+        }
+
+        //This function returns the string of the parcel with the required Id.
+        public string ViewParcel(int id)
+        {
+            return GetParcel(id).ToString();
+        }
+
+        //This function returns the parcel with the required Id.
+        public DO.Parcel GetParcel(int id)
+        {
+            if (DataSource.Parcels.FindIndex(x => x.Id == id) == -1)
+            {
+                throw new IdIsNotExistException(id, "Parcel");
+            }
+            int index = DataSource.Parcels.FindIndex(x => x.Id == id);
+            return DataSource.Parcels[index];
+        }
+
+        //This function returns a filtered copy of the Parcels list (according to a given predicate)
+        public IEnumerable<DO.Parcel> GetParcels(Func<DO.Parcel, bool> filter = null)
+        {
+            if (filter == null)
+            {
+                return DataSource.Parcels;
+            }
+            return DataSource.Parcels.Where(filter);
+        }
+
+    }
+}

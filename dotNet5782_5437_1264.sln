@@ -18,7 +18,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{A172
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI_BL", "ConsoleUI_BL\ConsoleUI_BL.csproj", "{A557E3B2-822A-4066-8A40-B4D6E958A6EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{EC4C5849-14C1-4497-BBD4-8C8DAC90DF8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{EC4C5849-14C1-4497-BBD4-8C8DAC90DF8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalApi", "DalApi\DalApi.csproj", "{CBCEB56F-63F9-487C-BDCE-BBAEFE88FB03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalObject", "DalObject\DalObject.csproj", "{FF839FE8-5FB3-4ED6-B031-DBE6BEC3E1F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{8C138479-0CA2-4C8F-BA47-51AA7BA02155}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +56,18 @@ Global
 		{EC4C5849-14C1-4497-BBD4-8C8DAC90DF8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC4C5849-14C1-4497-BBD4-8C8DAC90DF8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC4C5849-14C1-4497-BBD4-8C8DAC90DF8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBCEB56F-63F9-487C-BDCE-BBAEFE88FB03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBCEB56F-63F9-487C-BDCE-BBAEFE88FB03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBCEB56F-63F9-487C-BDCE-BBAEFE88FB03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBCEB56F-63F9-487C-BDCE-BBAEFE88FB03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF839FE8-5FB3-4ED6-B031-DBE6BEC3E1F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF839FE8-5FB3-4ED6-B031-DBE6BEC3E1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF839FE8-5FB3-4ED6-B031-DBE6BEC3E1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF839FE8-5FB3-4ED6-B031-DBE6BEC3E1F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C138479-0CA2-4C8F-BA47-51AA7BA02155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C138479-0CA2-4C8F-BA47-51AA7BA02155}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C138479-0CA2-4C8F-BA47-51AA7BA02155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C138479-0CA2-4C8F-BA47-51AA7BA02155}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
