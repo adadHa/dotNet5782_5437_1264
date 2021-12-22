@@ -15,9 +15,9 @@
     </Window.Resources>
     <Grid>
         <Grid Name="AddDroneWindow" HorizontalAlignment="Stretch" Height="340" Width="400" Grid.Row="0"
-VerticalAlignment="Stretch" Visibility="Collapsed">
+VerticalAlignment="Stretch" Visibility="Visible">
             <StackPanel Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-                <Grid Margin="0,0,0,10">
+                <Grid Margin="0,0,0,10" Background="{StaticResource BackgroundColor2}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*" />
                         <ColumnDefinition Width="*" />
@@ -74,7 +74,7 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
         </Grid>
 
         <Grid Name="OptionsDroneWindow" HorizontalAlignment="Stretch" Height="340" Width="400" Grid.Row="1"
-        VerticalAlignment="Stretch" Visibility="Visible">
+        VerticalAlignment="Stretch" Visibility="Collapsed" Background="{StaticResource BackgroundColor1}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
@@ -85,7 +85,7 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
                 <RowDefinition Height="1.5*"/>
 
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"  Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" >
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"  Background="{StaticResource BackgroundColor2}" >
                 <Button Name="CloseOptionsDroneWindowButton"  Template="{StaticResource ButtonTemplate}"  HorizontalAlignment="right" VerticalAlignment="Bottom" Click="CloseOptionsDroneWindowButton_Click" Width="20" Height="20" Margin="0,5,5,0">
 
                 </Button>

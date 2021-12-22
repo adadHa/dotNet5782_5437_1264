@@ -9,8 +9,8 @@
 			c5.068,5.072,11.824,7.856,19.024,7.856h0.008c7.204,0,13.96-2.784,19.028-7.856l16.12-16.116
 			c5.06-5.064,7.852-11.824,7.852-19.028c0-7.204-2.792-13.96-7.852-19.028L300.188,246z" Fill="Black"></Path>
     <!--#region Colors-->
-    <SolidColorBrush x:Key="BackgroundColor1" Color="#eeeee4"/>
-    <SolidColorBrush x:Key="BackgroundColor2" Color="#99A799"/>
+    <SolidColorBrush x:Key="BackgroundColor1" Color="#f1f1f1"/>
+    <SolidColorBrush x:Key="BackgroundColor2" Color="#e6e6e6"/>
     <SolidColorBrush x:Key="TextColor" Color="#99A799"/>
     <SolidColorBrush x:Key="Blue1" Color="#22577E"/>
     <SolidColorBrush x:Key="Blue2" Color="#5584AC"/>
