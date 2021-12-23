@@ -11,7 +11,7 @@
     <!--#region Colors-->
     <SolidColorBrush x:Key="BackgroundColor60" Color="#f1f1f1"/>
     <SolidColorBrush x:Key="BackgroundColor30" Color="#e6e6e6"/>
-    <SolidColorBrush x:Key="BackgroundColor10" Color="red"/>
+    <SolidColorBrush x:Key="BackgroundColor10" Color="#22577E"/>
     <SolidColorBrush x:Key="TextColor" Color="#99A799"/>
     <SolidColorBrush x:Key="Blue1" Color="#22577E"/>
     <SolidColorBrush x:Key="Blue2" Color="#5584AC"/>
