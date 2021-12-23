@@ -10,10 +10,7 @@ namespace Dal
 {
     public partial class DalObject : DalApi.IDal
     {
-        public DalObject()
-        {
-            DataSource.Initialize();
-        }
+        
 
         // This function add a customer to the customers data base.
         public void AddCustomer(int id, string name, string phoneNumber, double longitude, double latitude)
