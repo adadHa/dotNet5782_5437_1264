@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    internal partial class BL : BlApi.IBL
+    internal sealed partial class BL : BlApi.IBL
     {
         //this function adds a parcel to the database
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority)
@@ -33,7 +33,7 @@ namespace BL
         {
             try
             {
-                IDAL.DO.Parcel dalParcel = dalObject.GetParcel(id);
+                DO.Parcel dalParcel = dalObject.GetParcel(id);
                 BO.DroneInParcel drone = null;
                 if (dalParcel.DroneId != -1)
                 {
@@ -87,13 +87,13 @@ namespace BL
             return result;
         }
 
-        public IEnumerable<BO.ParcelForList> GetParcels(Func<IDAL.DO.Parcel, bool> filter = null)
+        public IEnumerable<BO.ParcelForList> GetParcels(Func<DO.Parcel, bool> filter = null)
         {
-            List<IDAL.DO.Parcel> dalParcels = dalObject.GetParcels(filter).ToList();
+            List<DO.Parcel> dalParcels = dalObject.GetParcels(filter).ToList();
             List<BO.ParcelForList> resultList = new List<BO.ParcelForList>();
             BO.Statuses s = new BO.Statuses();
 
-            foreach (IDAL.DO.Parcel parcel in dalParcels)
+            foreach (DO.Parcel parcel in dalParcels)
             {
                 if (parcel.Delivered != null) s = BO.Statuses.Delivered;
                 else if(parcel.PickedUp != null) s = BO.Statuses.PickedUp;

@@ -12,7 +12,7 @@ namespace ConsoleUI_BL
         static void Main(string[] args)
         {
             GeneralOptions option = new GeneralOptions();
-            BlApi.IBL blObject = new BL.BL();
+            BlApi.IBL blObject = BlApi.BlFactory.GetBl();
             do
             {
                 Console.WriteLine("Choose Option: \n" +

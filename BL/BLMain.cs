@@ -13,10 +13,10 @@ namespace BL
         //implement Lazy Instantiation (and thread-safe) singleton design pattern
         // Lazy - create the BL entity only when called
         // thread safe - the Nested class loader will do all static initialization before
-        //               it will enable other threads access to the class
+        //               it will enable other threads accessing the class
         private BL()
         {
-            dalObject = new DalApi.DalObject();
+            dalObject = DalApi.DalFactory.GetDal("DalObject");
             double[] arr = dalObject.ViewElectConsumptionData();
             availableDrElectConsumption = arr[0];
             lightDrElectConsumption = arr[1];
@@ -36,7 +36,7 @@ namespace BL
 
             internal static readonly BL Instance = new BL();
         }
-        private IDAL.IDal dalObject;
+        private DalApi.IDal dalObject;
         private List<BO.DroneForList> BLDrones = new List<BO.DroneForList>();
         private double availableDrElectConsumption;
         private double lightDrElectConsumption;

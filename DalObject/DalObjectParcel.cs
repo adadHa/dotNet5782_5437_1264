@@ -26,8 +26,7 @@ namespace Dal
                 {
                     throw new IdIsNotExistException(responsibleDrone, "Responsible drone");
                 }
-                DataSource.Parcels.Add(new 
-                    .Parcel()
+                DataSource.Parcels.Add(new DO.Parcel()
                 {
                     Id = DataSource.Parcels.Count,
                     SenderId = customerSenderId,

@@ -30,10 +30,10 @@ namespace BlApi
 
         public Parcel GetParcel(int id);
 
-        public IEnumerable<StationForList> GetStations(Func<IDAL.DO.Station, bool> filter = null);
+        public IEnumerable<StationForList> GetStations(Func<DO.Station, bool> filter = null);
         public IEnumerable<DroneForList> GetDrones(Func<DroneForList, bool> filter = null);
-        public IEnumerable<CustomerForList> GetCustomers(Func<IDAL.DO.Customer, bool> filter = null);
-        public IEnumerable<ParcelForList> GetParcels(Func<IDAL.DO.Parcel, bool> filter = null);
+        public IEnumerable<CustomerForList> GetCustomers(Func<DO.Customer, bool> filter = null);
+        public IEnumerable<ParcelForList> GetParcels(Func<DO.Parcel, bool> filter = null);
 
 
         public string ViewStationsList();

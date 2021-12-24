@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    internal partial class BL : BlApi.IBL
+    internal sealed partial class BL : BlApi.IBL
     {
         //this function adds a customer to the database
         public void AddCustomer(int id, string name, string phoneNumber)
@@ -51,12 +51,12 @@ namespace BL
         {
             try
             {
-                IDAL.DO.Customer dalCustomer = dalObject.GetCustomer(id);
+                DO.Customer dalCustomer = dalObject.GetCustomer(id);
                 //build the parcelsFromCustomer list
                 List<BO.ParcelInCustomer> parcelsFromCustomer = new List<BO.ParcelInCustomer>();
-                List<IDAL.DO.Parcel> dalParcelsFromCustomer = dalObject.GetParcels(x => x.SenderId == id).ToList();
+                List<DO.Parcel> dalParcelsFromCustomer = dalObject.GetParcels(x => x.SenderId == id).ToList();
                 BO.Statuses parcelStatus = new BO.Statuses();
-                foreach (IDAL.DO.Parcel parcel in dalParcelsFromCustomer)
+                foreach (DO.Parcel parcel in dalParcelsFromCustomer)
                 {
 
                     if (parcel.Delivered != null) parcelStatus = BO.Statuses.Delivered;
@@ -75,8 +75,8 @@ namespace BL
 
                 //build the parcelsListToCustomer list
                 List<BO.ParcelInCustomer> parcelsToCustomer = new List<BO.ParcelInCustomer>();
-                List<IDAL.DO.Parcel> dalParcelsToCustomer = dalObject.GetParcels(x => x.TargetId == id).ToList();
-                foreach (IDAL.DO.Parcel parcel in dalParcelsToCustomer)
+                List<DO.Parcel> dalParcelsToCustomer = dalObject.GetParcels(x => x.TargetId == id).ToList();
+                foreach (DO.Parcel parcel in dalParcelsToCustomer)
                 {
                     if (parcel.Delivered != null) parcelStatus = BO.Statuses.Delivered;
                     else if (parcel.PickedUp != null) parcelStatus = BO.Statuses.PickedUp;
@@ -120,13 +120,13 @@ namespace BL
             return result;
         }
 
-        public IEnumerable<BO.CustomerForList> GetCustomers(Func<IDAL.DO.Customer, bool> filter = null)
+        public IEnumerable<BO.CustomerForList> GetCustomers(Func<DO.Customer, bool> filter = null)
         {
-            List<IDAL.DO.Customer> dalCustomers = dalObject.GetCustomers().ToList();
+            List<DO.Customer> dalCustomers = dalObject.GetCustomers().ToList();
             List<BO.CustomerForList> resultList = new List<BO.CustomerForList>();
             int counterSendAndSupplied = 0, counterSendAndNotSupplied = 0,
                 counterRecievedParcels = 0, counterParcelsOnMyWay = 0;
-            foreach (IDAL.DO.Customer customer in dalCustomers)
+            foreach (DO.Customer customer in dalCustomers)
             {
                 counterSendAndSupplied = dalObject.GetParcels(x => x.SenderId == customer.Id && x.Delivered != null).Count();
                 counterSendAndNotSupplied = dalObject.GetParcels(x => x.SenderId == customer.Id && x.Delivered == null).Count();

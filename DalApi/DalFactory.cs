@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace DalApi
 {
-    class DalFactory
+    public static class DalFactory
     {
         public static IDal GetDal(string dataFormat)
         {
             switch (dataFormat)
             {
                 case "DalObject":
-                    return null;
+                    return DalO;
                 case "DalXml":
                     return null;//
                 default:

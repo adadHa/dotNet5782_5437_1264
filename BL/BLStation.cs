@@ -4,7 +4,7 @@ using System.Linq;
 using BO;
 namespace BL
 {
-    internal partial class BL : BlApi.IBL
+    internal sealed partial class BL : BlApi.IBL
     {
 
         //this function adds a station to the database
@@ -58,9 +58,9 @@ namespace BL
         {
             try
             {
-                List<IDAL.DO.DroneCharge> l = dalObject.GetDroneCharges(x => x.StationId == id).ToList();
+                List<DO.DroneCharge> l = dalObject.GetDroneCharges(x => x.StationId == id).ToList();
                 List<DroneInCharge> listOfDronesInCharge = new List<DroneInCharge>();
-                foreach (IDAL.DO.DroneCharge droneCharge in l)
+                foreach (DO.DroneCharge droneCharge in l)
                 {
                     DroneForList BLDrone = BLDrones[GetBLDroneIndex(droneCharge.DroneId)];
                     listOfDronesInCharge.Add(new DroneInCharge
@@ -70,7 +70,7 @@ namespace BL
                     });
                 }
 
-                IDAL.DO.Station station = dalObject.GetStation(id);
+                DO.Station station = dalObject.GetStation(id);
                 Station resultStation = new Station
                 {
                     Id = station.Id,
@@ -105,12 +105,12 @@ namespace BL
             }
             return result;
         }
-        public IEnumerable<StationForList> GetStations(Func<IDAL.DO.Station, bool> filter = null)
+        public IEnumerable<StationForList> GetStations(Func<DO.Station, bool> filter = null)
         {
-            List<IDAL.DO.Station> dalStations = dalObject.GetStations(filter).ToList();
+            List<DO.Station> dalStations = dalObject.GetStations(filter).ToList();
             List<StationForList> resultList = new List<StationForList>();
             int occupiedChargingSlots = 0;
-            foreach (IDAL.DO.Station station in dalStations)
+            foreach (DO.Station station in dalStations)
             {
                 occupiedChargingSlots = dalObject.GetDroneCharges(x => x.StationId == station.Id).Count();
                 resultList.Add(new StationForList
@@ -126,15 +126,15 @@ namespace BL
 
         //This function return the most close station's location to a given loaction
         //check on a filtered stations list if a filter was provided
-        private Location GetMostCloseStationLocation(Location location, Func<IDAL.DO.Station, bool> filter = null)
+        private Location GetMostCloseStationLocation(Location location, Func<DO.Station, bool> filter = null)
         {
-            List<IDAL.DO.Station> stations =
+            List<DO.Station> stations =
                     dalObject.GetStations(filter).ToList(); // we choose from the available stations.
             if (stations.Count() == 0) return null;
-            IDAL.DO.Station mostCloseStation = stations[0];
+            DO.Station mostCloseStation = stations[0];
             double mostCloseDistance = 0;
             double distance = 0;
-            foreach (IDAL.DO.Station station in stations)
+            foreach (DO.Station station in stations)
             {
                 Location stationL = new Location { Latitude = station.Latitude, Longitude = station.Longitude };
                 distance = Distance(stationL, location);
