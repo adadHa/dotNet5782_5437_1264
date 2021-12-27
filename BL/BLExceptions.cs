@@ -1,4 +1,4 @@
-﻿using IDAL.DO;
+﻿using DO;
 using System;
 using System.Runtime.Serialization;
 
@@ -68,12 +68,12 @@ namespace BO
     internal class NotEnoughBatteryException : Exception
     {
         private DroneForList Drone;
-        private IDAL.DO.Station Station;
+        private DO.Station Station;
         public NotEnoughBatteryException()
         {
         }
 
-        public NotEnoughBatteryException(DroneForList drone, IDAL.DO.Station station)
+        public NotEnoughBatteryException(DroneForList drone, DO.Station station)
         {
             Drone = drone;
             Station = station;
@@ -264,7 +264,7 @@ namespace BO
     internal class DroneCannotCollectParcelException : Exception
     {
         private DroneForList drone;
-        private IDAL.DO.Parcel? parcel;
+        private DO.Parcel? parcel;
 
         public DroneCannotCollectParcelException()
         {
@@ -273,7 +273,7 @@ namespace BO
         public DroneCannotCollectParcelException(string message) : base(message)
         {
         }
-        public DroneCannotCollectParcelException(DroneForList drone, IDAL.DO.Parcel? parcel = null)
+        public DroneCannotCollectParcelException(DroneForList drone, DO.Parcel? parcel = null)
         {
             this.drone = drone;
             this.parcel = parcel;
@@ -300,7 +300,7 @@ namespace BO
     internal class DroneCannotSupplyParcelException : Exception
     {
         private DroneForList drone;
-        private IDAL.DO.Parcel? parcel;
+        private DO.Parcel? parcel;
 
         public DroneCannotSupplyParcelException()
         {
@@ -310,7 +310,7 @@ namespace BO
         {
         }
 
-        public DroneCannotSupplyParcelException(DroneForList drone, IDAL.DO.Parcel? parcel = null)
+        public DroneCannotSupplyParcelException(DroneForList drone, DO.Parcel? parcel = null)
         {
             this.drone = drone;
             this.parcel = parcel;
