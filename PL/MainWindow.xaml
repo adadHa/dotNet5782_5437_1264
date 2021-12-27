@@ -30,6 +30,7 @@
             <Border Grid.ColumnSpan="9" BorderThickness="00,00,00,2" BorderBrush="#eceff1" VerticalAlignment="Bottom" ></Border>
             <TextBlock Grid.Column="1" Text="DR" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Medium" FontFamily="Fonts/#Dosis"/>
             <Button x:Name="ShowDrones" Grid.Column="2" Content="Drones List" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontWeight="Medium" FontFamily="Fonts/#Dosis" Click="ShowDronesButton_Click" BorderThickness="0,0,0,0" Margin="0,0,0,4"/>
+            <Button x:Name="ShowCustomers" Grid.Column="3" Content="Customers List" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontWeight="Medium" FontFamily="Fonts/#Dosis"  BorderThickness="0,0,0,0" Margin="0,0,0,4" Click="ShowCustomers_Click"/>
             <Button Name="CloseMainWindowButton"  Template="{StaticResource ButtonTemplate}"  HorizontalAlignment="Center" VerticalAlignment="Center" Click="CloseOptionsDroneWindowButton_Click" Grid.Column="9" Width="20" Height="20"/>
         </Grid>
         <Frame Name="CurrentPage" Background="Transparent" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" Grid.Row="2"/>

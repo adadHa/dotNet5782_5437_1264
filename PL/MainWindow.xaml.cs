@@ -22,6 +22,7 @@ namespace PL
     public partial class MainWindow : Window
     {
         DronesListPage droneListPage { get; set; }
+        CustomerListPage customersListPage { get; set; }
         private BlApi.IBL BLObject { get; set; }
         public MainWindow()
         {
@@ -39,6 +40,12 @@ namespace PL
         private void CloseOptionsDroneWindowButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void ShowCustomers_Click(object sender, RoutedEventArgs e)
+        {
+            customersListPage = new CustomerListPage(BLObject);
+            CurrentPage.Content = customersListPage;
         }
     }
 }
