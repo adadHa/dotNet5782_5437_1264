@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BO;
-
+using BlApi;
 namespace PL
 {
     /// <summary>
@@ -23,18 +23,14 @@ namespace PL
     {
         private BlApi.IBL BLObject { get; set; }
 
+
         public DronesListPage()
         {
             InitializeComponent();
-        }
-
-        public DronesListPage(BlApi.IBL blObject)
-        {
-            InitializeComponent();
-            BLObject = blObject;
-            DronesListView.ItemsSource = BLObject.GetDrones();
+            BLObject = BlFactory.GetBl();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WheightCategories));
+            DronesListView.DataContext = BLObject.GetDrones();
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -62,7 +58,14 @@ namespace PL
 
         private void AddDroneButton_Click(object sender, RoutedEventArgs e)
         {
-            new DroneWindow(BLObject).Show();
+            DroneWindow droneWindow = new DroneWindow();
+            droneWindow.Closed += DroneWindow_Closed;
+            droneWindow.Show();
+
+        }
+        private void DroneWindow_Closed(object sender, EventArgs e)
+        {
+            DronesListView.Items.Refresh();
         }
 
         private void DronesListView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -74,8 +77,12 @@ namespace PL
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DroneForList drone = (DroneForList)((ListView)sender).SelectedItem;
-            new DroneWindow(BLObject, drone).Show();
+            if (drone != null)
+            {
+                new DroneWindow(drone).Show(); 
+            }
         }
+
     }
 }
 

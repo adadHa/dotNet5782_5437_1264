@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
+using BlApi;
 namespace PL
 {
     /// <summary>
@@ -29,10 +30,10 @@ namespace PL
         private int InitialStation;
 
         //constructor of add drone mode
-        public DroneWindow(BlApi.IBL blObject)
+        public DroneWindow()
         {
             InitializeComponent();
-            BLObject = blObject;
+            BLObject = BlFactory.GetBl();
             ComboBoxInsertWeight.ItemsSource = Enum.GetNames(typeof(WheightCategories));
 
             //make the add drone window visible
@@ -41,8 +42,9 @@ namespace PL
         }
 
         // constructor of view drone/options mode
-        public DroneWindow(BlApi.IBL blObject, DroneForList drone) : this(blObject)
+        public DroneWindow( DroneForList drone)
         {
+            BLObject = BlFactory.GetBl();
             Drone = drone;
             OptionsDroneWindow.DataContext = Drone;
             OptionsDroneWindow.Visibility = Visibility.Visible;
@@ -63,11 +65,11 @@ namespace PL
             {
                 ReleaseDroneButton.Visibility = Visibility.Visible;
             }
-            else if (drone.Status == DroneStatuses.Shipping && blObject.GetParcel(drone.DeliveredParcelNumber).PickedUp == null)
+            else if (drone.Status == DroneStatuses.Shipping && BLObject.GetParcel(drone.DeliveredParcelNumber).PickedUp == null)
             {
                 PickUpDroneButton.Visibility = Visibility.Visible;
             }
-            else if (drone.Status == DroneStatuses.Shipping && blObject.GetParcel(drone.DeliveredParcelNumber).PickedUp != null)
+            else if (drone.Status == DroneStatuses.Shipping && BLObject.GetParcel(drone.DeliveredParcelNumber).PickedUp != null)
             {
                 SupplyParcelDroneButton.Visibility = Visibility.Visible;
             }

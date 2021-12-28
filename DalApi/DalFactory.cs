@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.IO;
+
 namespace DalApi
 {
     public static class DalFactory
@@ -17,7 +19,10 @@ namespace DalApi
                 switch (dataFormat)
                 {
                     case "DalObject":
-                        testAss = Assembly.LoadFrom("C:\\Users\\adadi\\source\\repos\\adadHa\\dotNet5782_5437_1264\\DalObject\\bin\\Debug\\net5.0\\DalObject.dll");
+                        // get the DalObject path
+                        string path = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, 
+                            "..\\..\\..\\..\\DalObject\\bin\\Debug\\net5.0\\DalObject.dll"));
+                        testAss = Assembly.LoadFrom(path);
                         break;
                     case "DalXml":
                         return null;//
@@ -46,9 +51,9 @@ namespace DalApi
 
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                return null;
+                throw e;
             }
         }
     }
 }
+//string basePath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName;

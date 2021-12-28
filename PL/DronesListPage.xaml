@@ -28,12 +28,25 @@
             <ComboBox x:Name="WeightSelector" Grid.Column="3" Margin="40,0,40,0"  Width="120" SelectionChanged="WeightSelector_SelectionChanged" IsEditable="True" Text="Weight" PreviewMouseDoubleClick="WeightSelector_PreviewMouseDoubleClick"/>
             <Button x:Name="AddDroneButton" Content="Add drone" HorizontalAlignment="Left" Margin="60,0,0,0" VerticalAlignment="Center" Click="AddDroneButton_Click"/>
         </Grid>
-        <ListView x:Name="DronesListView" Grid.Row="1" MouseDoubleClick="DronesListView_MouseDoubleClick" SelectionMode="Extended">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+        <ListView x:Name="DronesListView" ItemsSource="{Binding }" Grid.Row="1" MouseDoubleClick="DronesListView_MouseDoubleClick" SelectionMode="Extended">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="Id: " />
+                        <TextBlock Text="{Binding Id}" FontWeight="Bold" />
+                        <TextBlock Text="  Model: " />
+                        <TextBlock Text="{Binding Model}" FontWeight="Bold" />
+                        <TextBlock Text="  Location: " />
+                        <TextBlock Text="{Binding Location}" FontWeight="Bold" />
+                        <TextBlock Text="  Weight: " />
+                        <TextBlock Text="{Binding MaxWeight}" FontWeight="Bold" />
+                        <TextBlock Text="  Status: " />
+                        <TextBlock Text="{Binding Status}" FontWeight="Bold" />
+                        <TextBlock Text="  Battery: " />
+                        <TextBlock Text="{Binding Battery}" FontWeight="Bold" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
 
 
