@@ -21,7 +21,7 @@ namespace BL
             availableDrElectConsumption = arr[0];
             lightDrElectConsumption = arr[1];
             mediumDrElectConsumption = arr[2];
-            heavyDrElectConsumption = arr[3];
+            heavyDrElectConsumption = arr[3]; 
             chargingRate = arr[4];
             InitializeDrones();
         }
