@@ -44,6 +44,7 @@ namespace PL
         // constructor of view drone/options mode
         public DroneWindow( DroneForList drone)
         {
+            InitializeComponent();
             BLObject = BlFactory.GetBl();
             Drone = drone;
             OptionsDroneWindow.DataContext = Drone;
@@ -160,15 +161,6 @@ namespace PL
             Close();
         }
 
-        private void ButtonAddDrone_MouseEnter(object sender, MouseEventArgs e)
-        {
-            ButtonAddDrone.Background = FindResource("AddButtonMouseOver") as Brush;
-        }
-
-        private void ButtonAddDrone_MouseLeave(object sender, MouseEventArgs e)
-        {
-            ButtonAddDrone.Background = FindResource("AddButton") as Brush;
-        }
 
         private void ModelValueTextBox_KeyDown(object sender, KeyEventArgs e)
         {

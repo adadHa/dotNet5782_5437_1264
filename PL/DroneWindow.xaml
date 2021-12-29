@@ -61,7 +61,7 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
                     <ComboBox x:Name="ComboBoxInsertWeight" HorizontalAlignment="Center" SelectionChanged="ComboBoxInsertWeight_SelectionChanged" Grid.Row="3" Grid.Column="1" Width="120"/>
                 </Grid>
                 <Grid Margin="0,0,0,0">
-                    <Button x:Name="ButtonAddDrone" Content="Add" HorizontalAlignment="Center" Grid.Column="0" VerticalAlignment="Top" Click="ButtonAddDrone_Click" Margin="0,15,0,0" BorderBrush="{x:Null}" Background="{StaticResource AddButton}"  Width="100" Height="30" FontSize="18" FontWeight="Bold" Foreground="White" MouseEnter="ButtonAddDrone_MouseEnter" MouseLeave="ButtonAddDrone_MouseLeave"/>
+                    <Button x:Name="ButtonAddDrone" Content="Add" HorizontalAlignment="Center" Grid.Column="0" VerticalAlignment="Top" Click="ButtonAddDrone_Click" Margin="0,15,0,0" BorderBrush="{x:Null}" Background="{StaticResource AddButton}"  Width="100" Height="30" FontSize="18" FontWeight="Bold" Foreground="White"/>
                 </Grid>
             </StackPanel>
         </Grid>
@@ -99,7 +99,7 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Name="ModelValueTextBlock" Grid.Row="0" Text="Model  " FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"   />
-                <TextBox Name="ModelValueTextBox" Text="{Binding Path=Model}" Grid.Row="0" FontSize="14" KeyDown="ModelValueTextBox_KeyDown" BorderThickness="0,0,0,1" Grid.ColumnSpan="2" Margin="83,0,59,22"/>
+                <TextBox Name="ModelValueTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=Model}" Grid.Row="0" FontSize="14" KeyDown="ModelValueTextBox_KeyDown" BorderThickness="0,0,0,1" Grid.ColumnSpan="2" Margin="83,0,59,22"/>
 
                 <TextBlock Name="LocationValueTextBlock" Grid.Row="1" Text="Location"  FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,0,5,0"/>
                 <TextBlock Text="{Binding Path=Location}" Grid.Row="1" FontSize="14" Grid.Column="1" KeyDown="ModelValueTextBox_KeyDown"/>

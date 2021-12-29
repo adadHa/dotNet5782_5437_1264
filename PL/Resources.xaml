@@ -66,5 +66,9 @@
 
     </ControlTemplate>
 
+    <Style x:Key="TextBoxStyle" TargetType="Control">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0,0,0,3"/>
+    </Style>
 
 </ResourceDictionary>

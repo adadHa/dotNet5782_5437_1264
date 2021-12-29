@@ -118,6 +118,8 @@ namespace BL
             {
                 double batteryStatus = Math.Round(rand.NextDouble() * rand.Next(20, 41),1);
                 DO.Station initialStation = dalObject.GetStation(initialStationId);
+                if (initialStation.FreeChargeSlots == 0)
+                    throw new DalApi.NoChargeSlotsException(initialStation);
                 dalObject.AddDrone(id, model, weight);
                 BLDrones.Add(new BO.DroneForList
                 {
