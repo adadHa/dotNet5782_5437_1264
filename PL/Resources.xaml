@@ -12,20 +12,22 @@
     <SolidColorBrush x:Key="BackgroundColor60" Color="#f1f1f1"/>
     <SolidColorBrush x:Key="BackgroundColor30" Color="#e6e6e6"/>
     <SolidColorBrush x:Key="BackgroundColor10" Color="#22577E"/>
+    <SolidColorBrush x:Key="PageButtons" Color="Gray"/>
+    <SolidColorBrush x:Key="PageButtonsPressed" Color="Black"/>
     <SolidColorBrush x:Key="TextColor" Color="#99A799"/>
     <SolidColorBrush x:Key="Blue1" Color="#22577E"/>
     <SolidColorBrush x:Key="Blue2" Color="#5584AC"/>
     <SolidColorBrush x:Key="Blue3" Color="#95D1CC"/>
     <SolidColorBrush x:Key="AddButton" Color="#FF1E81B0"/>
     <SolidColorBrush x:Key="AddButtonMouseOver" Color="#4b9ac0"/>
-
+    
 
     <!--#region Texts-->
     <TextBox x:Key="InputValue" FontSize="16" Foreground="{StaticResource TextColor}">
     </TextBox>
 
     <!--#region Templates-->
-
+    
     <ControlTemplate x:Key = "ButtonTemplate" TargetType = "Button">
         <Grid Name="ButtonClose">
             <Grid.RowDefinitions>
@@ -45,13 +47,10 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Grid>
-
         <ControlTemplate.Triggers>
-
             <Trigger Property = "IsMouseOver" Value = "True">
                 <Setter TargetName="ButtonClose" Property="Background" Value="#dcdcdd"/>
             </Trigger>
-
             <Trigger Property = "IsPressed" Value = "True">
                 <Setter Property = "RenderTransform">
                     <Setter.Value>
@@ -61,11 +60,34 @@
                 </Setter>
                 <Setter Property = "RenderTransformOrigin" Value = "0.5,0.5" />
             </Trigger>
-
         </ControlTemplate.Triggers>
-
     </ControlTemplate>
 
+
+    <Style x:Key="PagesButtons" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource PageButtons}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="BorderThickness" Value="0,0,0,0"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Button" CornerRadius="5" BorderThickness="0" Padding="5" BorderBrush="#000">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property = "IsMouseOver" Value = "True">
+                            <Setter TargetName="Button" Property="Background" Value="{StaticResource BackgroundColor30}"/>
+                        </Trigger>
+                        <Trigger Property = "IsFocused" Value = "True">
+                            <Setter Property="Foreground" Value="{StaticResource PageButtonsPressed}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="TextBoxStyle" TargetType="Control">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0,0,0,3"/>

@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="1000" ResizeMode="NoResize" Background="{StaticResource BackgroundColor60}">
+        Title="MainWindow" Height="550" Width="1000" ResizeMode="NoResize"  Background="{StaticResource BackgroundColor60}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.08*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid Background="{StaticResource BackgroundColor10}" Grid.ColumnSpan="2">
+        <Grid Background="{StaticResource BackgroundColor60}" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -27,15 +27,68 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border Grid.ColumnSpan="9" BorderThickness="00,00,00,2" BorderBrush="#eceff1" VerticalAlignment="Bottom" ></Border>
+            <Border Grid.ColumnSpan="9" BorderThickness="00,00,00,0.3" BorderBrush="Black" VerticalAlignment="Bottom" ></Border>
             <TextBlock Grid.Column="1" Text="DR" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Medium" FontFamily="Fonts/#Dosis"/>
-            <Button x:Name="ShowDrones" Grid.Column="2" Content="Drones List" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontWeight="Medium" FontFamily="Fonts/#Dosis" Click="ShowDronesButton_Click" BorderThickness="0,0,0,0" Margin="0,0,0,4"/>
-            <Button x:Name="ShowCustomers" Grid.Column="3" Content="Customers List" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontWeight="Medium" FontFamily="Fonts/#Dosis"  BorderThickness="0,0,0,0" Margin="0,0,0,4" Click="ShowCustomers_Click"/>
+            <Button x:Name="ShowDrones" Style="{StaticResource PagesButtons}" Grid.Column="2" Content="Drones List" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="ShowDronesButton_Click" Margin="0,0,0,4"/>
+            <Button x:Name="ShowCustomers" Style="{StaticResource PagesButtons}" Grid.Column="3" Content="Customers List" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Bottom"  FontWeight="Medium" Margin="0,0,0,4" Click="ShowCustomers_Click"/>
             <Button Name="CloseMainWindowButton"  Template="{StaticResource ButtonTemplate}"  HorizontalAlignment="Center" VerticalAlignment="Center" Click="CloseOptionsDroneWindowButton_Click" Grid.Column="9" Width="20" Height="20"/>
         </Grid>
-        <Rectangle Fill="{StaticResource BackgroundColor30}" Grid.Column="1" Grid.Row="1" Margin="56,33,56,197"/>
-        <Frame Name="CurrentPage" Background="Transparent" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" Grid.Row="2"/>
-        
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30,0,0,60">
+            <TextBlock Text=" Take your" FontSize="30" FontWeight="ExtraLight" Foreground="Gray"/>
+            <TextBlock Text="  Drones " FontSize="130" FontWeight="ExtraLight" />
+            <TextBlock Text=" to the next level" FontSize="30" FontWeight="ExtraLight" Foreground="Gray"/>
+            <TextBlock Text="Our Drone And Data Integrated system is the the best int the world beccuse blablaladaskfdsjsdljkfklsdfsdlfjsdljfasjdlfjsldajflasjdflkjasdlkfjsldkfjsakdjflksajdfljsadklfjsdf" TextWrapping="Wrap" Foreground="Gray"/>
+        </StackPanel>
+        <Grid Margin="210,-967,-1298,233" Panel.ZIndex="-1" Grid.ColumnSpan="2">
+            <Grid.RenderTransform>
+                <RotateTransform Angle="50"/>
+            </Grid.RenderTransform>
+            <StackPanel Orientation="Horizontal" Margin="350,250,-255,-250">
+                <StackPanel>
+                    <Border
+                Width="700"
+                Height="35"
+                Margin="150,0,0,0"
+                CornerRadius="20"
+                Background="#3DDDC2"/>
+                    <Border
+                Width="700"
+                Height="35"
+                Margin="0,15,0,0"
+                CornerRadius="20"
+                Background="#FC6586"/>
+                    <Border
+                Width="700"
+                Height="35"
+                Margin="75,15,0,0"
+                CornerRadius="20"
+                Background="#383660"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <Border
+                Width="700"
+                Height="35"
+                Margin="150,0,0,0"
+                CornerRadius="20"
+                Background="#3DDDC2"/>
+                    <Border
+                Width="700"
+                Height="35"
+                Margin="0,15,0,0"
+                CornerRadius="20"
+                Background="#FC6586"/>
+                    <Border
+                Width="700"
+                Height="35"
+                Margin="75,15,0,0"
+                CornerRadius="20"
+                Background="#383660"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Frame Name="CurrentPage" Background="Transparent" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" Grid.Row="2" Navigated="CurrentPage_Navigated"/>
+
 
 
 

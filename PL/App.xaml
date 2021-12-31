@@ -6,6 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="ToolbarResources" 
+            Source="ToolbarResources.xaml" />
                 <ResourceDictionary x:Name="Resources" 
             Source="Resources.xaml" />
             </ResourceDictionary.MergedDictionaries>

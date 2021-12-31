@@ -22,38 +22,44 @@ namespace PL
     public partial class DronesListPage : Page
     {
         private BlApi.IBL BLObject { get; set; }
-
-
+        private DroneStatuses? statusFilter = null;
+        private WheightCategories? weightFilter = null;
         public DronesListPage()
         {
             InitializeComponent();
             BLObject = BlFactory.GetBl();
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(WheightCategories));
+            StatusSelector.DataContext = Enum.GetValues(typeof(DroneStatuses));
+            WeightSelector.DataContext = Enum.GetValues(typeof(WheightCategories));
             DronesListView.DataContext = BLObject.GetDrones();
+            GroupByStatusSelector.DataContext = Enum.GetValues(typeof(DroneStatuses));
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DroneStatuses statusFilter = (DroneStatuses)StatusSelector.SelectedItem;
-            DronesListView.ItemsSource = BLObject.GetDrones(x => x.Status == statusFilter);
-            DronesListView.Items.Refresh();
+            statusFilter = (DroneStatuses)StatusSelector.SelectedItem;
+            IEnumerable<DroneForList> currenList = BLObject.GetDrones();
+            DronesListView.DataContext = from drone in currenList
+                                         where drone.Status == statusFilter || statusFilter == null
+                                         where drone.MaxWeight == weightFilter || weightFilter == null
+                                         select drone;
         }
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            WheightCategories weightFilter = (WheightCategories)WeightSelector.SelectedItem;
-            DronesListView.ItemsSource = BLObject.GetDrones(x => x.MaxWeight == weightFilter);
-            DronesListView.Items.Refresh();
+            weightFilter = (WheightCategories)WeightSelector.SelectedItem;
+            IEnumerable<DroneForList> currenList = BLObject.GetDrones();
+            DronesListView.DataContext = from drone in currenList
+                                         where drone.Status == statusFilter || statusFilter == null
+                                         where drone.MaxWeight == weightFilter || weightFilter == null
+                                         select drone;
         }
         private void StatusSelector_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DronesListView.ItemsSource = BLObject.GetDrones();
-            DronesListView.Items.Refresh();
+            DronesListView.DataContext = BLObject.GetDrones();
         }
         private void WeightSelector_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DronesListView.ItemsSource = BLObject.GetDrones();
-            DronesListView.Items.Refresh();
+            DronesListView.DataContext = BLObject.GetDrones();
+
         }
 
         private void AddDroneButton_Click(object sender, RoutedEventArgs e)
@@ -79,10 +85,33 @@ namespace PL
             DroneForList drone = (DroneForList)((ListView)sender).SelectedItem;
             if (drone != null)
             {
-                new DroneWindow(drone).Show(); 
+                new DroneWindow(drone).Show();
             }
         }
 
+        private void GroupByWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void GroupByStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void GroupByStatusSelector_Checked(object sender, RoutedEventArgs e)
+        {
+            var currenList = (IEnumerable<DroneForList>)DronesListView.DataContext;
+            var resultList = from drone in currenList
+                             orderby drone.Status
+                             select drone;
+            DronesListView.DataContext = resultList;
+        }
+
+        private void GroupByStatusSelector_Unchecked(object sender, RoutedEventArgs e)
+        {
+            DronesListView.DataContext = BLObject.GetDrones();
+        }
     }
 }
 

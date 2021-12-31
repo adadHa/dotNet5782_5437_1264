@@ -78,7 +78,7 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
                 <RowDefinition Height="1.5*"/>
 
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"  Background="{StaticResource BackgroundColor30}" >
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"  Background="{StaticResource BackgroundColor60}" >
                 <Button Name="CloseOptionsDroneWindowButton"  Template="{StaticResource ButtonTemplate}"  HorizontalAlignment="right" VerticalAlignment="Bottom" Click="CloseOptionsDroneWindowButton_Click" Width="20" Height="20" Margin="0,5,5,0">
 
                 </Button>
