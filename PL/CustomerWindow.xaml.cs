@@ -21,7 +21,7 @@ namespace PL
     {
         private IBL BLObject { get; set; }
         private int Id;
-        private int Phone;
+        private string Phone;
         private string Name;
         private double Longitude;
         private double Lattitude;
@@ -45,8 +45,8 @@ namespace PL
             {
                 try
                 {
-                    BLObject.AddCustomer(Id, Name, Phone, Longitude, Lattitude);
-                    MessageBox.Show($"Drone {Id} was added succefully!");
+                    BLObject.AddCustomer(Id, Name, Phone, new BO.Location { Longitude = this.Longitude, Latitude = this.Lattitude });
+                    MessageBox.Show($"Customer {Id} was added succefully!");
                     Close();
                 }
                 catch (Exception ex)
@@ -80,13 +80,15 @@ namespace PL
 
         private void PhoneTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if ((int.TryParse(PhoneValueTextBox.Text, out Phone) && Phone >= 0) || PhoneValueTextBox.Text == "" || PhoneValueTextBox.Text.Length == 10)
+            int phone;
+            if ((int.TryParse(PhoneValueTextBox.Text, out phone) && phone >= 0) || PhoneValueTextBox.Text == "" || PhoneValueTextBox.Text.Length == 10)
             {
-                PhoneValueTextBox.BorderBrush = Brushes.Green;
+                Phone = PhoneValueTextBox.Text;
+                PhoneValueTextBox.Background = Brushes.Green;
             }
             else
             {
-                PhoneValueTextBox.BorderBrush = Brushes.Red;
+                PhoneValueTextBox.Background = Brushes.Red;
             }
         }
 

@@ -10,7 +10,7 @@ namespace BlApi
     {
         public void AddStation(int id, string name, int freeChargingSlots, BO.Location location);
         public void AddDrone(int id, string model, string weight, int initialStation);
-        public void AddCustomer(int id, string name, string phoneNumber);
+        public void AddCustomer(int id, string name, string phoneNumber, BO.Location location);
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority);
 
 
