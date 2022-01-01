@@ -20,15 +20,9 @@ namespace PL
     public partial class CustomerWindow : Window
     {
         private IBL BLObject { get; set; }
-        //add mode
-        public CustomerWindow()
-        {
-            InitializeComponent();
-            BLObject = BlFactory.GetBl();
-        }
 
-        //options mode
-        public CustomerWindow(BO.Customer customer)
+        // options/add mode
+        public CustomerWindow(BO.Customer customer = null)
         {
             InitializeComponent();
             BLObject = BlFactory.GetBl();
