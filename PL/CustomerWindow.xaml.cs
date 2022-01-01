@@ -22,6 +22,7 @@ namespace PL
         private IBL BLObject { get; set; }
         private int Id;
         private int Phone;
+        private string Name;
         private double Longitude;
         private double Lattitude;
 
@@ -35,7 +36,24 @@ namespace PL
 
         private void ButtonAddCustomer_Click(object sender, RoutedEventArgs e)
         {
+            if (!int.TryParse(IdValueTextBox.Text, out Id) || Id < 0)
+            {
+                MessageBox.Show("Id should be an integer grater or equal to than 0!");
+            }
 
+            else
+            {
+                try
+                {
+                    BLObject.AddCustomer(Id, Name, Phone, Longitude, Lattitude);
+                    MessageBox.Show($"Drone {Id} was added succefully!");
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
         }
 
         private void IdValueTextBox_TextChanged(object sender, TextChangedEventArgs e)

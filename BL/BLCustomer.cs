@@ -9,11 +9,11 @@ namespace BL
     internal sealed partial class BL : BlApi.IBL
     {
         //this function adds a customer to the database
-        public void AddCustomer(int id, string name, string phoneNumber)
+        public void AddCustomer(int id, string name, string phoneNumber,BO.Location location)
         {
             try
             {
-                dalObject.AddCustomer(id, name, phoneNumber, 0, 0);
+                dalObject.AddCustomer(id, name, phoneNumber, location.Longitude, location.Latitude);
 
             }
             catch (DalApi.IdIsAlreadyExistException e)
