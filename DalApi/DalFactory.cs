@@ -17,7 +17,7 @@ namespace DalApi
                 switch (dataFormat)
                 {
                     case "DalObject":
-                        testAss = Assembly.LoadFrom("C:\\Users\\adadi\\source\\repos\\adadHa\\dotNet5782_5437_1264\\DalObject\\bin\\Debug\\net5.0\\DalObject.dll");
+                        testAss = Assembly.LoadFrom("C:\\Users\\rafus\\source\\repos\\adadHa\\dotNet5782_5437_1264\\DalObject\\bin\\Debug\\net5.0\\DalObject.dll");
                         break;
                     case "DalXml":
                         return null;//
