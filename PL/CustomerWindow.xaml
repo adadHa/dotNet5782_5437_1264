@@ -14,10 +14,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.7*"/>
-            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
 
         </Grid.RowDefinitions>
+        <Button x:Name="ButtonAddCustomer" Grid.Row="2" Content="Add" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Bottom" Click="ButtonAddCustomer_Click" BorderBrush="{x:Null}" Background="{StaticResource AddButton}"  Width="100" Height="30" FontSize="18" FontWeight="Bold" Foreground="White"/>
+
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"  Background="{StaticResource BackgroundColor30}" >
             <Button Name="CloseOptionsCustomerWindowButton"  Template="{StaticResource ButtonTemplate}"  HorizontalAlignment="right" VerticalAlignment="Bottom" Width="20" Height="20" Margin="0,5,5,0">
 
@@ -25,37 +27,28 @@
         </StackPanel>
 
         <TextBlock Name="TitleTextBox" Grid.Row="1" Text="  Customer " FontSize="46" Grid.Column="0" />
-        <TextBlock Name="IdTextBlock" Grid.Row="1" Text="Id" FontSize="16" Grid.Column="0" VerticalAlignment="Bottom" Margin="50,0,0,16"/>
-        <Grid Grid.RowSpan="5" Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="0" Width="300" HorizontalAlignment="left" Margin="50,0,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock Name="NameValueTextBlock" Grid.Row="0" Text="Name  " FontSize="14" Grid.Column="0" HorizontalAlignment="Right" Margin="39,0,0,40" Grid.RowSpan="2"   />
-            <TextBox Name="NameValueTextBox" Text="{Binding Path=Name}" Grid.Row="0" Grid.Column="1" FontSize="14" BorderThickness="0,0,0,1" Margin="10,0,10,20"/>
+        <StackPanel Grid.RowSpan="2" Grid.Row="1" Grid.Column="0" Width="108" HorizontalAlignment="Left" Margin="50,112,0,15">
 
-            <TextBlock Name="PhoneValueTextBlock" Grid.Row="1" Text="Phone"  FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,0,5,0"/>
-            <TextBox Text="" Grid.Column="1" FontSize="14" Margin="10,40,10,22" BorderThickness="0,0,0,1" Grid.RowSpan="2"/>
+            <TextBlock Name="IdValueTextBlock" Text="Id  " FontSize="14" HorizontalAlignment="Right" Grid.RowSpan="2"   />
+            <TextBox Name="IdValueTextBox" Text="{Binding Path=Name}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="IdValueTextBox_TextChanged"/>
 
-            <TextBlock Name="CounterSendAndSuppliedValueTextBlock" Grid.Row="2" Text="Longitude" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,0,5,0" />
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=CounterSendAndSupplied}" FontSize="14" Margin="10,0,59,22" BorderThickness="0,0,0,1" />
+            <TextBlock Name="NameValueTextBlock" Text="Name  " FontSize="14" HorizontalAlignment="Right" Grid.RowSpan="2"   />
+            <TextBox Name="NameValueTextBox" Text="{Binding Path=Name}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="NameValueTextBox_TextChanged"/>
 
-            <TextBlock Name="CounterSendAndNotSupplied" Grid.Row="3" Text="Lattitude" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=CounterSendAndNotSupplied}" FontSize="14" Margin="10,0,59,22" BorderThickness="0,0,0,1"/>
+            <TextBlock Name="PhoneValueTextBlock" Text="Phone"  FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+            <TextBox Name="PhoneValueTextBox" Text="" FontSize="14" BorderThickness="0,0,0,1" Grid.RowSpan="2" TextChanged="PhoneTextBox_TextChanged"/>
 
-            <TextBlock Name="CounterRecievedParcels" Grid.Row="4" Text="Recieved Parcels " FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=CounterRecievedParcels}" FontSize="14" Margin="10,0,59,22" BorderThickness="0,0,0,1"/>
+            <TextBlock Name="LongitudeValueTextBlock" Grid.Row="2" Text="Longitude" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
+            <TextBox Name="LongitudeValueTextBox" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Location.Longitude}" FontSize="14"  BorderThickness="0,0,0,1" TextChanged="LongitudeValueTextBox_TextChanged" />
+
+            <TextBlock Name="LattitudeValueTextBlock" Grid.Row="3" Text="Lattitude" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+            <TextBox Name="LattitudeValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Location.Lattitude}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="LattitudeValueTextBox_TextChanged"/>
+
+            <!--<TextBlock Name="CounterRecievedParcels" Grid.Row="4" Text="Recieved Parcels " FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+            <TextBox Grid.Row="4" Text="{Binding Path=CounterRecievedParcels}" FontSize="14" BorderThickness="0,0,0,1"/>
 
             <TextBlock Name="CounterParcelsOnMyWay" Grid.Row="5" Text="Parcels On My Way " FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=CounterParcelsOnMyWay}" FontSize="14" Margin="10,0,59,22" BorderThickness="0,0,0,1"/>
-        </Grid>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=CounterParcelsOnMyWay}" FontSize="14" BorderThickness="0,0,0,1"/>-->
+        </StackPanel>
     </Grid>
 </Window>
