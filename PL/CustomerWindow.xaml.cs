@@ -23,7 +23,7 @@ namespace PL
         private int Id;
         private int Phone;
         private double Longitude;
-        private double Longitude;
+        private double Lattitude;
 
 
         // options/add mode
