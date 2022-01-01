@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using BO;
+using BlApi;
 namespace PL
 {
     /// <summary>
@@ -20,12 +21,12 @@ namespace PL
     /// </summary>
     public partial class CustomerListPage : Page
     {
-        BlApi.IBL BlObject;
+        BlApi.IBL BLObject;
         public CustomerListPage(BlApi.IBL blObject)
         {
             InitializeComponent();
-            BlObject = blObject;
-            CustomersListView.DataContext = blObject.GetCustomers();
+            BLObject = BlFactory.GetBl();
+            CustomersListView.DataContext = BLObject.GetCustomers();
         }
 
         private void titleTextBlock_MouseMove(object sender, MouseEventArgs e)

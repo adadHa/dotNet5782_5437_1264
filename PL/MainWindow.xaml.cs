@@ -33,7 +33,7 @@ namespace PL
 
         private void ShowDronesButton_Click(object sender, RoutedEventArgs e)
         {
-            droneListPage = new DronesListPage(BLObject);
+            droneListPage = new DronesListPage();
             CurrentPage.Content = droneListPage;
         }
 
@@ -46,6 +46,11 @@ namespace PL
         {
             customersListPage = new CustomerListPage(BLObject);
             CurrentPage.Content = customersListPage;
+        }
+
+        private void CurrentPage_Navigated(object sender, NavigationEventArgs e)
+        {
+
         }
     }
 }

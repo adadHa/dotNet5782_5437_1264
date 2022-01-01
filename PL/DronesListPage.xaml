@@ -13,28 +13,40 @@
             <RowDefinition Height="50*"/>
             <RowDefinition Height="400*"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
-         VerticalAlignment="Stretch" Width="auto">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200*"/>
-                <ColumnDefinition Width="157*"/>
-                <ColumnDefinition Width="43*"/>
-                <ColumnDefinition Width="200*"/>
-                <ColumnDefinition Width="200*"/>
-            </Grid.ColumnDefinitions >
-            <ComboBox Text="Status" Name ="StatusSelector"  Grid.Column="1" Width="120" SelectionChanged="StatusSelector_SelectionChanged" Grid.ColumnSpan="2" Margin="40,0,40,0" IsEditable="True" PreviewMouseDoubleClick="StatusSelector_PreviewMouseDoubleClick" >
 
-            </ComboBox>
-            <ComboBox x:Name="WeightSelector" Grid.Column="3" Margin="40,0,40,0"  Width="120" SelectionChanged="WeightSelector_SelectionChanged" IsEditable="True" Text="Weight" PreviewMouseDoubleClick="WeightSelector_PreviewMouseDoubleClick"/>
-            <Button x:Name="AddDroneButton" Content="Add drone" HorizontalAlignment="Left" Margin="60,0,0,0" VerticalAlignment="Center" Click="AddDroneButton_Click"/>
-        </Grid>
-        <ListView x:Name="DronesListView" Grid.Row="1" MouseDoubleClick="DronesListView_MouseDoubleClick" SelectionMode="Extended">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+        <WrapPanel Background="{StaticResource ToolBar}">
+            <Label Content="Weight"  Style="{StaticResource ToolBarLabel}" />
+            <ComboBox x:Name="WeightSelector"  ItemsSource="{Binding}" Style="{StaticResource ToolBarComboBox}" Width="80" SelectionChanged="WeightSelector_SelectionChanged" PreviewMouseDoubleClick="WeightSelector_PreviewMouseDoubleClick"/>
+            <Label Style="{StaticResource ToolBarLabel}" Content="   Status"></Label>
+            <ComboBox Name ="StatusSelector" ItemsSource="{Binding}" Style="{StaticResource ToolBarComboBox}"  Width="80" SelectionChanged="StatusSelector_SelectionChanged"   PreviewMouseDoubleClick="StatusSelector_PreviewMouseDoubleClick" />
+            <Border Width="0.5" Height="50" Background="{StaticResource ToolBarButtons}" Margin="5" />
+            <Label Style="{StaticResource ToolBarLabel}" Content="   Group by stutus:"/>
+            <ToggleButton Name ="GroupByStatusSelector" Style="{StaticResource AnimatedSwitch}" Width="75" Height="20" Margin="0,0,0,0" Checked="GroupByStatusSelector_Checked" Unchecked="GroupByStatusSelector_Unchecked"/>
+            <Button Template="{StaticResource RefreshIcon}" Height="42" Width="46" BorderBrush="{x:Null}" ></Button>
+        </WrapPanel>
+
+
+        <ListView x:Name="DronesListView" ItemsSource="{Binding }" Grid.Row="1" MouseDoubleClick="DronesListView_MouseDoubleClick" SelectionMode="Extended">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="Id: " />
+                        <TextBlock Text="{Binding Id}" FontWeight="Bold" />
+                        <TextBlock Text="  Model: " />
+                        <TextBlock Text="{Binding Model}" FontWeight="Bold" />
+                        <TextBlock Text="  Location: " />
+                        <TextBlock Text="{Binding Location}" FontWeight="Bold" />
+                        <TextBlock Text="  Weight: " />
+                        <TextBlock Text="{Binding MaxWeight}" FontWeight="Bold" />
+                        <TextBlock Text="  Status: " />
+                        <TextBlock Text="{Binding Status}" FontWeight="Bold" />
+                        <TextBlock Text="  Battery: " />
+                        <TextBlock Text="{Binding Battery}" FontWeight="Bold" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
+        <Button x:Name="AddDroneButton" Content="Add drone" HorizontalAlignment="right" Margin="0,0,50,50" VerticalAlignment="Bottom" Click="AddDroneButton_Click" Grid.Row="1"/>
 
 
     </Grid>
