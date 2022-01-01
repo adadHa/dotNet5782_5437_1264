@@ -86,13 +86,13 @@ namespace PL
 
         private void LattitudeValueTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if ((double.TryParse(LongitudeValueTextBox.Text, out Longitude) && Longitude >= 0) && (double.TryParse(LongitudeValueTextBox.Text, out Longitude) && Longitude <= 180) || LongitudeValueTextBox.Text == "")
+            if ((double.TryParse(LattitudeValueTextBox.Text, out Lattitude) && Lattitude >= 0) && (double.TryParse(LattitudeValueTextBox.Text, out Longitude) && Lattitude <= 180) || LattitudeValueTextBox.Text == "")
             {
-                LongitudeValueTextBox.Background = Brushes.White;
+                LattitudeValueTextBox.Background = Brushes.White;
             }
             else
             {
-                LongitudeValueTextBox.Background = Brushes.Red;
+                LattitudeValueTextBox.Background = Brushes.Red;
             }
         }
     }
