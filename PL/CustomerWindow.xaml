@@ -18,7 +18,7 @@
             <RowDefinition Height="3*"/>
 
         </Grid.RowDefinitions>
-        <Button x:Name="ButtonAddCustomer" Grid.Row="2" Content="Add" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Bottom" Click="ButtonAddCustomer_Click" BorderBrush="{x:Null}" Background="{StaticResource AddButton}"  Width="100" Height="30" FontSize="18" FontWeight="Bold" Foreground="White"/>
+        <Button x:Name="ButtonAddCustomer" Grid.Row="2" Content="Add" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Bottom" Click="ButtonAddCustomer_Click" BorderBrush="{x:Null}" Background="{StaticResource AddButtonColor}"  Width="100" Height="30" FontSize="18" FontWeight="Bold" Foreground="White"/>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"  Background="{StaticResource BackgroundColor30}" >
             <Button Name="CloseOptionsCustomerWindowButton"  Template="{StaticResource ButtonTemplate}"  HorizontalAlignment="right" VerticalAlignment="Bottom" Width="20" Height="20" Margin="0,5,5,0">

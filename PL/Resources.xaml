@@ -1,5 +1,8 @@
 ﻿<ResourceDictionary x:Name="Resources" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="clr-namespace:PL">
+    <converter:NotBooleanToVisibilityConverter x:Key="NotBooleanToVisibilityConverter"/>
+
     <!--#region Icons-->
     <Path x:Key="CloseIcon" Data="M300.188,246L484.14,62.04c5.06-5.064,7.852-11.82,7.86-19.024c0-7.208-2.792-13.972-7.86-19.028L468.02,7.872
 			c-5.068-5.076-11.824-7.856-19.036-7.856c-7.2,0-13.956,2.78-19.024,7.856L246.008,191.82L62.048,7.872
@@ -18,9 +21,9 @@
     <SolidColorBrush x:Key="Blue1" Color="#22577E"/>
     <SolidColorBrush x:Key="Blue2" Color="#5584AC"/>
     <SolidColorBrush x:Key="Blue3" Color="#95D1CC"/>
-    <SolidColorBrush x:Key="AddButton" Color="#FF1E81B0"/>
-    <SolidColorBrush x:Key="AddButtonMouseOver" Color="#4b9ac0"/>
-    
+    <SolidColorBrush x:Key="AddButtonColor" Color="#FF1E81B0"/>
+    <SolidColorBrush x:Key="AddButtonMouseOver" Color="#22577E"/>
+    <SolidColorBrush x:Key="AddButtonMouseClick" Color="#95D1CC"/>
 
     <!--#region Texts-->
     <TextBox x:Key="InputValue" FontSize="16" Foreground="{StaticResource TextColor}">
@@ -91,6 +94,36 @@
     <Style x:Key="TextBoxStyle" TargetType="Control">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0,0,0,3"/>
+    </Style>
+
+    
+    <Style x:Key="AddButton" TargetType="Button">
+        <Setter Property="Foreground" Value="white"/>
+        <Setter Property="Content" Value="Add"/>
+        <Setter Property="BorderThickness" Value="0,0,0,0"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Visibility" Value="{Binding ElementName=IsInOptionsModeCheckBox, Path=IsChecked, Converter={StaticResource NotBooleanToVisibilityConverter}}"/>
+        <Setter Property="Panel.ZIndex" Value="-1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Button" CornerRadius="9" BorderThickness="0" Padding="0" Background="{StaticResource AddButtonColor}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property = "IsMouseOver" Value = "True">
+                            <Setter TargetName="Button" Property="Background" Value="{StaticResource AddButtonMouseOver}"/>
+                        </Trigger>
+                        <Trigger Property = "IsPressed" Value = "True">
+                            <Setter TargetName="Button" Property="Background" Value="{StaticResource AddButtonMouseOver}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

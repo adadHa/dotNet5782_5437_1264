@@ -29,6 +29,8 @@ namespace BlApi
         public string ViewParcel(int id);
 
         public Parcel GetParcel(int id);
+        public Station GetStation(int id);
+
 
         public IEnumerable<StationForList> GetStations(Func<DO.Station, bool> filter = null);
         public IEnumerable<DroneForList> GetDrones(Func<DroneForList, bool> filter = null);

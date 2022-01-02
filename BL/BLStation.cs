@@ -54,7 +54,7 @@ namespace BL
             return GetStation(id).ToString();
         }
         //This function returns a StationForList from the datasource (on BL) by an index.
-        private Station GetStation(int id)
+        public Station GetStation(int id)
         {
             try
             {

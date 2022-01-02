@@ -26,17 +26,17 @@ namespace PL
         private int freeChargeSlots;
         private double Longitude;
         private double Lattitude;
-        public StationWindow(StationForList station = null)
+        public StationWindow(StationForList stationForList = null)
         {
             InitializeComponent();
-            if(station == null) // add mode
+            if(stationForList == null) // add mode
             {
-
+                IsInOptionsModeCheckBox.IsChecked = false;
 
             }
             else
             {
-                StationWindowGrid.DataContext = station;
+                StationWindowGrid.DataContext = BLObject.GetStation(stationForList.Id);
                 IsInOptionsModeCheckBox.IsChecked = true; // all the relevant elements are bind to this checkbox and will be visible/not visible as required
             }
         }

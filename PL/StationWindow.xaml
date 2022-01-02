@@ -3,9 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
+        xmlns:converter="clr-namespace:PL"
         mc:Ignorable="d"
         Title="StationWindow" Height="400" Width="400">
+    <Window.Resources>
+        <converter:BooleanToOppositeBooleanConverter x:Key="BooleanToOppositeBooleanConverter"/>
+    </Window.Resources>
     <Grid Name="StationWindowGrid" Background="{StaticResource BackgroundColor60}">
         <StackPanel Width="130" HorizontalAlignment="Left" Margin="42,79,0,66">
 
@@ -25,8 +28,8 @@
             <TextBox Name="LattitudeValueTextBox" Style="{StaticResource StationValueTextBox}"  Text="{Binding Path=Location.Lattitude}" FontSize="14" TextChanged="LattitudeValueTextBox_TextChanged"/>
 
         </StackPanel>
-        <Button x:Name="ButtonAddStation"  Content="Add" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Bottom" Click="ButtonAddCustomer_Click" BorderBrush="{x:Null}" Background="{StaticResource AddButton}"  Width="100" Height="30" FontSize="18" FontWeight="Bold" Foreground="White"/>
-        <CheckBox Name="IsInOptionsModeCheckBox" HorizontalAlignment="Left" Margin="307,283,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <Button x:Name="ButtonAddStation" Style="{StaticResource AddButton}" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Click="ButtonAddCustomer_Click" Margin="0,318,0,0" />
+        <CheckBox Name="IsInOptionsModeCheckBox" HorizontalAlignment="Left" Margin="307,283,0,0" VerticalAlignment="Top" Visibility="Collapsed" IsChecked="True"/>
 
     </Grid>
 </Window>
