@@ -10,7 +10,11 @@
             Source="ToolbarResources.xaml" />
                 <ResourceDictionary x:Name="Resources" 
             Source="Resources.xaml" />
+                <ResourceDictionary x:Name="ValueFieldsResources" 
+            Source="ValueFieldsResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        <local:BooleanToOppositeBooleanConverter 
+    x:Key="notBooleanToVisibilityConverter" />
     </Application.Resources>
 </Application>

@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    
+    <Style x:Key="ValueTextbox" TargetType="TextBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1,1,1,1" />
+        <Setter Property="BorderBrush" Value="LightGray" />
+    </Style>
+
+    <Style x:Key="StationValueTextBox" TargetType="TextBox" BasedOn="{StaticResource ValueTextbox}">
+        <Setter Property="IsReadOnly" Value="{Binding ElementName=IsInOptionsModeCheckBox, Path=IsChecked, Converter=}" />
+    </Style>
+</ResourceDictionary>

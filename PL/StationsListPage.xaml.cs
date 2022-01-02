@@ -30,20 +30,20 @@ namespace PL
 
         private void AddStationButton_Click(object sender, RoutedEventArgs e)
         {
-            //DroneWindow droneWindow = new DroneWindow();
-            //droneWindow.Closed += DroneWindow_Closed;
-            //droneWindow.Show();
+            StationWindow stationWindow = new StationWindow();
+            stationWindow.Closed += StationWindow_Closed;
+            stationWindow.Show();
         }
         private void StationWindow_Closed(object sender, EventArgs e)
         {
-            StationsListView.Items.Refresh();
+            StationsListView.DataContext = blObject.GetStations();
         }
         private void StationsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            StationForList drone = (StationForList)((ListView)sender).SelectedItem;
-            if (drone != null)
+            StationForList station = (StationForList)((ListView)sender).SelectedItem;
+            if (station != null)
             {
-               // new StationWindow(drone).Show();
+               new StationWindow(station).Show();
             }
         }
 
@@ -51,7 +51,7 @@ namespace PL
         {
             var currenList = (IEnumerable<StationForList>)StationsListView.DataContext;
             var resultList = from station in currenList
-                             orderby station.AvailableChargingSlots
+                             orderby station.AvailableChargingSlots descending
                              select station;
             StationsListView.DataContext = resultList;
         }
@@ -63,3 +63,4 @@ namespace PL
         }
     }
 }
+// todo: aoutomatic update list when a new customer is being added
