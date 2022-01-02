@@ -31,6 +31,7 @@
             <TextBlock Grid.Column="1" Text="DR" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Medium" FontFamily="Fonts/#Dosis"/>
             <Button x:Name="ShowDrones" Style="{StaticResource PagesButtons}" Grid.Column="2" Content="Drones List" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="ShowDronesButton_Click" Margin="0,0,0,4"/>
             <Button x:Name="ShowCustomers" Style="{StaticResource PagesButtons}" Grid.Column="3" Content="Customers List" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Bottom"  FontWeight="Medium" Margin="0,0,0,4" Click="ShowCustomers_Click"/>
+            <Button x:Name="ShowStations" Style="{StaticResource PagesButtons}" Grid.Column="4" Content="Stations List" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Bottom"  FontWeight="Medium" Margin="0,0,0,4" Click="ShowStations_Click"/>
             <Button Name="CloseMainWindowButton"  Template="{StaticResource ButtonTemplate}"  HorizontalAlignment="Center" VerticalAlignment="Center" Click="CloseOptionsDroneWindowButton_Click" Grid.Column="9" Width="20" Height="20"/>
         </Grid>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30,0,0,60">

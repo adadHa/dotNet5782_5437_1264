@@ -36,7 +36,7 @@ namespace PL
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            statusFilter = (DroneStatuses)StatusSelector.SelectedItem;
+            statusFilter = (DroneStatuses?)StatusSelector.SelectedItem;
             IEnumerable<DroneForList> currenList = BLObject.GetDrones();
             DronesListView.DataContext = from drone in currenList
                                          where drone.Status == statusFilter || statusFilter == null
@@ -45,7 +45,7 @@ namespace PL
         }
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            weightFilter = (WheightCategories)WeightSelector.SelectedItem;
+            weightFilter = (WheightCategories?)WeightSelector.SelectedItem;
             IEnumerable<DroneForList> currenList = BLObject.GetDrones();
             DronesListView.DataContext = from drone in currenList
                                          where drone.Status == statusFilter || statusFilter == null
@@ -111,6 +111,14 @@ namespace PL
         private void GroupByStatusSelector_Unchecked(object sender, RoutedEventArgs e)
         {
             DronesListView.DataContext = BLObject.GetDrones();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DronesListView.DataContext = BLObject.GetDrones();
+            GroupByStatusSelector.IsChecked = false;
+            StatusSelector.SelectedIndex = -1;
+            WeightSelector.SelectedIndex = -1;
         }
     }
 }

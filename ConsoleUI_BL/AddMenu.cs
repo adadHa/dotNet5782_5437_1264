@@ -105,7 +105,7 @@ namespace ConsoleUI_BL
 
                         try
                         {
-                            blObject.AddCustomer(id, name, phoneNumber);
+                            //blObject.AddCustomer(id, name, phoneNumber);
 
                         }
                         catch (Exception e)

@@ -48,7 +48,7 @@
 
     <Style x:Key="AnimatedSwitch" TargetType="{x:Type ToggleButton}">
         <Setter Property="Foreground" Value="Black" />
-        <Setter Property="Background" Value="#FAFAFB" />
+        <Setter Property="Background" Value="#6b6b6b" />
         <Setter Property="BorderBrush" Value="#EAEAEB" />
         <Setter Property="Template">
             <Setter.Value>
@@ -85,7 +85,7 @@
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FAFAFB" Duration="0:0:0.2" />
+                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#6b6b6b" Duration="0:0:0.2" />
                                         <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" To="#EAEAEB" Duration="0:0:0.2" />
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ellipse">
                                             <SplineDoubleKeyFrame KeyTime="0" Value="15"/>

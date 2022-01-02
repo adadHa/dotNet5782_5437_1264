@@ -23,6 +23,7 @@ namespace PL
     {
         DronesListPage droneListPage { get; set; }
         CustomerListPage customersListPage { get; set; }
+        StationsListPage stationsListPage { get; set; }
         private BlApi.IBL BLObject { get; set; }
         public MainWindow()
         {
@@ -51,6 +52,12 @@ namespace PL
         private void CurrentPage_Navigated(object sender, NavigationEventArgs e)
         {
 
+        }
+
+        private void ShowStations_Click(object sender, RoutedEventArgs e)
+        {
+            stationsListPage = new StationsListPage();
+            CurrentPage.Content = stationsListPage;
         }
     }
 }
