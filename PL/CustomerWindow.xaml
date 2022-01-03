@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="CustomerWindow" Height="400" Width="400">
+        Title="CustomerWindow" Height="400" Width="800">
     <Grid Name="OptionsCustomerWindow" HorizontalAlignment="Stretch" Grid.Row="1"
         VerticalAlignment="Stretch" Visibility="Visible" Background="{StaticResource BackgroundColor60}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="23*"/>
-            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="83*"/>
+            <ColumnDefinition Width="117*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*"/>
             <RowDefinition Height="3*"/>
 
         </Grid.RowDefinitions>
-        <Button x:Name="ButtonAddCustomer" Grid.Row="1" Content="Add" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Click="ButtonAddCustomer_Click" BorderBrush="{x:Null}" Background="{StaticResource AddButtonColor}"  Width="100" Height="30" FontSize="18" FontWeight="Bold" Foreground="White" Margin="0,302,0,0"/>
+        <Button x:Name="ButtonAddCustomer" Grid.Row="1" Content="Add" HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Click="ButtonAddCustomer_Click" BorderBrush="{x:Null}" Background="{StaticResource AddButtonColor}"  Width="100" Height="30" FontSize="18" FontWeight="Bold" Foreground="White" Margin="1,299,0,0"/>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Background="{StaticResource BackgroundColor30}" >
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Background="{StaticResource BackgroundColor30}" Margin="0,0,0,349" Grid.RowSpan="2" >
             <Button Name="CloseOptionsCustomerWindowButton"  Template="{StaticResource ButtonTemplate}"  HorizontalAlignment="right" VerticalAlignment="Bottom" Width="20" Height="20" Margin="0,5,5,0">
 
             </Button>
@@ -50,27 +50,34 @@
             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=CounterParcelsOnMyWay}" FontSize="14" BorderThickness="0,0,0,1"/>-->
         </StackPanel>
 
-        <ListView x:Name="ParcelsFromCustomer" ItemsSource="{Binding ParcelsFromCustomer}"  SelectionMode="Extended" Margin="29,65,108,64" MouseDoubleClick="ParcelsFromCustomer_MouseDoubleClick" Grid.Row="1" Grid.Column="1">
+        <ListView x:Name="ParcelsFromCustomer" ItemsSource="{Binding ParcelsFromCustomer}"  SelectionMode="Extended" Margin="159,64,209,64" MouseDoubleClick="ParcelsFromCustomer_MouseDoubleClick" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Text="Id: " />
-                        <TextBlock Text="{Binding Id}" FontWeight="Bold" />
-                        <TextBlock Text="  Priority: " />
-                        <TextBlock Text="{Binding Priority}" FontWeight="Bold" />
-                        <TextBlock Text="  Wheight: " />
-                        <TextBlock Text="{Binding Wheight}" FontWeight="Bold" />
-                        <TextBlock Text="  Parcel Status: " />
-                        <TextBlock Text="{Binding ParcelStatus}" FontWeight="Bold" />
-                        <TextBlock Text="  The Other Side: " />
-                        <TextBlock Text="{Binding TheOtherSide}" FontWeight="Bold" />
-                    </WrapPanel>
+                    <StackPanel>
+                        <WrapPanel>
+                            <TextBlock Text="Id: "/>
+                            <TextBlock Text="{Binding Id}" FontWeight="Bold" />
+                            <TextBlock Text="  Priority: " />
+                            <TextBlock Text="{Binding Priority}" FontWeight="Bold" />
+                        </WrapPanel>
+                        <WrapPanel>
+                            <TextBlock Text="  Wheight: " />
+                            <TextBlock Text="{Binding Wheight}" FontWeight="Bold" />
+                            <TextBlock Text="  Parcel Status: " />
+                            <TextBlock Text="{Binding ParcelStatus}" FontWeight="Bold" />
+                        </WrapPanel>
+                        <WrapPanel>
+                            <TextBlock Text="  The Other Side: " />
+                            <TextBlock Text="{Binding TheOtherSide}" FontWeight="Bold" />
+                        </WrapPanel>
+                       
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
 
-        <ListView x:Name="ParcelsToCustomer" ItemsSource="{Binding ParcelsToCustomer}" MouseDoubleClick="ParcelsToCustomer_MouseDoubleClick" SelectionMode="Extended" Margin="133,65,16,64" Grid.Column="1" Grid.Row="1">
+        <ListView x:Name="ParcelsToCustomer" ItemsSource="{Binding ParcelsToCustomer}" MouseDoubleClick="ParcelsToCustomer_MouseDoubleClick" SelectionMode="Extended" Margin="147,65,16,64" Grid.Column="1" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
