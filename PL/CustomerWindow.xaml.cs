@@ -32,6 +32,14 @@ namespace PL
         {
             InitializeComponent();
             BLObject = BlFactory.GetBl();
+            if (customer == null) //add modw
+            {
+
+            }
+            else //options mode
+            {
+
+            }
         }
 
         private void ButtonAddCustomer_Click(object sender, RoutedEventArgs e)
