@@ -30,6 +30,7 @@ namespace BlApi
 
         public Parcel GetParcel(int id);
         public Station GetStation(int id);
+        public BO.Customer GetCustomer(int id);
 
 
         public IEnumerable<StationForList> GetStations(Func<DO.Station, bool> filter = null);

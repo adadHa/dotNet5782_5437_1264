@@ -38,7 +38,7 @@ namespace PL
             }
             else //options mode
             {
-
+                OptionsCustomerWindow.DataContext = BLObject.GetCustomer(customer.Id);
             }
         }
 
@@ -138,6 +138,11 @@ namespace PL
             {
                 LattitudeValueTextBox.Background = Brushes.Red;
             }
+        }
+
+        private void ParcelsFromCustomer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

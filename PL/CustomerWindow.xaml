@@ -9,8 +9,9 @@
     <Grid Name="OptionsCustomerWindow" HorizontalAlignment="Stretch" Grid.Row="1"
         VerticalAlignment="Stretch" Visibility="Visible" Background="{StaticResource BackgroundColor60}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="246*"/>
+            <ColumnDefinition Width="21*"/>
+            <ColumnDefinition Width="133*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
@@ -18,15 +19,15 @@
             <RowDefinition Height="3*"/>
 
         </Grid.RowDefinitions>
-        <Button x:Name="ButtonAddCustomer" Grid.Row="2" Content="Add" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Bottom" Click="ButtonAddCustomer_Click" BorderBrush="{x:Null}" Background="{StaticResource AddButtonColor}"  Width="100" Height="30" FontSize="18" FontWeight="Bold" Foreground="White"/>
+        <Button x:Name="ButtonAddCustomer" Grid.Row="2" Content="Add" HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Top" Click="ButtonAddCustomer_Click" BorderBrush="{x:Null}" Background="{StaticResource AddButtonColor}"  Width="100" Height="30" FontSize="18" FontWeight="Bold" Foreground="White" Margin="0,244,0,0"/>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"  Background="{StaticResource BackgroundColor30}" >
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"  Background="{StaticResource BackgroundColor30}" >
             <Button Name="CloseOptionsCustomerWindowButton"  Template="{StaticResource ButtonTemplate}"  HorizontalAlignment="right" VerticalAlignment="Bottom" Width="20" Height="20" Margin="0,5,5,0">
 
             </Button>
         </StackPanel>
 
-        <TextBlock Name="TitleTextBox" Grid.Row="1" Text="  Customer " FontSize="46" Grid.Column="0" />
+        <TextBlock Name="TitleTextBox" Text="  Customer " FontSize="46" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,18,133,274" Grid.RowSpan="3" />
         <StackPanel Grid.Row="2" Grid.Column="0" Width="108" HorizontalAlignment="Left" Margin="40,0,0,36">
 
             <TextBlock Name="IdValueTextBlock" Text="Id  " FontSize="14" HorizontalAlignment="Right" Grid.RowSpan="2"   />
@@ -50,8 +51,8 @@
             <TextBlock Name="CounterParcelsOnMyWay" Grid.Row="5" Text="Parcels On My Way " FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=CounterParcelsOnMyWay}" FontSize="14" BorderThickness="0,0,0,1"/>-->
         </StackPanel>
-        
-        <ListView x:Name="ParcelsFromCustomer" ItemsSource="{Binding }" Grid.Row="1" MouseDoubleClick="CustomersListView_MouseDoubleClick" SelectionMode="Extended">
+
+        <ListView x:Name="ParcelsFromCustomer" ItemsSource="{Binding }"  SelectionMode="Extended" Grid.ColumnSpan="3" Margin="0,18,133,274" Grid.RowSpan="3" MouseDoubleClick="ParcelsFromCustomer_MouseDoubleClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -71,7 +72,7 @@
         </ListView>
 
 
-        <ListView x:Name="ParcelsToCustomer" ItemsSource="{Binding }" Grid.Row="1" MouseDoubleClick="CustomersListView_MouseDoubleClick" SelectionMode="Extended">
+        <ListView x:Name="ParcelsToCustomer" ItemsSource="{Binding }" MouseDoubleClick="CustomersListView_MouseDoubleClick" SelectionMode="Extended" Grid.ColumnSpan="3" Margin="0,18,133,274" Grid.RowSpan="3">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>

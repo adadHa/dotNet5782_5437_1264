@@ -47,7 +47,7 @@ namespace BL
         }
 
         //This function returns a CustomerForList from the datasource (on BL) by an index.
-        private BO.Customer GetCustomer(int id)
+        public BO.Customer GetCustomer(int id)
         {
             try
             {
