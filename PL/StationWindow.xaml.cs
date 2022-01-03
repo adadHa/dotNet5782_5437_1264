@@ -38,6 +38,7 @@ namespace PL
             {
                 StationWindowGrid.DataContext = BLObject.GetStation(stationForList.Id);
                 IsInOptionsModeCheckBox.IsChecked = true; // all the relevant elements are bind to this checkbox and will be visible/not visible as required
+                NameValueTextBox.IsReadOnly = false;
             }
         }
 
@@ -88,6 +89,7 @@ namespace PL
         private void NameValueTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             Name = NameValueTextBox.Text;
+            UpdateButton.IsEnabled = true; // relevant for options mode
         }
 
         private void LongitudeValueTextBox_TextChanged(object sender, TextChangedEventArgs e)
