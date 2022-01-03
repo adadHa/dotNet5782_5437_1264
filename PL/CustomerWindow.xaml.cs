@@ -35,11 +35,12 @@ namespace PL
             BLObject = BlFactory.GetBl();
             if (customer == null) //add modw
             {
-
+                IsInOptionsModeCheckBox.IsChecked = false;
             }
             else //options mode
             {
                 OptionsCustomerWindow.DataContext = BLObject.GetCustomer(customer.Id);
+                IsInOptionsModeCheckBox.IsChecked = true;
             }
         }
 
@@ -51,19 +52,19 @@ namespace PL
                 MessageBox.Show("Id should be an integer grater or equal to than 0!");
             }
 
-            if ((int.TryParse(PhoneValueTextBox.Text, out phone) && phone >= 0) || PhoneValueTextBox.Text == "" || PhoneValueTextBox.Text.Length == 10)
+            if ((int.TryParse(PhoneValueTextBox.Text, out phone) && phone <= 0) || PhoneValueTextBox.Text == "" || PhoneValueTextBox.Text.Length != 10)
             {
                 MessageBox.Show("Phone should be an integer grater or equal to than 0 and should be only 10 digits!");
             }
 
-            if ((double.TryParse(LongitudeValueTextBox.Text, out Longitude) && Longitude >= 0) && (double.TryParse(LongitudeValueTextBox.Text, out Longitude) && Longitude <= 180) || LongitudeValueTextBox.Text == "")
+            if ((double.TryParse(LongitudeValueTextBox.Text, out Longitude) && Longitude <= 0) && (double.TryParse(LongitudeValueTextBox.Text, out Longitude) && Longitude >= 180) || LongitudeValueTextBox.Text == "")
             {
-                MessageBox.Show("Phone should be an double grater or equal to than 0 and need to be less or equal to 180!");
+                MessageBox.Show("Longitude should be an double grater or equal to than 0 and need to be less or equal to 180!");
             }
 
-            if ((double.TryParse(LattitudeValueTextBox.Text, out Lattitude) && Lattitude >= 0) && (double.TryParse(LattitudeValueTextBox.Text, out Longitude) && Lattitude <= 180) || LattitudeValueTextBox.Text == "")
+            if ((double.TryParse(LattitudeValueTextBox.Text, out Lattitude) && Lattitude <= 0) && (double.TryParse(LattitudeValueTextBox.Text, out Longitude) && Lattitude >= 180) || LattitudeValueTextBox.Text == "")
             {
-                MessageBox.Show("Phone should be an double grater or equal to than 0 and need to be less or equal to 180!");
+                MessageBox.Show("Lattitude should be an double grater or equal to than 0 and need to be less or equal to 180!");
             }
 
             else
@@ -106,7 +107,7 @@ namespace PL
         private void PhoneTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             int phone;
-            if ((int.TryParse(PhoneValueTextBox.Text, out phone) && phone >= 0) || PhoneValueTextBox.Text == "" || PhoneValueTextBox.Text.Length == 10)
+            if ((int.TryParse(PhoneValueTextBox.Text, out phone) && phone >= 0) && PhoneValueTextBox.Text.Length == 10 || PhoneValueTextBox.Text == "")
             {
                 Phone = PhoneValueTextBox.Text;
                 PhoneValueTextBox.Background = Brushes.Green;
@@ -149,6 +150,11 @@ namespace PL
         private void ParcelsToCustomer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             
+        }
+
+        private void CloseOptionsCustomerWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

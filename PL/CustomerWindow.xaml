@@ -5,28 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        xmlns:converter="clr-namespace:PL"
         Title="CustomerWindow" Height="400" Width="800">
+    <Window.Resources>
+        <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Style x:Key="CustomersListViewStyle" TargetType="ListView">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Visibility" Value="{Binding ElementName=IsInOptionsModeCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel>
+                            <WrapPanel>
+                                <TextBlock Text="Id: "/>
+                                <TextBlock Text="{Binding Id}" FontWeight="Bold" />
+                                <TextBlock Text="  Priority: " />
+                                <TextBlock Text="{Binding Priority}" FontWeight="Bold" />
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="  Wheight: " />
+                                <TextBlock Text="{Binding Wheight}" FontWeight="Bold" />
+                                <TextBlock Text="  Parcel Status: " />
+                                <TextBlock Text="{Binding ParcelStatus}" FontWeight="Bold" />
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="  The Other Side: " />
+                                <TextBlock Text="{Binding TheOtherSide}" FontWeight="Bold" />
+                            </WrapPanel>
+
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid Name="OptionsCustomerWindow" HorizontalAlignment="Stretch" Grid.Row="1"
         VerticalAlignment="Stretch" Visibility="Visible" Background="{StaticResource BackgroundColor60}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="83*"/>
-            <ColumnDefinition Width="117*"/>
-        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.4*"/>
             <RowDefinition Height="3*"/>
 
         </Grid.RowDefinitions>
-        <Button x:Name="ButtonAddCustomer" Grid.Row="1" Content="Add" HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Click="ButtonAddCustomer_Click" BorderBrush="{x:Null}" Background="{StaticResource AddButtonColor}"  Width="100" Height="30" FontSize="18" FontWeight="Bold" Foreground="White" Margin="1,299,0,0"/>
+        <CheckBox Name="IsInOptionsModeCheckBox" HorizontalAlignment="Left" Margin="307,283,0,0" VerticalAlignment="Top" Visibility="Collapsed" IsChecked="True"/>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Background="{StaticResource BackgroundColor30}" Margin="0,0,0,349" Grid.RowSpan="2" >
-            <Button Name="CloseOptionsCustomerWindowButton"  Template="{StaticResource ButtonTemplate}"  HorizontalAlignment="right" VerticalAlignment="Bottom" Width="20" Height="20" Margin="0,5,5,0">
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Background="{StaticResource BackgroundColor30}" >
+            <Button Name="CloseOptionsCustomerWindowButton"  Template="{StaticResource ButtonTemplate}"  HorizontalAlignment="right" VerticalAlignment="Bottom" Width="20" Height="20" Margin="0,5,5,0" Click="CloseOptionsCustomerWindowButton_Click">
 
             </Button>
         </StackPanel>
 
-        <TextBlock Name="TitleTextBox" Text="  Customer " FontSize="46" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,18,133,274" Grid.RowSpan="2" />
-        <StackPanel Width="108" HorizontalAlignment="Left" Margin="26,71,0,60" Grid.Row="1">
+        <TextBlock Name="TitleTextBox" Text="  Customer " FontSize="46" Grid.Column="0" Grid.ColumnSpan="2" Margin="32,10,106,256" Grid.Row="1" />
+        <StackPanel Width="108" HorizontalAlignment="Left" Margin="21,96,0,36" Grid.Row="1">
 
             <TextBlock Name="IdValueTextBlock" Text="Id  " FontSize="14" HorizontalAlignment="Right" Grid.RowSpan="2"   />
             <TextBox Name="IdValueTextBox" Text="{Binding Path=Id}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="IdValueTextBox_TextChanged"/>
@@ -50,51 +80,13 @@
             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=CounterParcelsOnMyWay}" FontSize="14" BorderThickness="0,0,0,1"/>-->
         </StackPanel>
 
-        <ListView x:Name="ParcelsFromCustomer" ItemsSource="{Binding ParcelsFromCustomer}"  SelectionMode="Extended" Margin="159,64,209,64" MouseDoubleClick="ParcelsFromCustomer_MouseDoubleClick" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <WrapPanel>
-                            <TextBlock Text="Id: "/>
-                            <TextBlock Text="{Binding Id}" FontWeight="Bold" />
-                            <TextBlock Text="  Priority: " />
-                            <TextBlock Text="{Binding Priority}" FontWeight="Bold" />
-                        </WrapPanel>
-                        <WrapPanel>
-                            <TextBlock Text="  Wheight: " />
-                            <TextBlock Text="{Binding Wheight}" FontWeight="Bold" />
-                            <TextBlock Text="  Parcel Status: " />
-                            <TextBlock Text="{Binding ParcelStatus}" FontWeight="Bold" />
-                        </WrapPanel>
-                        <WrapPanel>
-                            <TextBlock Text="  The Other Side: " />
-                            <TextBlock Text="{Binding TheOtherSide}" FontWeight="Bold" />
-                        </WrapPanel>
-                       
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+        <ListView x:Name="ParcelsFromCustomer" Style="{StaticResource CustomersListViewStyle}" ItemsSource="{Binding ParcelsFromCustomer}"  SelectionMode="Extended" Margin="166,92,339,36" MouseDoubleClick="ParcelsFromCustomer_MouseDoubleClick" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent">
+
         </ListView>
 
 
-        <ListView x:Name="ParcelsToCustomer" ItemsSource="{Binding ParcelsToCustomer}" MouseDoubleClick="ParcelsToCustomer_MouseDoubleClick" SelectionMode="Extended" Margin="147,65,16,64" Grid.Column="1" Grid.Row="1">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Text="Id: " />
-                        <TextBlock Text="{Binding Id}" FontWeight="Bold" />
-                        <TextBlock Text="  Priority: " />
-                        <TextBlock Text="{Binding Priority}" FontWeight="Bold" />
-                        <TextBlock Text="  Wheight: " />
-                        <TextBlock Text="{Binding Wheight}" FontWeight="Bold" />
-                        <TextBlock Text="  Parcel Status: " />
-                        <TextBlock Text="{Binding ParcelStatus}" FontWeight="Bold" />
-                        <TextBlock Text="  The Other Side: " />
-                        <TextBlock Text="{Binding TheOtherSide}" FontWeight="Bold" />
-                    </WrapPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <ListView x:Name="ParcelsToCustomer" Style="{StaticResource CustomersListViewStyle}" ItemsSource="{Binding ParcelsToCustomer}" MouseDoubleClick="ParcelsToCustomer_MouseDoubleClick" SelectionMode="Extended" Margin="481,92,19,38" Grid.Row="1"/>
+        <Button x:Name="ButtonAddCustomer" Style="{StaticResource AddButton}" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="100" Click="ButtonAddCustomer_Click"/>
 
     </Grid>
 </Window>

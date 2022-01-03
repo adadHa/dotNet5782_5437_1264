@@ -106,7 +106,6 @@
         <Setter Property="Width" Value="100"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="Visibility" Value="{Binding ElementName=IsInOptionsModeCheckBox, Path=IsChecked, Converter={StaticResource NotBooleanToVisibilityConverter}}"/>
-        <Setter Property="Panel.ZIndex" Value="-1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

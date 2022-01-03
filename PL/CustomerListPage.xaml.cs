@@ -35,9 +35,14 @@ namespace PL
         }
         private void AddCustomerButton_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerWindow().Show();
+            CustomerWindow customerWindow = new CustomerWindow();
+            customerWindow.Closed += CustomerWindow_Closed;
+            customerWindow.Show();
         }
-
+        private void CustomerWindow_Closed(object sender, EventArgs e)
+        {
+            CustomersListView.DataContext = BLObject.GetCustomers();
+        }
         private void CustomersListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             CustomerForList customer = (CustomerForList)((ListView)sender).SelectedItem;
@@ -46,5 +51,6 @@ namespace PL
                 new CustomerWindow(customer).Show();
             }
         }
+        
     }
 }
