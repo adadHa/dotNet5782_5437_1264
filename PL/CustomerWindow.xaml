@@ -51,27 +51,6 @@
             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=CounterParcelsOnMyWay}" FontSize="14" BorderThickness="0,0,0,1"/>-->
         </StackPanel>
         
-        <ListView x:Name="DronesListView" ItemsSource="{Binding }" Grid.Row="1" MouseDoubleClick="DronesListView_MouseDoubleClick" SelectionMode="Extended">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Text="Id: " />
-                        <TextBlock Text="{Binding Id}" FontWeight="Bold" />
-                        <TextBlock Text="  Model: " />
-                        <TextBlock Text="{Binding Model}" FontWeight="Bold" />
-                        <TextBlock Text="  Location: " />
-                        <TextBlock Text="{Binding Location}" FontWeight="Bold" />
-                        <TextBlock Text="  Weight: " />
-                        <TextBlock Text="{Binding MaxWeight}" FontWeight="Bold" />
-                        <TextBlock Text="  Status: " />
-                        <TextBlock Text="{Binding Status}" FontWeight="Bold" />
-                        <TextBlock Text="  Battery: " />
-                        <TextBlock Text="{Binding Battery}" FontWeight="Bold" />
-                    </WrapPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
         <ListView x:Name="ParcelsFromCustomer" ItemsSource="{Binding }" Grid.Row="1" MouseDoubleClick="CustomersListView_MouseDoubleClick" SelectionMode="Extended">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -90,5 +69,26 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+
+        <ListView x:Name="ParcelsToCustomer" ItemsSource="{Binding }" Grid.Row="1" MouseDoubleClick="CustomersListView_MouseDoubleClick" SelectionMode="Extended">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="Id: " />
+                        <TextBlock Text="{Binding Id}" FontWeight="Bold" />
+                        <TextBlock Text="  Priority: " />
+                        <TextBlock Text="{Binding Priority}" FontWeight="Bold" />
+                        <TextBlock Text="  Wheight: " />
+                        <TextBlock Text="{Binding Wheight}" FontWeight="Bold" />
+                        <TextBlock Text="  Parcel Status: " />
+                        <TextBlock Text="{Binding ParcelStatus}" FontWeight="Bold" />
+                        <TextBlock Text="  The Other Side: " />
+                        <TextBlock Text="{Binding TheOtherSide}" FontWeight="Bold" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Window>
