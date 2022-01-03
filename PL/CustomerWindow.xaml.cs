@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
+using BO;
 namespace PL
 {
     /// <summary>
@@ -28,7 +29,7 @@ namespace PL
 
 
         // options/add mode
-        public CustomerWindow(BO.Customer customer = null)
+        public CustomerWindow(CustomerForList customer = null)
         {
             InitializeComponent();
             BLObject = BlFactory.GetBl();
@@ -142,7 +143,12 @@ namespace PL
 
         private void ParcelsFromCustomer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            
+        }
 
+        private void ParcelsToCustomer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            
         }
     }
 }

@@ -37,5 +37,14 @@ namespace PL
         {
             new CustomerWindow().Show();
         }
+
+        private void CustomersListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            CustomerForList customer = (CustomerForList)((ListView)sender).SelectedItem;
+            if (customer != null)
+            {
+                new CustomerWindow(customer).Show();
+            }
+        }
     }
 }

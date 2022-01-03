@@ -18,7 +18,7 @@
             <ColumnDefinition Width ="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="titleTextBlock" Text="Customers List" Grid.Column="1" Foreground="red" FontStyle="Italic" FontWeight="Bold" FontSize="23" MouseMove="titleTextBlock_MouseMove"/>
-        <ListView x:Name="CustomersListView" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding }">
+        <ListView x:Name="CustomersListView" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding }" MouseDoubleClick="CustomersListView_MouseDoubleClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
