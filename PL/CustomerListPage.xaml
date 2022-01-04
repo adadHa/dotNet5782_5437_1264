@@ -44,6 +44,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button x:Name="AddCustomerButton" Content="Add customer" HorizontalAlignment="Left" Margin="60,0,0,0" VerticalAlignment="Center" Click="AddCustomerButton_Click"/>
+        <Button x:Name="AddParcelButton" Content="Add customer" HorizontalAlignment="Left" Margin="60,0,0,0" VerticalAlignment="Center" Click="AddCustomerButton_Click"/>
     </Grid>
 </Page>

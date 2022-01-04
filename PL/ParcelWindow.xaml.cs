@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
@@ -18,22 +17,13 @@ using BlApi;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for ParcelsList.xaml
+    /// Interaction logic for ParcelWindow.xaml
     /// </summary>
-    public partial class ParcelsList : Page
+    public partial class ParcelWindow : Window
     {
-        public ParcelsList()
+        public ParcelWindow(ParcelForList parcel = null)
         {
             InitializeComponent();
-        }
-
-        private void ParcelsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            ParcelForList parcel = (ParcelForList)((ListView)sender).SelectedItem;
-            if (parcel != null)
-            {
-                new ParcelWindow(parcel).Show();
-            }
         }
     }
 }

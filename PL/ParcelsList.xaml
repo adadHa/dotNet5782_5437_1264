@@ -9,7 +9,7 @@
       Title="ParcelsList">
 
     <Grid>
-        <ListView x:Name="ParcelsListView" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding }" MouseDoubleClick="ParcelsListView_MouseDoubleClick">
+        <ListView x:Name="ParcelsListView" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding }" MouseDoubleClick="ParcelsListView_MouseDoubleClick" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
