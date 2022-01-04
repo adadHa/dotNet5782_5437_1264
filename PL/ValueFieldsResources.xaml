@@ -8,7 +8,7 @@
         <Setter Property="BorderThickness" Value="1,1,1,1" />
         <Setter Property="BorderBrush" Value="LightGray" />
     </Style>
-
+    
     <Style x:Key="StationValueTextBox" TargetType="TextBox" BasedOn="{StaticResource ValueTextbox}">
         <Setter Property="IsEnabled" Value="{Binding ElementName=IsInOptionsModeCheckBox, Path=IsChecked, Converter={StaticResource BooleanToOppositeBooleanConverter}}" />
     </Style>

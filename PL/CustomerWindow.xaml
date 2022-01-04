@@ -80,7 +80,9 @@
             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=CounterParcelsOnMyWay}" FontSize="14" BorderThickness="0,0,0,1"/>-->
         </StackPanel>
 
-        <ListView x:Name="ParcelsFromCustomer" Style="{StaticResource CustomersListViewStyle}" ItemsSource="{Binding ParcelsFromCustomer}"  SelectionMode="Extended" Margin="166,92,339,36" MouseDoubleClick="ParcelsFromCustomer_MouseDoubleClick" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent">
+        <ListView x:Name="ParcelsFromCustomer" Style="{StaticResource CustomersListViewStyle}" ItemsSource="{Binding ParcelsFromCustomer}"
+                  SelectionMode="Extended" Margin="166,92,339,36" MouseDoubleClick="ParcelsFromCustomer_MouseDoubleClick" Grid.Row="1" 
+                  Grid.ColumnSpan="2" Background="Transparent">
 
         </ListView>
 

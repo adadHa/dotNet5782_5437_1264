@@ -22,10 +22,11 @@ namespace PL
     {
         IBL BLObject = BlFactory.GetBl();
         private int Id;
-        private string Name;
+        private string ParcelName;
         private int freeChargeSlots;
         private double Longitude;
         private double Lattitude;
+        private Station Station;
         public StationWindow(StationForList stationForList = null)
         {
             InitializeComponent();
@@ -36,7 +37,9 @@ namespace PL
             }
             else
             {
-                StationWindowGrid.DataContext = BLObject.GetStation(stationForList.Id);
+                this.Station = BLObject.GetStation(stationForList.Id);
+                StationWindowGrid.DataContext = this.Station;
+                DroneChargesListView.DataContext = this.Station.ListOfDronesInCharge;
                 IsInOptionsModeCheckBox.IsChecked = true; // all the relevant elements are bind to this checkbox and will be visible/not visible as required
                 NameValueTextBox.IsReadOnly = false;
             }
@@ -49,12 +52,17 @@ namespace PL
                 MessageBox.Show("Id should be an integer grater or equal to than 0!");
             }
 
-            if (!(double.TryParse(LongitudeValueTextBox.Text, out Longitude) && Longitude >= 0 && double.TryParse(LongitudeValueTextBox.Text, out Longitude) && Longitude <= 180))
+            else if (!int.TryParse(FreeChargeSlots.Text, out Id) || Id < 0)
+            {
+                MessageBox.Show("The amount of free charge slots should be positive!");
+            }
+
+            else if (!(double.TryParse(LongitudeValueTextBox.Text, out Longitude) && Longitude >= 0 && double.TryParse(LongitudeValueTextBox.Text, out Longitude) && Longitude <= 180))
             {
                 MessageBox.Show("Longitude should be an double grater or equal to than 0 and need to be less or equal to 180!");
             }
 
-            if (!(double.TryParse(LattitudeValueTextBox.Text, out Lattitude) && Lattitude >= 0 && double.TryParse(LattitudeValueTextBox.Text, out Longitude) && Lattitude <= 180))
+            else if (!(double.TryParse(LattitudeValueTextBox.Text, out Lattitude) && Lattitude >= 0 && double.TryParse(LattitudeValueTextBox.Text, out Longitude) && Lattitude <= 180))
             {
                 MessageBox.Show("Lattitude should be an double grater or equal to than 0 and need to be less or equal to 180!");
             }
@@ -88,8 +96,11 @@ namespace PL
 
         private void NameValueTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Name = NameValueTextBox.Text;
-            UpdateButton.IsEnabled = true; // relevant for options mode
+            if (this.Station != null && NameValueTextBox.Text != this.Station.Name)
+                UpdateButton.Visibility = Visibility.Visible; // relevant for options mode
+            
+            ParcelName = NameValueTextBox.Text;
+            
         }
 
         private void LongitudeValueTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -118,14 +129,34 @@ namespace PL
 
         private void FreeChargeSlots_TextChanged(object sender, TextChangedEventArgs e)
         {
+            
             if ((int.TryParse(FreeChargeSlots.Text, out freeChargeSlots) && freeChargeSlots >= 0) || FreeChargeSlots.Text == "")
             {
                 FreeChargeSlots.Background = Brushes.White;
+                if (this.Station != null && FreeChargeSlots.Text != this.Station.FreeChargeSlots.ToString())
+                    UpdateButton.Visibility = Visibility.Visible; // relevant for options mode
             }
             else
             {
                 FreeChargeSlots.Background = Brushes.Red;
             }
+        }
+
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!int.TryParse(FreeChargeSlots.Text, out Id) || Id < 0)
+            {
+                MessageBox.Show("The amount of free charge slots should be positive!");
+            }
+            else
+            {
+                BLObject.UpdateStation(this.Station.Id, ParcelName, int.Parse(FreeChargeSlots.Text));
+            }
+        }
+
+        private void DroneChargesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            
         }
     }
 }

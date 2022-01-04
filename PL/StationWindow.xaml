@@ -5,11 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converter="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="StationWindow" Height="400" Width="400">
+        Title="StationWindow" Height="400" Width="611">
     <Window.Resources>
         <converter:BooleanToOppositeBooleanConverter x:Key="BooleanToOppositeBooleanConverter"/>
         <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Style x:Key="ChargeDroneListViewStyle" TargetType="ListView">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Visibility" Value="{Binding ElementName=IsInOptionsModeCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel>
+                            <WrapPanel>
+                                <TextBlock Text="Id: "/>
+                                <TextBlock Text="{Binding Id}" FontWeight="Bold" />
+                                <TextBlock Text="  Priority: " />
+                                <TextBlock Text="{Binding Priority}" FontWeight="Bold" />
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="  Wheight: " />
+                                <TextBlock Text="{Binding Wheight}" FontWeight="Bold" />
+                                <TextBlock Text="  Parcel Status: " />
+                                <TextBlock Text="{Binding ParcelStatus}" FontWeight="Bold" />
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="  The Other Side: " />
+                                <TextBlock Text="{Binding TheOtherSide}" FontWeight="Bold" />
+                            </WrapPanel>
+
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
+
     <Grid Name="StationWindowGrid" Background="{StaticResource BackgroundColor60}">
         <StackPanel Width="130" HorizontalAlignment="Left" Margin="42,79,0,66">
 
@@ -17,20 +47,23 @@
             <TextBox Name="IdValueTextBox" Style="{StaticResource StationValueTextBox}" Text="{Binding Path=Id}" FontSize="14" TextChanged="IdValueTextBox_TextChanged"/>
 
             <TextBlock Name="NameValueTextBlock" Text="Name  " FontSize="14" HorizontalAlignment="Right" Grid.RowSpan="2"   />
-            <TextBox Name="NameValueTextBox" Style="{StaticResource StationValueTextBox}" IsReadOnly="False" Text="{Binding Path=Name}" FontSize="14"  TextChanged="NameValueTextBox_TextChanged"/>
+            <TextBox Name="NameValueTextBox" Style="{StaticResource ValueTextbox}" 
+                     Text="{Binding Path=Name}" FontSize="14"  TextChanged="NameValueTextBox_TextChanged"/>
 
             <TextBlock Name="FreeChargeSlotsValueTextBlock" Text="Free charge slots  " FontSize="14" HorizontalAlignment="Right" Grid.RowSpan="2"   />
-            <TextBox Name="FreeChargeSlots" Style="{StaticResource StationValueTextBox}" Text="{Binding Path=AvailableChargingSlots}" FontSize="14" TextChanged="FreeChargeSlots_TextChanged"/>
+            <TextBox Name="FreeChargeSlots" Style="{StaticResource ValueTextbox}" Text="{Binding Path=FreeChargeSlots}" FontSize="14" TextChanged="FreeChargeSlots_TextChanged"/>
 
             <TextBlock Name="LongitudeValueTextBlock" Grid.Row="2" Text="Longitude" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
             <TextBox Name="LongitudeValueTextBox" Style="{StaticResource StationValueTextBox}" Text="{Binding Path=Location.Longitude}" FontSize="14"  TextChanged="LongitudeValueTextBox_TextChanged" />
 
             <TextBlock Name="LattitudeValueTextBlock" Grid.Row="3" Text="Lattitude" FontSize="14"  HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-            <TextBox Name="LattitudeValueTextBox" Style="{StaticResource StationValueTextBox}"  Text="{Binding Path=Location.Lattitude}" FontSize="14" TextChanged="LattitudeValueTextBox_TextChanged"/>
+            <TextBox Name="LattitudeValueTextBox" Style="{StaticResource StationValueTextBox}"  Text="{Binding Path=Location.Latitude}" FontSize="14" TextChanged="LattitudeValueTextBox_TextChanged"/>
 
         </StackPanel>
         <Button x:Name="ButtonAddStation" Style="{StaticResource AddButton}" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Click="ButtonAddCustomer_Click" Margin="0,318,0,0" />
         <CheckBox Name="IsInOptionsModeCheckBox" HorizontalAlignment="Left" Margin="307,283,0,0" VerticalAlignment="Top" Visibility="Collapsed" IsChecked="True"/>
-        <Button Name="UpdateButton" Content="Update" Width="50" Margin="184,136,166,226" Visibility="{Binding ElementName=IsInOptionsModeCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Button Name="UpdateButton" Content="Update" Margin="226,100,35,161" Visibility="Collapsed" Click="UpdateButton_Click"/>
+        <ListView x:Name="DroneChargesListView" Style="{StaticResource ChargeDroneListViewStyle}" ItemsSource="{Binding ParcelsFromCustomer}"  SelectionMode="Extended" Margin="216,91,43,37" Background="Transparent" MouseDoubleClick="DroneChargesListView_MouseDoubleClick"/>
+
     </Grid>
 </Window>
