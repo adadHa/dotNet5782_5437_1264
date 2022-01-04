@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlApi;
+using BO;
 
 namespace PL
 {
@@ -24,6 +25,7 @@ namespace PL
         DronesListPage droneListPage { get; set; }
         CustomerListPage customersListPage { get; set; }
         StationsListPage stationsListPage { get; set; }
+        ParcelsListPage parcelsListPage { get; set; }
         private BlApi.IBL BLObject { get; set; }
         public MainWindow()
         {
@@ -58,6 +60,12 @@ namespace PL
         {
             stationsListPage = new StationsListPage();
             CurrentPage.Content = stationsListPage;
+        }
+
+        private void ShowParcels_Click(object sender, RoutedEventArgs e)
+        {
+            parcelsListPage = new ParcelsListPage();
+            CurrentPage.Content = parcelsListPage;
         }
     }
 }

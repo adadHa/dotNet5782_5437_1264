@@ -14,19 +14,20 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
-
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for ParcelsList.xaml
+    /// Interaction logic for ParcelsListPage.xaml
     /// </summary>
-    public partial class ParcelsList : Page
+    public partial class ParcelsListPage : Page
     {
-        public ParcelsList()
+        private BlApi.IBL BLObject { get; set; }
+        public ParcelsListPage( ParcelForList parcel = null)
         {
             InitializeComponent();
+            BLObject = BlFactory.GetBl();
+            ParcelsListView.DataContext = BLObject.GetParcels();
         }
-
         private void ParcelsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ParcelForList parcel = (ParcelForList)((ListView)sender).SelectedItem;

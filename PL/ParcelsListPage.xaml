@@ -1,4 +1,4 @@
-﻿<Page x:Class="PL.ParcelsList"
+﻿<Page x:Class="PL.ParcelsListPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:PL"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ParcelsList">
+      Title="ParcelsListPage">
 
     <Grid>
         <ListView x:Name="ParcelsListView" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding }" MouseDoubleClick="ParcelsListView_MouseDoubleClick" >
@@ -37,6 +37,6 @@
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView> 
+        </ListView>
     </Grid>
 </Page>
