@@ -23,12 +23,17 @@ namespace PL
     {
         IBL BLObject = BlFactory.GetBl();
         Parcel Parcel;
+        public int SenderId { get; set; }
+        public int TargetId { get; set; }
+        public WheightCategories Wheight { get; set; }
+        public Priorities Priority { get; set; }
         public ParcelWindow(int? parcelId = null)
         {
             InitializeComponent();
             if(parcelId == null) //add mode
             {
-                
+                AddWheightValueComboBox.DataContext = Enum.GetValues(typeof(WheightCategories));
+                AddPriorityValueComboBox.DataContext = Enum.GetValues(typeof(Priorities));
             }
             else // options mode
             {
@@ -47,6 +52,26 @@ namespace PL
         private void PriorityValueComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void SenderIdValueComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SenderId = (int)((ComboBox)sender).SelectedItem;
+        }
+
+        private void TargetIdValueComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TargetId = (int)((ComboBox)sender).SelectedItem;
+        }
+
+        private void AddWheightValueComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Wheight = (WheightCategories)((ComboBox)sender).SelectedItem;
+        }
+
+        private void AddPriorityValueComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Priority = (Priorities)((ComboBox)sender).SelectedItem;
         }
     }
 }
