@@ -155,7 +155,8 @@ namespace PL
 
         private void DroneChargesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
+           DroneInCharge droneInCharg = (DroneInCharge)((ListView)sender).SelectedItem;
+            new DroneWindow(droneInCharg.DroneId).Show();
         }
     }
 }

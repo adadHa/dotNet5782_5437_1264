@@ -86,7 +86,7 @@ namespace PL
             DroneForList drone = (DroneForList)((ListView)sender).SelectedItem;
             if (drone != null)
             {
-                new DroneWindow(drone).Show();
+                new DroneWindow(drone.Id).Show();
             }
         }
 

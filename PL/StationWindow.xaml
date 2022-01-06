@@ -11,18 +11,20 @@
         <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Style x:Key="ChargeDroneListViewStyle" TargetType="ListView">
             <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0,0,0,0"/>
             <Setter Property="Visibility" Value="{Binding ElementName=IsInOptionsModeCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
                         <StackPanel>
                             <WrapPanel>
-                                <TextBlock Text="Drone: "/>
-                                <TextBlock Text="{Binding Id}" FontWeight="Bold" />
-                                <TextBlock Text="  Priority: " />
-                                <TextBlock Text="{Binding Priority}" FontWeight="Bold" />
+                                <Image Source="Images/Charge.png" Width="50" Height="50"/>
+                                <TextBlock Text=" Id: " Margin="10,0,0,0" FontSize="15"/>
+                                <TextBlock Text="{Binding DroneId}" FontWeight="Bold" Margin="0,0,0,0" FontSize="15"/>
+                                <TextBlock Text="  Battery: " FontSize="15"/>
+                                <TextBlock Text="{Binding BatteryStatus}" FontWeight="Bold" FontSize="15" />
                             </WrapPanel>
-                            
+                            <Border Height="0.5" Background="LightGray"/>
 
                         </StackPanel>
                     </DataTemplate>
