@@ -34,7 +34,19 @@ namespace PL
             {
                 Parcel = BLObject.GetParcel((int)parcelId);
                 ParcelGrid.DataContext = Parcel;
+                WheightValueComboBox.ItemsSource = Enum.GetValues(typeof(WheightCategories));
+                PriorityValueComboBox.ItemsSource = Enum.GetValues(typeof(Priorities));
             }
+        }
+
+        private void WheightValueComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void PriorityValueComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
