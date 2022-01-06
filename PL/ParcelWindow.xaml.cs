@@ -26,11 +26,15 @@ namespace PL
         public ParcelWindow(int? parcelId = null)
         {
             InitializeComponent();
-            if(parcelId != null)
+            if(parcelId == null) //add mode
+            {
+                
+            }
+            else // options mode
             {
                 Parcel = BLObject.GetParcel((int)parcelId);
+                ParcelGrid.DataContext = Parcel;
             }
-
         }
     }
 }

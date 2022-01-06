@@ -13,26 +13,23 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
-                        <TextBlock Text="Name: " />
-                        <TextBlock Text="{Binding Name}" FontWeight="Bold" />
-                        <TextBlock Text=", " />
                         <TextBlock Text="Id: " />
                         <TextBlock Text="{Binding Id}" FontWeight="Bold" />
                         <TextBlock Text=", " />
-                        <TextBlock Text="Phone: " />
-                        <TextBlock Text="{Binding Phone}" FontWeight="Bold" />
+                        <TextBlock Text="Sender Name: " />
+                        <TextBlock Text="{Binding SenderName}" FontWeight="Bold" />
                         <TextBlock Text=", " />
-                        <TextBlock Text="Counter Send And Supplied: " />
-                        <TextBlock Text="{Binding CounterSendAndSupplied}" FontWeight="Bold" />
+                        <TextBlock Text="Receiver Name: " />
+                        <TextBlock Text="{Binding ReceiverName}" FontWeight="Bold" />
                         <TextBlock Text=", " />
-                        <TextBlock Text="Counter Send And Not Supplied: " />
-                        <TextBlock Text="{Binding CounterSendAndNotSupplied}" FontWeight="Bold" />
+                        <TextBlock Text="Max Weight: " />
+                        <TextBlock Text="{Binding MaxWeight}" FontWeight="Bold" />
                         <TextBlock Text=", " />
-                        <TextBlock Text="Counter Recieved Parcels: " />
-                        <TextBlock Text="{Binding CounterRecievedParcels}" FontWeight="Bold" />
+                        <TextBlock Text="Priority: " />
+                        <TextBlock Text="{Binding Priority}" FontWeight="Bold" />
                         <TextBlock Text=", " />
-                        <TextBlock Text="Counter Parcels On My Way: " />
-                        <TextBlock Text="{Binding CounterParcelsOnMyWay}" FontWeight="Bold" />
+                        <TextBlock Text="Parcel Status: " />
+                        <TextBlock Text="{Binding ParcelStatus}" FontWeight="Bold" />
                         <TextBlock Text=", " />
                     </WrapPanel>
                 </DataTemplate>

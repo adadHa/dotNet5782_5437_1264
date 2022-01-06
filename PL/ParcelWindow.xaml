@@ -6,7 +6,25 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ParcelWindow" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="ParcelGrid">
+        <TextBlock Name="TitleTextBox" Text="  Parcel " FontSize="46" Grid.Column="0" Grid.ColumnSpan="2" Margin="32,10,106,256" Grid.Row="1" />
+        <StackPanel Width="108" HorizontalAlignment="Left" Margin="21,96,0,36" Grid.Row="1">
+
+            <TextBlock Name="IdValueTextBlock" Text="Id  " FontSize="14" HorizontalAlignment="Right" Grid.RowSpan="2"   />
+            <TextBox Name="IdValueTextBox" Text="{Binding Path=Id}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="IdValueTextBox_TextChanged"/>
+
+            <TextBlock Name="SenderValueTextBlock" Text="Sender  " FontSize="14" HorizontalAlignment="Right" Grid.RowSpan="2"   />
+            <TextBox Name="SenderValueTextBox" Text="{Binding Path=Sender}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="SenderValueTextBox_TextChanged"/>
+
+            <TextBlock Name="TargetValueTextBlock" Text="Phone"  FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+            <TextBox Name="PhoneValueTextBox" Text="{Binding Path=Phone}" FontSize="14" BorderThickness="0,0,0,1" Grid.RowSpan="2" TextChanged="PhoneTextBox_TextChanged"/>
+
+            <TextBlock Name="LongitudeValueTextBlock" Grid.Row="2" Text="Longitude" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
+            <TextBox Name="LongitudeValueTextBox" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Location.Longitude}" FontSize="14"  BorderThickness="0,0,0,1" TextChanged="LongitudeValueTextBox_TextChanged" />
+
+            <TextBlock Name="LattitudeValueTextBlock" Grid.Row="3" Text="Lattitude" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+            <TextBox Name="LattitudeValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Location.Latitude}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="LattitudeValueTextBox_TextChanged"/>
         
+        </StackPanel>
     </Grid>
 </Window>
