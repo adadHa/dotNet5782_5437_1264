@@ -16,15 +16,30 @@
             <TextBlock Name="SenderValueTextBlock" Text="Sender  " FontSize="14" HorizontalAlignment="Right" Grid.RowSpan="2"   />
             <TextBox Name="SenderValueTextBox" Text="{Binding Path=Sender}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="SenderValueTextBox_TextChanged"/>
 
-            <TextBlock Name="TargetValueTextBlock" Text="Phone"  FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-            <TextBox Name="PhoneValueTextBox" Text="{Binding Path=Phone}" FontSize="14" BorderThickness="0,0,0,1" Grid.RowSpan="2" TextChanged="PhoneTextBox_TextChanged"/>
+            <TextBlock Name="TargetValueTextBlock" Text="Target"  FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+            <TextBox Name="TargetValueTextBox" Text="{Binding Path=Target}" FontSize="14" BorderThickness="0,0,0,1" Grid.RowSpan="2" TextChanged="TargetTextBox_TextChanged"/>
 
-            <TextBlock Name="LongitudeValueTextBlock" Grid.Row="2" Text="Longitude" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
-            <TextBox Name="LongitudeValueTextBox" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Location.Longitude}" FontSize="14"  BorderThickness="0,0,0,1" TextChanged="LongitudeValueTextBox_TextChanged" />
+            <TextBlock Name="WheightValueTextBlock" Grid.Row="2" Text="Wheight" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
+            <TextBox Name="WheightValueTextBox" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Wheight}" FontSize="14"  BorderThickness="0,0,0,1" TextChanged="WheightValueTextBox_TextChanged" />
 
-            <TextBlock Name="LattitudeValueTextBlock" Grid.Row="3" Text="Lattitude" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-            <TextBox Name="LattitudeValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Location.Latitude}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="LattitudeValueTextBox_TextChanged"/>
-        
+            <TextBlock Name="PriorityValueTextBlock" Grid.Row="3" Text="Priority" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+            <TextBox Name="PriorityValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Priority}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="PriorityValueTextBox_TextChanged"/>
+
+            <TextBlock Name="DroneValueTextBlock" Grid.Row="3" Text="Drone" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+            <TextBox Name="DroneValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Drone}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="DroneValueTextBox_TextChanged"/>
+
+            <TextBlock Name="CreatedValueTextBlock" Grid.Row="3" Text="Created" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+            <TextBox Name="CreatedValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Created}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="CreatedValueTextBox_TextChanged"/>
+
+            <TextBlock Name="ScheduledValueTextBlock" Grid.Row="3" Text="Scheduled" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+            <TextBox Name="ScheduledValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Scheduled}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="ScheduledValueTextBox_TextChanged"/>
+
+            <TextBlock Name="PickedUpValueTextBlock" Grid.Row="3" Text="Picked Up" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+            <TextBox Name="PickedUpValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=PickedUp}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="PickedUpValueTextBox_TextChanged"/>
+
+            <TextBlock Name="DeliveredValueTextBlock" Grid.Row="3" Text="Delivered" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+            <TextBox Name="DeliveredValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Delivered}" FontSize="14" BorderThickness="0,0,0,1" TextChanged="DeliveredValueTextBox_TextChanged"/>
+       
         </StackPanel>
     </Grid>
 </Window>
