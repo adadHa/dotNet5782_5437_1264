@@ -33,7 +33,7 @@ namespace PL
             ParcelForList parcel = (ParcelForList)((ListView)sender).SelectedItem;
             if (parcel != null)
             {
-                new ParcelWindow(parcel).Show();
+                new ParcelWindow(parcel.Id).Show();
             }
         }
     }

@@ -394,7 +394,7 @@ namespace BL
         {
             return GetDrone(id).ToString();
         }
-        private Drone GetDrone(int id)
+        public Drone GetDrone(int id)
         {
             try
             {

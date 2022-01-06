@@ -21,9 +21,16 @@ namespace PL
     /// </summary>
     public partial class ParcelWindow : Window
     {
-        public ParcelWindow(ParcelForList parcel = null)
+        IBL BLObject = BlFactory.GetBl();
+        Parcel Parcel;
+        public ParcelWindow(int? parcelId = null)
         {
             InitializeComponent();
+            if(parcelId != null)
+            {
+                Parcel = BLObject.GetParcel((int)parcelId);
+            }
+
         }
     }
 }

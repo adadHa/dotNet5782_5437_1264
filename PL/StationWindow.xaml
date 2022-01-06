@@ -17,21 +17,12 @@
                     <DataTemplate>
                         <StackPanel>
                             <WrapPanel>
-                                <TextBlock Text="Id: "/>
+                                <TextBlock Text="Drone: "/>
                                 <TextBlock Text="{Binding Id}" FontWeight="Bold" />
                                 <TextBlock Text="  Priority: " />
                                 <TextBlock Text="{Binding Priority}" FontWeight="Bold" />
                             </WrapPanel>
-                            <WrapPanel>
-                                <TextBlock Text="  Wheight: " />
-                                <TextBlock Text="{Binding Wheight}" FontWeight="Bold" />
-                                <TextBlock Text="  Parcel Status: " />
-                                <TextBlock Text="{Binding ParcelStatus}" FontWeight="Bold" />
-                            </WrapPanel>
-                            <WrapPanel>
-                                <TextBlock Text="  The Other Side: " />
-                                <TextBlock Text="{Binding TheOtherSide}" FontWeight="Bold" />
-                            </WrapPanel>
+                            
 
                         </StackPanel>
                     </DataTemplate>
@@ -62,8 +53,11 @@
         </StackPanel>
         <Button x:Name="ButtonAddStation" Style="{StaticResource AddButton}" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Click="ButtonAddCustomer_Click" Margin="0,318,0,0" />
         <CheckBox Name="IsInOptionsModeCheckBox" HorizontalAlignment="Left" Margin="307,283,0,0" VerticalAlignment="Top" Visibility="Collapsed" IsChecked="True"/>
-        <Button Name="UpdateButton" Content="Update" Margin="226,100,35,161" Visibility="Collapsed" Click="UpdateButton_Click"/>
-        <ListView x:Name="DroneChargesListView" Style="{StaticResource ChargeDroneListViewStyle}" ItemsSource="{Binding ParcelsFromCustomer}"  SelectionMode="Extended" Margin="216,91,43,37" Background="Transparent" MouseDoubleClick="DroneChargesListView_MouseDoubleClick"/>
+        <Button Name="UpdateButton" Content="Update" Margin="32,289,429,47" Visibility="Collapsed" Click="UpdateButton_Click"/>
+        <ListView x:Name="DroneChargesListView" Style="{StaticResource ChargeDroneListViewStyle}" 
+                  ItemsSource="{Binding ListOfDronesInCharge}"  SelectionMode="Extended" Margin="216,91,43,37"
+                  Background="Transparent" MouseDoubleClick="DroneChargesListView_MouseDoubleClick"
+                  Visibility="{Binding ElementName=IsInOptionsModeCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
     </Grid>
 </Window>

@@ -22,7 +22,7 @@
             <Border Width="0.5" Height="50" Background="{StaticResource ToolBarButtons}" Margin="5" />
             <Label Style="{StaticResource ToolBarLabel}" Content="   Group by stutus:"/>
             <ToggleButton Name ="GroupByStatusSelector" Style="{StaticResource AnimatedSwitch}" Width="75" Height="20" Margin="0,0,0,0" Checked="GroupByStatusSelector_Checked" Unchecked="GroupByStatusSelector_Unchecked"/>
-            <Button Content="Refresh" Height="42" Width="46" BorderBrush="{x:Null}" ></Button>
+            <Button Content="Refresh" Height="42" Width="46" BorderBrush="{x:Null}" Click="Button_Click" ></Button>
             
         </WrapPanel>
 

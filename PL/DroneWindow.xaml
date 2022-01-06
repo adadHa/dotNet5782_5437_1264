@@ -4,14 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        xmlns:converter="clr-namespace:PL"
         mc:Ignorable="d"
         Height="auto" Width="auto" WindowStyle="None">
     <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <converter:ShippingStatusToTrueConverter x:Key="ShippingStatusToTrueConverter"/>
     </Window.Resources>
     <Grid>
         <Grid Name="AddDroneWindow" HorizontalAlignment="Stretch" Height="340" Width="400" Grid.Row="0"
@@ -85,7 +82,8 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
             </StackPanel>
 
             <TextBlock Name="TitleTextBox" Grid.Row="1" Text="  Drone " FontSize="46" Grid.Column="0" />
-            <TextBlock Name="IdAndParcelIdTextBlock" Grid.Row="1" Text="With parcel" FontSize="16" Grid.Column="0" VerticalAlignment="Bottom" Margin="50,0,0,16"/>
+
+
             <Grid Grid.RowSpan="5" Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="0" Width="250" HorizontalAlignment="left">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -97,7 +95,9 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+
                 <TextBlock Name="ModelValueTextBlock" Grid.Row="0" Text="Model  " FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"   />
                 <TextBox Name="ModelValueTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=Model}" Grid.Row="0" FontSize="14" KeyDown="ModelValueTextBox_KeyDown" BorderThickness="0,0,0,1" Grid.ColumnSpan="2" Margin="83,0,59,22"/>
 
@@ -112,6 +112,14 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
 
                 <TextBlock Name="BatteryValueTextBlock" Grid.Row="4" Text="Battery " FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
                 <TextBlock Grid.Row="4" Text="{Binding Path=Battery}" FontSize="14" Grid.Column="1"/>
+
+                <Button Grid.Row="5" Height="30" Margin="10,3,28,3" 
+                        Grid.ColumnSpan="2" Click="Button_Click" IsEnabled="{Binding Status, Converter={StaticResource ShippingStatusToTrueConverter} }">
+                    <StackPanel Orientation="Horizontal">
+                        <Image x:Name="p" Source="Images/Parcel.png" Height="24" Stretch="Fill"/>
+                        <TextBlock Name="TransferedParcel" Margin="10,0,0,0" Grid.Row="0" Text="{Binding TransferedParcel}" FontSize="14" Grid.Column="0" VerticalAlignment="Stretch" Width="147"   />
+                    </StackPanel>
+                </Button>
             </Grid>
 
             <StackPanel Name="OptionsStackPanel" Orientation="Vertical" Height="180" Background="{StaticResource Blue3}" Margin="224,47,10,85" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2"  >
