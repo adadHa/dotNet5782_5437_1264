@@ -35,5 +35,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button x:Name="AddParcelButton" Content="Add drone" HorizontalAlignment="right" Margin="0,0,50,50" VerticalAlignment="Bottom" Click="AddParcelButton_Click" Grid.Row="1"/>
+
     </Grid>
 </Page>

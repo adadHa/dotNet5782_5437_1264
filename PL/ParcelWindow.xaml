@@ -6,73 +6,120 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ParcelWindow" Height="600" Width="600">
-    <Grid>
-        <Grid x:Name="ParcelGrid" Visibility="Collapsed">
+    <Window.Resources>
+        <Style x:Key="CustomersComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Id: "/>
+                                <TextBlock Name="CustomerIdTextBlock" Text="{Binding Id}" FontWeight="Bold"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Name: "/>
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Background="{StaticResource BackgroundColor60}">
+        <Grid x:Name="ParcelGrid" Visibility="Visible">
             <TextBlock Name="TitleTextBox" Text="  Parcel " FontSize="46" Grid.Column="0" Grid.ColumnSpan="2" Margin="32,10,106,256" Grid.Row="1" />
-            <StackPanel Width="108" HorizontalAlignment="Left" Margin="21,96,0,36" Grid.Row="1">
+            <StackPanel Width="142" HorizontalAlignment="Left" Margin="21,96,0,36">
 
                 <TextBlock Name="IdValueTextBlock" Text="Id  " FontSize="14" HorizontalAlignment="Right" Grid.RowSpan="2"   />
-                <TextBox Name="IdValueTextBox" Text="{Binding Path=Id}" FontSize="14" BorderThickness="0,0,0,1"/>
+                <TextBlock Name="IdValueTextBox" Text="{Binding Path=Id}" FontSize="14" />
 
-                <StackPanel>
-                    <TextBlock Name="SenderValueTextBlock" Text="Sender:  " FontSize="14" HorizontalAlignment="Right" Grid.RowSpan="2"   />
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Id: "/>
-                        <TextBlock Text="{Binding Id}"/>
+                <TextBlock Name="SenderValueTextBlock" Text="Sender:  " FontSize="14" HorizontalAlignment="Right" Grid.RowSpan="2"   />
+                <Button Name="SenderButton" Click="SenderButton_Click">
+                    <StackPanel Name="SenderStackPanel">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Id: "/>
+                            <TextBlock Text="{Binding Sender.Id}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Name: "/>
+                            <TextBlock Text="{Binding Sender.Name}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <TextBlock Text="Name: "/>
-                    <TextBlock Text="{Binding Name}"/>
-                </StackPanel>
+                </Button>
 
-                <StackPanel>
-                    <TextBlock Name="TargetValueTextBlock" Text="Target"  FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Id: "/>
-                        <TextBlock Text="{Binding Id}"/>
+                <TextBlock Name="TargetValueTextBlock" Text="Target"  FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+                <Button Name="TargetButton" Click="TargetButton_Click">
+                    <StackPanel Name="TargetStackPanel">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Id: "/>
+                            <TextBlock Text="{Binding Path=Target.Id}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Name: "/>
+                            <TextBlock Text="{Binding Path=Target.Name}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <TextBlock Text="Name: "/>
-                    <TextBlock Text="{Binding Name}"/>
-                </StackPanel>
+                </Button>
                 <TextBlock Name="WheightValueTextBlock" Grid.Row="2" Text="Wheight" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
                 <ComboBox Name="WheightValueComboBox" Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Path=Wheight}" FontSize="14"  BorderThickness="0,0,0,1" SelectionChanged="WheightValueComboBox_SelectionChanged"/>
 
                 <TextBlock Name="PriorityValueTextBlock" Grid.Row="3" Text="Priority" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
                 <ComboBox Name="PriorityValueComboBox" Grid.Row="3" Grid.Column="1" SelectedItem="{Binding Path=Priority}" FontSize="14" BorderThickness="0,0,0,1" SelectionChanged="PriorityValueComboBox_SelectionChanged"/>
 
-                <TextBlock Name="DroneValueTextBlock" Grid.Row="3" Text="Drone" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-                <TextBox Name="DroneValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Drone}" FontSize="14" BorderThickness="0,0,0,1"/>
+                <TextBlock Text="Drone" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+                <Button Name="DroneButton" Click="DroneButton_Click">
+                    <StackPanel Name="DroneStackPanel">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Id: "/>
+                            <TextBlock Text="{Binding Drone.Id}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Location: "/>
+                            <TextBlock Text="{Binding Drone.CurrentLocation}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Button>
 
             </StackPanel>
 
-            <StackPanel Margin="213,96,216,5">
+            <StackPanel Margin="213,96,216,231">
                 <TextBlock Name="CreatedValueTextBlock" Grid.Row="3" Text="Created" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-                <TextBox Name="CreatedValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Created}" FontSize="14" BorderThickness="0,0,0,1"/>
+                <TextBlock Name="CreatedValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Created}" FontSize="14"/>
 
                 <TextBlock Name="ScheduledValueTextBlock" Grid.Row="3" Text="Scheduled" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-                <TextBox Name="ScheduledValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Scheduled}" FontSize="14" BorderThickness="0,0,0,1"/>
+                <TextBlock Name="ScheduledValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Scheduled}" FontSize="14"/>
 
                 <TextBlock Name="PickedUpValueTextBlock" Grid.Row="3" Text="Picked Up" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-                <TextBox Name="PickedUpValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=PickedUp}" FontSize="14" BorderThickness="0,0,0,1"/>
+                <TextBlock Name="PickedUpValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=PickedUp}" FontSize="14"/>
 
                 <TextBlock Name="DeliveredValueTextBlock" Grid.Row="3" Text="Delivered" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-                <TextBox Name="DeliveredValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Delivered}" FontSize="14" BorderThickness="0,0,0,1"/>
+                <TextBlock Name="DeliveredValueTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Delivered}" FontSize="14" />
             </StackPanel>
 
         </Grid>
-        <Grid x:Name="AddParcelGrid" Visibility="Visible">
-            <StackPanel>
+        <Grid x:Name="AddParcelGrid" Visibility="Collapsed">
+            <StackPanel Margin="116,46,210,-46">
                 <TextBlock Name="SenderIdValueTextBlock" Grid.Row="2" Text="Sender Id" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
-                <ComboBox Name="SenderIdValueComboBox" Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Path=SenderId}" FontSize="14"  BorderThickness="0,0,0,1" SelectionChanged="SenderIdValueComboBox_SelectionChanged"/>
+                <ComboBox Name="SenderIdValueComboBox" ItemsSource="{Binding}"
+                          SelectionChanged="SenderIdValueComboBox_SelectionChanged"
+                          Style="{StaticResource CustomersComboBoxStyle}"/>
 
                 <TextBlock Name="TargetIdValueTextBlock" Grid.Row="3" Text="Target Id" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-                <ComboBox Name="TargetIdValueComboBox" Grid.Row="3" Grid.Column="1" SelectedItem="{Binding Path=TargetId}" FontSize="14" BorderThickness="0,0,0,1" SelectionChanged="TargetIdValueComboBox_SelectionChanged"/>
+                <ComboBox Name="TargetIdValueComboBox" ItemsSource="{Binding}" 
+                          SelectionChanged="TargetIdValueComboBox_SelectionChanged"
+                          Style="{StaticResource CustomersComboBoxStyle}"/>
 
                 <TextBlock Name="AddWheightValueTextBlock" Grid.Row="2" Text="Wheight" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
-                <ComboBox Name="AddWheightValueComboBox" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding}" SelectedItem="{Binding Path=Wheight}" FontSize="14"  BorderThickness="0,0,0,1" SelectionChanged="AddWheightValueComboBox_SelectionChanged"/>
+                <ComboBox Name="AddWheightValueComboBox" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding}" FontSize="14"  BorderThickness="0,0,0,1" SelectionChanged="AddWheightValueComboBox_SelectionChanged"/>
 
                 <TextBlock Name="AddPriorityValueTextBlock" Grid.Row="3" Text="Priority" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-                <ComboBox Name="AddPriorityValueComboBox" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding}" SelectedItem="{Binding Path=Priority}" FontSize="14" BorderThickness="0,0,0,1" SelectionChanged="AddPriorityValueComboBox_SelectionChanged"/>
+                <ComboBox Name="AddPriorityValueComboBox" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding}" FontSize="14" BorderThickness="0,0,0,1" SelectionChanged="AddPriorityValueComboBox_SelectionChanged"/>
+
             </StackPanel>
+
+            <Button x:Name="ButtonAddStation" Style="{StaticResource AddButton}" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ButtonAddParcel_Click" Margin="235,338,0,0" />
+
         </Grid>
     </Grid>
 </Window>

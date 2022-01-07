@@ -53,7 +53,8 @@
             <TextBox Name="LattitudeValueTextBox" Style="{StaticResource StationValueTextBox}"  Text="{Binding Path=Location.Latitude}" FontSize="14" TextChanged="LattitudeValueTextBox_TextChanged"/>
 
         </StackPanel>
-        <Button x:Name="ButtonAddStation" Style="{StaticResource AddButton}" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Click="ButtonAddCustomer_Click" Margin="0,318,0,0" />
+        <Button x:Name="ButtonAddStation" Style="{StaticResource AddButton}" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Click="ButtonAddCustomer_Click" Margin="0,318,0,0"
+            Visibility="{Binding ElementName=IsInOptionsModeCheckBox, Path=IsChecked, Converter={StaticResource NotBooleanToVisibilityConverter}}"/>
         <CheckBox Name="IsInOptionsModeCheckBox" HorizontalAlignment="Left" Margin="307,283,0,0" VerticalAlignment="Top" Visibility="Collapsed" IsChecked="True"/>
         <Button Name="UpdateButton" Content="Update" Margin="32,289,429,47" Visibility="Collapsed" Click="UpdateButton_Click"/>
         <ListView x:Name="DroneChargesListView" Style="{StaticResource ChargeDroneListViewStyle}" 

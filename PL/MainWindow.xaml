@@ -91,7 +91,7 @@
         </Grid>
         <Frame Name="CurrentPage" Background="Transparent" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" Grid.Row="2" Navigated="CurrentPage_Navigated"/>
 
-
+        <Viewbox Width="200" Height="400" Grid.Row="1"/>
 
 
     </Grid>
