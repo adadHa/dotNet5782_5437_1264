@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:PL"
         xmlns:converter="clr-namespace:PL"
         mc:Ignorable="d"
-        Height="auto" Width="auto" WindowStyle="None">
+        WindowStyle="None" Height="400" Width="500">
     <Window.Resources>
         <converter:ShippingStatusToTrueConverter x:Key="ShippingStatusToTrueConverter"/>
     </Window.Resources>
     <Grid>
-        <Grid Name="AddDroneWindow" HorizontalAlignment="Stretch" Height="340" Width="400" Grid.Row="0"
+        <Grid Name="AddDroneWindow" HorizontalAlignment="Stretch" Grid.Row="0"
 VerticalAlignment="Stretch" Visibility="Collapsed">
             <StackPanel Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
                 <Grid Margin="0,0,0,10" Background="{StaticResource BackgroundColor60}">
@@ -63,7 +63,7 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
             </StackPanel>
         </Grid>
 
-        <Grid Name="OptionsDroneWindow" HorizontalAlignment="Stretch" Height="340" Width="400" Grid.Row="1"
+        <Grid Name="OptionsDroneWindow" HorizontalAlignment="Stretch" Grid.Row="1"
         VerticalAlignment="Stretch" Visibility="Visible" Background="{StaticResource BackgroundColor60}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
@@ -122,7 +122,31 @@ VerticalAlignment="Stretch" Visibility="Collapsed">
                 </Button>
             </Grid>
 
-            <StackPanel Name="OptionsStackPanel" Orientation="Vertical" Height="180" Background="{StaticResource Blue3}" Margin="224,47,10,85" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2"  >
+            <StackPanel Name="OptionsStackPanel" Orientation="Vertical" Margin="282,76,116,151"
+                        Grid.Row="1" Grid.RowSpan="2"
+                        Background="#ededed"
+                        local:MarginSetter.Margin="5" Grid.ColumnSpan="2" IsEnabled="False">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="Button" BorderThickness="0,0,0,0" BorderBrush="Gray">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property = "IsMouseOver" Value = "True">
+                                            <Setter TargetName="Button" Property="Background" Value="#ded5c2"/>
+                                        </Trigger>
+                                        <Trigger Property = "IsPressed" Value = "True">
+                                            <Setter TargetName="Button" Property="Background" Value="#d5cab1"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </StackPanel.Resources>
                 <Button x:Name="ChargeDroneButton" Content="Charge Drone" Click="ChargeDroneButton_Click"/>
                 <Button x:Name="ReleaseDroneButton" Content="Stop charging" Click="ReleaseDroneButton_Click" />
                 <Button x:Name="LinkDroneButton" Content="Link to parcel" Click="LinkDroneButton_Click" />
