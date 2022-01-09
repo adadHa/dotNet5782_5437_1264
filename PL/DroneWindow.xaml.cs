@@ -21,7 +21,7 @@ namespace PL
     public partial class DroneWindow : Window
     {
         private BlApi.IBL BLObject { get; set; }
-        public DroneForList Drone { get; set; }
+        public Drone Drone { get; set; }
 
         //for adding a drone:
         private int Id;
@@ -29,56 +29,49 @@ namespace PL
         private string Weight;
         private int InitialStation;
 
-        //constructor of add drone mode
-        public DroneWindow()
+        public DroneWindow(int? droneId = null)
         {
             InitializeComponent();
             BLObject = BlFactory.GetBl();
-            ComboBoxInsertWeight.ItemsSource = Enum.GetNames(typeof(WheightCategories));
-
-            //make the add drone window visible
-            AddDroneWindow.Visibility = Visibility.Visible;
-            OptionsDroneWindow.Visibility = Visibility.Collapsed;
-        }
-
-        // constructor of view drone/options mode
-        public DroneWindow( DroneForList drone)
-        {
-            InitializeComponent();
-            BLObject = BlFactory.GetBl();
-            Drone = drone;
-            OptionsDroneWindow.DataContext = Drone;
-            OptionsDroneWindow.Visibility = Visibility.Visible;
-            AddDroneWindow.Visibility = Visibility.Collapsed;
-            TimeInput.Visibility = Visibility.Collapsed;
-            ChargeDroneButton.Visibility = Visibility.Collapsed;
-            ReleaseDroneButton.Visibility = Visibility.Collapsed;
-            LinkDroneButton.Visibility = Visibility.Collapsed;
-            PickUpDroneButton.Visibility = Visibility.Collapsed;
-            SupplyParcelDroneButton.Visibility = Visibility.Collapsed;
-            //show only desired buttons
-            if (drone.Status == DroneStatuses.Available)
+            if(droneId == null) //add mode
             {
-                ChargeDroneButton.Visibility = Visibility.Visible;
-                LinkDroneButton.Visibility = Visibility.Visible;
+                ComboBoxInsertWeight.ItemsSource = Enum.GetNames(typeof(WheightCategories));
+                //make the add drone window visible
+                AddDroneWindow.Visibility = Visibility.Visible;
+                OptionsDroneWindow.Visibility = Visibility.Collapsed;
             }
-            else if(drone.Status == DroneStatuses.Maintenance)
+            else //options mode
             {
-                ReleaseDroneButton.Visibility = Visibility.Visible;
+                Drone = BLObject.GetDrone((int)droneId);
+                OptionsDroneWindow.DataContext = Drone;
+                OptionsDroneWindow.Visibility = Visibility.Visible;
+                AddDroneWindow.Visibility = Visibility.Collapsed;
+                TimeInput.Visibility = Visibility.Collapsed;
+                ChargeDroneButton.Visibility = Visibility.Collapsed;
+                ReleaseDroneButton.Visibility = Visibility.Collapsed;
+                LinkDroneButton.Visibility = Visibility.Collapsed;
+                PickUpDroneButton.Visibility = Visibility.Collapsed;
+                SupplyParcelDroneButton.Visibility = Visibility.Collapsed;
+                //show only desired buttons
+                if (Drone.Status == DroneStatuses.Available)
+                {
+                    ChargeDroneButton.Visibility = Visibility.Visible;
+                    LinkDroneButton.Visibility = Visibility.Visible;
+                }
+                else if (Drone.Status == DroneStatuses.Maintenance)
+                {
+                    ReleaseDroneButton.Visibility = Visibility.Visible;
+                }
+                else if (Drone.Status == DroneStatuses.Shipping && BLObject.GetParcel((int)Drone.TransferedParcel.Id).PickedUp == null)
+                {
+                    PickUpDroneButton.Visibility = Visibility.Visible;
+                }
+                else if (Drone.Status == DroneStatuses.Shipping && BLObject.GetParcel((int)Drone.TransferedParcel.Id).PickedUp != null)
+                {
+                    SupplyParcelDroneButton.Visibility = Visibility.Visible;
+                }
+                TitleTextBox.Text = $"Drone {Drone.Id}";
             }
-            else if (drone.Status == DroneStatuses.Shipping && BLObject.GetParcel(drone.DeliveredParcelNumber).PickedUp == null)
-            {
-                PickUpDroneButton.Visibility = Visibility.Visible;
-            }
-            else if (drone.Status == DroneStatuses.Shipping && BLObject.GetParcel(drone.DeliveredParcelNumber).PickedUp != null)
-            {
-                SupplyParcelDroneButton.Visibility = Visibility.Visible;
-            }
-            TitleTextBox.Text = $"Drone {drone.Id}";
-            if (drone.DeliveredParcelNumber != -1)
-                IdAndParcelIdTextBlock.Text = $"With parcel {drone.DeliveredParcelNumber}";
-            else
-                IdAndParcelIdTextBlock.Text = $"";
 
         }
 
@@ -181,7 +174,7 @@ namespace PL
             try
             {
                 BLObject.ChargeDrone(Drone.Id);
-                Drone = BLObject.GetDrones(x => x.Id == Drone.Id).ToList()[0];
+                Drone = BLObject.GetDrone(Drone.Id);
                 MessageBox.Show($"Drone {Drone.Id} has sarted charging. \n " +
                     $"Its battery now is {Drone.Battery}");
             }
@@ -195,8 +188,8 @@ namespace PL
             try
             {
                 BLObject.BindDrone(Drone.Id);
-                Drone = BLObject.GetDrones(x => x.Id == Drone.Id).ToList()[0];
-                MessageBox.Show($"Drone {Drone.Id} was sent succefully to deliver parcel {Drone.DeliveredParcelNumber}!");
+                Drone = BLObject.GetDrone(Drone.Id);
+                MessageBox.Show($"Drone {Drone.Id} was sent succefully to deliver parcel {Drone.TransferedParcel.Id}!");
             }
             catch (Exception ex)
             {
@@ -214,8 +207,8 @@ namespace PL
             try
             {
                 BLObject.CollectParcelByDrone(Drone.Id);
-                Drone = BLObject.GetDrones(x => x.Id == Drone.Id).ToList()[0];
-                MessageBox.Show($"Drone {Drone.Id} picks up parcel {Drone.DeliveredParcelNumber}!");
+                Drone = BLObject.GetDrone(Drone.Id);
+                MessageBox.Show($"Drone {Drone.Id} picks up parcel {Drone.TransferedParcel.Id}!");
             }
             catch (Exception ex)
             {
@@ -228,8 +221,8 @@ namespace PL
             try
             {
                 BLObject.SupplyParcel(Drone.Id);
-                Drone = BLObject.GetDrones(x => x.Id == Drone.Id).ToList()[0];
-                MessageBox.Show($"Drone {Drone.Id} supply parcel {Drone.DeliveredParcelNumber}!");
+                Drone = BLObject.GetDrone(Drone.Id);
+                MessageBox.Show($"Drone {Drone.Id} supply parcel {Drone.TransferedParcel.Id}!");
             }
             catch (Exception ex)
             {
@@ -282,6 +275,11 @@ namespace PL
             {
                 TimeInputTextBox.Background = Brushes.Red;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new ParcelWindow(Drone.TransferedParcel.Id).Show();
         }
     }
 }

@@ -33,8 +33,21 @@ namespace PL
             ParcelForList parcel = (ParcelForList)((ListView)sender).SelectedItem;
             if (parcel != null)
             {
-                new ParcelWindow(parcel).Show();
+                new ParcelWindow(parcel.Id).Show();
             }
+        }
+
+        private void AddParcelButton_Click(object sender, RoutedEventArgs e)
+        {
+            ParcelWindow parcelWindow = new ParcelWindow();
+            parcelWindow.Closed += ParcelWindow_Closed;
+            parcelWindow.Show();
+
+        }
+        private void ParcelWindow_Closed(object sender, EventArgs e)
+        {
+            ParcelsListView.ItemsSource = BLObject.GetParcels();
+            ParcelsListView.Items.Refresh();
         }
     }
 }

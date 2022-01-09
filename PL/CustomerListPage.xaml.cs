@@ -48,7 +48,7 @@ namespace PL
             CustomerForList customer = (CustomerForList)((ListView)sender).SelectedItem;
             if (customer != null)
             {
-                new CustomerWindow(customer).Show();
+                new CustomerWindow(customer.Id).Show();
             }
         }
         

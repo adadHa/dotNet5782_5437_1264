@@ -105,7 +105,6 @@
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Width" Value="100"/>
         <Setter Property="Height" Value="30"/>
-        <Setter Property="Visibility" Value="{Binding ElementName=IsInOptionsModeCheckBox, Path=IsChecked, Converter={StaticResource NotBooleanToVisibilityConverter}}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

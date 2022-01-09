@@ -39,7 +39,6 @@ namespace PL
             {
                 this.Station = BLObject.GetStation(stationForList.Id);
                 StationWindowGrid.DataContext = this.Station;
-                DroneChargesListView.DataContext = this.Station.ListOfDronesInCharge;
                 IsInOptionsModeCheckBox.IsChecked = true; // all the relevant elements are bind to this checkbox and will be visible/not visible as required
                 NameValueTextBox.IsReadOnly = false;
             }
@@ -156,7 +155,8 @@ namespace PL
 
         private void DroneChargesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
+           DroneInCharge droneInCharg = (DroneInCharge)((ListView)sender).SelectedItem;
+            new DroneWindow(droneInCharg.DroneId).Show();
         }
     }
 }

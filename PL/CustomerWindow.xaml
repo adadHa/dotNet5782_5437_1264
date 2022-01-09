@@ -88,7 +88,10 @@
 
 
         <ListView x:Name="ParcelsToCustomer" Style="{StaticResource CustomersListViewStyle}" ItemsSource="{Binding ParcelsToCustomer}" MouseDoubleClick="ParcelsToCustomer_MouseDoubleClick" SelectionMode="Extended" Margin="481,92,19,38" Grid.Row="1"/>
-        <Button x:Name="ButtonAddCustomer" Style="{StaticResource AddButton}" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="100" Click="ButtonAddCustomer_Click"/>
+        <Button x:Name="ButtonAddCustomer" Style="{StaticResource AddButton}" Grid.Row="1"
+                VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="166" Height="41"
+                Click="ButtonAddCustomer_Click" Margin="329,0,0,23"
+                Visibility="{Binding ElementName=IsInOptionsModeCheckBox, Path=IsChecked, Converter={StaticResource NotBooleanToVisibilityConverter}}"/>
 
     </Grid>
 </Window>

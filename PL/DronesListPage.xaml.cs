@@ -71,6 +71,7 @@ namespace PL
         }
         private void DroneWindow_Closed(object sender, EventArgs e)
         {
+            DronesListView.ItemsSource = BLObject.GetDrones();
             DronesListView.Items.Refresh();
         }
 
@@ -85,7 +86,7 @@ namespace PL
             DroneForList drone = (DroneForList)((ListView)sender).SelectedItem;
             if (drone != null)
             {
-                new DroneWindow(drone).Show();
+                new DroneWindow(drone.Id).Show();
             }
         }
 
@@ -116,6 +117,7 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             DronesListView.DataContext = BLObject.GetDrones();
+            DronesListView.Items.Refresh();
             GroupByStatusSelector.IsChecked = false;
             StatusSelector.SelectedIndex = -1;
             WeightSelector.SelectedIndex = -1;

@@ -29,17 +29,17 @@ namespace PL
 
 
         // options/add mode
-        public CustomerWindow(CustomerForList customer = null)
+        public CustomerWindow(int? customerId = null)
         {
             InitializeComponent();
             BLObject = BlFactory.GetBl();
-            if (customer == null) //add modw
+            if (customerId == null) //add modw
             {
                 IsInOptionsModeCheckBox.IsChecked = false;
             }
             else //options mode
             {
-                OptionsCustomerWindow.DataContext = BLObject.GetCustomer(customer.Id);
+                OptionsCustomerWindow.DataContext = BLObject.GetCustomer((int)customerId);
                 IsInOptionsModeCheckBox.IsChecked = true;
             }
         }
