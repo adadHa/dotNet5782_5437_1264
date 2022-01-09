@@ -90,6 +90,40 @@ namespace DalApi
             return $"{Type} with Id = {Id} is already exist. please try another id \n";
         }
     }
+
+    #region XML Exceptions
+    [Serializable]
+    public class XMLFileLoadCreateException : Exception
+    {
+        private string pathToSave;
+
+        public XMLFileLoadCreateException()
+        {
+        }
+
+        public XMLFileLoadCreateException(string message) : base(message)
+        {
+        }
+
+        public XMLFileLoadCreateException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        public XMLFileLoadCreateException(string pathToSave, string v, Exception ex): base(v, ex)
+        {
+            this.pathToSave = pathToSave;
+        }
+
+        protected XMLFileLoadCreateException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + $"fail to load/create {pathToSave}";
+        }
+    }
+    #endregion
 }
 
 
