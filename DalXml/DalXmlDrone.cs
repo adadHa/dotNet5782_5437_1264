@@ -69,7 +69,6 @@ namespace DalXml
             XMLTools.SaveListToXMLSerializer<Station>(stationsList, StationsPath);
         }
 
-
         void IDal.UpdateDrone(int droneId, string newModel)
         {
             List<Drone> dronesList = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
