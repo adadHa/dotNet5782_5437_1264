@@ -18,7 +18,7 @@ namespace DalXml
         }
 
         ///Tools for xml serilaizer
-        static void SaveListToXMLSerializer<T>(List<T> listToSave, string pathToSave)
+        public static void SaveListToXMLSerializer<T>(List<T> listToSave, string pathToSave)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace DalXml
             }
         }
 
-        static List<T> LoadListFromXMLSerializer<T>(string fileToLoad)
+        public static List<T> LoadListFromXMLSerializer<T>(string fileToLoad)
         {
             try
             {

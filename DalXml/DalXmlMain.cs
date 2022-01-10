@@ -34,7 +34,8 @@ namespace DalXml
         #endregion
         #region datasource xml file's pathes
         string DronesPath = @"DronesXML.xml";
-
+        string DronesChargesPath = @"DronesCharges.xml";
+        string StationsPath = @"Stations.xml";
         void IDal.AddStation(int id, string name, int num, double longitude, double latitude)
         {
             throw new NotImplementedException();
