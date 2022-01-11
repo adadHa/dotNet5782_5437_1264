@@ -27,7 +27,7 @@ namespace PL
             InitializeComponent();
             BLObject = BlFactory.GetBl();
             ParcelsListView.DataContext = BLObject.GetParcels();
-            ParcelsStatusSelector.DataContext = Enum.GetValues(typeof());
+            ParcelsStatusSelector.DataContext = Enum.GetValues(typeof(ParcelsStatus));
         }
         private void ParcelsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
