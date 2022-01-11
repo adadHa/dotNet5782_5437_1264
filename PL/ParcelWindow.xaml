@@ -27,7 +27,7 @@
         </Style>
     </Window.Resources>
     <Grid Background="{StaticResource BackgroundColor60}">
-        <Grid x:Name="ParcelGrid" Visibility="Visible">
+        <Grid x:Name="ParcelGrid" Visibility="Collapsed">
             <TextBlock Name="TitleTextBox" Text="  Parcel " FontSize="46" Grid.Column="0" Grid.ColumnSpan="2" Margin="32,10,106,256" Grid.Row="1" />
             <StackPanel Width="142" HorizontalAlignment="Left" Margin="21,96,0,36">
 
@@ -98,7 +98,7 @@
             </StackPanel>
 
         </Grid>
-        <Grid x:Name="AddParcelGrid" Visibility="Collapsed">
+        <Grid x:Name="AddParcelGrid" Visibility="Visible">
             <StackPanel Margin="116,46,210,-46">
                 <TextBlock Name="SenderIdValueTextBlock" Grid.Row="2" Text="Sender Id" FontSize="14" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
                 <ComboBox Name="SenderIdValueComboBox" ItemsSource="{Binding}"

@@ -32,7 +32,6 @@
                                 <TextBlock Text="  The Other Side: " />
                                 <TextBlock Text="{Binding TheOtherSide}" FontWeight="Bold" />
                             </WrapPanel>
-
                         </StackPanel>
                     </DataTemplate>
                 </Setter.Value>

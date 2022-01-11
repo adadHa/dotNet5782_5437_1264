@@ -9,6 +9,18 @@
       Title="ParcelsListPage">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="400*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Background="{StaticResource ToolBar}" Grid.Row="0">
+            <Label Style="{StaticResource ToolBarLabel}" Content="   ParcelsStatus"></Label>
+            <ComboBox Name ="ParcelsStatusSelector" ItemsSource="{Binding}" Style="{StaticResource ToolBarComboBox}"  Width="80" />
+            <Border Width="0.5" Height="50" Background="{StaticResource ToolBarButtons}" Margin="5" />
+            <Label Style="{StaticResource ToolBarLabel}" Content="   Group by stutus:"/>
+            <ToggleButton Name ="GroupBySenderNameSelector" Style="{StaticResource AnimatedSwitch}" Width="75" Height="20" Margin="0,0,0,0" Checked="GroupBySenderNameSelector_Checked"/>
+            <ToggleButton Name ="GroupByTargetNameSelector" Style="{StaticResource AnimatedSwitch}" Width="75" Height="20" Margin="0,0,0,0" Checked="GroupByTargetNameSelector_Checked"/>
+        </WrapPanel>
         <ListView x:Name="ParcelsListView" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding }" MouseDoubleClick="ParcelsListView_MouseDoubleClick" >
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -35,7 +47,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button x:Name="AddParcelButton" Content="Add drone" HorizontalAlignment="right" Margin="0,0,50,50" VerticalAlignment="Bottom" Click="AddParcelButton_Click" Grid.Row="1"/>
-
+        <Button x:Name="AddParcelButton" Content="Add Parcel" HorizontalAlignment="right" Margin="0,0,50,50" VerticalAlignment="Bottom" Click="AddParcelButton_Click" Grid.Row="1"/>
+        
     </Grid>
 </Page>

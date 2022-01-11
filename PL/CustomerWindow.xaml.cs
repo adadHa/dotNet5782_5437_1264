@@ -144,12 +144,14 @@ namespace PL
 
         private void ParcelsFromCustomer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
+            ParcelInCustomer parcel = (ParcelInCustomer)((ListView)sender).SelectedItem;
+            new ParcelWindow(parcel.Id).Show();
         }
 
         private void ParcelsToCustomer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
+            ParcelInCustomer parcel = (ParcelInCustomer)((ListView)sender).SelectedItem;
+            new ParcelWindow(parcel.Id).Show();
         }
 
         private void CloseOptionsCustomerWindowButton_Click(object sender, RoutedEventArgs e)
