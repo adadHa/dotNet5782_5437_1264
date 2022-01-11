@@ -17,7 +17,36 @@ namespace DalXml
             Directory.CreateDirectory(pathToDir);
         }
 
-        ///Tools for xml serilaizer
+        #region Tolls for xml element
+        public static void SaveListToXMLElement(XElement xElement, string path)
+        {
+            try
+            {
+                xElement.Save(path);
+            }
+            catch (Exception ex)
+            {
+                throw new XMLFileLoadCreateException(path, $"fail to create xml file: {path}", ex);
+            }
+        }
+        public static void LoadListFromXMLElement(XElement xElement, string path)
+        {
+            if (File.Exists(path))
+            {
+                xElement.   ```
+            }
+            try
+            {
+                xElement.Save(path);
+            }
+            catch (Exception ex)
+            {
+                throw new XMLFileLoadCreateException(path, $"fail to create xml file: {path}", ex);
+            }
+        }
+        #endregion
+
+        #region Tools for xml serilaizer
         public static void SaveListToXMLSerializer<T>(List<T> listToSave, string pathToSave)
         {
             try
@@ -56,5 +85,6 @@ namespace DalXml
                 throw new XMLFileLoadCreateException(fileToLoad, $"fail to create xml file: {fileToLoad}", ex);
             }
         }
+        #endregion
     }
 }
