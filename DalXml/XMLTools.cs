@@ -22,22 +22,27 @@ namespace DalXml
         {
             try
             {
-                xElement.Save(path);
+                xElement.Save(pathToDir +path);
             }
             catch (Exception ex)
             {
                 throw new XMLFileLoadCreateException(path, $"fail to create xml file: {path}", ex);
             }
         }
-        public static void LoadListFromXMLElement(XElement xElement, string path)
+        public static XElement LoadListFromXMLElement(string path)
         {
-            if (File.Exists(path))
-            {
-                xElement.   ```
-            }
             try
             {
-                xElement.Save(path);
+                if (File.Exists(path))
+                {
+                    return XElement.Load(pathToDir + path);
+                }
+                else
+                {
+                    XElement rootElement = new XElement(pathToDir + path);
+                    rootElement.Save(pathToDir + path);
+                    return rootElement;
+                }
             }
             catch (Exception ex)
             {
