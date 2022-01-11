@@ -27,6 +27,7 @@ namespace PL
             InitializeComponent();
             BLObject = BlFactory.GetBl();
             ParcelsListView.DataContext = BLObject.GetParcels();
+            ParcelsStatusSelector.DataContext = Enum.GetValues(typeof());
         }
         private void ParcelsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -48,6 +49,16 @@ namespace PL
         {
             ParcelsListView.ItemsSource = BLObject.GetParcels();
             ParcelsListView.Items.Refresh();
+        }
+
+        private void GroupBySenderNameSelector_Checked(object sender, EventArgs e)
+        {
+            //BLObject.GetCustomersOrderBySender();
+        }
+
+        private void GroupByTargetNameSelector_Checked(object sender, EventArgs e)
+        {
+            //BLObject.GetCustomersOrderByTarget();
         }
     }
 }
