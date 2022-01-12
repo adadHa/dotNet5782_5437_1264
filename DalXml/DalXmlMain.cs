@@ -39,20 +39,17 @@ namespace DalXml
         string StationsPath = @"Stations.xml";
         string ParcelsPath = @"Parcels.xml";
         string CustomersPath = @"Customers.xml";
-        string ConfigPath = @"ConfigPath.xml";
+        string ConfigPath = @"Config.xml";
         #endregion
         
-
-        
-
-
-
         double[] IDal.ViewElectConsumptionData()
         {
-            XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(ConfigPath);
-            var arr = from x in cutomersRootElement.Elements()
-                      let double x = 2
-
+            
+            XElement ConfigRootElement = XMLTools.LoadListFromXMLElement(ConfigPath);
+            double[] result = (from x in ConfigRootElement.Elements()
+                         let value = double.Parse(x.Element("ElectricValue").Value)
+                         select value).ToArray();
+            return result;
         }
 
         public string ViewParcel(int id)

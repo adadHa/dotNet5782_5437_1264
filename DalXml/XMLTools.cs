@@ -9,12 +9,16 @@ using System.Xml.Serialization;
 using DalApi;
 namespace DalXml
 {
-    static class XMLTools
+    public static class XMLTools
     {
-        static string pathToDir = @"xml/";
+        static string pathToDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,
+                            "..\\..\\..\\..\\Data\\"));
         static XMLTools()
         {
-            Directory.CreateDirectory(pathToDir);
+            if (!Directory.Exists(pathToDir))
+            {
+                Directory.CreateDirectory(pathToDir);
+            }
         }
 
         #region Tolls for xml element
@@ -33,13 +37,13 @@ namespace DalXml
         {
             try
             {
-                if (File.Exists(path))
+                if (File.Exists(pathToDir + path))
                 {
                     return XElement.Load(pathToDir + path);
                 }
                 else
                 {
-                    XElement rootElement = new XElement(pathToDir + path);
+                    XElement rootElement = new XElement(path);
                     rootElement.Save(pathToDir + path);
                     return rootElement;
                 }

@@ -9,7 +9,6 @@ namespace DalXml
 {
     public sealed partial class DalXml : IDal
     {
-
         IEnumerable<DroneCharge> IDal.GetDroneCharges(Func<DroneCharge, bool> filter)
         {
             List<DroneCharge> list = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DronesChargesPath);

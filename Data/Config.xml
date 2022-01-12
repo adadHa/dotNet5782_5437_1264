@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConsumptionDataList>
+	<ConsumptionData>
+		<Target>availableDrElectConsumption</Target>
+		<ElectricValue>0.10</ElectricValue>
+	</ConsumptionData>
+	<ConsumptionData>
+		<Target>lightDrElectConsumption</Target>
+		<ElectricValue>0.15</ElectricValue>
+	</ConsumptionData>
+	<ConsumptionData>
+		<Target>mediumDrElectConsumption</Target>
+		<ElectricValue>0.20</ElectricValue>
+	</ConsumptionData>
+	<ConsumptionData>
+		<Target>heavyDrElectConsumption</Target>
+		<ElectricValue>0.25</ElectricValue>
+	</ConsumptionData>
+	<ConsumptionData>
+		<Target>chargingRate</Target>
+		<ElectricValue>20</ElectricValue>
+	</ConsumptionData>
+</ConsumptionDataList>

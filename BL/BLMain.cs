@@ -16,7 +16,7 @@ namespace BL
         //               it will enable other threads accessing the class
         private BL()
         {
-            dalObject = DalApi.DalFactory.GetDal("DalXml");
+            dalObject = DalApi.DalFactory.GetDal("DalObject");
             double[] arr = dalObject.ViewElectConsumptionData();
             availableDrElectConsumption = arr[0];
             lightDrElectConsumption = arr[1];
@@ -48,3 +48,11 @@ namespace BL
     }
 }
 
+
+
+//save data example into xml
+//DalXml.XMLTools.SaveListToXMLSerializer<DO.Customer>(dalObject.GetCustomers().ToList(),"Customers.xml");
+//DalXml.XMLTools.SaveListToXMLSerializer<DO.Drone>(dalObject.GetDrones().ToList(), "Drones.xml");
+//DalXml.XMLTools.SaveListToXMLSerializer<DO.Parcel>(dalObject.GetParcels().ToList(), "Parcels.xml");
+//DalXml.XMLTools.SaveListToXMLSerializer<DO.Station>(dalObject.GetStations().ToList(), "Stations.xml");
+//DalXml.XMLTools.SaveListToXMLSerializer<DO.DroneCharge>(dalObject.GetDroneCharges().ToList(), "DronesCharges.xml");
