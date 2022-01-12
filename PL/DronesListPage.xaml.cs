@@ -71,7 +71,7 @@ namespace PL
         }
         private void DroneWindow_Closed(object sender, EventArgs e)
         {
-            DronesListView.ItemsSource = BLObject.GetDrones();
+            DronesListView.DataContext = BLObject.GetDrones();
             DronesListView.Items.Refresh();
         }
 
