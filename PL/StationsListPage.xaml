@@ -14,7 +14,7 @@
             <RowDefinition Height="400*"/>
         </Grid.RowDefinitions>
 
-        <WrapPanel Background="{StaticResource ToolBar}" Orientation="Vertical" >
+        <WrapPanel Background="{StaticResource ToolBar}" Orientation="Horizontal" >
             <Label Style="{StaticResource ToolBarLabel}" Content="   Group by stutus:" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
             <ToggleButton Name ="orderByFreeSlots" Style="{StaticResource AnimatedSwitch}" Width="29" Height="20" Checked="orderByFreeSlots_Checked"/>
             <Border Width="1" Height="41" Background="{StaticResource ToolBarButtons}" Margin="30,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
@@ -25,14 +25,14 @@
         <ListView x:Name="StationsListView" ItemsSource="{Binding }" Grid.Row="1" MouseDoubleClick="StationsListView_MouseDoubleClick" SelectionMode="Extended">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
-                        <StackPanel>
-                            <TextBlock Text="Id: " FontWeight="Bold" />
-                            <TextBlock Text="{Binding Id}" />
-                            <TextBlock Text="  Name: " FontWeight="Bold" />
-                            <TextBlock Text="{Binding Name}" />
+                    <WrapPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Id: " FontSize="16" />
+                            <TextBlock Text="{Binding Id}" FontSize="16" />
+                            <TextBlock Text=" " FontSize="16" />
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16" />
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel Orientation="Horizontal">
                             <TextBlock Text="  Available slots: " Foreground="Gray"/>
                             <TextBlock Text="{Binding AvailableChargingSlots}" />
                             <TextBlock Text="  Occupied slots: " Foreground="Gray"/>
