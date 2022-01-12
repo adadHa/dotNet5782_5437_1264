@@ -9,7 +9,6 @@ using System.Runtime.CompilerServices;
 
 namespace BL
 {
-
     internal sealed partial class BL : BlApi.IBL
     {
         //this functions initialize the drones

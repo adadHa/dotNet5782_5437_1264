@@ -46,5 +46,9 @@ namespace BlApi
         public string ViewUnbinedParcelsList();
         public string ViewStationsWithFreeChargeSlots();
 
+
+        // simulator:
+        public void OperateSimulator(int droneNumber, Action updatePl, Func<bool> isStopped);
+
     }
 }

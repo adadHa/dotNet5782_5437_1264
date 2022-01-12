@@ -40,7 +40,7 @@ namespace BL
             }
             internal static readonly BL Instance = new BL();
         }
-        private DalApi.IDal dalObject;
+        internal DalApi.IDal dalObject;
         private List<BO.DroneForList> BLDrones = new List<BO.DroneForList>();
         private double availableDrElectConsumption;
         private double lightDrElectConsumption;

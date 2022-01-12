@@ -10,4 +10,8 @@
     <ProjectReference Include="..\DalXml\DalXml.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ate\" />
+  </ItemGroup>
+
 </Project>
