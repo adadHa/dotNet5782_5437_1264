@@ -26,7 +26,8 @@
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Id: " FontSize="18"/>
+                            <Image Source=" Images/Parcel.png  " Height="30" Width="30"/>
+                            <TextBlock Text="  Id: " FontSize="18"/>
                             <TextBlock Text="{Binding Id}" FontWeight="Bold" FontSize="18"/>
                             <TextBlock Text="  " FontSize="18"/>
                             <TextBlock Text="{Binding SenderName}" FontWeight="Bold" FontSize="18"/>
@@ -35,13 +36,19 @@
                             <TextBlock Text="  " FontSize="18"/>
                             <TextBlock Text="{Binding ReceiverName}" FontWeight="Bold" FontSize="18"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Max Weight: " Foreground="Gray"/>
-                            <TextBlock Text="{Binding MaxWeight}"/>
-                            <TextBlock Text="Priority: " Foreground="Gray"/>
-                            <TextBlock Text="{Binding Priority}"/>
-                            <TextBlock Text="Parcel Status: " Foreground="Gray"/>
-                            <TextBlock Text="{Binding ParcelStatus}"/>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Max Weight: " Foreground="Gray"/>
+                                <TextBlock Text="{Binding MaxWeight}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Priority: " Foreground="Gray"/>
+                                <TextBlock Text="{Binding Priority}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Parcel Status: " Foreground="Gray"/>
+                                <TextBlock Text="{Binding ParcelStatus}"/>
+                            </StackPanel>
                         </StackPanel>
                     </WrapPanel>
                 </DataTemplate>

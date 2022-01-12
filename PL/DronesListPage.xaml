@@ -32,7 +32,8 @@
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Id: " FontSize="16"/>
+                            <Image Source=" Images/Drone.png" Height="30" Width="30"/>
+                            <TextBlock Text="  Id: " FontSize="16"/>
                             <TextBlock Text="{Binding Id}" FontWeight="Bold" FontSize="16"/>
                             <TextBlock Text="  Model: " FontSize="16"/>
                             <TextBlock Text="{Binding Model}" FontWeight="Bold" FontSize="16"/>

@@ -12,6 +12,7 @@
     <None Remove="Images\Drone.png" />
     <None Remove="Images\Parcel.png" />
     <None Remove="Images\RefreshIcon.png" />
+    <None Remove="Images\Station.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\RefreshIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Station.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

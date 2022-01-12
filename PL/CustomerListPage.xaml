@@ -29,19 +29,28 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Id: " FontSize="18"/>
                             <TextBlock Text="{Binding Id}" FontWeight="Bold" FontSize="18"/>
+                            <TextBlock Text=" ~ " FontSize="18"/>
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="18"/>
                             <TextBlock Text="  " FontSize="18"/>
-                            <TextBlock Text="{Binding SenderName}" FontWeight="Bold" FontSize="18"/>
-                            <Image Source=" Images/ArrowIcon.png" Height="30" Width="30"/>
-                            <TextBlock Text="  " FontSize="18"/>
-                            <TextBlock Text="{Binding ReceiverName}" Foreground="Gray" />
+                            <TextBlock Text="{Binding Phone}" FontSize="18"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Max Weight: " Foreground="Gray"/>
-                            <TextBlock Text="{Binding MaxWeight}" />
-                            <TextBlock Text=" Counter Priority: " Foreground="Gray"/>
-                            <TextBlock Text="{Binding Priority}"/>
-                            <TextBlock Text=" Parcel Status: " Foreground="Gray"/>
-                            <TextBlock Text="{Binding ParcelStatus}"/>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Counter Send And Supplied: " Foreground="Gray"/>
+                                <TextBlock Text="{Binding CounterSendAndSupplied}" />
+                            </StackPanel>
+                            <StackPanel  Orientation="Horizontal">
+                                <TextBlock Text=" Counter Send And Not Supplied: " Foreground="Gray"/>
+                                <TextBlock Text="{Binding CounterSendAndNotSupplied}"/>
+                            </StackPanel>
+                            <StackPanel  Orientation="Horizontal">
+                                <TextBlock Text=" Counter Recieved Parcels: " Foreground="Gray"/>
+                                <TextBlock Text="{Binding CounterRecievedParcels}"/>
+                            </StackPanel>
+                            <StackPanel  Orientation="Horizontal">
+                                <TextBlock Text=" Counter Parcels On My Way: " Foreground="Gray"/>
+                                <TextBlock Text="{Binding CounterParcelsOnMyWay}"/>
+                            </StackPanel>
                         </StackPanel>
                     </WrapPanel>
                 </DataTemplate>

@@ -25,20 +25,23 @@
         <ListView x:Name="StationsListView" ItemsSource="{Binding }" Grid.Row="1" MouseDoubleClick="StationsListView_MouseDoubleClick" SelectionMode="Extended">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Id: " FontSize="16" />
-                            <TextBlock Text="{Binding Id}" FontSize="16" />
-                            <TextBlock Text=" " FontSize="16" />
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="  Available slots: " Foreground="Gray"/>
-                            <TextBlock Text="{Binding AvailableChargingSlots}" />
-                            <TextBlock Text="  Occupied slots: " Foreground="Gray"/>
-                            <TextBlock Text="{Binding OccupiedChargingSlots}" />
-                        </StackPanel>
-                    </WrapPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source=" Images/Station.png" Height="40" Width="40"/>
+                        <WrapPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="  Id: " FontSize="16" />
+                                <TextBlock Text="{Binding Id}" FontSize="16" />
+                                <TextBlock Text=" " FontSize="16" />
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="  Available slots: " Foreground="Gray"/>
+                                <TextBlock Text="{Binding AvailableChargingSlots}" />
+                                <TextBlock Text="  Occupied slots: " Foreground="Gray"/>
+                                <TextBlock Text="{Binding OccupiedChargingSlots}" />
+                            </StackPanel>
+                        </WrapPanel>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
