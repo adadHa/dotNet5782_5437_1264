@@ -29,10 +29,6 @@ namespace PL
             CustomersListView.DataContext = BLObject.GetCustomers();
         }
 
-        private void titleTextBlock_MouseMove(object sender, MouseEventArgs e)
-        {
-            titleTextBlock.Foreground = Brushes.White;
-        }
         private void AddCustomerButton_Click(object sender, RoutedEventArgs e)
         {
             CustomerWindow customerWindow = new CustomerWindow();
