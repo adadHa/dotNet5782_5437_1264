@@ -24,25 +24,25 @@
         <ListView x:Name="ParcelsListView" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding }" MouseDoubleClick="ParcelsListView_MouseDoubleClick" >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Text="Id: " />
-                        <TextBlock Text="{Binding Id}" FontWeight="Bold" />
-                        <TextBlock Text=", " />
-                        <TextBlock Text="Sender Name: " />
-                        <TextBlock Text="{Binding SenderName}" FontWeight="Bold" />
-                        <TextBlock Text=", " />
-                        <TextBlock Text="Receiver Name: " />
-                        <TextBlock Text="{Binding ReceiverName}" FontWeight="Bold" />
-                        <TextBlock Text=", " />
-                        <TextBlock Text="Max Weight: " />
-                        <TextBlock Text="{Binding MaxWeight}" FontWeight="Bold" />
-                        <TextBlock Text=", " />
-                        <TextBlock Text="Priority: " />
-                        <TextBlock Text="{Binding Priority}" FontWeight="Bold" />
-                        <TextBlock Text=", " />
-                        <TextBlock Text="Parcel Status: " />
-                        <TextBlock Text="{Binding ParcelStatus}" FontWeight="Bold" />
-                        <TextBlock Text=", " />
+                    <WrapPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Id: " FontSize="18"/>
+                            <TextBlock Text="{Binding Id}" FontWeight="Bold" FontSize="18"/>
+                            <TextBlock Text="  " FontSize="18"/>
+                            <TextBlock Text="{Binding SenderName}" FontWeight="Bold" FontSize="18"/>
+                            <TextBlock Text="  " FontSize="18"/>
+                            <Image Source=" Images/ArrowIcon.png" Height="30" Width="30"/>
+                            <TextBlock Text="  " FontSize="18"/>
+                            <TextBlock Text="{Binding ReceiverName}" FontWeight="Bold" FontSize="18"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Max Weight: " Foreground="Gray"/>
+                            <TextBlock Text="{Binding MaxWeight}"/>
+                            <TextBlock Text="Priority: " Foreground="Gray"/>
+                            <TextBlock Text="{Binding Priority}"/>
+                            <TextBlock Text="Parcel Status: " Foreground="Gray"/>
+                            <TextBlock Text="{Binding ParcelStatus}"/>
+                        </StackPanel>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

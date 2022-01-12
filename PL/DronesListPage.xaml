@@ -30,19 +30,23 @@
         <ListView x:Name="DronesListView" ItemsSource="{Binding }" Grid.Row="1" MouseDoubleClick="DronesListView_MouseDoubleClick" SelectionMode="Extended">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Text="Id: " />
-                        <TextBlock Text="{Binding Id}" FontWeight="Bold" />
-                        <TextBlock Text="  Model: " />
-                        <TextBlock Text="{Binding Model}" FontWeight="Bold" />
-                        <TextBlock Text="  Location: " />
-                        <TextBlock Text="{Binding Location}" FontWeight="Bold" />
-                        <TextBlock Text="  Weight: " />
-                        <TextBlock Text="{Binding MaxWeight}" FontWeight="Bold" />
-                        <TextBlock Text="  Status: " />
-                        <TextBlock Text="{Binding Status}" FontWeight="Bold" />
-                        <TextBlock Text="  Battery: " />
-                        <TextBlock Text="{Binding Battery}" FontWeight="Bold" />
+                    <WrapPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Id: " FontSize="16"/>
+                            <TextBlock Text="{Binding Id}" FontWeight="Bold" FontSize="16"/>
+                            <TextBlock Text="  Model: " FontSize="16"/>
+                            <TextBlock Text="{Binding Model}" FontWeight="Bold" FontSize="16"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="  Location: " Foreground="Gray"/>
+                            <TextBlock Text="{Binding Location}"/>
+                            <TextBlock Text="  Weight: " Foreground="Gray"/>
+                            <TextBlock Text="{Binding MaxWeight}"/>
+                            <TextBlock Text="  Status: " Foreground="Gray"/>
+                            <TextBlock Text="{Binding Status}"/>
+                            <TextBlock Text="  Battery: " Foreground="Gray"/>
+                            <TextBlock Text="{Binding Battery}"/>
+                        </StackPanel>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
