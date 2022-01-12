@@ -35,12 +35,66 @@ namespace DalXml
         }
         void IDal.UpdateCustomerName(int id, string newName)
         {
-            throw new NotImplementedException();
+            XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(CustomersPath);
+            XElement customer = (from c in cutomersRootElement.Elements()
+                                 where (int.Parse(c.Element("id").Value) == id)
+                                 select c).FirstOrDefault();
+
+            if (customer == null)
+                throw new IdIsNotExistException(id, "Customer");
+
+            customer.Element("Name").Value = newName;
+            XMLTools.SaveListToXMLElement(cutomersRootElement, CustomersPath);
         }
 
         void IDal.UpdateCustomrePhoneNumber(int id, string newPhoneNumber)
         {
-            throw new NotImplementedException();
+            XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(CustomersPath);
+            XElement customer = (from c in cutomersRootElement.Elements()
+                                 where (int.Parse(c.Element("id").Value) == id)
+                                 select c).FirstOrDefault();
+
+            if (customer == null)
+                throw new IdIsNotExistException(id, "Customer");
+
+            customer.Element("PhoneNumber").Value = newPhoneNumber;
+            XMLTools.SaveListToXMLElement(cutomersRootElement, CustomersPath);
+        }
+
+        Customer IDal.GetCustomer(int id)
+        {
+            XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(CustomersPath);
+            XElement customer = (from c in cutomersRootElement.Elements()
+                                 where (int.Parse(c.Element("id").Value) == id)
+                                 select c).FirstOrDefault();
+
+            if (customer == null)
+                throw new IdIsNotExistException(id, "Customer");
+
+            return new Customer
+            {
+                Id = int.Parse(customer.Element("Id").Value),
+                Name = customer.Element("Name").Value,
+                Phone = customer.Element("PhoneNumber").Value,
+                Longitude = double.Parse(customer.Element("Longitude").Value),
+                Latitude = double.Parse(customer.Element("Latitude").Value),
+            };
+        }
+
+        IEnumerable<Customer> IDal.GetCustomers(Func<Customer, bool> filter)
+        {
+            XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(CustomersPath);
+            return from cElement in cutomersRootElement.Elements()
+                                         let customer = new Customer
+                                         {
+                                             Id = int.Parse(cElement.Element("Id").Value),
+                                             Name = cElement.Element("Name").Value,
+                                             Phone = cElement.Element("PhoneNumber").Value,
+                                             Longitude = double.Parse(cElement.Element("Longitude").Value),
+                                             Latitude = double.Parse(cElement.Element("Latitude").Value),
+                                         }
+                                         where filter(customer)
+                                         select customer;
         }
 
         IEnumerable<Customer> IDal.ViewCustomersList()
@@ -54,16 +108,6 @@ namespace DalXml
         }
 
         string IDal.ViewCustomer(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Customer IDal.GetCustomer(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<Customer> IDal.GetCustomers(Func<Customer, bool> filter)
         {
             throw new NotImplementedException();
         }

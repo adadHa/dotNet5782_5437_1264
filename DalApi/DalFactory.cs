@@ -16,20 +16,23 @@ namespace DalApi
             {
                 IDal dal = null;
                 Assembly testAss;
+                string path;
                 switch (dataFormat)
                 {
                     case "DalObject":
                         // get the DalObject path
-                        string path = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, 
+                        path = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, 
                             "..\\..\\..\\..\\DalObject\\bin\\Debug\\net5.0\\DalObject.dll"));
-                        testAss = Assembly.LoadFrom(path);
                         break;
                     case "DalXml":
-                        return null;//
+                        // get the DalXml path
+                        path = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,
+                            "..\\..\\..\\..\\DalXml\\bin\\Debug\\net5.0\\DalXml.dll"));
+                        break;
                     default:
                         return null;
                 }
-
+                testAss = Assembly.LoadFrom(path);
                 foreach (Type type in testAss.GetTypes())
                 {
                     if (type.IsClass == true)
@@ -40,7 +43,7 @@ namespace DalApi
                     //{
                     //    continue;
                     //}
-                    if (type.Name == "DalObject")
+                    if (type.Name == "DalObject"|| type.Name == "DalXml")
                     {
                         dal = (IDal)Activator.CreateInstance(type);
                         break;

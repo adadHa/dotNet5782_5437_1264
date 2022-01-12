@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DalApi;
 using DO;
-
+using System.Xml.Linq;
+using System.Xml.Serialization;
 namespace DalXml
 {
     public sealed partial class DalXml :IDal
@@ -38,6 +39,7 @@ namespace DalXml
         string StationsPath = @"Stations.xml";
         string ParcelsPath = @"Parcels.xml";
         string CustomersPath = @"Customers.xml";
+        string ConfigPath = @"ConfigPath.xml";
         #endregion
         
 
@@ -47,7 +49,10 @@ namespace DalXml
 
         double[] IDal.ViewElectConsumptionData()
         {
-            throw new NotImplementedException();
+            XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(ConfigPath);
+            var arr = from x in cutomersRootElement.Elements()
+                      let double x = 2
+
         }
 
         public string ViewParcel(int id)
