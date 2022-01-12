@@ -14,7 +14,7 @@
             <RowDefinition Height="400*"/>
         </Grid.RowDefinitions>
 
-        <WrapPanel Background="{StaticResource ToolBar}" Orientation="Horizontal" >
+        <WrapPanel Background="{StaticResource ToolBar}" Orientation="Vertical" >
             <Label Style="{StaticResource ToolBarLabel}" Content="   Group by stutus:" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
             <ToggleButton Name ="orderByFreeSlots" Style="{StaticResource AnimatedSwitch}" Width="29" Height="20" Checked="orderByFreeSlots_Checked"/>
             <Border Width="1" Height="41" Background="{StaticResource ToolBarButtons}" Margin="30,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
@@ -26,14 +26,18 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
-                        <TextBlock Text="Id: " FontWeight="Bold" />
-                        <TextBlock Text="{Binding Id}" />
-                        <TextBlock Text="  Name: " FontWeight="Bold" />
-                        <TextBlock Text="{Binding Name}" />
-                        <TextBlock Text="  Available slots: " Foreground="Gray"/>
-                        <TextBlock Text="{Binding AvailableChargingSlots}" FontWeight="Bold" />
-                        <TextBlock Text="  Occupied slots: " Foreground="Gray"/>
-                        <TextBlock Text="{Binding OccupiedChargingSlots}" FontWeight="Bold" />
+                        <StackPanel>
+                            <TextBlock Text="Id: " FontWeight="Bold" />
+                            <TextBlock Text="{Binding Id}" />
+                            <TextBlock Text="  Name: " FontWeight="Bold" />
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="  Available slots: " Foreground="Gray"/>
+                            <TextBlock Text="{Binding AvailableChargingSlots}" />
+                            <TextBlock Text="  Occupied slots: " Foreground="Gray"/>
+                            <TextBlock Text="{Binding OccupiedChargingSlots}" />
+                        </StackPanel>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
