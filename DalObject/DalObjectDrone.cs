@@ -6,12 +6,13 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using DalApi;
-
+using System.Runtime.CompilerServices;
 namespace Dal
 {
     public partial class DalObject : DalApi.IDal
     {
         // This function add a drone to the drones data base.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(int id, string model, string weight)
         {
             try
@@ -34,6 +35,7 @@ namespace Dal
         }
 
         //This function charges a drone.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ChargeDrone(int droneId, int stationId)
         {
             try
@@ -65,6 +67,7 @@ namespace Dal
         }
 
         //This function stops the charge of the drone.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void StopCharging(int droneId)
         {
             int droneIndex = DataSource.Drones.FindIndex(x => x.Id == droneId);
@@ -83,6 +86,7 @@ namespace Dal
         }
 
         // This function updates a drone with an new model.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateDrone(int droneId, string newModel)
         {
             try
@@ -103,12 +107,14 @@ namespace Dal
         }
 
         //This function returns the string of the drone with the required Id.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public string ViewDrone(int id)
         {
             return GetDrone(id).ToString();
         }
 
         //This function returns the drone with the required Id.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Drone GetDrone(int id)
         {
             int index = DataSource.Drones.FindIndex(x => x.Id == id);
@@ -118,8 +124,9 @@ namespace Dal
             }
             return DataSource.Drones[index];
         }
-        
+
         //This function returns a copy of the drones list.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Drone> ViewDronesList()
         {
             List<DO.Drone> resultList = new List<DO.Drone>();
@@ -133,6 +140,7 @@ namespace Dal
         }
 
         //This function returns a filtered copy of the drones list (according to given predicate)
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Drone> GetDrones(Func<DO.Drone, bool> filter = null)
         {
             if (filter == null)
@@ -142,6 +150,7 @@ namespace Dal
             return DataSource.Drones.Where(filter); 
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public double[] ViewElectConsumptionData()
         {
             double[] arr = {DataSource.Config.availableDrElectConsumption,

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using DalApi;
-
+using System.Runtime.CompilerServices;
 namespace Dal
 {
     public sealed partial class DalObject : DalApi.IDal
@@ -14,12 +14,15 @@ namespace Dal
         // Lazy - create the BL entity only when called
         // thread safe - the Nested class loader will do all static initialization before
         //               it will enable other threads accessing the class
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DalObject()
         {
             DataSource.Initialize();
         }
 
         public static DalObject Instance { get { return Nested.Instance; } }
+
+
         private class Nested
         {
             // Explicit static constructor to tell C# compiler

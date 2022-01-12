@@ -7,10 +7,13 @@ using DalApi;
 using DO;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using System.Runtime.CompilerServices;
+
 namespace DalXml
 {
     public sealed partial class DalXml : IDal
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void IDal.AddCustomer(int id, string name, string phoneNumber, double longitude, double latitude)
         {
             XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(CustomersPath);
@@ -33,6 +36,8 @@ namespace DalXml
                 XMLTools.SaveListToXMLElement(cutomersRootElement, CustomersPath);
             }   
         }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void IDal.UpdateCustomerName(int id, string newName)
         {
             XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(CustomersPath);
@@ -47,6 +52,7 @@ namespace DalXml
             XMLTools.SaveListToXMLElement(cutomersRootElement, CustomersPath);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void IDal.UpdateCustomrePhoneNumber(int id, string newPhoneNumber)
         {
             XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(CustomersPath);
@@ -61,6 +67,7 @@ namespace DalXml
             XMLTools.SaveListToXMLElement(cutomersRootElement, CustomersPath);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         Customer IDal.GetCustomer(int id)
         {
             XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(CustomersPath);
@@ -81,6 +88,7 @@ namespace DalXml
             };
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         IEnumerable<Customer> IDal.GetCustomers(Func<Customer, bool> filter)
         {
             XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(CustomersPath);
@@ -96,7 +104,7 @@ namespace DalXml
                                          where filter(customer)
                                          select customer;
         }
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         IEnumerable<Customer> IDal.ViewCustomersList()
         {
             throw new NotImplementedException();

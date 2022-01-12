@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DalApi;
-
+using System.Runtime.CompilerServices;
 namespace Dal
 {
     public partial class DalObject : DalApi.IDal
     {
         // This function add a parcel to the parcels data base.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone)
         {
             try
@@ -47,6 +48,7 @@ namespace Dal
         }
 
         //This function binds a parcel to a drone.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void BindParcel(int parcelId, int droneId)
         {
             try
@@ -75,6 +77,7 @@ namespace Dal
         }
 
         //This function collects a parcel by a drone (Its status was already changed to "shipping" on the bind function).
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void CollectParcelByDrone(int droneId, int parcelId)
         {
             try
@@ -95,6 +98,7 @@ namespace Dal
         }
 
         //This funtion supplies a parcel to the customer.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void SupplyParcelToCustomer(int parcelId)
         {
             try
@@ -115,6 +119,7 @@ namespace Dal
         }
 
         //This function returns a copy of the parcels list.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Parcel> ViewParcelsList()
         {
             List<DO.Parcel> resultList = new List<DO.Parcel>();
@@ -127,6 +132,7 @@ namespace Dal
             return resultList;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Parcel> ViewUnbindParcels()
         {
             // create the result list
@@ -144,12 +150,14 @@ namespace Dal
         }
 
         //This function returns the string of the parcel with the required Id.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public string ViewParcel(int id)
         {
             return GetParcel(id).ToString();
         }
 
         //This function returns the parcel with the required Id.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Parcel GetParcel(int id)
         {
             if (DataSource.Parcels.FindIndex(x => x.Id == id) == -1)
@@ -161,6 +169,7 @@ namespace Dal
         }
 
         //This function returns a filtered copy of the Parcels list (according to a given predicate)
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Parcel> GetParcels(Func<DO.Parcel, bool> filter = null)
         {
             if (filter == null)

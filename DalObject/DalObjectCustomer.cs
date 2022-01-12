@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Runtime.CompilerServices;
 using DalApi;
 
 namespace Dal
 {
     public partial class DalObject : DalApi.IDal
     {
-        
+
 
         // This function add a customer to the customers data base.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(int id, string name, string phoneNumber, double longitude, double latitude)
         {
             try
@@ -37,6 +38,7 @@ namespace Dal
         }
 
         //This function updates a customer with a new name.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCustomerName(int id, string newName)
         {
             try
@@ -57,6 +59,7 @@ namespace Dal
         }
 
         //This function updates a customer with a new name.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCustomrePhoneNumber(int id, string newPhoneNumber)
         {
             try
@@ -78,6 +81,7 @@ namespace Dal
 
 
         //This function returns a copy of the customers list.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Customer> ViewCustomersList()
         {
             List<DO.Customer> resultList = new List<DO.Customer>();
@@ -91,10 +95,13 @@ namespace Dal
         }
 
         //This function returns the customer with the required Id.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public string ViewCustomer(int id)
         {
             return ViewCustomer(id).ToString();
         }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Customer GetCustomer(int id)
         {
             int index = DataSource.Customers.FindIndex(x => x.Id == id);
@@ -106,6 +113,7 @@ namespace Dal
         }
 
         //This function returns a filtered copy of the Customers list (according to a given predicate)
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Customer> GetCustomers(Func<DO.Customer, bool> filter = null)
         {
             if (filter == null)

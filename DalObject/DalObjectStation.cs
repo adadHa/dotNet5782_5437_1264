@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DalApi;
+using System.Runtime.CompilerServices;
 namespace Dal
 {
     public partial class DalObject : DalApi.IDal
     {
         // This function add a station to the stations data base.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(int id, string name, int num, double longitude, double latitude)
         {
             try
@@ -34,6 +36,7 @@ namespace Dal
         }
 
         //This function updates a station with a new name.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateStationName(int id, string newName)
         {
             try
@@ -54,6 +57,7 @@ namespace Dal
         }
 
         //This function updates a station with a new charging slots capacity.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateStationChargeSlotsCap(int id, int newNum)
         {
             try
@@ -74,6 +78,7 @@ namespace Dal
         }
 
         //This function returns a copy of the stations list.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Station> ViewStationsList()
         {
             List<DO.Station> resultList = new List<DO.Station>();
@@ -87,12 +92,14 @@ namespace Dal
         }
 
         //This function returns the string of the station with the required Id.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public string ViewStation(int id)
         {
             return GetStation(id).ToString();
         }
 
         //This function returns the station with the required Id.
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Station GetStation(int id)
         {
             int index = DataSource.Stations.FindIndex(x => x.Id == id);
@@ -104,6 +111,7 @@ namespace Dal
         }
 
         //This function returns a filtered copy of the Stations list (according to a given predicate)
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Station> GetStations(Func<DO.Station, bool> filter = null)
         {
             if (filter == null)
@@ -114,6 +122,7 @@ namespace Dal
         }
 
         //This function returns a filtered copy of the Drone Charges list (according to a given predicate)
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.DroneCharge> GetDroneCharges(Func<DO.DroneCharge, bool> filter = null)
         {
             if (filter == null)
@@ -123,6 +132,7 @@ namespace Dal
             return DataSource.DroneCharges.Where(filter);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Station> ViewStationsWithFreeChargeSlots()
         {
             // create the result list
