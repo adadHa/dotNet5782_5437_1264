@@ -49,9 +49,10 @@ namespace DalXml
 
         double[] IDal.ViewElectConsumptionData()
         {
-            XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(ConfigPath);
-            var arr = from x in cutomersRootElement.Elements()
-                      let double x = 2
+            //XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(ConfigPath);
+            //var arr = from x in cutomersRootElement.Elements()
+            //          let double x = 2
+            throw new NotImplementedException();
 
         }
 

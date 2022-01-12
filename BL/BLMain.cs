@@ -16,7 +16,7 @@ namespace BL
         //               it will enable other threads accessing the class
         private BL()
         {
-            dalObject = DalApi.DalFactory.GetDal("DalXml");
+            dalObject = DalApi.DalFactory.GetDal("DalObject");
             double[] arr = dalObject.ViewElectConsumptionData();
             availableDrElectConsumption = arr[0];
             lightDrElectConsumption = arr[1];
