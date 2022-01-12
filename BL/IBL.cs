@@ -49,6 +49,7 @@ namespace BlApi
 
         // simulator:
         public void OperateSimulator(int droneNumber, Action updatePl, Func<bool> isStopped);
+        public bool IsAbleToDoDelivery(DroneForList drone, DO.Parcel p);
 
     }
 }

@@ -324,7 +324,7 @@ namespace BL
         // 2. and is able to drive the path:
         //   drone current location --> sender location --> target location --> most close station (to the target)
         [MethodImpl(MethodImplOptions.Synchronized)]
-        private bool IsAbleToDoDelivery(DroneForList drone, DO.Parcel p)
+        public bool IsAbleToDoDelivery(DroneForList drone, DO.Parcel p)
         {
             lock (dalObject)
             {
