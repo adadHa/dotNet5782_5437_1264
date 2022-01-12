@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
+
 namespace DalXml
 {
     public sealed partial class DalXml : IDal
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddParcel(int customerSenderId, int customerReceiverId, string weight, string priority, int responsibleDrone)
         {
             List<Parcel> list = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
@@ -26,6 +29,7 @@ namespace DalXml
         }
 
         #region getters
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Parcel GetParcel(int id)
         {
             List<Parcel> list = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
@@ -36,12 +40,14 @@ namespace DalXml
                 throw new IdIsNotExistException(id, "Parcel");
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Parcel> GetParcels(Func<Parcel, bool> filter = null)
         {
             List<Parcel> list = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
             return list.Where(filter);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         IEnumerable<Parcel> IDal.ViewUnbindParcels()
         {
             throw new NotImplementedException();
@@ -49,6 +55,7 @@ namespace DalXml
         #endregion
 
         #region functions: operations oon parcels
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void IDal.BindParcel(int parcelId, int droneId)
         {
             List<Parcel> parcelsList = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
@@ -69,6 +76,7 @@ namespace DalXml
             XMLTools.SaveListToXMLSerializer<Parcel>(parcelsList, ParcelsPath);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void IDal.CollectParcelByDrone(int droneId, int parcelId)
         {
             List<Parcel> parcelsList = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
@@ -84,6 +92,7 @@ namespace DalXml
             XMLTools.SaveListToXMLSerializer<Parcel>(parcelsList, ParcelsPath);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void IDal.SupplyParcelToCustomer(int parcelId)
         {
             List<Parcel> parcelsList = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);

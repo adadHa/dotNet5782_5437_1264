@@ -79,7 +79,6 @@ namespace Dal
             }
         }
 
-
         //This function returns a copy of the customers list.
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Customer> ViewCustomersList()

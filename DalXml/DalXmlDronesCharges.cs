@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
+
 namespace DalXml
 {
     public sealed partial class DalXml : IDal
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         IEnumerable<DroneCharge> IDal.GetDroneCharges(Func<DroneCharge, bool> filter)
         {
             List<DroneCharge> list = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DronesChargesPath);

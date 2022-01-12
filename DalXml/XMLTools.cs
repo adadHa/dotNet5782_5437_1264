@@ -7,12 +7,15 @@ using System.IO;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using DalApi;
+using System.Runtime.CompilerServices;
+
 namespace DalXml
 {
     public static class XMLTools
     {
         static string pathToDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,
                             "..\\..\\..\\..\\Data\\"));
+        [MethodImpl(MethodImplOptions.Synchronized)]
         static XMLTools()
         {
             if (!Directory.Exists(pathToDir))
@@ -21,7 +24,8 @@ namespace DalXml
             }
         }
 
-        #region Tolls for xml element
+        #region Toolls for xml element
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static void SaveListToXMLElement(XElement xElement, string path)
         {
             try
@@ -33,6 +37,8 @@ namespace DalXml
                 throw new XMLFileLoadCreateException(path, $"fail to create xml file: {path}", ex);
             }
         }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static XElement LoadListFromXMLElement(string path)
         {
             try
@@ -56,6 +62,7 @@ namespace DalXml
         #endregion
 
         #region Tools for xml serilaizer
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static void SaveListToXMLSerializer<T>(List<T> listToSave, string pathToSave)
         {
             try
@@ -71,6 +78,7 @@ namespace DalXml
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static List<T> LoadListFromXMLSerializer<T>(string fileToLoad)
         {
             try

@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using BO;
-
+using System.Runtime.CompilerServices;
 namespace BL
 {
     internal sealed partial class BL : BlApi.IBL
@@ -14,17 +14,22 @@ namespace BL
         // Lazy - create the BL entity only when called
         // thread safe - the Nested class loader will do all static initialization before
         //               it will enable other threads accessing the class
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private BL()
         {
-            dalObject = DalApi.DalFactory.GetDal("DalObject");
-            double[] arr = dalObject.ViewElectConsumptionData();
-            availableDrElectConsumption = arr[0];
-            lightDrElectConsumption = arr[1];
-            mediumDrElectConsumption = arr[2];
-            heavyDrElectConsumption = arr[3]; 
-            chargingRate = arr[4];
+            lock (dalObject)
+            {
+                dalObject = DalApi.DalFactory.GetDal("DalObject");
+                double[] arr = dalObject.ViewElectConsumptionData();
+                availableDrElectConsumption = arr[0];
+                lightDrElectConsumption = arr[1];
+                mediumDrElectConsumption = arr[2];
+                heavyDrElectConsumption = arr[3];
+                chargingRate = arr[4];
+            }
             InitializeDrones();
         }
+
         public static BL Instance { get { return Nested.Instance; } }
         private class Nested
         {
@@ -33,7 +38,6 @@ namespace BL
             static Nested()
             {
             }
-
             internal static readonly BL Instance = new BL();
         }
         private DalApi.IDal dalObject;

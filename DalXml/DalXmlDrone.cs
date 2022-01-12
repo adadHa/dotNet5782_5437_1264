@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
+
 namespace DalXml
 {
     public sealed partial class DalXml : IDal
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void IDal.AddDrone(int id, string model, string weight)
         {
             List<Drone> list = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
@@ -25,6 +28,7 @@ namespace DalXml
         }
 
         #region Charge and update functions
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void IDal.ChargeDrone(int droneId, int stationId)
         {
             List<Drone> dronesList = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
@@ -48,6 +52,7 @@ namespace DalXml
             XMLTools.SaveListToXMLSerializer<Station>(stationsList, StationsPath);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void IDal.StopCharging(int droneId)
         {
             List<Drone> dronesList = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
@@ -69,6 +74,7 @@ namespace DalXml
             XMLTools.SaveListToXMLSerializer<Station>(stationsList, StationsPath);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void IDal.UpdateDrone(int droneId, string newModel)
         {
             List<Drone> dronesList = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
@@ -83,6 +89,7 @@ namespace DalXml
         }
         #endregion
         #region get functions
+        [MethodImpl(MethodImplOptions.Synchronized)]
         Drone IDal.GetDrone(int id)
         {
             List<Drone> list = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
@@ -92,6 +99,7 @@ namespace DalXml
             else
                 throw new IdIsNotExistException(id, "Drone");
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         IEnumerable<Drone> IDal.GetDrones(Func<Drone, bool> filter)
         {
             List<Drone> list = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
@@ -99,11 +107,13 @@ namespace DalXml
         }
 
         #endregion
+        [MethodImpl(MethodImplOptions.Synchronized)]
         IEnumerable<Drone> IDal.ViewDronesList()
         {
             throw new NotImplementedException();
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         string IDal.ViewDrone(int id)
         {
             throw new NotImplementedException();

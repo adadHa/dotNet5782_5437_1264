@@ -7,6 +7,8 @@ using DalApi;
 using DO;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using System.Runtime.CompilerServices;
+
 namespace DalXml
 {
     public sealed partial class DalXml :IDal
@@ -41,7 +43,8 @@ namespace DalXml
         string CustomersPath = @"Customers.xml";
         string ConfigPath = @"Config.xml";
         #endregion
-        
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         double[] IDal.ViewElectConsumptionData()
         {
             

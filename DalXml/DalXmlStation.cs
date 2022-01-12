@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
+
 namespace DalXml
 {
     public sealed partial class DalXml : IDal
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void IDal.AddStation(int id, string name, int num, double longitude, double latitude)
         {
             List<Station> list = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
@@ -25,6 +28,7 @@ namespace DalXml
                 });
             XMLTools.SaveListToXMLSerializer<Station>(list, StationsPath);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void IDal.UpdateStationName(int id, string newName)
         {
             List<Station> list = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
@@ -38,6 +42,7 @@ namespace DalXml
             XMLTools.SaveListToXMLSerializer<Station>(list, StationsPath);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         void IDal.UpdateStationChargeSlotsCap(int id, int newNum)
         {
             List<Station> list = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
@@ -52,6 +57,7 @@ namespace DalXml
         }
 
         #region get functions
+        [MethodImpl(MethodImplOptions.Synchronized)]
         Station IDal.GetStation(int id)
         {
             List<Station> list = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
@@ -62,6 +68,7 @@ namespace DalXml
                 throw new IdIsNotExistException(id, "Station");
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         IEnumerable<Station> IDal.GetStations(Func<Station, bool> filter)
         {
             List<Station> list = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
@@ -69,16 +76,19 @@ namespace DalXml
         }
         #endregion
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         IEnumerable<Station> IDal.ViewStationsList()
         {
             throw new NotImplementedException();
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         IEnumerable<Station> IDal.ViewStationsWithFreeChargeSlots()
         {
             throw new NotImplementedException();
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         string IDal.ViewStation(int id)
         {
             throw new NotImplementedException();
