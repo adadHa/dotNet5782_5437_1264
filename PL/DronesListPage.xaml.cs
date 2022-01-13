@@ -86,8 +86,13 @@ namespace PL
             DroneForList drone = (DroneForList)((ListView)sender).SelectedItem;
             if (drone != null)
             {
-                new DroneWindow(drone.Id).Show();
+                new DroneWindow(drone.Id, ResetDronesList).Show();
             }
+        }
+
+        private void ResetDronesList()
+        {
+            DronesListView.DataContext = BLObject.GetDrones();
         }
 
         private void GroupByWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)

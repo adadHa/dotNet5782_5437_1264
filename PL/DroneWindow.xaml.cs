@@ -25,18 +25,24 @@ namespace PL
         public Drone Drone { get; set; }
 
         BackgroundWorker worker = new BackgroundWorker();
-        
+        Action? ResetDronesList = null;
         //for adding a drone:
         private int Id;
         private string Model;
         private string Weight;
         private int InitialStation;
 
-        public DroneWindow(int? droneId = null)
+        public DroneWindow(int? droneId = null, Action? resetDronesList = null)
         {
             InitializeComponent();
             BLObject = BlFactory.GetBl();
-            if(droneId == null) //add mode
+            ResetDronesList = resetDronesList;
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgresChanged;
+            worker.RunWorkerCompleted += Worker_RunCompleted;
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
+            if (droneId == null) //add mode
             {
                 ComboBoxInsertWeight.ItemsSource = Enum.GetNames(typeof(WheightCategories));
                 //make the add drone window visible
@@ -75,7 +81,7 @@ namespace PL
                     SupplyParcelDroneButton.Visibility = Visibility.Visible;
                 }
                 TitleTextBox.Text = $"Drone {Drone.Id}";
-                worker.DoWork += StartSimulator;
+                
             }
 
         }
@@ -290,13 +296,31 @@ namespace PL
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             worker.RunWorkerAsync();
+            this.IsEnabled = false;
         }
 
-        private void StartSimulator(object sender, DoWorkEventArgs e)
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             BLObject.OperateSimulator(Drone.Id,
                 ()=>worker.ReportProgress(1),
                 ()=>worker.CancellationPending);
+        }
+
+        private void Worker_ProgresChanged(object sender, ProgressChangedEventArgs e)
+        {
+            ResetDrone();
+            ResetDronesList();
+        }
+
+        private void Worker_RunCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            
+        }
+
+        private void ResetDrone()
+        {
+            Drone = BLObject.GetDrone(Drone.Id);
+            OptionsDroneWindow.DataContext = Drone;
         }
     }
 }

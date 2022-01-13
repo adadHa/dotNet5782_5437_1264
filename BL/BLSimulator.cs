@@ -10,7 +10,7 @@ namespace BL
     {
         public void OperateSimulator(int droneNumber, Action updatePl, Func<bool> isStopped)
         {
-           // new Simulator(blObject, )
+            Simulator simulator = new Simulator(this, droneNumber, updatePl, isStopped);
         }
     }
 }

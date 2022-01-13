@@ -65,9 +65,9 @@ namespace DalXml
             Drone drone = dronesList.Find(x => x.Id == droneId);
             Parcel parcel = parcelsList.Find(x => x.Id == parcelId);
 
-            if (dronesList.FindIndex(x => x.Id == droneId) != -1)
+            if (dronesList.FindIndex(x => x.Id == droneId) == -1)
                 throw new IdIsNotExistException(droneId, "Drone");
-            if (parcelsList.FindIndex(x => x.Id == parcelId) != -1)
+            if (parcelsList.FindIndex(x => x.Id == parcelId) == -1)
                 throw new IdIsNotExistException(parcelId, "Parcel");
 
             parcelsList.Remove(parcel);

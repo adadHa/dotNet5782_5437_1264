@@ -14,15 +14,21 @@ namespace BL
         {
             DateTime? currentTime = DateTime.Now;
             DateTime? chargeTime = null;
-            while (isStopped())
+            
+            while (!isStopped())
             {
                 lock (blObject)
                 {
                     try
                     {
-                        blObject.BindDrone(droneId);
+                        if(blObject.GetDrone(droneId).Status == DroneStatuses.Available)
+                        {
+                            blObject.BindDrone(droneId);
+                            updatePl();
+                            Thread.Sleep(DELAY);
+                        }
                     }
-                    catch (NoParcelsToBindException ex)
+                    catch (NoParcelsToBindException)
                     {
                         while (blObject.GetDrone(droneId).Battery != 100)
                         {
@@ -34,10 +40,10 @@ namespace BL
                             Thread.Sleep(DELAY);
                         }
                     }
+                    
                 }
                 if (chargeTime != null)
-                {
-                    Thread.Sleep(DELAY);
+                {                    
                     lock (blObject)
                     {
                         blObject.CollectParcelByDrone(droneId);
@@ -48,7 +54,8 @@ namespace BL
                     {
                         blObject.SupplyParcel(droneId);
                         updatePl();
-                    } 
+                    }
+                    Thread.Sleep(DELAY);
                 }
             }
         }
