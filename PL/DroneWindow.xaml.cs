@@ -24,14 +24,14 @@ namespace PL
         private BlApi.IBL BLObject { get; set; }
         public Drone Drone { get; set; }
 
+        BackgroundWorker worker = new BackgroundWorker();
+        
         //for adding a drone:
         private int Id;
         private string Model;
         private string Weight;
         private int InitialStation;
 
-        //
-        
         public DroneWindow(int? droneId = null)
         {
             InitializeComponent();
@@ -55,6 +55,7 @@ namespace PL
                 LinkDroneButton.Visibility = Visibility.Collapsed;
                 PickUpDroneButton.Visibility = Visibility.Collapsed;
                 SupplyParcelDroneButton.Visibility = Visibility.Collapsed;
+
                 //show only desired buttons
                 if (Drone.Status == DroneStatuses.Available)
                 {
@@ -74,6 +75,7 @@ namespace PL
                     SupplyParcelDroneButton.Visibility = Visibility.Visible;
                 }
                 TitleTextBox.Text = $"Drone {Drone.Id}";
+                worker.DoWork += StartSimulator;
             }
 
         }
@@ -287,8 +289,7 @@ namespace PL
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            BackgroundWorker worker = new BackgroundWorker();
-            worker.DoWork += StartSimulator;
+            worker.RunWorkerAsync();
         }
 
         private void StartSimulator(object sender, DoWorkEventArgs e)
