@@ -294,7 +294,9 @@ namespace PL
 
         private void StartSimulator(object sender, DoWorkEventArgs e)
         {
-            //BLObject.OperateSimulator(Drone.Id, );
+            BLObject.OperateSimulator(Drone.Id,
+                ()=>worker.ReportProgress(1),
+                ()=>worker.CancellationPending);
         }
     }
 }
