@@ -54,7 +54,7 @@ namespace BL
 
 
 
-//save data example into xml
+//save data example into xml 
 //DalXml.XMLTools.SaveListToXMLSerializer<DO.Customer>(dalObject.GetCustomers().ToList(),"Customers.xml");
 //DalXml.XMLTools.SaveListToXMLSerializer<DO.Drone>(dalObject.GetDrones().ToList(), "Drones.xml");
 //DalXml.XMLTools.SaveListToXMLSerializer<DO.Parcel>(dalObject.GetParcels().ToList(), "Parcels.xml");
