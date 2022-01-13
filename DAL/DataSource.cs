@@ -29,25 +29,25 @@ namespace DalApi
         static public void Initialize()
         {
             // initialize customers
+            int numberOfCustomers = 30;
             string[] names = { "Yosi","Dani","Avi", "Rafi", "Yoel"
                         , "David", "Israel", "Levi", "Ben", "Moti"};
-            string[] phoneNumbers = { "05467651241", "0524931828", "0526067135",
-                    "0527839442", "0524711136", "0588824245", "0586934625",
-                    "0542444196", "0549035643", "0542463885" };
-            int[] ids = new int[10];
-            for (int i = 0; i < 10; i++)
+            string[] secondName = { "Levi","Cohen","Haim", "Wolfes", "Shushan"
+                        , "Biton", "Ben-Haim", "Ben Shalom", "Ben-David", "Shtain"};
+            int[] ids = new int[numberOfCustomers];
+            for (int i = 0; i < numberOfCustomers; i++)
                 ids[i] = rand.Next(10000000, 99999999);
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < numberOfCustomers; i++)
             {
                 Customers.Add(new IDAL.DO.Customer()
                 {
                     Id = ids[i],
-                    Name = names[i],
-                    Phone = phoneNumbers[i],
-                    Longitude = rand.NextDouble() * 180,
-                    Latitude = rand.NextDouble() * 180
+                    Name = names[rand.Next(0,10)] + secondName[rand.Next(0, 10)],
+                    Phone = "05" + rand.Next(10000000, 99999999).ToString(),
+                    Longitude = rand.NextDouble() + 31.23,
+                    Latitude = rand.NextDouble() + 35.13
                 });
-            }
+            } 
 
             // generate general random values that will guide the initialization.
             int shippedParcels = rand.Next(0, 5);  // 0-5 shipped parcels

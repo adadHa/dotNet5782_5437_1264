@@ -36,7 +36,7 @@ namespace DalXml
         }
         #endregion
         #region datasource xml file's pathes
-        string DronesPath = @"DronesXML.xml";
+        string DronesPath = @"Drones.xml";
         string DronesChargesPath = @"DronesCharges.xml";
         string StationsPath = @"Stations.xml";
         string ParcelsPath = @"Parcels.xml";

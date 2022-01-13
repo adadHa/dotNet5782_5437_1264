@@ -35,9 +35,9 @@ namespace DalXml
             List<Station> stationsList = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
             List<DroneCharge> dronesChargesList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DronesChargesPath);
 
-            if (dronesList.FindIndex(x => x.Id == droneId) != -1)
+            if (dronesList.FindIndex(x => x.Id == droneId) == -1)
                 throw new IdIsNotExistException(droneId, "Drone");
-            if (stationsList.FindIndex(x => x.Id == stationId) != -1)
+            if (stationsList.FindIndex(x => x.Id == stationId) == -1)
                 throw new IdIsNotExistException(stationId, "Station");
 
             Station station = stationsList.Find(x => x.Id == stationId);
@@ -94,16 +94,18 @@ namespace DalXml
         {
             List<Drone> list = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
             Drone? drone = list.Find(x => x.Id == id);
-            if (drone == null)
+            if (drone != null)
                 return (Drone)drone;
             else
                 throw new IdIsNotExistException(id, "Drone");
         }
         [MethodImpl(MethodImplOptions.Synchronized)]
-        IEnumerable<Drone> IDal.GetDrones(Func<Drone, bool> filter)
+        IEnumerable<Drone> IDal.GetDrones(Func<Drone, bool> filter = null)
         {
             List<Drone> list = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
-            return list.Where(filter);
+            if (filter == null) return list;
+            List<Drone> result = (List <Drone>)list.Where(filter);
+            return result;
         }
 
         #endregion

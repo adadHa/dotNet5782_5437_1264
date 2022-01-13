@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 using BO;
 using BlApi;
 namespace PL
@@ -29,6 +30,8 @@ namespace PL
         private string Weight;
         private int InitialStation;
 
+        //
+        
         public DroneWindow(int? droneId = null)
         {
             InitializeComponent();
@@ -280,6 +283,17 @@ namespace PL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new ParcelWindow(Drone.TransferedParcel.Id).Show();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += StartSimulator;
+        }
+
+        private void StartSimulator(object sender, DoWorkEventArgs e)
+        {
+            //BLObject.OperateSimulator(Drone.Id, );
         }
     }
 }

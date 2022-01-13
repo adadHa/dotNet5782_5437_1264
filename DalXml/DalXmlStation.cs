@@ -62,7 +62,7 @@ namespace DalXml
         {
             List<Station> list = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
             Station? station = list.Find(x => x.Id == id);
-            if (station == null)
+            if (station != null)
                 return (Station)station;
             else
                 throw new IdIsNotExistException(id, "Station");
@@ -72,6 +72,7 @@ namespace DalXml
         IEnumerable<Station> IDal.GetStations(Func<Station, bool> filter)
         {
             List<Station> list = XMLTools.LoadListFromXMLSerializer<Station>(StationsPath);
+            if (filter == null) return list;
             return list.Where(filter);
         }
         #endregion

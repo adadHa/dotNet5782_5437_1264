@@ -15,6 +15,7 @@ namespace DalXml
         IEnumerable<DroneCharge> IDal.GetDroneCharges(Func<DroneCharge, bool> filter)
         {
             List<DroneCharge> list = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DronesChargesPath);
+            if (filter == null) return list;
             return list.Where(filter);
         }
     }

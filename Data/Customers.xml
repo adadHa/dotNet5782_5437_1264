@@ -1,73 +1,213 @@
 <?xml version="1.0"?>
 <ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Customer>
-    <Id>63787883</Id>
-    <Name>Yosi</Name>
-    <Phone>05467651241</Phone>
-    <Longitude>96.33916032330093</Longitude>
-    <Latitude>176.54092795054473</Latitude>
+    <Id>82350002</Id>
+    <Name>Avi Ben Shalom</Name>
+    <Phone>0533955998</Phone>
+    <Longitude>31.416464969155594</Longitude>
+    <Latitude>36.06745037491315</Latitude>
   </Customer>
   <Customer>
-    <Id>77473936</Id>
-    <Name>Dani</Name>
-    <Phone>0524931828</Phone>
-    <Longitude>74.20672512343467</Longitude>
-    <Latitude>56.16697761051682</Latitude>
+    <Id>90019836</Id>
+    <Name>Dani Levi</Name>
+    <Phone>0515246793</Phone>
+    <Longitude>32.094262794081246</Longitude>
+    <Latitude>35.94629597899332</Latitude>
   </Customer>
   <Customer>
-    <Id>81544783</Id>
-    <Name>Avi</Name>
-    <Phone>0526067135</Phone>
-    <Longitude>74.36528416088096</Longitude>
-    <Latitude>31.391462968379006</Latitude>
+    <Id>23197796</Id>
+    <Name>Rafi Levi</Name>
+    <Phone>0517207363</Phone>
+    <Longitude>32.180150683964676</Longitude>
+    <Latitude>35.55872825564292</Latitude>
   </Customer>
   <Customer>
-    <Id>82457684</Id>
-    <Name>Rafi</Name>
-    <Phone>0527839442</Phone>
-    <Longitude>49.90418979427972</Longitude>
-    <Latitude>37.73553253046029</Latitude>
+    <Id>66134595</Id>
+    <Name>Israel Ben-Haim</Name>
+    <Phone>0599563345</Phone>
+    <Longitude>32.171577659426994</Longitude>
+    <Latitude>35.41329058470358</Latitude>
   </Customer>
   <Customer>
-    <Id>45052964</Id>
-    <Name>Yoel</Name>
-    <Phone>0524711136</Phone>
-    <Longitude>65.68914919425228</Longitude>
-    <Latitude>175.43762423816958</Latitude>
+    <Id>86199387</Id>
+    <Name>Yoel Levi</Name>
+    <Phone>0553354855</Phone>
+    <Longitude>31.73575519237004</Longitude>
+    <Latitude>35.70711996816896</Latitude>
   </Customer>
   <Customer>
-    <Id>57181961</Id>
-    <Name>David</Name>
-    <Phone>0588824245</Phone>
-    <Longitude>34.57997271538711</Longitude>
-    <Latitude>44.458850102712795</Latitude>
+    <Id>36706106</Id>
+    <Name>Yoel Haim</Name>
+    <Phone>0539007922</Phone>
+    <Longitude>31.80219101841198</Longitude>
+    <Latitude>35.90574585274595</Latitude>
   </Customer>
   <Customer>
-    <Id>72580948</Id>
-    <Name>Israel</Name>
-    <Phone>0586934625</Phone>
-    <Longitude>75.2321291878969</Longitude>
-    <Latitude>138.8404523948396</Latitude>
+    <Id>52146210</Id>
+    <Name>Israel Haim</Name>
+    <Phone>0562643942</Phone>
+    <Longitude>31.785870010310724</Longitude>
+    <Latitude>35.74567700170711</Latitude>
   </Customer>
   <Customer>
-    <Id>80755417</Id>
-    <Name>Levi</Name>
-    <Phone>0542444196</Phone>
-    <Longitude>138.7044498132097</Longitude>
-    <Latitude>118.36078299133143</Latitude>
+    <Id>44092408</Id>
+    <Name>Dani Shushan</Name>
+    <Phone>0515741993</Phone>
+    <Longitude>31.71047650627814</Longitude>
+    <Latitude>35.6493004363772</Latitude>
   </Customer>
   <Customer>
-    <Id>82170219</Id>
-    <Name>Ben</Name>
-    <Phone>0549035643</Phone>
-    <Longitude>10.629660128909006</Longitude>
-    <Latitude>102.81316656750307</Latitude>
+    <Id>82384583</Id>
+    <Name>David Levi</Name>
+    <Phone>0546570808</Phone>
+    <Longitude>31.32253679453048</Longitude>
+    <Latitude>35.941745498241744</Latitude>
   </Customer>
   <Customer>
-    <Id>46354286</Id>
-    <Name>Moti</Name>
-    <Phone>0542463885</Phone>
-    <Longitude>92.51223470667014</Longitude>
-    <Latitude>43.344909419931895</Latitude>
+    <Id>83828618</Id>
+    <Name>Israel Haim</Name>
+    <Phone>0572686050</Phone>
+    <Longitude>31.625603684892695</Longitude>
+    <Latitude>35.55154742377883</Latitude>
+  </Customer>
+  <Customer>
+    <Id>89820864</Id>
+    <Name>Rafi Ben-Haim</Name>
+    <Phone>0535628543</Phone>
+    <Longitude>31.74058125333422</Longitude>
+    <Latitude>35.93533941453572</Latitude>
+  </Customer>
+  <Customer>
+    <Id>71750196</Id>
+    <Name>Dani Haim</Name>
+    <Phone>0578438030</Phone>
+    <Longitude>31.839345000986636</Longitude>
+    <Latitude>35.611735341940886</Latitude>
+  </Customer>
+  <Customer>
+    <Id>32523840</Id>
+    <Name>Moti Ben Shalom</Name>
+    <Phone>0553749601</Phone>
+    <Longitude>31.318516941335293</Longitude>
+    <Latitude>35.325889757571694</Latitude>
+  </Customer>
+  <Customer>
+    <Id>47613418</Id>
+    <Name>Dani Shushan</Name>
+    <Phone>0557179061</Phone>
+    <Longitude>31.564473682257567</Longitude>
+    <Latitude>35.44777075925738</Latitude>
+  </Customer>
+  <Customer>
+    <Id>70330340</Id>
+    <Name>Avi Ben-Haim</Name>
+    <Phone>0556320460</Phone>
+    <Longitude>31.652277223049794</Longitude>
+    <Latitude>35.84330594258071</Latitude>
+  </Customer>
+  <Customer>
+    <Id>68195767</Id>
+    <Name>Rafi Ben-Haim</Name>
+    <Phone>0545026544</Phone>
+    <Longitude>31.9240096941283</Longitude>
+    <Latitude>36.091327418201296</Latitude>
+  </Customer>
+  <Customer>
+    <Id>23476839</Id>
+    <Name>Dani Biton</Name>
+    <Phone>0593403589</Phone>
+    <Longitude>31.380643594633156</Longitude>
+    <Latitude>35.5162071290548</Latitude>
+  </Customer>
+  <Customer>
+    <Id>34354460</Id>
+    <Name>Moti Shtain</Name>
+    <Phone>0516691630</Phone>
+    <Longitude>31.98053059577501</Longitude>
+    <Latitude>35.59822000363293</Latitude>
+  </Customer>
+  <Customer>
+    <Id>91794948</Id>
+    <Name>Ben Ben-Haim</Name>
+    <Phone>0550900942</Phone>
+    <Longitude>32.22874116433726</Longitude>
+    <Latitude>35.74071068682276</Latitude>
+  </Customer>
+  <Customer>
+    <Id>25788175</Id>
+    <Name>Ben Ben-Haim</Name>
+    <Phone>0538604284</Phone>
+    <Longitude>32.126647036958786</Longitude>
+    <Latitude>35.82001879714896</Latitude>
+  </Customer>
+  <Customer>
+    <Id>68737515</Id>
+    <Name>Dani Ben Shalom</Name>
+    <Phone>0542583419</Phone>
+    <Longitude>31.307832925635314</Longitude>
+    <Latitude>35.341503674840325</Latitude>
+  </Customer>
+  <Customer>
+    <Id>41335649</Id>
+    <Name>Levi Cohen</Name>
+    <Phone>0587623592</Phone>
+    <Longitude>32.02727531075351</Longitude>
+    <Latitude>35.58372063175483</Latitude>
+  </Customer>
+  <Customer>
+    <Id>68199611</Id>
+    <Name>Yoel Shtain</Name>
+    <Phone>0515977158</Phone>
+    <Longitude>31.878017582785347</Longitude>
+    <Latitude>35.42411238212796</Latitude>
+  </Customer>
+  <Customer>
+    <Id>84189873</Id>
+    <Name>Rafi Ben-David</Name>
+    <Phone>0540191678</Phone>
+    <Longitude>31.932309812280494</Longitude>
+    <Latitude>35.38666354655133</Latitude>
+  </Customer>
+  <Customer>
+    <Id>14637404</Id>
+    <Name>Dani Wolfes</Name>
+    <Phone>0579631308</Phone>
+    <Longitude>32.096253678624635</Longitude>
+    <Latitude>35.63103365187582</Latitude>
+  </Customer>
+  <Customer>
+    <Id>16382262</Id>
+    <Name>David Cohen</Name>
+    <Phone>0556433755</Phone>
+    <Longitude>32.04156653622704</Longitude>
+    <Latitude>36.027646052715205</Latitude>
+  </Customer>
+  <Customer>
+    <Id>70869546</Id>
+    <Name>Levi Wolfes</Name>
+    <Phone>0554328310</Phone>
+    <Longitude>31.233990896979343</Longitude>
+    <Latitude>35.92744868390144</Latitude>
+  </Customer>
+  <Customer>
+    <Id>30370532</Id>
+    <Name>Yoel Cohen</Name>
+    <Phone>0586398626</Phone>
+    <Longitude>32.16913991979283</Longitude>
+    <Latitude>35.74424378148012</Latitude>
+  </Customer>
+  <Customer>
+    <Id>81448464</Id>
+    <Name>Levi Levi</Name>
+    <Phone>0534936852</Phone>
+    <Longitude>31.52680996402018</Longitude>
+    <Latitude>36.10160467271302</Latitude>
+  </Customer>
+  <Customer>
+    <Id>32356283</Id>
+    <Name>Moti Biton</Name>
+    <Phone>0582579359</Phone>
+    <Longitude>31.934628782209302</Longitude>
+    <Latitude>35.37805619812015</Latitude>
   </Customer>
 </ArrayOfCustomer>

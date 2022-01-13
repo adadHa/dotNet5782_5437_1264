@@ -17,9 +17,9 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         private BL()
         {
+            dalObject = DalApi.DalFactory.GetDal("DalXml");
             lock (dalObject)
             {
-                dalObject = DalApi.DalFactory.GetDal("DalObject");
                 double[] arr = dalObject.ViewElectConsumptionData();
                 availableDrElectConsumption = arr[0];
                 lightDrElectConsumption = arr[1];

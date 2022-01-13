@@ -34,7 +34,7 @@ namespace DalXml
         {
             List<Parcel> list = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
             Parcel? parcel = list.Find(x => x.Id == id);
-            if (parcel == null)
+            if (parcel != null)
                 return (Parcel)parcel;
             else
                 throw new IdIsNotExistException(id, "Parcel");
@@ -44,6 +44,7 @@ namespace DalXml
         public IEnumerable<Parcel> GetParcels(Func<Parcel, bool> filter = null)
         {
             List<Parcel> list = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+            if (filter == null) return list;
             return list.Where(filter);
         }
 

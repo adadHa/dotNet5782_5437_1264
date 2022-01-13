@@ -2,27 +2,152 @@
 <ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Drone>
     <Id>0</Id>
-    <Model />
+    <Model>DroneRobots6643</Model>
     <MaxWeight>Heavy</MaxWeight>
   </Drone>
   <Drone>
     <Id>1</Id>
-    <Model />
+    <Model>DroneRobots8107</Model>
     <MaxWeight>Light</MaxWeight>
   </Drone>
   <Drone>
     <Id>2</Id>
-    <Model />
+    <Model>DroneRobots8170</Model>
     <MaxWeight>Heavy</MaxWeight>
   </Drone>
   <Drone>
-    <Id>5</Id>
-    <Model />
+    <Id>3</Id>
+    <Model>DroneRobots4623</Model>
     <MaxWeight>Medium</MaxWeight>
   </Drone>
   <Drone>
     <Id>4</Id>
-    <Model />
+    <Model>DroneRobots5427</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>5</Id>
+    <Model>DroneRobots5596</Model>
     <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>6</Id>
+    <Model>DroneRobots9709</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>7</Id>
+    <Model>DroneRobots1199</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>8</Id>
+    <Model>DroneRobots1313</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>9</Id>
+    <Model>DroneRobots4847</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>10</Id>
+    <Model>DroneRobots9157</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>11</Id>
+    <Model>DroneRobots8190</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>12</Id>
+    <Model>DroneRobots1675</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>13</Id>
+    <Model>DroneRobots7138</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>14</Id>
+    <Model>DroneRobots7664</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>15</Id>
+    <Model>DroneRobots6719</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>16</Id>
+    <Model>DroneRobots2682</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>17</Id>
+    <Model>DroneRobots7617</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>18</Id>
+    <Model>DroneRobots8043</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>19</Id>
+    <Model>DroneRobots5508</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>20</Id>
+    <Model>DroneRobots9981</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>21</Id>
+    <Model>DroneRobots8250</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>22</Id>
+    <Model>DroneRobots6355</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>23</Id>
+    <Model>DroneRobots4760</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>24</Id>
+    <Model>DroneRobots1527</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>25</Id>
+    <Model>DroneRobots8611</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>26</Id>
+    <Model>DroneRobots7189</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>27</Id>
+    <Model>DroneRobots1481</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>28</Id>
+    <Model>DroneRobots3498</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>29</Id>
+    <Model>DroneRobots7041</Model>
+    <MaxWeight>Light</MaxWeight>
   </Drone>
 </ArrayOfDrone>

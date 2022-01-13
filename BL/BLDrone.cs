@@ -73,15 +73,21 @@ namespace BL
                     if (newDrone.Status == DroneStatuses.Maintenance)
                     {
                         List<DO.Station> stations = dalObject.GetStations().ToList();
-                        DO.Station randStation;
-                        do
+                        DO.Station chosenStation = stations[0];
+                        foreach (DO.Station station in stations)
                         {
-                            int randIndex = rand.Next(0, stations.Count());
-                            randStation = stations[randIndex];
-                            newDrone.Location = new Location { Latitude = randStation.Latitude, Longitude = randStation.Longitude };
-                            newDrone.Battery = rand.NextDouble() * 20;
-                        } while (randStation.FreeChargeSlots == 0);
-                        dalObject.ChargeDrone(newDrone.Id, randStation.Id);
+                            if (station.FreeChargeSlots != 0)
+                            {
+                                chosenStation = station;
+                                newDrone.Location = new Location { Latitude = station.Latitude, Longitude = station.Longitude };
+                                newDrone.Battery = rand.NextDouble() * 20;
+                                break;
+                            }
+                        }
+                        if (chosenStation.FreeChargeSlots != 0)
+                        {
+                            dalObject.ChargeDrone(newDrone.Id, chosenStation.Id);
+                        }
                     }
 
                     else if (newDrone.Status == DroneStatuses.Available)

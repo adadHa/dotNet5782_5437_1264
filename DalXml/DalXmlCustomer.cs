@@ -72,7 +72,7 @@ namespace DalXml
         {
             XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(CustomersPath);
             XElement customer = (from c in cutomersRootElement.Elements()
-                                 where (int.Parse(c.Element("id").Value) == id)
+                                 where (int.Parse(c.Element("Id").Value) == id)
                                  select c).FirstOrDefault();
 
             if (customer == null)
@@ -82,7 +82,7 @@ namespace DalXml
             {
                 Id = int.Parse(customer.Element("Id").Value),
                 Name = customer.Element("Name").Value,
-                Phone = customer.Element("PhoneNumber").Value,
+                Phone = customer.Element("Phone").Value,
                 Longitude = double.Parse(customer.Element("Longitude").Value),
                 Latitude = double.Parse(customer.Element("Latitude").Value),
             };
@@ -92,12 +92,25 @@ namespace DalXml
         IEnumerable<Customer> IDal.GetCustomers(Func<Customer, bool> filter)
         {
             XElement cutomersRootElement = XMLTools.LoadListFromXMLElement(CustomersPath);
+            if(filter == null)
+            {
+                return from cElement in cutomersRootElement.Elements()
+                       let customer = new Customer
+                       {
+                           Id = int.Parse(cElement.Element("Id").Value),
+                           Name = cElement.Element("Name").Value,
+                           Phone = cElement.Element("Phone").Value,
+                           Longitude = double.Parse(cElement.Element("Longitude").Value),
+                           Latitude = double.Parse(cElement.Element("Latitude").Value),
+                       }
+                       select customer;
+            }
             return from cElement in cutomersRootElement.Elements()
                                          let customer = new Customer
                                          {
                                              Id = int.Parse(cElement.Element("Id").Value),
                                              Name = cElement.Element("Name").Value,
-                                             Phone = cElement.Element("PhoneNumber").Value,
+                                             Phone = cElement.Element("Phone").Value,
                                              Longitude = double.Parse(cElement.Element("Longitude").Value),
                                              Latitude = double.Parse(cElement.Element("Latitude").Value),
                                          }
